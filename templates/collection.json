@@ -1,0 +1,118 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "disabled": true,
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "lumin_mega_7mTbzj": {
+      "type": "lumin-mega",
+      "blocks": {
+        "feature_text_TBnMjN": {
+          "type": "feature-text",
+          "settings": {
+            "text": "<em>★★★★★</em> Excellent <strong>4.8/5 Rated</strong>",
+            "font_size": 12,
+            "text_bg": "#f2f2f2",
+            "italic_text": "#00b67a",
+            "bold_text": "#1c1c1c",
+            "border": "#d3d3d3"
+          }
+        },
+        "divider_nQ8M6p": {
+          "type": "divider",
+          "settings": {
+            "base_width": 20,
+            "thickness": 0,
+            "style": "solid",
+            "divider_color": "#ffffff",
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        },
+        "heading_mxMkW3": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ontdek Kleding Die De Toon Zet",
+            "heading_size": "h2"
+          }
+        },
+        "text_MNraVn": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Premium minimalisme met perfecte pasvorm en duurzame materialen — klaar voor elke dag.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "feature_text_TBnMjN",
+        "divider_nQ8M6p",
+        "heading_mxMkW3",
+        "text_MNraVn"
+      ],
+      "name": "Lumin Mega Section",
+      "settings": {
+        "color_scheme_main": "background-2",
+        "full-width": true,
+        "image": "shopify://shop_images/Figma_2025-10-25_21.35.32.png",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "overlap",
+        "color_scheme": "background-2",
+        "image_behavior": "zoom-in",
+        "mobile_content_alignment": "center",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-c7656904-3575-45df-a6bb-c0462f554d39",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "image_no_crop": false,
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "show_scroll_tags": false,
+        "show_product_description": false,
+        "description_font_size": 14,
+        "description_word_limit": 20,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "drawer",
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "lumin_mega_7mTbzj",
+    "product-grid"
+  ]
+}

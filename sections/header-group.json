@@ -1,0 +1,158 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "header": {
+      "type": "header",
+      "blocks": {
+        "menu_image_jmMTqY": {
+          "type": "menu_image",
+          "settings": {
+            "menu_name": "Catalog",
+            "menu_width": "medium",
+            "heading": false,
+            "heading_bold": false,
+            "menu_child_link_bold": false,
+            "menu_link_size": 18,
+            "menu_child_link_size": 16,
+            "menu_link_color": "#000000",
+            "menu_child_link_color": "#000000",
+            "show_image_in_mega_menu": false,
+            "show_image_in_mega_menu_mobile": true,
+            "featured_image_width": 50,
+            "featured_image_border_radius": 4,
+            "border_radius": 4,
+            "show_promotion_arrow": false,
+            "show_promotion_arrow_mobile": false,
+            "custom_title": "Custom Title",
+            "custom_text": "Add your custom text here",
+            "custom_image_link": "",
+            "badge_text": "",
+            "custom_text_overlay": false,
+            "title_color_1": "#000000",
+            "text_color_1": "#000000",
+            "badge_background_color": "#ff0000",
+            "badge_text_color": "#ffffff",
+            "background_color": "#ffffff",
+            "custom_title_size": 20,
+            "custom_text_size": 12,
+            "custom_title_2": "Custom Title",
+            "custom_text_2": "Add your custom text here",
+            "custom_image_link_2": "",
+            "badge_text_2": "",
+            "custom_text_overlay_2": false,
+            "title_color_2": "#000000",
+            "text_color_2": "#000000",
+            "badge_background_color_2": "#ff0000",
+            "badge_text_color_2": "#ffffff",
+            "background_color_2": "#ffffff",
+            "custom_title_2_size": 20,
+            "custom_text_2_size": 12,
+            "custom_title_3": "Custom Title",
+            "custom_text_3": "Add your custom text here",
+            "custom_image_link_3": "",
+            "custom_text_overlay_3": false,
+            "badge_text_3": "",
+            "title_color_3": "#000000",
+            "text_color_3": "#000000",
+            "badge_background_color_3": "#ff0000",
+            "badge_text_color_3": "#ffffff",
+            "background_color_3": "#ffffff",
+            "custom_title_3_size": 20,
+            "custom_text_3_size": 12,
+            "custom_title_4": "Custom Title",
+            "custom_text_4": "Add your custom text here",
+            "custom_text_overlay_4": false,
+            "custom_image_link_4": "",
+            "badge_text_4": "",
+            "title_color_4": "#000000",
+            "text_color_4": "#000000",
+            "badge_background_color_4": "#ff0000",
+            "badge_text_color_4": "#ffffff",
+            "background_color_4": "#ffffff",
+            "custom_title_4_size": 20,
+            "custom_text_4_size": 12,
+            "custom_title_5": "Custom Title",
+            "custom_text_5": "Add your custom text here",
+            "custom_text_overlay_5": false,
+            "custom_image_link_5": "",
+            "badge_text_5": "",
+            "title_color_5": "#000000",
+            "text_color_5": "#000000",
+            "badge_background_color_5": "#ff0000",
+            "badge_text_color_5": "#ffffff",
+            "background_color_5": "#ffffff",
+            "custom_title_5_size": 20,
+            "custom_text_5_size": 12
+          }
+        }
+      },
+      "block_order": [
+        "menu_image_jmMTqY"
+      ],
+      "custom_css": [],
+      "settings": {
+        "enable_transparent-header": false,
+        "enable_hover_animation": false,
+        "color-transparent": "#261b33",
+        "color-hover-background": "#ffffff",
+        "color-hover-text": "#212121",
+        "logo_position": "middle-center",
+        "menu": "main-menu",
+        "menu_type_desktop": "mega",
+        "sticky_header_type": "always",
+        "show_line_separator": true,
+        "color_scheme": "background-1",
+        "menu_color_scheme": "background-2",
+        "enable_country_selector": true,
+        "enable_language_selector": false,
+        "enable_customer_avatar": true,
+        "mobile_logo_position": "center",
+        "margin_bottom": 0,
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-bar-0": {
+          "type": "announcement",
+          "settings": {
+            "text": "<strong>Mid Seasons Sale - Up to 40% Off</strong>",
+            "font_family": "heading",
+            "font_size": 12,
+            "use_custom_color": false,
+            "text_color": "#000000",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement-bar-0"
+      ],
+      "settings": {
+        "color_scheme": "accent-1",
+        "show_line_separator": false,
+        "show_social": true,
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    }
+  },
+  "order": [
+    "header",
+    "announcement-bar"
+  ]
+}

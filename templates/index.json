@@ -1,0 +1,316 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "lumin_mega_gwYTDN": {
+      "type": "lumin-mega",
+      "blocks": {
+        "feature_text_GQhVrX": {
+          "type": "feature-text",
+          "settings": {
+            "text": "<em>★★★★★</em> Excellent <strong>4.8/5 Rated</strong>",
+            "font_size": 12,
+            "text_bg": "#f2f2f2",
+            "italic_text": "#00b67a",
+            "bold_text": "#1c1c1c",
+            "border": "#d3d3d3"
+          }
+        },
+        "divider_bPHqQF": {
+          "type": "divider",
+          "settings": {
+            "base_width": 20,
+            "thickness": 0,
+            "style": "solid",
+            "divider_color": "#ffffff",
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        },
+        "heading_LYpAU4": {
+          "type": "heading",
+          "settings": {
+            "heading": "Premium Minimalisme - Precieze Snit, Luxe Comfort",
+            "heading_size": "h2"
+          }
+        },
+        "text_tiPRq8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Premium minimalisme met perfecte pasvorm en duurzame materialen — klaar voor elke dag.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_QdD6Ma": {
+          "type": "button",
+          "settings": {
+            "button_label": "SHOP NOW",
+            "button_link": "#",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "feature_text_GQhVrX",
+        "divider_bPHqQF",
+        "heading_LYpAU4",
+        "text_tiPRq8",
+        "button_QdD6Ma"
+      ],
+      "name": "Lumin Mega Section",
+      "settings": {
+        "color_scheme_main": "background-2",
+        "full-width": true,
+        "image": "shopify://shop_images/Figma_2025-10-25_21.35.32.png",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "background-2",
+        "image_behavior": "ambient",
+        "mobile_content_alignment": "center",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "collection_list_pCR6RV": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_7xUhcz": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured_collection_QKpkbM": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured_collection_UJ8zE6": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_7xUhcz",
+        "featured_collection_QKpkbM",
+        "featured_collection_UJ8zE6"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Shop op collectie",
+        "heading_size": "h2",
+        "image_ratio": "portrait",
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "lumin_mega_TnphAm": {
+      "type": "lumin-mega",
+      "blocks": {
+        "heading_HneKEm": {
+          "type": "heading",
+          "settings": {
+            "heading": "Verfijnd & Duurzaam",
+            "heading_size": "h2"
+          }
+        },
+        "text_EGDUTX": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Premium stoffen, precieze snit en afwerking in kleine oplage voor blijvende elegantie.</p>",
+            "text_style": "body"
+          }
+        },
+        "text_JJPVEk": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Premium materialen    ·    Precieze snit    ·    Kleine oplage</strong></p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_HneKEm",
+        "text_EGDUTX",
+        "text_JJPVEk"
+      ],
+      "name": "Lumin Mega Section",
+      "settings": {
+        "color_scheme_main": "background-1",
+        "full-width": false,
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "content_layout": "no-overlap",
+        "color_scheme": "",
+        "image_behavior": "ambient",
+        "mobile_content_alignment": "center",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "lumin_mega_z76EmA": {
+      "type": "lumin-mega",
+      "blocks": {
+        "heading_Vt9TMR": {
+          "type": "heading",
+          "settings": {
+            "heading": "Belangrijkste Benmerken",
+            "heading_size": "h2"
+          }
+        },
+        "text_HdxXnJ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>De Amber Haze Tee is gemaakt van het fijnste dubbel-gemerceriseerde Egyptische katoen, wat zorgt voor een luxueus zachte hand en een subtiele, zijdeachtige glans die blijft bestaan was na was.  De slim fit pasvorm geeft een moderne, aansluitende look zonder in te boeten op comfort. Deze premium t-shirt is ontworpen om jarenlang mee te gaan, met dubbelgestikte naden die extra duurzaamheid garanderen en kleurvaste stoffen die hun levendige tint behouden.</p>",
+            "text_style": "body"
+          }
+        },
+        "feature_PqtUYq": {
+          "type": "feature",
+          "settings": {
+            "alignment": "center",
+            "icon_size": 32,
+            "heading": "List Feature",
+            "heading_size": 16,
+            "text": "<p>focus on your chosen product</p>",
+            "text_size": 14,
+            "padding_top": 8,
+            "padding_bottom": 8
+          }
+        },
+        "feature_LgAD3C": {
+          "type": "feature",
+          "settings": {
+            "alignment": "center",
+            "icon_size": 32,
+            "heading": "List Feature",
+            "heading_size": 16,
+            "text": "<p>focus on your chosen product</p>",
+            "text_size": 14,
+            "padding_top": 8,
+            "padding_bottom": 8
+          }
+        },
+        "feature_rEn3C3": {
+          "type": "feature",
+          "settings": {
+            "alignment": "center",
+            "icon_size": 32,
+            "heading": "List Feature",
+            "heading_size": 16,
+            "text": "<p>focus on your chosen product</p>",
+            "text_size": 14,
+            "padding_top": 8,
+            "padding_bottom": 8
+          }
+        }
+      },
+      "block_order": [
+        "heading_Vt9TMR",
+        "text_HdxXnJ",
+        "feature_PqtUYq",
+        "feature_LgAD3C",
+        "feature_rEn3C3"
+      ],
+      "name": "Lumin Mega Section",
+      "settings": {
+        "color_scheme_main": "background-1",
+        "full-width": false,
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "",
+        "image_behavior": "ambient",
+        "mobile_content_alignment": "left",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "tabs_collection_KMPX6q": {
+      "type": "tabs-collection",
+      "blocks": {
+        "tab_mN6ede": {
+          "type": "tab",
+          "settings": {
+            "heading": "Our Bestellers",
+            "collection": "frontpage",
+            "description": "",
+            "collection_text_alignment": "left",
+            "show_description": false,
+            "description_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "tab_mN6ede"
+      ],
+      "settings": {
+        "tabs_color_scheme": "background-1",
+        "tab_font": 16,
+        "tab_font_align": "center",
+        "tab_font_mb": 14,
+        "tab_font_mb_align": "center",
+        "show_border": false,
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "image_ratio": "portrait",
+        "image_no_crop": true,
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "show_scroll_tags": false,
+        "show_product_description": false,
+        "description_font_size": 14,
+        "description_word_limit": 20,
+        "quick_add": "standard",
+        "show_secondary_add": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "lumin_mega_gwYTDN",
+    "collection_list_pCR6RV",
+    "lumin_mega_TnphAm",
+    "lumin_mega_z76EmA",
+    "tabs_collection_KMPX6q"
+  ]
+}

@@ -1,0 +1,175 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "trust_badges_FHUXaB": {
+      "type": "trust-badges",
+      "blocks": {
+        "image_fjBiUW": {
+          "type": "image",
+          "settings": {
+            "feature_title": "<strong>Fast Shipping</strong>",
+            "feature_text": "<p>Doorstep delivery to most of the US.</p>",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_Kig7Lp": {
+          "type": "image",
+          "settings": {
+            "feature_title": "<strong>Price-match guarantee</strong>",
+            "feature_text": "<p>Safe money when ordering with us</p>",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_NcbnLf": {
+          "type": "image",
+          "settings": {
+            "feature_title": "<strong>Hassle-free exchange</strong>",
+            "feature_text": "<p>No questions ask</p>",
+            "feature_url": "",
+            "hide_image": false
+          }
+        }
+      },
+      "block_order": [
+        "image_fjBiUW",
+        "image_Kig7Lp",
+        "image_NcbnLf"
+      ],
+      "name": "Feature Blocks",
+      "settings": {
+        "feature_row": 3,
+        "feature_row_mobile": 1,
+        "feature_gap": 20,
+        "feature_gap_mobile": 20,
+        "feature_padding_horizontal": 0,
+        "feature_padding_vertical": 0,
+        "feature_radius": 16,
+        "feature_border_thickness": 0,
+        "feature_shadow": false,
+        "feature_heading_size": 14,
+        "feature_heading_size_mobile": 12,
+        "feature_heading_height": 130,
+        "feature_heading_mt": 8,
+        "feature_text_size": 12,
+        "feature_text_size_mobile": 12,
+        "feature_text_height": 130,
+        "feature_text_mt": 8,
+        "feature_icon_size": 32,
+        "feature_icon_size_mobile": 32,
+        "feature_bg": "rgba(0,0,0,0)",
+        "feature_border_color": "rgba(0,0,0,0)",
+        "feature_shadow_color": "rgba(0,0,0,0)",
+        "feature_heading_color": "#1c1c1c",
+        "feature_text_color": "#6b6b6b",
+        "feature_icon_color": "#1c1c1c",
+        "background_color": "#f2f2f2",
+        "background_gradient": "",
+        "border_color": "rgba(0,0,0,0)",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "big_image_XF7KnY": {
+          "type": "big_image",
+          "settings": {
+            "image_drawer": "shopify://shop_images/Figma_2025-10-25_22.17.56.png",
+            "image_size": 20,
+            "image_border": 0,
+            "img_position": "center",
+            "padding_top_image": 16,
+            "padding_bottom_image": 16
+          }
+        },
+        "brand_information_Br4bBK": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": true
+          }
+        },
+        "link_list_JWiGYM": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Information",
+            "menu": "footer"
+          }
+        },
+        "link_list_JinYBi": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Shop",
+            "menu": "main-menu"
+          }
+        },
+        "text_UxTGHt": {
+          "type": "text",
+          "settings": {
+            "heading": "Need To Get In Touch?",
+            "subtext": "<p>Questions or comments? Drop us a line, we'd love to hear from you. <a href=\"/pages/contact\" title=\"Contact\">Contact Us</a></p><p>support@lumintheme.com luminlabinfo@gmail.com</p>"
+          }
+        }
+      },
+      "block_order": [
+        "big_image_XF7KnY",
+        "brand_information_Br4bBK",
+        "link_list_JWiGYM",
+        "link_list_JinYBi",
+        "text_UxTGHt"
+      ],
+      "settings": {
+        "color_scheme": "accent-1",
+        "newsletter_enable": true,
+        "show_collapse": true,
+        "collapse_mode": "menu_only",
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": false,
+        "show_social": true,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "original": "custom",
+        "payment_icon": "visa,master,paypal,apple_pay,shopify-pay,google-pay",
+        "custom_icon_1_width": 34,
+        "custom_icon_2_width": 34,
+        "custom_icon_3_width": 34,
+        "show_policy": true,
+        "hide_shopify": true,
+        "copyright": "",
+        "show_bottom_text": false,
+        "bottom_text_align": "center",
+        "bottom_text": "Some text",
+        "bottom_text_font_size": 10,
+        "color_bottom_text": "#868686",
+        "margin_top": 0,
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    }
+  },
+  "order": [
+    "trust_badges_FHUXaB",
+    "footer"
+  ]
+}
