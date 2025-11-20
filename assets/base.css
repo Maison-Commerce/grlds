@@ -2159,6 +2159,7 @@ input[type=checkbox] {
 }
 
 .utility-bar {
+  display: flex;
   min-height: 32px;
 }
 
