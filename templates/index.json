@@ -128,10 +128,83 @@
         "icon_gap_desktop": 30,
         "icon_gap_mobile": 24
       }
+    },
+    "maison_propose_product_hBqB84": {
+      "type": "maison-propose-product",
+      "blocks": {
+        "product_yx4nCG": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "badge_text": "",
+            "button_text": "Shop Now"
+          }
+        },
+        "product_EHBYAh": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "badge_text": "",
+            "button_text": "Shop Now"
+          }
+        },
+        "product_jHMWGT": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "badge_text": "",
+            "button_text": "Shop Now"
+          }
+        },
+        "product_qGQe4i": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "badge_text": "",
+            "button_text": "Shop Now"
+          }
+        }
+      },
+      "block_order": [
+        "product_yx4nCG",
+        "product_EHBYAh",
+        "product_jHMWGT",
+        "product_qGQe4i"
+      ],
+      "name": "Maison Propose Product",
+      "settings": {
+        "section_heading": "Gift Hub",
+        "section_bg_color": "#ffffff",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_left_desktop": 40,
+        "padding_right_desktop": 40,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32,
+        "padding_left_mobile": 20,
+        "padding_right_mobile": 20,
+        "heading_font_size_desktop": 40,
+        "heading_font_size_mobile": 24,
+        "heading_color": "#1a1a1a",
+        "card_gap_desktop": 20,
+        "card_gap_mobile": 16,
+        "title_font_size_desktop": 14,
+        "title_font_size_mobile": 16,
+        "title_color": "#1a1a1a",
+        "price_font_size": 14,
+        "price_color": "#aeaeae",
+        "button_bg_color": "#090909",
+        "button_text_color": "#ffffff",
+        "button_font_size_desktop": 14,
+        "button_font_size_mobile": 16,
+        "button_height_desktop": 44,
+        "button_height_mobile": 36
+      }
     }
   },
   "order": [
     "maison_banner_4mYryL",
-    "maison_img_with_text_96bPrD"
+    "maison_img_with_text_96bPrD",
+    "maison_propose_product_hBqB84"
   ]
 }
