@@ -460,14 +460,9 @@
         </p>
 
         <div class="maison_commerce_maison_footer__payment-methods">
-          <!-- Payment icons would go here - using Shopify's payment icons or custom -->
-          <div class="maison_commerce_maison_footer__payment-icon">
-            <svg width="23" height="16" viewBox="0 0 23 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="23" height="16" rx="2" fill="#1f72cd"/>
-              <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="8" font-weight="bold">AMEX</text>
-            </svg>
-          </div>
-          <!-- Add more payment icons as needed -->
+          {%- for type in shop.enabled_payment_types -%}
+            <div class="maison_commerce_maison_footer__payment-icon">{{ type | payment_type_svg_tag }}</div>
+          {%- endfor -%}
         </div>
       </div>
     </div>
