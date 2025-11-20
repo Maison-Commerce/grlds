@@ -439,7 +439,7 @@
     background-color: {{ section.settings.section_bg_color }};
   }
 
-  .maison_commerce_maison_propose_product {
+  {% comment %} .maison_commerce_maison_propose_product {
     padding-top: {{ section.settings.padding_top_desktop }}px;
     padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
     padding-left: {{ section.settings.padding_left_desktop }}px;
@@ -453,7 +453,7 @@
       padding-left: {{ section.settings.padding_left_mobile }}px;
       padding-right: {{ section.settings.padding_right_mobile }}px;
     }
-  }
+  } {% endcomment %}
 
   /* Container */
   .maison_commerce_maison_propose_product__container {
