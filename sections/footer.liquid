@@ -446,14 +446,14 @@
     <div class="maison_commerce_maison_footer__bottom">
       <!-- Mobile Language/Currency Selectors -->
       <div class="maison_commerce_maison_footer__selectors-mobile">
-        <localization-form>
+        <localization-form class="maison_commerce_maison_footer__selector">
           {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
             <div>
               {%- render 'country-localization', localPosition: 'FooterCountry' -%}
             </div>
           {%- endform -%}
         </localization-form>
-        <localization-form>
+        <localization-form class="maison_commerce_maison_footer__selector">
           {%- form 'localization', id: 'FooterLanguageForm', class: 'localization-form' -%}
             <div>
               {%- render 'language-localization', localPosition: 'FooterLanguage' -%}
