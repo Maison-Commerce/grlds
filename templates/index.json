@@ -246,19 +246,19 @@
         "article_QTCKr6": {
           "type": "article",
           "settings": {
-            "article": ""
+            "article": "news/the-art-of-the-first-burn-a-ritual-worth-honoring"
           }
         },
         "article_VjatDP": {
           "type": "article",
           "settings": {
-            "article": ""
+            "article": "news/scent-memory-how-fragrance-shapes-the-spaces-we-love"
           }
         },
         "article_bM4x7k": {
           "type": "article",
           "settings": {
-            "article": ""
+            "article": "news/winter-light-the-story-behind-our-limited-edition-collection"
           }
         }
       },
@@ -288,7 +288,7 @@
         "title_font_size_mobile": 18,
         "title_color": "#121212",
         "excerpt_font_size": 14,
-        "excerpt_color": "rgba(26, 26, 26, 0.75)",
+        "excerpt_color": "#1a1a1abf",
         "link_font_size": 16,
         "link_color": "#1a1a1a",
         "read_more_text": "Read More"
