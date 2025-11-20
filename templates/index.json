@@ -195,8 +195,8 @@
         "price_color": "#aeaeae",
         "button_bg_color": "#090909",
         "button_text_color": "#ffffff",
-        "button_font_size_desktop": 14,
-        "button_font_size_mobile": 16,
+        "button_font_size_desktop": 16,
+        "button_font_size_mobile": 12,
         "button_height_desktop": 44,
         "button_height_mobile": 36
       }
