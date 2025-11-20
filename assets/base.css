@@ -2170,9 +2170,14 @@ input[type=checkbox] {
   .utility-bar--bottom-border-social-only {
     border-bottom: .1rem solid rgba(var(--color-foreground), .08)
   }
+
+  .utility-bar {
+    height: 34px;
+  }
 }
 
 .utility-bar__grid {
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas: 'announcements'
