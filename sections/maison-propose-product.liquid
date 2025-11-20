@@ -335,7 +335,7 @@
                           <span class="maison_commerce_maison_propose_product__price--sale">{{ product.price | money }}</span>
                           <span class="maison_commerce_maison_propose_product__price--compare">{{ product.compare_at_price | money }}</span>
                         {% else %}
-                          <span class="maison_commerce_maison_propose_product__price--sale">
+                          <span class="maison_commerce_maison_propose_product__price--sale">{{ product.price | money }}</span>
                         {% endif %}
                       </div>
                     {% endif %}
@@ -396,7 +396,7 @@
                               <span class="maison_commerce_maison_propose_product__price--sale">{{ product.price | money }}</span>
                               <span class="maison_commerce_maison_propose_product__price--compare">{{ product.compare_at_price | money }}</span>
                             {% else %}
-                              <span class="maison_commerce_maison_propose_product__price--sale">
+                              <span class="maison_commerce_maison_propose_product__price--sale">{{ product.price | money }}</span>
                             {% endif %}
                           </div>
                         {% endif %}
