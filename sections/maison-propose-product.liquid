@@ -761,6 +761,14 @@
           nextEl: nextButton,
           prevEl: prevButton,
         },
+        breakpoints: {
+            0: {
+            slidesPerView: 1.5,
+            },
+            500: {
+            slidesPerView: 3,
+            }
+        }
         on: {
           slideChange: function() {
             const progress = ((this.activeIndex + 1) / this.slides.length) * 100;
