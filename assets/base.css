@@ -2159,7 +2159,7 @@ input[type=checkbox] {
 }
 
 .utility-bar {
-  height: 32px;
+  min-height: 32px;
 }
 
 .utility-bar--bottom-border {
@@ -2172,7 +2172,7 @@ input[type=checkbox] {
   }
 
   .utility-bar {
-    height: 34px;
+    min-height: 34px;
   }
 }
 
