@@ -159,7 +159,7 @@
         "product_qGQe4i": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "sample-coconut-bar-soap",
             "badge_text": "",
             "button_text": "Shop Now"
           }
@@ -200,11 +200,51 @@
         "button_height_desktop": 44,
         "button_height_mobile": 36
       }
+    },
+    "maison_img_with_txt_button_FUTWVG": {
+      "type": "maison-img-with-txt-button",
+      "name": "Maison Img - Text Button",
+      "settings": {
+        "section_heading": "inspired by evenings in the pines",
+        "section_description": "<p>Gerald's Candles blend refined perfumery with modern design</p>",
+        "main_image": "shopify://shop_images/5d926139954951df0c2bccdbea940df456c3bf07.png",
+        "icon_image": "shopify://shop_images/123t34yg45rg54.png",
+        "image_position": "left",
+        "button_text": "View Full Care Guide",
+        "button_link": "#",
+        "section_bg_color": "#ffffff",
+        "content_bg_color": "#f8f8f8",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 32,
+        "padding_left_mobile": 0,
+        "padding_right_mobile": 0,
+        "content_padding_desktop": 48,
+        "content_padding_mobile": 32,
+        "heading_font_size_desktop": 40,
+        "heading_font_size_mobile": 24,
+        "heading_color": "#1a1a1a",
+        "description_font_size_desktop": 20,
+        "description_font_size_mobile": 16,
+        "description_color": "rgba(26, 26, 26, 0.75)",
+        "icon_size_desktop": 128,
+        "icon_size_mobile": 93,
+        "button_font_size_desktop": 16,
+        "button_font_size_mobile": 12,
+        "button_height_desktop": 64,
+        "button_height_mobile": 44,
+        "button_border_color": "#1f1a13",
+        "button_text_color": "#1a1a1a"
+      }
     }
   },
   "order": [
     "maison_banner_4mYryL",
     "maison_img_with_text_96bPrD",
-    "maison_propose_product_hBqB84"
+    "maison_propose_product_hBqB84",
+    "maison_img_with_txt_button_FUTWVG"
   ]
 }
