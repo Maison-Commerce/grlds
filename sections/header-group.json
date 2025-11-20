@@ -18,7 +18,7 @@
           "type": "announcement",
           "settings": {
             "text": "SIGNATURE GIFT WRAP + 2 SAMPLES WITH EVERY ORDER",
-            "font_family": "heading",
+            "font_family": "body",
             "font_size": 12,
             "use_custom_color": false,
             "text_color": "#000000",
