@@ -759,27 +759,25 @@
         breakpoints: {
             0: {
             slidesPerView: 1.5,
-            centeredSlides: true,
             },
             500: {
             slidesPerView: 3,
             }
         },
         on: {
-          slideChange: function() {
-            const progress = ((this.activeIndex + 1) / this.slides.length) * 100;
+          init: function() {
             if (progressBar) {
-              progressBar.style.width = progress + '%';
+              progressBar.style.width = '25%';
+            }
+          },
+          progress: function(swiper, progress) {
+            const adjustedProgress = 0.25 + (progress * 0.75);
+            if (progressBar) {
+              progressBar.style.width = (adjustedProgress * 100) + '%';
             }
           },
         },
       });
-
-      // Initialize progress bar
-      if (progressBar && swiper) {
-        const initialProgress = (1 / swiper.slides.length) * 100;
-        progressBar.style.width = initialProgress + '%';
-      }
     }
   });
 </script>
