@@ -9,6 +9,66 @@
  */
 {
   "sections": {
+    "maison_banner_4mYryL": {
+      "type": "maison-banner",
+      "blocks": {
+        "feature_Dp8HyR": {
+          "type": "feature",
+          "settings": {
+            "feature_text": ""
+          }
+        },
+        "feature_fjd8JN": {
+          "type": "feature",
+          "settings": {
+            "feature_text": ""
+          }
+        },
+        "feature_nNimp4": {
+          "type": "feature",
+          "settings": {
+            "feature_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "feature_Dp8HyR",
+        "feature_fjd8JN",
+        "feature_nNimp4"
+      ],
+      "name": "Maison Banner",
+      "settings": {
+        "rating_text": "Rated 4.8 / 5 based on 3200+ reviews",
+        "section_heading": "A Winter Light collection",
+        "section_description": "<p>Limited-edition scents and gilded vessels—made for gifting</p>",
+        "primary_button_text": "Shop Holiday Collection",
+        "primary_button_link": "",
+        "secondary_button_text": "Find a gift",
+        "secondary_button_link": "",
+        "background_image": "shopify://shop_images/7b9d51068cb2251b233e76e231453122e67f84f6.png",
+        "section_bg_color": "#f8f8f8",
+        "padding_top_desktop": 96,
+        "padding_bottom_desktop": 96,
+        "padding_left_desktop": 80,
+        "padding_right_desktop": 80,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 0,
+        "padding_left_mobile": 20,
+        "padding_right_mobile": 20,
+        "heading_font_size_desktop": 48,
+        "heading_font_size_mobile": 24,
+        "heading_color": "#1a1a1a",
+        "description_font_size_desktop": 20,
+        "description_font_size_mobile": 14,
+        "description_color": "rgba(26, 26, 26, 0.75)",
+        "rating_color": "#403527",
+        "primary_button_bg": "#090909",
+        "primary_button_text_color": "#ffffff",
+        "secondary_button_border": "#1f1a13",
+        "secondary_button_text_color": "#1f1a13",
+        "feature_text_color": "#1a1a1a"
+      }
+    },
     "lumin_mega_gwYTDN": {
       "type": "lumin-mega",
       "blocks": {
@@ -68,7 +128,6 @@
       "settings": {
         "color_scheme_main": "background-2",
         "full-width": true,
-        "image": "shopify://shop_images/Figma_2025-10-25_21.35.32.png",
         "height": "medium",
         "desktop_image_width": "medium",
         "layout": "text_first",
@@ -307,6 +366,7 @@
     }
   },
   "order": [
+    "maison_banner_4mYryL",
     "lumin_mega_gwYTDN",
     "collection_list_pCR6RV",
     "lumin_mega_TnphAm",
