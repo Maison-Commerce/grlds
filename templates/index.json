@@ -41,7 +41,7 @@
       ],
       "name": "Maison Banner",
       "settings": {
-        "rating_text": "Rated 4.8 / 5 based on 3200+ reviews",
+        "rating_text": "<p>Rated <strong>4.8</strong> / 5 based on 3200+ reviews</p>",
         "section_heading": "A Winter Light collection",
         "section_description": "<p>Limited-edition scents and gilded vessels—made for gifting</p>",
         "primary_button_text": "Shop Holiday Collection",
@@ -63,7 +63,7 @@
         "heading_color": "#1a1a1a",
         "description_font_size_desktop": 20,
         "description_font_size_mobile": 14,
-        "description_color": "rgba(26, 26, 26, 0.75)",
+        "description_color": "#1a1a1abf",
         "rating_color": "#403527",
         "primary_button_bg": "#090909",
         "primary_button_text_color": "#ffffff",
