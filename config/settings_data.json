@@ -11,6 +11,7 @@
   "current": {
     "hide_collections": "",
     "icon_stroke": "default",
+    "cart_icon_custom": "shopify://shop_images/shopping-bag--shopping-bag-handle-down.svg",
     "cart_icon": "icon-cart-bag-2",
     "enable_recently_viewed": false,
     "enable_wishlist": false,
