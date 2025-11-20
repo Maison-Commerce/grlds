@@ -2598,6 +2598,11 @@ input[type=checkbox] {
   height: 36px
 }
 
+.header__icon .svg-wrapper svg, .header__icon .svg-wrapper img{
+  width: 20px;
+  height: 20px;
+}
+
 .header__icon::after {
   content: none
 }
