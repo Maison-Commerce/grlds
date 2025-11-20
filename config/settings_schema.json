@@ -290,9 +290,9 @@
       {
         "type": "range",
         "id": "logo_width",
-        "min": 50,
-        "max": 300,
-        "step": 10,
+        "min": 60,
+        "max": 150,
+        "step": 1,
         "default": 100,
         "unit": "px",
         "label": "t:settings_schema.logo.settings.logo_width.label"
