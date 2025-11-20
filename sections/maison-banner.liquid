@@ -308,43 +308,45 @@
         </div>
 
         <div class="maison_commerce_maison_banner__actions">
-          {% if section.settings.primary_button_text != blank and section.settings.primary_button_link != blank %}
-            <a
-              href="{{ section.settings.primary_button_link }}"
-              class="maison_commerce_maison_banner__button maison_commerce_maison_banner__button--primary"
-            >
-              <span>{{ section.settings.primary_button_text }}</span>
-              <svg
-                class="maison_commerce_maison_banner__button-arrow"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-          {% endif %}
+          <div class="maison_commerce_maison_banner__actions-buttons">
+            {% if section.settings.primary_button_text != blank and section.settings.primary_button_link != blank %}
+                <a
+                href="{{ section.settings.primary_button_link }}"
+                class="maison_commerce_maison_banner__button maison_commerce_maison_banner__button--primary"
+                >
+                <span>{{ section.settings.primary_button_text }}</span>
+                <svg
+                    class="maison_commerce_maison_banner__button-arrow"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                </a>
+            {% endif %}
 
-          {% if section.settings.secondary_button_text != blank and section.settings.secondary_button_link != blank %}
-            <a
-              href="{{ section.settings.secondary_button_link }}"
-              class="maison_commerce_maison_banner__button maison_commerce_maison_banner__button--secondary"
-            >
-              <span>{{ section.settings.secondary_button_text }}</span>
-              <svg
-                class="maison_commerce_maison_banner__button-arrow"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-          {% endif %}
+            {% if section.settings.secondary_button_text != blank and section.settings.secondary_button_link != blank %}
+                <a
+                href="{{ section.settings.secondary_button_link }}"
+                class="maison_commerce_maison_banner__button maison_commerce_maison_banner__button--secondary"
+                >
+                <span>{{ section.settings.secondary_button_text }}</span>
+                <svg
+                    class="maison_commerce_maison_banner__button-arrow"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                </a>
+            {% endif %}
+          </div>
 
           {% if section.blocks.size > 0 %}
             <div class="maison_commerce_maison_banner__features">
