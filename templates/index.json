@@ -15,19 +15,22 @@
         "feature_Dp8HyR": {
           "type": "feature",
           "settings": {
-            "feature_text": ""
+            "feature_text": "Signature Gift Wrap",
+            "feature_icon": "shopify://shop_images/meteor-icons_gift.svg"
           }
         },
         "feature_fjd8JN": {
           "type": "feature",
           "settings": {
-            "feature_text": ""
+            "feature_text": "Free Returns",
+            "feature_icon": "shopify://shop_images/shipment-return--shipment-return-parcel-shipping-box-arrow.svg"
           }
         },
         "feature_nNimp4": {
           "type": "feature",
           "settings": {
-            "feature_text": ""
+            "feature_text": "Carbon-Neutral",
+            "feature_icon": "shopify://shop_images/Frame_1484580598.svg"
           }
         }
       },
