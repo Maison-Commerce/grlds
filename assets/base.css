@@ -2178,7 +2178,6 @@ input[type=checkbox] {
 }
 
 .utility-bar__grid {
-  height: 100%;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas: 'announcements'
