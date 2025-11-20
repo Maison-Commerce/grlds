@@ -1,0 +1,587 @@
+{% schema %}
+{
+  "name": "Maison Image with Text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section Heading",
+      "default": "Why You'll Love It"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Small-batch poured. Clean-burn soy blend wax. Designed to glow</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "overlay_image",
+      "label": "Overlay Image (Mobile Only)"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position (Desktop)",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "content_bg_color",
+      "label": "Content Background Color (Mobile)",
+      "default": "#fcf9f6"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "content_padding_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Content Padding (Desktop)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "content_padding_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Content Padding (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_desktop",
+      "min": 16,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Mobile)",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "description_font_size_desktop",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size (Desktop)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "description_font_size_mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size (Mobile)",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "rgba(26, 26, 26, 0.75)"
+    },
+    {
+      "type": "range",
+      "id": "icon_size_desktop",
+      "min": 50,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon Size (Desktop)",
+      "default": 124
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "min": 50,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon Size (Mobile)",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "icon_gap_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon Gap (Desktop)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "icon_gap_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon Gap (Mobile)",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon",
+      "name": "Icon",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Maison Image with Text",
+      "blocks": [
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="maison_commerce_maison_img_with_text" style="background-color: {{ section.settings.section_bg_color }}; padding-top: {{ section.settings.padding_top_desktop }}px; padding-bottom: {{ section.settings.padding_bottom_desktop }}px; padding-left: {{ section.settings.padding_left_desktop }}px; padding-right: {{ section.settings.padding_right_desktop }}px;">
+  <div class="maison_commerce_maison_img_with_text__wrapper">
+    {% assign image_first = false %}
+    {% if section.settings.image_position == 'left' %}
+      {% assign image_first = true %}
+    {% endif %}
+
+    {% if image_first and section.settings.main_image != blank %}
+      <div class="maison_commerce_maison_img_with_text__image-container">
+        <div class="maison_commerce_maison_img_with_text__image-wrapper">
+          {{
+            section.settings.main_image
+            | image_url: width: 2000
+            | image_tag:
+              loading: 'lazy',
+              class: 'maison_commerce_maison_img_with_text__image',
+              alt: section.settings.main_image.alt
+          }}
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="maison_commerce_maison_img_with_text__content" style="padding: {{ section.settings.content_padding_desktop }}px;">
+      <div class="maison_commerce_maison_img_with_text__text-content">
+        {% if section.settings.section_heading != blank %}
+          <h2 class="maison_commerce_maison_img_with_text__heading">
+            {{ section.settings.section_heading }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.section_description != blank %}
+          <div class="maison_commerce_maison_img_with_text__description">
+            {{ section.settings.section_description }}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if section.blocks.size > 0 %}
+        <div class="maison_commerce_maison_img_with_text__icons">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'icon' %}
+                <div class="maison_commerce_maison_img_with_text__icon" {{ block.shopify_attributes }}>
+                  {% if block.settings.icon_image != blank %}
+                    {{
+                      block.settings.icon_image
+                      | image_url: width: 500
+                      | image_tag:
+                        loading: 'lazy',
+                        class: 'maison_commerce_maison_img_with_text__icon-image',
+                        alt: block.settings.icon_image.alt
+                    }}
+                  {% endif %}
+                </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% unless image_first %}
+      {% if section.settings.main_image != blank %}
+        <div class="maison_commerce_maison_img_with_text__image-container">
+          <div class="maison_commerce_maison_img_with_text__image-wrapper">
+            {{
+              section.settings.main_image
+              | image_url: width: 2000
+              | image_tag:
+                loading: 'lazy',
+                class: 'maison_commerce_maison_img_with_text__image',
+                alt: section.settings.main_image.alt
+            }}
+            {% if section.settings.overlay_image != blank %}
+              <div class="maison_commerce_maison_img_with_text__overlay">
+                {{
+                  section.settings.overlay_image
+                  | image_url: width: 1000
+                  | image_tag:
+                    loading: 'lazy',
+                    class: 'maison_commerce_maison_img_with_text__overlay-image',
+                    alt: section.settings.overlay_image.alt
+                }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endunless %}
+  </div>
+</div>
+
+<style>
+  /* Section Container */
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.section_bg_color }};
+  }
+
+  .maison_commerce_maison_img_with_text {
+    padding-top: {{ section.settings.padding_top_desktop }}px;
+    padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    padding-left: {{ section.settings.padding_left_desktop }}px;
+    padding-right: {{ section.settings.padding_right_desktop }}px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_img_with_text {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      padding-left: {{ section.settings.padding_left_mobile }}px;
+      padding-right: {{ section.settings.padding_right_mobile }}px;
+    }
+  }
+
+  /* Wrapper */
+  .maison_commerce_maison_img_with_text__wrapper {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    max-width: 1440px;
+    margin: 0 auto;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_img_with_text__wrapper {
+      flex-direction: column;
+      border: none;
+    }
+  }
+
+  /* Content */
+  .maison_commerce_maison_img_with_text__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .maison_commerce_maison_img_with_text__wrapper .maison_commerce_maison_img_with_text__image-container:first-child ~ .maison_commerce_maison_img_with_text__content {
+    border-right: none;
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_img_with_text__content {
+      border: none;
+      background: linear-gradient(to bottom, {{ section.settings.content_bg_color }}, #ffffff);
+      border-radius: 12px;
+      padding: {{ section.settings.content_padding_mobile }}px 20px !important;
+      gap: 32px;
+    }
+
+    .maison_commerce_maison_img_with_text__wrapper .maison_commerce_maison_img_with_text__image-container:first-child ~ .maison_commerce_maison_img_with_text__content {
+      border-left: none;
+    }
+  }
+
+  /* Text Content */
+  .maison_commerce_maison_img_with_text__text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 478px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_img_with_text__text-content {
+      gap: 16px;
+      max-width: 100%;
+    }
+  }
+
+  /* Heading */
+  .maison_commerce_maison_img_with_text__heading {
+    font-size: {{ section.settings.heading_font_size_desktop }}px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: {{ section.settings.heading_color }};
+    margin: 0;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_img_with_text__heading {
+      font-size: {{ section.settings.heading_font_size_mobile }}px;
+      line-height: 1.4;
+    }
+  }
+
+  /* Description */
+  .maison_commerce_maison_img_with_text__description {
+    font-size: {{ section.settings.description_font_size_desktop }}px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: {{ section.settings.description_color }};
+    text-align: center;
+    width: 100%;
+  }
+
+  .maison_commerce_maison_img_with_text__description p {
+    margin: 0;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_img_with_text__description {
+      font-size: {{ section.settings.description_font_size_mobile }}px;
+      font-weight: 400;
+      text-transform: capitalize;
+    }
+  }
+
+  /* Icons */
+  .maison_commerce_maison_img_with_text__icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: {{ section.settings.icon_gap_desktop }}px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_img_with_text__icons {
+      gap: {{ section.settings.icon_gap_mobile }}px;
+    }
+  }
+
+  .maison_commerce_maison_img_with_text__icon {
+    width: {{ section.settings.icon_size_desktop }}px;
+    height: {{ section.settings.icon_size_desktop }}px;
+    border-radius: 48px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_img_with_text__icon {
+      width: {{ section.settings.icon_size_mobile }}px;
+      height: {{ section.settings.icon_size_mobile }}px;
+    }
+  }
+
+  .maison_commerce_maison_img_with_text__icon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+  }
+
+  /* Image Container */
+  .maison_commerce_maison_img_with_text__image-container {
+    flex: 1;
+    aspect-ratio: 670 / 670;
+    background-color: #ffffff;
+    overflow: hidden;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_img_with_text__image-container {
+      aspect-ratio: 600 / 600;
+      width: 100%;
+    }
+  }
+
+  .maison_commerce_maison_img_with_text__image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .maison_commerce_maison_img_with_text__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  /* Overlay Image (Mobile) */
+  .maison_commerce_maison_img_with_text__overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 375px;
+    height: 375px;
+    pointer-events: none;
+  }
+
+  @media (min-width: 991px) {
+    .maison_commerce_maison_img_with_text__overlay {
+      display: none;
+    }
+  }
+
+  .maison_commerce_maison_img_with_text__overlay-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+</style>
+
