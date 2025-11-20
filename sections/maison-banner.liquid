@@ -386,12 +386,14 @@
 </div>
 
 <style>
+  #shopify-section-{{ section.id }}{
+    background-color: {{ section.settings.section_bg_color }};
+  }
   .maison_commerce_maison_banner-wrapper{
     display: flex;
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
-    background-color: {{ section.settings.section_bg_color }};
   }
   @media (max-width: 990px) {
     .maison_commerce_maison_banner-wrapper{
