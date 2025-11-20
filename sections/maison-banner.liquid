@@ -235,7 +235,7 @@
         {
           "type": "text",
           "id": "feature_text",
-          "label": "Feature Text",
+          "label": "Feature Text"
         },
         {
           "type": "image_picker",
@@ -264,113 +264,141 @@
 }
 {% endschema %}
 
-<div class="maison_commerce_maison_banner" style="background-color: {{ section.settings.section_bg_color }}; padding-top: {{ section.settings.padding_top_desktop }}px; padding-bottom: {{ section.settings.padding_bottom_desktop }}px; padding-left: {{ section.settings.padding_left_desktop }}px; padding-right: {{ section.settings.padding_right_desktop }}px;">
-  <div class="maison_commerce_maison_banner__container">
-    <div class="maison_commerce_maison_banner__content">
-      <div class="maison_commerce_maison_banner__text-content">
-        {% if section.settings.rating_text != blank %}
-          <div class="maison_commerce_maison_banner__rating">
-            <div class="maison_commerce_maison_banner__stars">
-              {% for i in (1..5) %}
-                <svg class="maison_commerce_maison_banner__star" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8 0L10.163 5.52786L16 6.2918L12 10.1443L12.9443 16L8 13.5279L3.05573 16L4 10.1443L0 6.2918L5.83698 5.52786L8 0Z" fill="currentColor"/>
-                </svg>
+<div class="maison_commerce_maison_banner-wrapper">
+  <div
+    class="maison_commerce_maison_banner"
+    style="background-color: {{ section.settings.section_bg_color }}; padding-top: {{ section.settings.padding_top_desktop }}px; padding-bottom: {{ section.settings.padding_bottom_desktop }}px; padding-left: {{ section.settings.padding_left_desktop }}px; padding-right: {{ section.settings.padding_right_desktop }}px;"
+  >
+    <div class="maison_commerce_maison_banner__container">
+      <div class="maison_commerce_maison_banner__content">
+        <div class="maison_commerce_maison_banner__text-content">
+          {% if section.settings.rating_text != blank %}
+            <div class="maison_commerce_maison_banner__rating">
+              <div class="maison_commerce_maison_banner__stars">
+                {% for i in (1..5) %}
+                  <svg
+                    class="maison_commerce_maison_banner__star"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M8 0L10.163 5.52786L16 6.2918L12 10.1443L12.9443 16L8 13.5279L3.05573 16L4 10.1443L0 6.2918L5.83698 5.52786L8 0Z" fill="currentColor"/>
+                  </svg>
+                {% endfor %}
+              </div>
+              <p class="maison_commerce_maison_banner__rating-text">
+                {{ section.settings.rating_text }}
+              </p>
+            </div>
+          {% endif %}
+
+          {% if section.settings.section_heading != blank %}
+            <h2 class="maison_commerce_maison_banner__heading">
+              {{ section.settings.section_heading }}
+            </h2>
+          {% endif %}
+
+          {% if section.settings.section_description != blank %}
+            <div class="maison_commerce_maison_banner__description">
+              {{ section.settings.section_description }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="maison_commerce_maison_banner__actions">
+          {% if section.settings.primary_button_text != blank and section.settings.primary_button_link != blank %}
+            <a
+              href="{{ section.settings.primary_button_link }}"
+              class="maison_commerce_maison_banner__button maison_commerce_maison_banner__button--primary"
+            >
+              <span>{{ section.settings.primary_button_text }}</span>
+              <svg
+                class="maison_commerce_maison_banner__button-arrow"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          {% endif %}
+
+          {% if section.settings.secondary_button_text != blank and section.settings.secondary_button_link != blank %}
+            <a
+              href="{{ section.settings.secondary_button_link }}"
+              class="maison_commerce_maison_banner__button maison_commerce_maison_banner__button--secondary"
+            >
+              <span>{{ section.settings.secondary_button_text }}</span>
+              <svg
+                class="maison_commerce_maison_banner__button-arrow"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          {% endif %}
+
+          {% if section.blocks.size > 0 %}
+            <div class="maison_commerce_maison_banner__features">
+              {% for block in section.blocks %}
+                {% case block.type %}
+                  {% when 'feature' %}
+                    <div class="maison_commerce_maison_banner__feature" {{ block.shopify_attributes }}>
+                      {% if block.settings.feature_icon != blank %}
+                        <div class="maison_commerce_maison_banner__feature-icon">
+                          {{
+                            block.settings.feature_icon
+                            | image_url: width: 32
+                            | image_tag: loading: 'lazy', alt: block.settings.feature_icon.alt, width: 16, height: 16
+                          }}
+                        </div>
+                      {% endif %}
+                      {% if block.settings.feature_text != blank %}
+                        <p class="maison_commerce_maison_banner__feature-text">
+                          {{ block.settings.feature_text }}
+                        </p>
+                      {% endif %}
+                      {% unless forloop.last %}
+                        <div class="maison_commerce_maison_banner__feature-divider"></div>
+                      {% endunless %}
+                    </div>
+                {% endcase %}
               {% endfor %}
             </div>
-            <p class="maison_commerce_maison_banner__rating-text">
-              {{ section.settings.rating_text }}
-            </p>
-          </div>
-        {% endif %}
-
-        {% if section.settings.section_heading != blank %}
-          <h2 class="maison_commerce_maison_banner__heading">
-            {{ section.settings.section_heading }}
-          </h2>
-        {% endif %}
-
-        {% if section.settings.section_description != blank %}
-          <div class="maison_commerce_maison_banner__description">
-            {{ section.settings.section_description }}
-          </div>
-        {% endif %}
-      </div>
-
-      <div class="maison_commerce_maison_banner__actions">
-        {% if section.settings.primary_button_text != blank and section.settings.primary_button_link != blank %}
-          <a href="{{ section.settings.primary_button_link }}" class="maison_commerce_maison_banner__button maison_commerce_maison_banner__button--primary">
-            <span>{{ section.settings.primary_button_text }}</span>
-            <svg class="maison_commerce_maison_banner__button-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        {% endif %}
-
-        {% if section.settings.secondary_button_text != blank and section.settings.secondary_button_link != blank %}
-          <a href="{{ section.settings.secondary_button_link }}" class="maison_commerce_maison_banner__button maison_commerce_maison_banner__button--secondary">
-            <span>{{ section.settings.secondary_button_text }}</span>
-            <svg class="maison_commerce_maison_banner__button-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        {% endif %}
-
-        {% if section.blocks.size > 0 %}
-          <div class="maison_commerce_maison_banner__features">
-            {% for block in section.blocks %}
-              {% case block.type %}
-                {% when 'feature' %}
-                  <div class="maison_commerce_maison_banner__feature" {{ block.shopify_attributes }}>
-                    {% if block.settings.feature_icon != blank %}
-                      <div class="maison_commerce_maison_banner__feature-icon">
-                        {{
-                          block.settings.feature_icon
-                          | image_url: width: 32
-                          | image_tag:
-                            loading: 'lazy',
-                            alt: block.settings.feature_icon.alt,
-                            width: 16,
-                            height: 16
-                        }}
-                      </div>
-                    {% endif %}
-                    {% if block.settings.feature_text != blank %}
-                      <p class="maison_commerce_maison_banner__feature-text">
-                        {{ block.settings.feature_text }}
-                      </p>
-                    {% endif %}
-                    {% unless forloop.last %}
-                      <div class="maison_commerce_maison_banner__feature-divider"></div>
-                    {% endunless %}
-                  </div>
-              {% endcase %}
-            {% endfor %}
-          </div>
-        {% endif %}
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
-</div>
-{% if section.settings.background_image != blank or section.settings.background_video != blank %}
+  {% if section.settings.background_image != blank or section.settings.background_video != blank %}
     <div class="maison_commerce_maison_banner__background">
-    {% if section.settings.background_video != blank %}
+      {% if section.settings.background_video != blank %}
         <video class="maison_commerce_maison_banner__video" autoplay muted loop playsinline>
-        {% for source in section.settings.background_video.sources %}
+          {% for source in section.settings.background_video.sources %}
             <source src="{{ source.url }}" type="{{ source.mime_type }}">
-        {% endfor %}
+          {% endfor %}
         </video>
-    {% elsif section.settings.background_image != blank %}
+      {% elsif section.settings.background_image != blank %}
         {{
-        section.settings.background_image
-        | image_url: width: 2000
-        | image_tag:
+          section.settings.background_image
+          | image_url: width: 2000
+          | image_tag:
             loading: 'lazy',
             class: 'maison_commerce_maison_banner__image',
             alt: section.settings.background_image.alt
         }}
-    {% endif %}
+      {% endif %}
     </div>
-{% endif %}
+  {% endif %}
+</div>
 
 <style>
   /* Section Container */
@@ -711,4 +739,3 @@
     }
   }
 </style>
-
