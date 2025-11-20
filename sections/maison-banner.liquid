@@ -266,27 +266,6 @@
 
 <section class="maison_commerce_maison_banner" style="background-color: {{ section.settings.section_bg_color }}; padding-top: {{ section.settings.padding_top_desktop }}px; padding-bottom: {{ section.settings.padding_bottom_desktop }}px; padding-left: {{ section.settings.padding_left_desktop }}px; padding-right: {{ section.settings.padding_right_desktop }}px;">
   <div class="maison_commerce_maison_banner__container">
-    {% if section.settings.background_image != blank or section.settings.background_video != blank %}
-      <div class="maison_commerce_maison_banner__background">
-        {% if section.settings.background_video != blank %}
-          <video class="maison_commerce_maison_banner__video" autoplay muted loop playsinline>
-            {% for source in section.settings.background_video.sources %}
-              <source src="{{ source.url }}" type="{{ source.mime_type }}">
-            {% endfor %}
-          </video>
-        {% elsif section.settings.background_image != blank %}
-          {{
-            section.settings.background_image
-            | image_url: width: 2000
-            | image_tag:
-              loading: 'lazy',
-              class: 'maison_commerce_maison_banner__image',
-              alt: section.settings.background_image.alt
-          }}
-        {% endif %}
-      </div>
-    {% endif %}
-
     <div class="maison_commerce_maison_banner__content">
       <div class="maison_commerce_maison_banner__text-content">
         {% if section.settings.rating_text != blank %}
@@ -371,6 +350,26 @@
       </div>
     </div>
   </div>
+  {% if section.settings.background_image != blank or section.settings.background_video != blank %}
+      <div class="maison_commerce_maison_banner__background">
+        {% if section.settings.background_video != blank %}
+          <video class="maison_commerce_maison_banner__video" autoplay muted loop playsinline>
+            {% for source in section.settings.background_video.sources %}
+              <source src="{{ source.url }}" type="{{ source.mime_type }}">
+            {% endfor %}
+          </video>
+        {% elsif section.settings.background_image != blank %}
+          {{
+            section.settings.background_image
+            | image_url: width: 2000
+            | image_tag:
+              loading: 'lazy',
+              class: 'maison_commerce_maison_banner__image',
+              alt: section.settings.background_image.alt
+          }}
+        {% endif %}
+      </div>
+    {% endif %}
 </section>
 
 <style>
