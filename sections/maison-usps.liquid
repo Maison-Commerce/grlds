@@ -1,0 +1,444 @@
+{% schema %}
+{
+  "name": "Maison USPs",
+  "settings": [
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_right_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "item_gap_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Gap (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "item_gap_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Item Gap (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon Size",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_desktop",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Title Font Size (Desktop)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Title Font Size (Mobile)",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "description_font_size_desktop",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size (Desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_font_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size (Mobile)",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#8b8b8b"
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Content Gap (Icon to Text)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "text_gap",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Text Gap (Title to Description)",
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "usp",
+      "name": "USP",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Maison USPs",
+      "blocks": [
+        {
+          "type": "usp"
+        },
+        {
+          "type": "usp"
+        },
+        {
+          "type": "usp"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="maison_commerce_maison_usps">
+  <div class="maison_commerce_maison_usps__container">
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'usp' %}
+            <div class="maison_commerce_maison_usps__item" {{ block.shopify_attributes }}>
+              <div class="maison_commerce_maison_usps__content">
+                {% if block.settings.icon != blank %}
+                  <div class="maison_commerce_maison_usps__icon">
+                    {{
+                      block.settings.icon
+                      | image_url: width: 100
+                      | image_tag:
+                        loading: 'lazy',
+                        class: 'maison_commerce_maison_usps__icon-image',
+                        alt: block.settings.icon.alt,
+                        width: section.settings.icon_size,
+                        height: section.settings.icon_size
+                    }}
+                  </div>
+                {% endif %}
+
+                <div class="maison_commerce_maison_usps__text">
+                  {% if block.settings.title != blank %}
+                    <h3 class="maison_commerce_maison_usps__title">
+                      {{ block.settings.title }}
+                    </h3>
+                  {% endif %}
+
+                  {% if block.settings.description != blank %}
+                    <p class="maison_commerce_maison_usps__description">
+                      {{ block.settings.description }}
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            {% unless forloop.last %}
+              <div class="maison_commerce_maison_usps__divider"></div>
+            {% endunless %}
+        {% endcase %}
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  /* Section Container */
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.section_bg_color }};
+  }
+
+  .maison_commerce_maison_usps {
+    padding-top: {{ section.settings.padding_top_desktop }}px;
+    padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    padding-left: {{ section.settings.padding_left_desktop }}px;
+    padding-right: {{ section.settings.padding_right_desktop }}px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_usps {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      padding-left: {{ section.settings.padding_left_mobile }}px;
+      padding-right: {{ section.settings.padding_right_mobile }}px;
+      border-top: none;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  /* Container */
+  .maison_commerce_maison_usps__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: {{ section.settings.item_gap_desktop }}px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_usps__container {
+      flex-direction: column;
+      gap: {{ section.settings.item_gap_mobile }}px;
+      padding: 0;
+    }
+  }
+
+  /* Item */
+  .maison_commerce_maison_usps__item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_usps__item {
+      flex: none;
+      width: 100%;
+      padding: 0 18px;
+    }
+  }
+
+  /* Content */
+  .maison_commerce_maison_usps__content {
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.content_gap }}px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    max-width: 325.333px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_usps__content {
+      flex-direction: row;
+      align-items: center;
+      text-align: left;
+      gap: 18px;
+      max-width: 100%;
+    }
+  }
+
+  /* Icon */
+  .maison_commerce_maison_usps__icon {
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .maison_commerce_maison_usps__icon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Text */
+  .maison_commerce_maison_usps__text {
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.text_gap }}px;
+    width: 100%;
+  }
+
+  /* Title */
+  .maison_commerce_maison_usps__title {
+    font-size: {{ section.settings.title_font_size_desktop }}px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: {{ section.settings.title_color }};
+    margin: 0;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_usps__title {
+      font-size: {{ section.settings.title_font_size_mobile }}px;
+      text-align: left;
+    }
+  }
+
+  /* Description */
+  .maison_commerce_maison_usps__description {
+    font-size: {{ section.settings.description_font_size_desktop }}px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: {{ section.settings.description_color }};
+    margin: 0;
+    letter-spacing: 0.32px;
+    text-align: center;
+    width: 100%;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_usps__description {
+      font-size: {{ section.settings.description_font_size_mobile }}px;
+      letter-spacing: 0;
+      text-align: left;
+    }
+  }
+
+  /* Divider */
+  .maison_commerce_maison_usps__divider {
+    width: 1px;
+    height: 312px;
+    background-color: rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_usps__divider {
+      width: 100%;
+      height: 1px;
+    }
+  }
+</style>
+
