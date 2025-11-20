@@ -66,7 +66,7 @@
                 class="announcement-bar__link link link--text focus-inset animate-arrow"
               >
             {%- endif -%}
-            <p class="announcement-bar__message h5{% if section.blocks.first.settings.font_family == 'heading' %} font-heading-family{% else %} font-body-family{% endif %}" 
+            <p class="announcement-bar__message {% if section.blocks.first.settings.font_family == 'heading' %} font-heading-family{% else %} font-body-family{% endif %}" 
             style="font-size: {{ section.blocks.first.settings.font_size }}px; {% if section.blocks.first.settings.use_custom_color == true %} color: {{ section.blocks.first.settings.text_color }}; {% endif %} {% if section.blocks.first.settings.use_custom_weight == true %} font-weight: {{ section.blocks.first.settings.font_weight }}; {% endif %}">
               <span>{{ section.blocks.first.settings.text }}</span>
               {%- if section.blocks.first.settings.link != blank -%}
@@ -189,7 +189,7 @@
                           class="announcement-bar__link link link--text focus-inset animate-arrow"
                         >
                       {%- endif -%}
-                      <p class="announcement-bar__message h5{% if block.settings.font_family == 'heading' %} font-heading-family{% else %} font-body-family{% endif %}" 
+                      <p class="announcement-bar__message {% if block.settings.font_family == 'heading' %} font-heading-family{% else %} font-body-family{% endif %}" 
                       style="font-size: {{ block.settings.font_size }}px; {% if block.settings.use_custom_color == true %} color: {{ block.settings.text_color }}; {% endif %} {% if block.settings.use_custom_weight == true %} font-weight: {{ block.settings.font_weight }}; {% endif %}">
                         <span>{{ block.settings.text }}</span>
                         {%- if block.settings.link != blank -%}
