@@ -436,6 +436,7 @@
   /* Section Container */
   #shopify-section-{{ section.id }} {
     background-color: {{ section.settings.section_bg_color }};
+    overflow: hidden;
   }
 
   .maison_commerce_maison_propose_product {
@@ -670,7 +671,7 @@
   @media (max-width: 990px) {
     .maison_commerce_maison_propose_product__swiper {
       display: block!important;
-      overflow: visible;
+      overflow: visible!important;
     }
   }
 
