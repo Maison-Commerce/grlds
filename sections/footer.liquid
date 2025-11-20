@@ -275,7 +275,7 @@
           <ul class="maison_commerce_maison_footer__nav-links">
             {% if section.settings.chamber_of_commerce != blank %}
               <li>
-                <a href="#" class="maison_commerce_maison_footer__nav-link maison_commerce_maison_footer__nav-link--with-icon">
+                <p class="maison_commerce_maison_footer__nav-link maison_commerce_maison_footer__nav-link--with-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                     <path d="M0.625 7.5C0.625 9.32338 1.34933 11.0721 2.63864 12.3614C3.92796 13.6507 5.67664 14.375 7.5 14.375C9.32338 14.375 11.0721 13.6507 12.3614 12.3614C13.6507 11.0721 14.375 9.32338 14.375 7.5C14.375 5.67664 13.6507 3.92796 12.3614 2.63864C11.0721 1.34933 9.32338 0.625 7.5 0.625C5.67664 0.625 3.92796 1.34933 2.63864 2.63864C1.34933 3.92796 0.625 5.67664 0.625 7.5Z" stroke="currentColor" stroke-width="1.25"/>
                     <path d="M5 6.25H7.5V10.625" stroke="currentColor" stroke-width="1.25"/>
@@ -283,20 +283,20 @@
                     <path d="M7.5 4.375V3.125" stroke="currentColor" stroke-width="1.25"/>
                   </svg>
                   <span>{{ section.settings.chamber_of_commerce }}</span>
-                </a>
+                </p>
               </li>
             {% endif %}
 
             {% if section.settings.address != blank %}
               <li>
-                <a href="#" class="maison_commerce_maison_footer__nav-link maison_commerce_maison_footer__nav-link--with-icon">
+                <p class="maison_commerce_maison_footer__nav-link maison_commerce_maison_footer__nav-link--with-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
                     <path d="M3.125 11C1.60694 11.3421 0.625 11.8867 0.625 12.5002C0.625 13.5357 3.42322 14.3752 6.875 14.3752C10.3268 14.3752 13.125 13.5357 13.125 12.5002C13.125 11.8867 12.1431 11.3421 10.625 11" stroke="currentColor" stroke-width="1.25"/>
                     <path d="M7.1875 5.3125H6.5625V4.6875H7.1875V5.3125Z" stroke="currentColor" stroke-width="1.25"/>
                     <path d="M2.5 5.02155C2.5 7.95256 6.875 11.25 6.875 11.25C6.875 11.25 11.25 7.95256 11.25 5.02155C11.25 2.59341 9.29125 0.625 6.875 0.625C4.45876 0.625 2.5 2.59341 2.5 5.02155Z" stroke="currentColor" stroke-width="1.25"/>
                   </svg>
                   <span>{{ section.settings.address }}</span>
-                </a>
+                </p>
               </li>
             {% endif %}
 
