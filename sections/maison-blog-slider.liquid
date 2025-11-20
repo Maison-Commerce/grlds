@@ -1,0 +1,716 @@
+{% schema %}
+{
+  "name": "Maison Blog Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section Heading",
+      "default": "Journal"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_left_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_right_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_desktop",
+      "min": 16,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Mobile)",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "card_gap_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Gap (Desktop)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "card_gap_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Gap (Mobile)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_desktop",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Title Font Size (Desktop)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Title Font Size (Mobile)",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "excerpt_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Excerpt Font Size (Mobile)",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "excerpt_color",
+      "label": "Excerpt Color",
+      "default": "rgba(26, 26, 26, 0.75)"
+    },
+    {
+      "type": "range",
+      "id": "link_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Read More Link Font Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Read More Link Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "text",
+      "id": "read_more_text",
+      "label": "Read More Text",
+      "default": "Read More"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article",
+      "name": "Article",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "Article"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Maison Blog Slider",
+      "blocks": [
+        {
+          "type": "article"
+        },
+        {
+          "type": "article"
+        },
+        {
+          "type": "article"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<div class="maison_commerce_maison_blog_slider">
+  <div class="maison_commerce_maison_blog_slider__container">
+    {% if section.settings.section_heading != blank %}
+      <div class="maison_commerce_maison_blog_slider__heading-wrapper">
+        <h2 class="maison_commerce_maison_blog_slider__heading">
+          {{ section.settings.section_heading }}
+        </h2>
+      </div>
+    {% endif %}
+
+    {% if section.blocks.size > 0 %}
+      <!-- Desktop Grid -->
+      <div class="maison_commerce_maison_blog_slider__grid">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'article' %}
+              {% assign article = block.settings.article %}
+              {% if article != blank %}
+                <div class="maison_commerce_maison_blog_slider__card" {{ block.shopify_attributes }}>
+                  {% if article.image != blank %}
+                    <div class="maison_commerce_maison_blog_slider__image-wrapper">
+                      <a href="{{ article.url }}">
+                        {{
+                          article.image
+                          | image_url: width: 1000
+                          | image_tag:
+                            loading: 'lazy',
+                            class: 'maison_commerce_maison_blog_slider__image',
+                            alt: article.image.alt | default: article.title
+                        }}
+                      </a>
+                    </div>
+                  {% endif %}
+
+                  <div class="maison_commerce_maison_blog_slider__content">
+                    {% if article.title != blank %}
+                      <h3 class="maison_commerce_maison_blog_slider__title">
+                        <a href="{{ article.url }}">{{ article.title }}</a>
+                      </h3>
+                    {% endif %}
+
+                    <a href="{{ article.url }}" class="maison_commerce_maison_blog_slider__link">
+                      <span>{{ section.settings.read_more_text | default: 'Read More' }}</span>
+                      <div class="maison_commerce_maison_blog_slider__link-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M15.3105 12.0003L9.53099 6.21925L8.46899 7.27975L13.1895 12.0003L8.46899 16.7192L9.53099 17.7812L15.3105 12.0003Z" fill="#7B7B7B"/>
+                        </svg>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              {% endif %}
+          {% endcase %}
+        {% endfor %}
+      </div>
+
+      <!-- Mobile Swiper -->
+      <div class="swiper maison_commerce_maison_blog_slider__swiper">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'article' %}
+                {% assign article = block.settings.article %}
+                {% if article != blank %}
+                  <div class="swiper-slide maison_commerce_maison_blog_slider__slide">
+                    <div class="maison_commerce_maison_blog_slider__card">
+                      {% if article.image != blank %}
+                        <div class="maison_commerce_maison_blog_slider__image-wrapper">
+                          <a href="{{ article.url }}">
+                            {{
+                              article.image
+                              | image_url: width: 1000
+                              | image_tag:
+                                loading: 'lazy',
+                                class: 'maison_commerce_maison_blog_slider__image',
+                                alt: article.image.alt | default: article.title
+                            }}
+                          </a>
+                        </div>
+                      {% endif %}
+
+                      <div class="maison_commerce_maison_blog_slider__content">
+                        {% if article.title != blank %}
+                          <h3 class="maison_commerce_maison_blog_slider__title">
+                            <a href="{{ article.url }}">{{ article.title }}</a>
+                          </h3>
+                        {% endif %}
+
+                        {% if article.excerpt != blank %}
+                          <div class="maison_commerce_maison_blog_slider__excerpt">
+                            {{ article.excerpt }}
+                          </div>
+                        {% endif %}
+
+                        <a href="{{ article.url }}" class="maison_commerce_maison_blog_slider__link">
+                          <span>{{ section.settings.read_more_text | default: 'Read More' }}</span>
+                          <div class="maison_commerce_maison_blog_slider__link-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M15.3105 12.0003L9.53099 6.21925L8.46899 7.27975L13.1895 12.0003L8.46899 16.7192L9.53099 17.7812L15.3105 12.0003Z" fill="#7B7B7B"/>
+                            </svg>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+            {% endcase %}
+          {% endfor %}
+        </div>
+
+        <!-- Navigation -->
+        <div class="maison_commerce_maison_blog_slider__navigation">
+          <div class="maison_commerce_maison_blog_slider__nav-button maison_commerce_maison_blog_slider__nav-button--prev">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="maison_commerce_maison_blog_slider__progress">
+            <div class="maison_commerce_maison_blog_slider__progress-bar"></div>
+          </div>
+          <div class="maison_commerce_maison_blog_slider__nav-button maison_commerce_maison_blog_slider__nav-button--next">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  /* Section Container */
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.section_bg_color }};
+  }
+
+  .maison_commerce_maison_blog_slider {
+    padding-top: {{ section.settings.padding_top_desktop }}px;
+    padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    padding-left: {{ section.settings.padding_left_desktop }}px;
+    padding-right: {{ section.settings.padding_right_desktop }}px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_blog_slider {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      padding-left: {{ section.settings.padding_left_mobile }}px;
+      padding-right: {{ section.settings.padding_right_mobile }}px;
+    }
+  }
+
+  /* Container */
+  .maison_commerce_maison_blog_slider__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_blog_slider__container {
+      gap: 32px;
+    }
+  }
+
+  /* Heading */
+  .maison_commerce_maison_blog_slider__heading-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_blog_slider__heading-wrapper {
+      max-width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .maison_commerce_maison_blog_slider__heading {
+    font-size: {{ section.settings.heading_font_size_desktop }}px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: {{ section.settings.heading_color }};
+    margin: 0;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_blog_slider__heading {
+      font-size: {{ section.settings.heading_font_size_mobile }}px;
+      line-height: 1.4;
+    }
+  }
+
+  /* Desktop Grid */
+  .maison_commerce_maison_blog_slider__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: {{ section.settings.card_gap_desktop }}px;
+    width: 100%;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_blog_slider__grid {
+      display: none;
+    }
+  }
+
+  /* Card */
+  .maison_commerce_maison_blog_slider__card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Image Wrapper */
+  .maison_commerce_maison_blog_slider__image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: #f8f8f8;
+  }
+
+  .maison_commerce_maison_blog_slider__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    transition: transform 0.3s ease;
+  }
+
+  .maison_commerce_maison_blog_slider__image-wrapper:hover .maison_commerce_maison_blog_slider__image {
+    transform: scale(1.05);
+  }
+
+  /* Content */
+  .maison_commerce_maison_blog_slider__content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+  }
+
+  /* Title */
+  .maison_commerce_maison_blog_slider__title {
+    font-size: {{ section.settings.title_font_size_desktop }}px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: {{ section.settings.title_color }};
+    margin: 0;
+  }
+
+  .maison_commerce_maison_blog_slider__title a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .maison_commerce_maison_blog_slider__title a:hover {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_blog_slider__title {
+      font-size: {{ section.settings.title_font_size_mobile }}px;
+    }
+  }
+
+  /* Excerpt (Mobile Only) */
+  .maison_commerce_maison_blog_slider__excerpt {
+    display: none;
+    font-size: {{ section.settings.excerpt_font_size }}px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: {{ section.settings.excerpt_color }};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    height: calc({{ section.settings.excerpt_font_size }}px * 1.5 * 3);
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_blog_slider__excerpt {
+      display: -webkit-box;
+    }
+  }
+
+  @media (min-width: 991px) {
+    .maison_commerce_maison_blog_slider__excerpt {
+      display: none;
+    }
+  }
+
+  .maison_commerce_maison_blog_slider__excerpt p {
+    margin: 0;
+  }
+
+  /* Link */
+  .maison_commerce_maison_blog_slider__link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: {{ section.settings.link_color }};
+    font-size: {{ section.settings.link_font_size }}px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .maison_commerce_maison_blog_slider__link:hover {
+    opacity: 0.7;
+  }
+
+  .maison_commerce_maison_blog_slider__link-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .maison_commerce_maison_blog_slider__link-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Mobile Swiper */
+  .maison_commerce_maison_blog_slider__swiper {
+    display: none;
+    position: relative;
+    width: 100%;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_blog_slider__swiper {
+      display: block;
+    }
+  }
+
+  .maison_commerce_maison_blog_slider__slide {
+    height: auto;
+  }
+
+  .maison_commerce_maison_blog_slider__slide .maison_commerce_maison_blog_slider__card {
+    width: 280px;
+    margin: 0 auto;
+  }
+
+  .maison_commerce_maison_blog_slider__slide .maison_commerce_maison_blog_slider__image-wrapper {
+    height: 280px;
+    aspect-ratio: none;
+  }
+
+  /* Navigation */
+  .maison_commerce_maison_blog_slider__navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  @media (min-width: 991px) {
+    .maison_commerce_maison_blog_slider__navigation {
+      display: none;
+    }
+  }
+
+  .maison_commerce_maison_blog_slider__nav-button {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e6e6e6;
+    background-color: transparent;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .maison_commerce_maison_blog_slider__nav-button:hover {
+    opacity: 0.7;
+  }
+
+  .maison_commerce_maison_blog_slider__nav-button svg {
+    color: #1a1a1a;
+  }
+
+  /* Progress Bar */
+  .maison_commerce_maison_blog_slider__progress {
+    flex: 1;
+    height: 2px;
+    background-color: rgba(26, 26, 26, 0.1);
+    border-radius: 999px;
+    position: relative;
+    overflow: hidden;
+    max-width: 200px;
+  }
+
+  .maison_commerce_maison_blog_slider__progress-bar {
+    display: flex!important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #1a1a1a;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const swiperContainer = document.querySelector('.maison_commerce_maison_blog_slider__swiper');
+    
+    if (swiperContainer && window.innerWidth <= 990) {
+      const progressBar = swiperContainer.querySelector('.maison_commerce_maison_blog_slider__progress-bar');
+      const prevButton = swiperContainer.querySelector('.maison_commerce_maison_blog_slider__nav-button--prev');
+      const nextButton = swiperContainer.querySelector('.maison_commerce_maison_blog_slider__nav-button--next');
+      
+      const swiper = new Swiper('.maison_commerce_maison_blog_slider__swiper', {
+        slidesPerView: 'auto',
+        spaceBetween: 16,
+        centeredSlides: false,
+        loop: false,
+        navigation: {
+          nextEl: nextButton,
+          prevEl: prevButton,
+        },
+        breakpoints: {
+          0: {
+            slidesPerView: 1.17,
+            centeredSlides: true,
+          },
+          500: {
+            slidesPerView: 3,
+          }
+        },
+        on: {
+          init: function() {
+            if (progressBar) {
+              progressBar.style.width = '25%';
+            }
+          },
+          progress: function(swiper, progress) {
+            const adjustedProgress = 0.25 + (progress * 0.75);
+            if (progressBar) {
+              progressBar.style.width = (adjustedProgress * 100) + '%';
+            }
+          },
+        },
+      });
+    }
+  });
+</script>
