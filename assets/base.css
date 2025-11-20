@@ -2599,8 +2599,8 @@ input[type=checkbox] {
 }
 
 .header__icon .svg-wrapper svg, .header__icon .svg-wrapper img{
-  width: 20px;
-  height: 20px;
+  width: 20px!important;
+  height: 20px!important;
 }
 
 .header__icon::after {
