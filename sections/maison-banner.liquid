@@ -373,6 +373,9 @@
                       {% endunless %}
                     </div>
                 {% endcase %}
+                {% unless forloop.last %}
+                    <div class="maison_commerce_maison_banner__features-divider"></div>
+                {% endunless %}
               {% endfor %}
             </div>
           {% endif %}
