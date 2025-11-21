@@ -403,6 +403,8 @@ quick-add-bulk .quantity__input {
 
 .maison-quick-add-form{
   display: flex;
+  width: 100%;
+  justify-content: end;
 }
 
 .maison-quick-add{
