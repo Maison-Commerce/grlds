@@ -68,7 +68,6 @@
       "settings": {
         "color_scheme_main": "background-2",
         "full-width": true,
-        "image": "shopify://shop_images/Figma_2025-10-25_21.35.32.png",
         "height": "medium",
         "desktop_image_width": "medium",
         "layout": "text_first",
@@ -100,7 +99,7 @@
         "show_product_description": false,
         "description_font_size": 14,
         "description_word_limit": 20,
-        "quick_add": "none",
+        "quick_add": "standard",
         "enable_filtering": true,
         "filter_type": "drawer",
         "enable_sorting": true,
