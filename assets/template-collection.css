@@ -102,3 +102,7 @@
   max-width: 1440px;
   padding: 0 80px;
 }
+
+.maison-product-grid{
+  gap: 18px;
+}
