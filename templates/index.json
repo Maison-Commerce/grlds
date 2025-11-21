@@ -93,7 +93,7 @@
         "heading_font_size_desktop": 40,
         "heading_font_size_mobile": 24,
         "heading_color": "#1a1a1a",
-        "image_ratio": "adapt",
+        "image_ratio": "portrait",
         "image_shape": "default",
         "image_no_crop": false,
         "show_secondary_image": false,
