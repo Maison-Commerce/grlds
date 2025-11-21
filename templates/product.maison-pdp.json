@@ -419,6 +419,46 @@
         "icon_gap_mobile": 24
       }
     },
+    "maison_product_specification_GETt9W": {
+      "type": "maison-product-specification",
+      "name": "Maison Product Specific",
+      "settings": {
+        "section_heading": "Care & Safety",
+        "burn_time_label": "Burn Time",
+        "burn_time_value": "~ 40 h",
+        "first_burn_label": "First burn",
+        "first_burn_value": "2–3 h · Trim wick 5 mm · Do not burn > 3 h",
+        "keep_away_label": "Keep away from",
+        "care_guide_text": "View Full Care Guide",
+        "care_guide_link": "#",
+        "product_image": "shopify://shop_images/9810d94e5d182fd3415907fc409378fec71088f4.png",
+        "icon_child": "shopify://shop_images/Kids-Boy--Streamline-Ultimate.svg",
+        "icon_pet": "shopify://shop_images/Dog-Sit-3--Streamline-Ultimate.svg",
+        "icon_fire": "shopify://shop_images/Safety-Fire-Extinguisher--Streamline-Ultimate.svg",
+        "section_bg_color": "#ffffff",
+        "content_bg_color_mobile": "#fcf9f6",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "padding_left_mobile": 0,
+        "padding_right_mobile": 0,
+        "content_padding_desktop": 48,
+        "content_padding_mobile": 32,
+        "heading_font_size_desktop": 40,
+        "heading_font_size_mobile": 24,
+        "heading_color": "#1a1a1a",
+        "spec_font_size_desktop": 16,
+        "spec_font_size_mobile": 14,
+        "spec_label_color": "rgba(26, 26, 26, 0.75)",
+        "spec_value_color": "#1a1a1a",
+        "icon_size": 24,
+        "link_font_size": 16,
+        "link_color": "#1a1a1a"
+      }
+    },
     "maison_collection_slider_biG3Jx": {
       "type": "maison-collection-slider",
       "name": "Maison Collection Slider",
@@ -534,6 +574,7 @@
   "order": [
     "main",
     "maison_img_with_text_JGaQp6",
+    "maison_product_specification_GETt9W",
     "maison_collection_slider_biG3Jx",
     "maison_usps_diRRKV",
     "related-products"
