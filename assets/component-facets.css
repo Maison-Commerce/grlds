@@ -1278,4 +1278,5 @@ input.mobile-facets__checkbox {
   width: 20px!important;
   height: 20px!important;
   right: 18px!important;
+  top: calc(50% - 1.1rem)!important;
 }
