@@ -867,6 +867,12 @@ cubic-bezier(.4, .06, .1, 1.04);
 
 .mobile-facets__open-label {
   transition: text-decoration var(--duration-short) ease;
+  color: var(--Color-Brand-2-2900, #1F1A13);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 21px;
+  text-transform: uppercase;
 }
 
 .mobile-facets__open:hover .mobile-facets__open-label {
