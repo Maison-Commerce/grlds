@@ -18,49 +18,66 @@
         "padding_bottom": 36
       }
     },
-    "contact_form_bTH467": {
-      "type": "contact-form",
+    "maison_usps_iiFYcz": {
+      "type": "maison-usps",
       "blocks": {
-        "name_dAVwic": {
-          "type": "name",
-          "settings": {}
+        "usp_apQXVK": {
+          "type": "usp",
+          "settings": {
+            "icon": "shopify://shop_images/meteor-icons_gift.svg",
+            "title": "Signature Gift Wrap",
+            "description": "Complimentary on every order"
+          }
         },
-        "email_4zcRKk": {
-          "type": "email",
-          "settings": {}
+        "usp_KiwNPh": {
+          "type": "usp",
+          "settings": {
+            "icon": "shopify://shop_images/Frame_1484580598.svg",
+            "title": "CARBON-NEUTRAL DELIVERY",
+            "description": "Every delivery is 100% carbon offset"
+          }
         },
-        "tel_JTHEx9": {
-          "type": "tel",
-          "settings": {}
-        },
-        "textarea_iJdDwa": {
-          "type": "textarea",
-          "settings": {}
+        "usp_Qra3PH": {
+          "type": "usp",
+          "settings": {
+            "icon": "shopify://shop_images/shipment-return--shipment-return-parcel-shipping-box-arrow.svg",
+            "title": "Free Returns guarantee",
+            "description": "30-day hassle-free returns"
+          }
         }
       },
       "block_order": [
-        "name_dAVwic",
-        "email_4zcRKk",
-        "tel_JTHEx9",
-        "textarea_iJdDwa"
+        "usp_apQXVK",
+        "usp_KiwNPh",
+        "usp_Qra3PH"
       ],
-      "name": "t:sections.contact-form.presets.name",
+      "name": "Maison USPs",
       "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "heading_align": "center",
-        "heading_align_mobile": "center",
-        "sub_heading": "",
-        "sub_heading_align": "left",
-        "sub_heading_align_mobile": "left",
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "section_bg_color": "#ffffff",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_left_desktop": 80,
+        "padding_right_desktop": 80,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32,
+        "padding_left_mobile": 0,
+        "padding_right_mobile": 0,
+        "item_gap_desktop": 40,
+        "item_gap_mobile": 20,
+        "icon_size": 24,
+        "title_font_size_desktop": 20,
+        "title_font_size_mobile": 18,
+        "title_color": "#1a1a1a",
+        "description_font_size_desktop": 16,
+        "description_font_size_mobile": 12,
+        "description_color": "#8b8b8b",
+        "content_gap": 24,
+        "text_gap": 4
       }
     }
   },
   "order": [
     "main",
-    "contact_form_bTH467"
+    "maison_usps_iiFYcz"
   ]
 }
