@@ -1273,3 +1273,9 @@ input.mobile-facets__checkbox {
     padding: 0 1rem 1rem;
   }
 }
+
+.maison-collection-filter-icon{
+  width: 20px;
+  height: 20px;
+  right: 18px;
+}
