@@ -55,8 +55,8 @@ a.pagination__item:hover::after {
   height: 0.1rem;
 }
 
-.pagination__item--current::after,
-.pagination__item:hover::after {
+.pagination__item--current,
+.pagination__item:hover{
   background: rgba(56, 56, 56, 0.10);
 }
 
