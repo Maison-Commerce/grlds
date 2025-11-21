@@ -401,6 +401,10 @@ quick-add-bulk .quantity__input {
   pointer-events: none;
 }
 
+.maison-quick-add-form{
+  display: flex;
+}
+
 .maison-quick-add{
   width: 36px;
   height: 36px;
