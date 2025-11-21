@@ -99,6 +99,11 @@
   transition: none;
 }
 
+.facet-filters__field .select__select{
+  padding: 8px 12px;
+  border: 1px solid rgba(37, 33, 24, 0.20);
+}
+
 .select .icon-caret {
   width: 10px;
 }
