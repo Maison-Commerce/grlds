@@ -24,16 +24,23 @@
 }
 
 .pagination__item {
-  color: rgb(var(--color-foreground));
   display: inline-flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 3.2rem;
-  width: 3.2rem;
+  height: 32px;
+  width: 32px;
   padding: 0;
   text-decoration: none;
-  background: rgba(56, 56, 56, 0.10);
+
+  overflow: hidden;
+  color: var(--Text-Secondary, rgba(26, 26, 26, 0.75));
+  text-overflow: ellipsis;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.4px;
 }
 
 a.pagination__item:hover::after {
@@ -50,7 +57,7 @@ a.pagination__item:hover::after {
 
 .pagination__item--current::after,
 .pagination__item:hover::after {
-  
+  background: rgba(56, 56, 56, 0.10);
 }
 
 .pagination__item--next .icon {
