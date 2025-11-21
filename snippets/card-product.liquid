@@ -399,11 +399,10 @@
                       {% endif %}
                     >
                       <span>
-                        {%- if card_product.selected_or_first_available_variant.available -%}
-                          {{ 'products.product.add_to_cart' | t }}
-                        {%- else -%}
-                          {{ 'products.product.sold_out' | t }}
-                        {%- endif -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                          <path d="M5.66162 0V11.3235" stroke="currentColor" stroke-width="0.941177"/>
+                          <path d="M0 5.66187H11.3235" stroke="currentColor" stroke-width="0.941177"/>
+                        </svg>
                       </span>
                       <span class="sold-out-message hidden">
                         {{ 'products.product.sold_out' | t }}
