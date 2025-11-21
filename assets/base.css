@@ -1367,7 +1367,6 @@ button.shopify-payment-button__button--unbranded {
 .button-label,
 .customer button,
 .shopify-challenge__button {
-  font-family: var(--font-button-family);
   font-size: var(--button-text-size);
   font-weight: var(--font-button-weight);
   text-transform: var(--font-button-style);
