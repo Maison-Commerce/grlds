@@ -411,6 +411,8 @@
     {% if section.blocks.size > 0 %}
       <!-- Swiper Container -->
       <div class="swiper maison_commerce_maison_reviews_slider__swiper">
+        <div class="maison_commerce_maison_reviews_slider-shadow maison_commerce_maison_reviews_slider-shadow-left"></div>
+        <div class="maison_commerce_maison_reviews_slider-shadow maison_commerce_maison_reviews_slider-shadow-right"></div>
         <div class="swiper-wrapper">
           {% for block in section.blocks %}
             {% case block.type %}
