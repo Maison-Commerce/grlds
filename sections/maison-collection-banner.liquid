@@ -1,0 +1,573 @@
+{% schema %}
+{
+  "name": "Maison Collection Banner",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "rating_text",
+      "label": "Rating Text",
+      "default": "<p>Rated <strong>4.8</strong> / 5 based on <u>3200+</u> reviews</p>"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section Heading",
+      "default": "Sculpted Marble. Pure Fragrance."
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Luxury candles hand-poured in sculpted marble vessels, showcasing craftsmanship and tradition.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background Video"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background Color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_left_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_right_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_desktop",
+      "min": 16,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Desktop)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Mobile)",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "description_font_size_desktop",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size (Desktop)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "description_font_size_mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size (Mobile)",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "rgba(26, 26, 26, 0.75)"
+    },
+    {
+      "type": "color",
+      "id": "rating_color",
+      "label": "Rating Text Color",
+      "default": "#403527"
+    },
+    {
+      "type": "color",
+      "id": "feature_text_color",
+      "label": "Feature Text Color",
+      "default": "#1a1a1a"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_text",
+          "label": "Feature Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "feature_icon",
+          "label": "Feature Icon"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Maison Collection Banner",
+      "blocks": [
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="maison_commerce_maison_collection_banner-wrapper">
+  <div class="maison_commerce_maison_collection_banner">
+    <div class="maison_commerce_maison_collection_banner__container">
+      <div class="maison_commerce_maison_collection_banner__content">
+        <div class="maison_commerce_maison_collection_banner__text-content">
+          {% if section.settings.rating_text != blank %}
+            <div class="maison_commerce_maison_collection_banner__rating">
+              <div class="maison_commerce_maison_collection_banner__stars">
+                {% for i in (1..5) %}
+                  <svg xmlns="http://www.w3.org/2000/svg" class="maison_commerce_maison_collection_banner__star" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M8 12L3.5 14.5L4.5 9.5L1 6L6 5.5L8 1L10 5.5L15 6L11.5 9.5L12.5 14.5L8 12Z" fill="currentColor"/>
+                  </svg>
+                {% endfor %}
+              </div>
+              <div class="maison_commerce_maison_collection_banner__rating-text">
+                {{ section.settings.rating_text }}
+              </div>
+            </div>
+          {% endif %}
+
+          {% if section.settings.section_heading != blank %}
+            <h2 class="maison_commerce_maison_collection_banner__heading">
+              {{ section.settings.section_heading }}
+            </h2>
+          {% endif %}
+
+          {% if section.settings.section_description != blank %}
+            <div class="maison_commerce_maison_collection_banner__description">
+              {{ section.settings.section_description }}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if section.blocks.size > 0 %}
+          <div class="maison_commerce_maison_collection_banner__features">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'feature' %}
+                  <div class="maison_commerce_maison_collection_banner__feature" {{ block.shopify_attributes }}>
+                    {% if block.settings.feature_icon != blank %}
+                      <div class="maison_commerce_maison_collection_banner__feature-icon">
+                        {{
+                          block.settings.feature_icon
+                          | image_url: width: 100
+                          | image_tag: loading: 'lazy', alt: block.settings.feature_icon.alt, width: 16, height: 16
+                        }}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.feature_text != blank %}
+                      <p class="maison_commerce_maison_collection_banner__feature-text">
+                        {{ block.settings.feature_text }}
+                      </p>
+                    {% endif %}
+                  </div>
+                  {% unless forloop.last %}
+                    <div class="maison_commerce_maison_collection_banner__feature-divider"></div>
+                  {% endunless %}
+              {% endcase %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if section.settings.background_image != blank or section.settings.background_video != blank %}
+    <div class="maison_commerce_maison_collection_banner__background">
+      {% if section.settings.background_video != blank %}
+        <video class="maison_commerce_maison_collection_banner__video" autoplay muted loop playsinline>
+          {% for source in section.settings.background_video.sources %}
+            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+          {% endfor %}
+        </video>
+      {% elsif section.settings.background_image != blank %}
+        {{
+          section.settings.background_image
+          | image_url: width: 2000
+          | image_tag:
+            loading: 'lazy',
+            class: 'maison_commerce_maison_collection_banner__image',
+            alt: section.settings.background_image.alt
+        }}
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.section_bg_color }};
+  }
+
+  .maison_commerce_maison_collection_banner-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_banner-wrapper {
+      flex-direction: column;
+    }
+  }
+
+  /* Section Container */
+  .maison_commerce_maison_collection_banner {
+    position: relative;
+    width: 100%;
+    padding-top: {{ section.settings.padding_top_desktop }}px;
+    padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    padding-left: {{ section.settings.padding_left_desktop }}px;
+    padding-right: {{ section.settings.padding_right_desktop }}px;
+    min-height: 500px;
+    min-width: 584px;
+    overflow: hidden;
+    background-color: {{ section.settings.section_bg_color }};
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_banner {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      padding-left: {{ section.settings.padding_left_mobile }}px;
+      padding-right: {{ section.settings.padding_right_mobile }}px;
+      min-height: auto;
+      min-width: auto;
+    }
+  }
+
+  /* Container */
+  .maison_commerce_maison_collection_banner__container {
+    position: relative;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Background Image/Video */
+  .maison_commerce_maison_collection_banner__background {
+    overflow: hidden;
+    pointer-events: none;
+    width: 100%;
+    max-width: 621px;
+    display: flex;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_banner__background {
+      max-width: 100%;
+      order: 2;
+    }
+  }
+
+  .maison_commerce_maison_collection_banner__video,
+  .maison_commerce_maison_collection_banner__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Content */
+  .maison_commerce_maison_collection_banner__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: 655px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_banner__content {
+      gap: 24px;
+      max-width: 100%;
+      align-items: center;
+    }
+  }
+
+  /* Text Content */
+  .maison_commerce_maison_collection_banner__text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_banner__text-content {
+      gap: 8px;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  /* Rating */
+  .maison_commerce_maison_collection_banner__rating {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_banner__rating {
+      justify-content: center;
+    }
+  }
+
+  .maison_commerce_maison_collection_banner__stars {
+    display: flex;
+    gap: 0;
+    align-items: center;
+  }
+
+  .maison_commerce_maison_collection_banner__star {
+    width: 16px;
+    height: 16px;
+    color: #1a1a1a;
+    flex-shrink: 0;
+  }
+
+  .maison_commerce_maison_collection_banner__rating-text {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: {{ section.settings.rating_color }};
+    margin: 0;
+  }
+
+  .maison_commerce_maison_collection_banner__rating-text p {
+    margin: 0;
+  }
+
+  .maison_commerce_maison_collection_banner__rating-text a {
+    color: inherit;
+  }
+
+  .maison_commerce_maison_collection_banner__rating-text strong {
+    font-weight: 700;
+  }
+
+  .maison_commerce_maison_collection_banner__rating-text u {
+    text-decoration: underline;
+    text-underline-position: from-font;
+  }
+
+  /* Heading */
+  .maison_commerce_maison_collection_banner__heading {
+    font-size: {{ section.settings.heading_font_size_desktop }}px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: {{ section.settings.heading_color }};
+    margin: 0;
+    text-transform: uppercase;
+    text-align: left;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_banner__heading {
+      font-size: {{ section.settings.heading_font_size_mobile }}px;
+      line-height: 1.4;
+      text-align: center;
+    }
+  }
+
+  /* Description */
+  .maison_commerce_maison_collection_banner__description {
+    font-size: {{ section.settings.description_font_size_desktop }}px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: {{ section.settings.description_color }};
+    letter-spacing: 0.4px;
+    text-align: left;
+  }
+
+  .maison_commerce_maison_collection_banner__description p {
+    margin: 0;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_banner__description {
+      font-size: {{ section.settings.description_font_size_mobile }}px;
+      letter-spacing: 0.28px;
+      text-align: center;
+    }
+  }
+
+  /* Features */
+  .maison_commerce_maison_collection_banner__features {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 18px;
+    padding: 8px 0;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_banner__features {
+      justify-content: center;
+      gap: 12px;
+      padding: 8px 16px;
+    }
+  }
+
+  .maison_commerce_maison_collection_banner__feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 18px;
+  }
+
+  .maison_commerce_maison_collection_banner__feature-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .maison_commerce_maison_collection_banner__feature-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .maison_commerce_maison_collection_banner__feature-text {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: {{ section.settings.feature_text_color }};
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .maison_commerce_maison_collection_banner__feature-divider {
+    width: 1px;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_banner__feature-divider {
+      transform: rotate(90deg);
+      width: 10px;
+      height: 1px;
+    }
+  }
+</style>
+
