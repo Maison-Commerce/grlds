@@ -106,3 +106,9 @@
 .maison-product-grid{
   row-gap: 44px;
 }
+
+@media(max-width: 990px){
+  .maison-collection{
+    padding: 0 20px;
+  }
+}
