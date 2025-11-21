@@ -359,14 +359,14 @@
           {% endfor %}
         </div>
 
-        <!-- Mobile Navigation -->
+          <!-- Mobile Navigation -->
         <div class="maison_commerce_maison_collection_slider__navigation">
           <div class="maison_commerce_maison_collection_slider__nav-button maison_commerce_maison_collection_slider__nav-button--prev maison_commerce_maison_collection_slider__nav-button--mobile">
             <svg class="maison_commerce_maison_collection_slider__nav-icon--mobile" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-          <div class="maison_commerce_maison_collection_slider__progress">
+          <div class="maison_commerce_maison_collection_slider__progress maison_commerce_maison_collection_slider__progress--mobile">
             <div class="maison_commerce_maison_collection_slider__progress-bar"></div>
           </div>
           <div class="maison_commerce_maison_collection_slider__nav-button maison_commerce_maison_collection_slider__nav-button--next maison_commerce_maison_collection_slider__nav-button--mobile">
@@ -375,6 +375,11 @@
             </svg>
           </div>
         </div>
+      </div>
+
+      <!-- Desktop Progress Bar -->
+      <div class="maison_commerce_maison_collection_slider__progress maison_commerce_maison_collection_slider__progress--desktop">
+        <div class="maison_commerce_maison_collection_slider__progress-bar"></div>
       </div>
 
       <!-- CTA Button -->
@@ -583,18 +588,36 @@
 
   /* Progress Bar */
   .maison_commerce_maison_collection_slider__progress {
-    flex: 1;
     height: 2px;
     background-color: rgba(26, 26, 26, 0.1);
     border-radius: 999px;
     position: relative;
     overflow: hidden;
+  }
+
+  /* Desktop Progress Bar */
+  .maison_commerce_maison_collection_slider__progress--desktop {
+    display: block;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_slider__progress--desktop {
+      display: none;
+    }
+  }
+
+  /* Mobile Progress Bar */
+  .maison_commerce_maison_collection_slider__progress--mobile {
+    display: none;
+    flex: 1;
     max-width: 200px;
   }
 
-  @media (min-width: 991px) {
-    .maison_commerce_maison_collection_slider__progress {
-      max-width: none;
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_slider__progress--mobile {
+      display: block;
     }
   }
 
@@ -671,9 +694,8 @@
     const swiperContainer = document.querySelector('.maison_commerce_maison_collection_slider__swiper');
     
     if (swiperContainer) {
-      const progressBar = swiperContainer.querySelector('.maison_commerce_maison_collection_slider__progress-bar');
-      const prevButton = swiperContainer.querySelector('.maison_commerce_maison_collection_slider__nav-button--prev');
-      const nextButton = swiperContainer.querySelector('.maison_commerce_maison_collection_slider__nav-button--next');
+      const desktopProgressBar = document.querySelector('.maison_commerce_maison_collection_slider__progress--desktop .maison_commerce_maison_collection_slider__progress-bar');
+      const mobileProgressBar = document.querySelector('.maison_commerce_maison_collection_slider__progress--mobile .maison_commerce_maison_collection_slider__progress-bar');
       
       // Get navigation buttons (desktop or mobile depending on screen size)
       const desktopPrev = document.querySelector('.maison_commerce_maison_collection_slider__nav-button--prev.maison_commerce_maison_collection_slider__nav-button--desktop');
@@ -714,14 +736,20 @@
         },
         on: {
           init: function() {
-            if (progressBar) {
-              progressBar.style.width = '25%';
+            if (desktopProgressBar) {
+              desktopProgressBar.style.width = '25%';
+            }
+            if (mobileProgressBar) {
+              mobileProgressBar.style.width = '25%';
             }
           },
           progress: function(swiper, progress) {
             const adjustedProgress = 0.25 + (progress * 0.75);
-            if (progressBar) {
-              progressBar.style.width = (adjustedProgress * 100) + '%';
+            if (desktopProgressBar) {
+              desktopProgressBar.style.width = (adjustedProgress * 100) + '%';
+            }
+            if (mobileProgressBar) {
+              mobileProgressBar.style.width = (adjustedProgress * 100) + '%';
             }
           },
         },
