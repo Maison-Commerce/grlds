@@ -943,7 +943,7 @@
       const nextButtonMobile = document.querySelector('.maison_commerce_maison_reviews_slider__nav-button--next-mobile');
       
       const swiper = new Swiper('.maison_commerce_maison_reviews_slider__swiper', {
-        slidesPerView: 'auto',
+        slidesPerView: 4,
         spaceBetween: 20,
         centeredSlides: false,
         loop: false,
@@ -953,12 +953,17 @@
         },
         breakpoints: {
           0: {
-            slidesPerView: 'auto',
+            slidesPerView: 2,
             spaceBetween: 16,
             centeredSlides: true,
           },
+          600: {
+            slidesPerView: 3,
+            spaceBetween: 16,
+            centeredSlides: false,
+          },
           991: {
-            slidesPerView: 'auto',
+            slidesPerView: 4,
             spaceBetween: 20,
             centeredSlides: false,
           }
