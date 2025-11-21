@@ -405,5 +405,7 @@ quick-add-bulk .quantity__input {
   width: 36px;
   height: 36px;
   min-width: fit-content;
+  min-height: fit-content;
   padding: 7.529px;
+  border-radius: 0px;
 }
