@@ -48,7 +48,7 @@
       "name": "Maison Collection Banner",
       "settings": {
         "rating_text": "<p>Rated <strong>4.8</strong> / 5 based on <span style=\"text-decoration:underline\">3200+</span> reviews</p>",
-        "section_heading": "Sculpted Marble. Pure Fragrance.",
+        "section_heading": "<p>Sculpted Marble. <br/>Pure Fragrance.</p>",
         "section_description": "<p>Luxury candles hand-poured in sculpted marble vessels, showcasing craftsmanship and tradition.</p>",
         "background_image": "shopify://shop_images/9810d94e5d182fd3415907fc409378fec71088f4.png",
         "section_bg_color": "#f8f8f8",
@@ -65,7 +65,7 @@
         "heading_color": "#1a1a1a",
         "description_font_size_desktop": 20,
         "description_font_size_mobile": 14,
-        "description_color": "rgba(26, 26, 26, 0.75)",
+        "description_color": "#1a1a1abf",
         "rating_color": "#403527",
         "feature_text_color": "#1a1a1a"
       }
