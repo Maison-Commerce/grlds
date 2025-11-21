@@ -353,7 +353,7 @@
           "text": "#1c1c1c",
           "button": "#1c1c1c",
           "button_label": "#ffffff",
-          "secondary_button_label": "#585858",
+          "secondary_button_label": "rgba(0,0,0,0)",
           "shadow": "#000000"
         }
       },
