@@ -40,6 +40,10 @@
     letter-spacing: 0.32px;
     text-decoration: none;
   }
+
+  .maison-product-card-title-wrapper{
+    text-decoration: none;
+  }
 </style>
 {%- unless skip_styles -%}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
@@ -377,7 +381,7 @@
         {% endif %}
         <div class="card__information">
           <p
-            class="card__heading"
+            class="card__heading maison-product-card-title-wrapper"
             {% if card_product.featured_media or settings.card_style == 'card' %}
               id="title-{{ section_id }}-{{ card_product.id }}"
             {% endif %}
