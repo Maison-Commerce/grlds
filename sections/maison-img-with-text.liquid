@@ -419,7 +419,11 @@
   @media (max-width: 990px) {
     .maison_commerce_maison_img_with_text__wrapper {
       grid-template-columns: repeat(1, 1fr);
-      flex-direction: column-reverse;
+      {% if section.settings.img_position == 'top' %}
+        flex-direction: column-reverse;
+      {% else %}
+        flex-direction: column;
+      {% endif %}
       border: none;
     }
   }
