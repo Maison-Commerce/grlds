@@ -402,6 +402,8 @@ quick-add-bulk .quantity__input {
 }
 
 .maison-quick-add{
-  width: fit-content;
-  max-width: fit-content;
+  width: 36px;
+  height: 36px;
+  min-width: fit-content;
+  padding: 7.529px;
 }
