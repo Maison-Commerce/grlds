@@ -1275,7 +1275,7 @@ input.mobile-facets__checkbox {
 }
 
 .maison-collection-filter-icon{
-  width: 20px;
-  height: 20px;
-  right: 18px;
+  width: 20px!important;
+  height: 20px!important;
+  right: 18px!important;
 }
