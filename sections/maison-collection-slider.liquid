@@ -297,23 +297,10 @@
   <div class="maison_commerce_maison_collection_slider__container">
     {% if section.settings.section_heading != blank %}
       <div class="maison_commerce_maison_collection_slider__header">
-        <!-- Desktop Navigation -->
-        <div class="maison_commerce_maison_collection_slider__nav-button maison_commerce_maison_collection_slider__nav-button--prev-desktop">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-
         <div class="maison_commerce_maison_collection_slider__heading-wrapper">
           <h2 class="maison_commerce_maison_collection_slider__heading">
             {{ section.settings.section_heading }}
           </h2>
-        </div>
-
-        <div class="maison_commerce_maison_collection_slider__nav-button maison_commerce_maison_collection_slider__nav-button--next-desktop">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
         </div>
       </div>
     {% endif %}
@@ -321,42 +308,7 @@
     {% if collection != blank and collection.products_count > 0 %}
       {% assign collection_products = collection.products | limit: products_to_show %}
 
-      <!-- Desktop Grid -->
-      <div class="maison_commerce_maison_collection_slider__grid">
-        {% for product in collection_products %}
-          {% assign lazy_load = false %}
-          {% if forloop.index > 2 %}
-            {% assign lazy_load = true %}
-          {% endif %}
-
-          {% assign skip_card_product_styles = false %}
-          {% if forloop.first %}
-            {% assign skip_card_product_styles = true %}
-          {% endif %}
-
-          <div class="maison_commerce_maison_collection_slider__product">
-            {% render 'card-product', 
-              card_product: product, 
-              media_aspect_ratio: section.settings.image_ratio, 
-              image_shape: section.settings.image_shape, 
-              show_secondary_image: section.settings.show_secondary_image, 
-              show_vendor: section.settings.show_vendor, 
-              show_rating: section.settings.show_rating, 
-              lazy_load: lazy_load, 
-              skip_styles: skip_card_product_styles, 
-              quick_add: section.settings.quick_add, 
-              section_id: section.id, 
-              show_description: section.settings.show_product_description, 
-              description_font_size: section.settings.description_font_size, 
-              description_word_limit: section.settings.description_word_limit, 
-              no_crop_image: section.settings.image_no_crop, 
-              show_scroll_tags: section.settings.show_scroll_tags 
-            %}
-          </div>
-        {% endfor %}
-      </div>
-
-      <!-- Mobile Swiper -->
+      <!-- Swiper Slider (Desktop & Mobile) -->
       <div class="swiper maison_commerce_maison_collection_slider__swiper">
         <div class="swiper-wrapper">
           {% for product in collection_products %}
@@ -394,10 +346,13 @@
           {% endfor %}
         </div>
 
-        <!-- Mobile Navigation -->
+        <!-- Navigation -->
         <div class="maison_commerce_maison_collection_slider__navigation">
           <div class="maison_commerce_maison_collection_slider__nav-button maison_commerce_maison_collection_slider__nav-button--prev">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="maison_commerce_maison_collection_slider__nav-icon--desktop" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="maison_commerce_maison_collection_slider__nav-icon--mobile" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
@@ -405,16 +360,14 @@
             <div class="maison_commerce_maison_collection_slider__progress-bar"></div>
           </div>
           <div class="maison_commerce_maison_collection_slider__nav-button maison_commerce_maison_collection_slider__nav-button--next">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="maison_commerce_maison_collection_slider__nav-icon--desktop" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="maison_commerce_maison_collection_slider__nav-icon--mobile" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
         </div>
-      </div>
-
-      <!-- Progress Bar Desktop -->
-      <div class="maison_commerce_maison_collection_slider__progress-desktop">
-        <div class="maison_commerce_maison_collection_slider__progress-bar-desktop"></div>
       </div>
 
       <!-- CTA Button -->
@@ -477,7 +430,7 @@
   .maison_commerce_maison_collection_slider__header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
@@ -486,7 +439,6 @@
   @media (max-width: 990px) {
     .maison_commerce_maison_collection_slider__header {
       max-width: 100%;
-      justify-content: center;
     }
   }
 
@@ -517,77 +469,31 @@
     }
   }
 
-  /* Navigation Buttons Desktop */
-  .maison_commerce_maison_collection_slider__nav-button {
-    width: 56px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #e6e6e6;
-    background-color: transparent;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-    flex-shrink: 0;
-  }
 
-  .maison_commerce_maison_collection_slider__nav-button:hover {
-    opacity: 0.7;
-  }
-
-  .maison_commerce_maison_collection_slider__nav-button svg {
-    color: #1a1a1a;
-  }
-
-  @media (max-width: 990px) {
-    .maison_commerce_maison_collection_slider__nav-button--prev-desktop,
-    .maison_commerce_maison_collection_slider__nav-button--next-desktop {
-      display: none;
-    }
-  }
-
-  /* Desktop Grid */
-  .maison_commerce_maison_collection_slider__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    width: 100%;
-  }
-
-  @media (max-width: 990px) {
-    .maison_commerce_maison_collection_slider__grid {
-      display: none;
-    }
-  }
-
-  .maison_commerce_maison_collection_slider__product {
-    width: 100%;
-  }
-
-  /* Mobile Swiper */
+  /* Swiper */
   .maison_commerce_maison_collection_slider__swiper {
-    display: none;
     position: relative;
     width: 100%;
     overflow: visible;
   }
 
-  @media (max-width: 990px) {
-    .maison_commerce_maison_collection_slider__swiper {
-      display: block;
-    }
+  .maison_commerce_maison_collection_slider__product {
+    width: 100%;
+    height: 100%;
   }
 
   .maison_commerce_maison_collection_slider__slide {
     height: auto;
   }
 
-  .maison_commerce_maison_collection_slider__slide .maison_commerce_maison_collection_slider__product {
-    width: 180px;
-    margin: 0 auto;
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_slider__slide .maison_commerce_maison_collection_slider__product {
+      width: 180px;
+      margin: 0 auto;
+    }
   }
 
-  /* Mobile Navigation */
+  /* Navigation */
   .maison_commerce_maison_collection_slider__navigation {
     display: flex;
     align-items: center;
@@ -596,49 +502,41 @@
     margin-top: 32px;
   }
 
-  @media (min-width: 991px) {
-    .maison_commerce_maison_collection_slider__navigation {
-      display: none;
-    }
-  }
-
-  .maison_commerce_maison_collection_slider__nav-button--prev,
-  .maison_commerce_maison_collection_slider__nav-button--next {
-    width: 44px;
-    height: 44px;
+  .maison_commerce_maison_collection_slider__nav-button {
+    width: 56px;
+    height: 56px;
     border: 1px solid #e6e6e6;
-  }
-
-  /* Progress Bar Desktop */
-  .maison_commerce_maison_collection_slider__progress-desktop {
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: rgba(26, 26, 26, 0.1);
-    border-radius: 999px;
-    position: relative;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   @media (max-width: 990px) {
-    .maison_commerce_maison_collection_slider__progress-desktop {
-      display: none;
+    .maison_commerce_maison_collection_slider__nav-button {
+      width: 44px;
+      height: 44px;
     }
   }
 
-  .maison_commerce_maison_collection_slider__progress-bar-desktop {
-    display: flex!important;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background-color: #1a1a1a;
-    border-radius: 999px;
-    transition: width 0.3s ease;
-    width: 25%;
+  .maison_commerce_maison_collection_slider__nav-icon--desktop {
+    display: block;
   }
 
-  /* Progress Bar Mobile */
+  .maison_commerce_maison_collection_slider__nav-icon--mobile {
+    display: none;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_slider__nav-icon--desktop {
+      display: none;
+    }
+
+    .maison_commerce_maison_collection_slider__nav-icon--mobile {
+      display: block;
+    }
+  }
+
+  /* Progress Bar */
   .maison_commerce_maison_collection_slider__progress {
     flex: 1;
     height: 2px;
@@ -647,6 +545,12 @@
     position: relative;
     overflow: hidden;
     max-width: 200px;
+  }
+
+  @media (min-width: 991px) {
+    .maison_commerce_maison_collection_slider__progress {
+      max-width: none;
+    }
   }
 
   .maison_commerce_maison_collection_slider__progress-bar {
@@ -721,14 +625,14 @@
   document.addEventListener('DOMContentLoaded', function() {
     const swiperContainer = document.querySelector('.maison_commerce_maison_collection_slider__swiper');
     
-    if (swiperContainer && window.innerWidth <= 990) {
+    if (swiperContainer) {
       const progressBar = swiperContainer.querySelector('.maison_commerce_maison_collection_slider__progress-bar');
       const prevButton = swiperContainer.querySelector('.maison_commerce_maison_collection_slider__nav-button--prev');
       const nextButton = swiperContainer.querySelector('.maison_commerce_maison_collection_slider__nav-button--next');
       
       const swiper = new Swiper('.maison_commerce_maison_collection_slider__swiper', {
         slidesPerView: 'auto',
-        spaceBetween: 16,
+        spaceBetween: 20,
         centeredSlides: false,
         loop: false,
         navigation: {
@@ -738,10 +642,18 @@
         breakpoints: {
           0: {
             slidesPerView: 1.17,
+            spaceBetween: 16,
             centeredSlides: true,
           },
           500: {
             slidesPerView: 2,
+            spaceBetween: 16,
+            centeredSlides: false,
+          },
+          991: {
+            slidesPerView: 4,
+            spaceBetween: 20,
+            centeredSlides: false,
           }
         },
         on: {
@@ -758,49 +670,6 @@
           },
         },
       });
-    }
-
-    // Desktop navigation
-    const prevDesktop = document.querySelector('.maison_commerce_maison_collection_slider__nav-button--prev-desktop');
-    const nextDesktop = document.querySelector('.maison_commerce_maison_collection_slider__nav-button--next-desktop');
-    const progressBarDesktop = document.querySelector('.maison_commerce_maison_collection_slider__progress-bar-desktop');
-    const grid = document.querySelector('.maison_commerce_maison_collection_slider__grid');
-    
-    if (grid && prevDesktop && nextDesktop && progressBarDesktop && window.innerWidth > 990) {
-      let currentIndex = 0;
-      const products = grid.querySelectorAll('.maison_commerce_maison_collection_slider__product');
-      const totalProducts = products.length;
-      const visibleProducts = 4;
-      const maxIndex = Math.max(0, totalProducts - visibleProducts);
-      
-      function updateDesktopSlider() {
-        const translateX = -(currentIndex * (100 / visibleProducts));
-        grid.style.transform = `translateX(${translateX}%)`;
-        
-        const progress = currentIndex / maxIndex;
-        const adjustedProgress = 0.25 + (progress * 0.75);
-        progressBarDesktop.style.width = (adjustedProgress * 100) + '%';
-        
-        prevDesktop.style.opacity = currentIndex === 0 ? '0.5' : '1';
-        nextDesktop.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
-      }
-      
-      prevDesktop.addEventListener('click', function() {
-        if (currentIndex > 0) {
-          currentIndex--;
-          updateDesktopSlider();
-        }
-      });
-      
-      nextDesktop.addEventListener('click', function() {
-        if (currentIndex < maxIndex) {
-          currentIndex++;
-          updateDesktopSlider();
-        }
-      });
-      
-      // Initialize
-      updateDesktopSlider();
     }
   });
 </script>
