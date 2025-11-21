@@ -993,6 +993,8 @@
             if (progressBarMobile) {
               progressBarMobile.style.width = '25%';
             }
+            // Set shadow heights after Swiper initializes
+            setTimeout(setShadowHeights, 100);
           },
           progress: function(swiper, progress) {
             const adjustedProgress = 0.25 + (progress * 0.75);
@@ -1006,6 +1008,36 @@
         },
       });
     }
+
+    // Set shadow heights based on first slide
+    function setShadowHeights() {
+      const firstSlide = document.querySelector('.maison_commerce_maison_reviews_slider__slide');
+      const shadowLeft = document.querySelector('.maison_commerce_maison_reviews_slider-shadow-left');
+      const shadowRight = document.querySelector('.maison_commerce_maison_reviews_slider-shadow-right');
+      
+      if (firstSlide && (shadowLeft || shadowRight)) {
+        const slideHeight = firstSlide.offsetHeight;
+        
+        if (shadowLeft) {
+          shadowLeft.style.height = slideHeight + 'px';
+        }
+        if (shadowRight) {
+          shadowRight.style.height = slideHeight + 'px';
+        }
+      }
+    }
+
+    // Set initial heights after a short delay to ensure slides are rendered
+    setTimeout(setShadowHeights, 100);
+
+    // Update heights on resize
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(function() {
+        setShadowHeights();
+      }, 100);
+    });
   });
 </script>
 
