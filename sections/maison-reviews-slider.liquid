@@ -965,14 +965,19 @@
       const prevButtonMobile = document.querySelector('.maison_commerce_maison_reviews_slider__nav-button--prev-mobile');
       const nextButtonMobile = document.querySelector('.maison_commerce_maison_reviews_slider__nav-button--next-mobile');
       
+      // Determine which buttons to use based on viewport width
+      const isMobile = window.innerWidth <= 990;
+      const nextButton = (isMobile && nextButtonMobile) ? nextButtonMobile : (nextButtonDesktop || nextButtonMobile);
+      const prevButton = (isMobile && prevButtonMobile) ? prevButtonMobile : (prevButtonDesktop || prevButtonMobile);
+      
       const swiper = new Swiper('.maison_commerce_maison_reviews_slider__swiper', {
         slidesPerView: 4,
         spaceBetween: 20,
         centeredSlides: false,
         loop: false,
         navigation: {
-          nextEl: nextButtonDesktop || nextButtonMobile,
-          prevEl: prevButtonDesktop || prevButtonMobile,
+          nextEl: nextButton,
+          prevEl: prevButton,
         },
         breakpoints: {
           0: {
@@ -1013,6 +1018,7 @@
           },
         },
       });
+
     }
 
     // Set shadow heights based on first slide
