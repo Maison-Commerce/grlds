@@ -41,7 +41,7 @@
       ],
       "name": "Maison Banner",
       "settings": {
-        "rating_text": "<p>Rated <strong>4.8</strong> / 5 based on <a href=\"#\" title=\"#\">3200+</a> reviews</p>",
+        "rating_text": "<p>Rated <strong>4.8</strong> / 5 based on <span style=\"text-decoration:underline\">3200+</span> reviews</p>",
         "section_heading": "A Winter Light collection",
         "section_description": "<p>Limited-edition scents and gilded vessels—made for gifting</p>",
         "primary_button_text": "Shop Holiday Collection",
