@@ -297,10 +297,23 @@
   <div class="maison_commerce_maison_collection_slider__container">
     {% if section.settings.section_heading != blank %}
       <div class="maison_commerce_maison_collection_slider__header">
+        <!-- Desktop Navigation -->
+        <div class="maison_commerce_maison_collection_slider__nav-button maison_commerce_maison_collection_slider__nav-button--prev maison_commerce_maison_collection_slider__nav-button--desktop">
+          <svg class="maison_commerce_maison_collection_slider__nav-icon--desktop" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
         <div class="maison_commerce_maison_collection_slider__heading-wrapper">
           <h2 class="maison_commerce_maison_collection_slider__heading">
             {{ section.settings.section_heading }}
           </h2>
+        </div>
+
+        <div class="maison_commerce_maison_collection_slider__nav-button maison_commerce_maison_collection_slider__nav-button--next maison_commerce_maison_collection_slider__nav-button--desktop">
+          <svg class="maison_commerce_maison_collection_slider__nav-icon--desktop" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
       </div>
     {% endif %}
@@ -346,12 +359,9 @@
           {% endfor %}
         </div>
 
-        <!-- Navigation -->
+        <!-- Mobile Navigation -->
         <div class="maison_commerce_maison_collection_slider__navigation">
-          <div class="maison_commerce_maison_collection_slider__nav-button maison_commerce_maison_collection_slider__nav-button--prev">
-            <svg class="maison_commerce_maison_collection_slider__nav-icon--desktop" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+          <div class="maison_commerce_maison_collection_slider__nav-button maison_commerce_maison_collection_slider__nav-button--prev maison_commerce_maison_collection_slider__nav-button--mobile">
             <svg class="maison_commerce_maison_collection_slider__nav-icon--mobile" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -359,10 +369,7 @@
           <div class="maison_commerce_maison_collection_slider__progress">
             <div class="maison_commerce_maison_collection_slider__progress-bar"></div>
           </div>
-          <div class="maison_commerce_maison_collection_slider__nav-button maison_commerce_maison_collection_slider__nav-button--next">
-            <svg class="maison_commerce_maison_collection_slider__nav-icon--desktop" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+          <div class="maison_commerce_maison_collection_slider__nav-button maison_commerce_maison_collection_slider__nav-button--next maison_commerce_maison_collection_slider__nav-button--mobile">
             <svg class="maison_commerce_maison_collection_slider__nav-icon--mobile" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -430,7 +437,7 @@
   .maison_commerce_maison_collection_slider__header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
@@ -439,6 +446,7 @@
   @media (max-width: 990px) {
     .maison_commerce_maison_collection_slider__header {
       max-width: 100%;
+      justify-content: center;
     }
   }
 
@@ -493,28 +501,36 @@
     }
   }
 
-  /* Navigation */
-  .maison_commerce_maison_collection_slider__navigation {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 32px;
-  }
-
+  /* Navigation Buttons */
   .maison_commerce_maison_collection_slider__nav-button {
     width: 56px;
     height: 56px;
     border: 1px solid #e6e6e6;
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .maison_commerce_maison_collection_slider__nav-button:hover {
+    opacity: 0.7;
+  }
+
+  .maison_commerce_maison_collection_slider__nav-button svg {
+    color: #1a1a1a;
+  }
+
+  /* Desktop Navigation (in header) */
+  .maison_commerce_maison_collection_slider__nav-button--desktop {
+    display: flex;
   }
 
   @media (max-width: 990px) {
-    .maison_commerce_maison_collection_slider__nav-button {
-      width: 44px;
-      height: 44px;
+    .maison_commerce_maison_collection_slider__nav-button--desktop {
+      display: none;
     }
   }
 
@@ -522,15 +538,44 @@
     display: block;
   }
 
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_slider__nav-icon--desktop {
+      display: none;
+    }
+  }
+
+  /* Mobile Navigation (at bottom) */
+  .maison_commerce_maison_collection_slider__navigation {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_slider__navigation {
+      display: flex;
+    }
+  }
+
+  .maison_commerce_maison_collection_slider__nav-button--mobile {
+    width: 44px;
+    height: 44px;
+    display: none;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_collection_slider__nav-button--mobile {
+      display: flex;
+    }
+  }
+
   .maison_commerce_maison_collection_slider__nav-icon--mobile {
     display: none;
   }
 
   @media (max-width: 990px) {
-    .maison_commerce_maison_collection_slider__nav-icon--desktop {
-      display: none;
-    }
-
     .maison_commerce_maison_collection_slider__nav-icon--mobile {
       display: block;
     }
@@ -630,14 +675,25 @@
       const prevButton = swiperContainer.querySelector('.maison_commerce_maison_collection_slider__nav-button--prev');
       const nextButton = swiperContainer.querySelector('.maison_commerce_maison_collection_slider__nav-button--next');
       
+      // Get navigation buttons (desktop or mobile depending on screen size)
+      const desktopPrev = document.querySelector('.maison_commerce_maison_collection_slider__nav-button--prev.maison_commerce_maison_collection_slider__nav-button--desktop');
+      const desktopNext = document.querySelector('.maison_commerce_maison_collection_slider__nav-button--next.maison_commerce_maison_collection_slider__nav-button--desktop');
+      const mobilePrev = document.querySelector('.maison_commerce_maison_collection_slider__nav-button--prev.maison_commerce_maison_collection_slider__nav-button--mobile');
+      const mobileNext = document.querySelector('.maison_commerce_maison_collection_slider__nav-button--next.maison_commerce_maison_collection_slider__nav-button--mobile');
+      
+      // Determine which buttons to use based on screen size
+      const isMobile = window.innerWidth <= 990;
+      const prevButtonToUse = isMobile ? mobilePrev : desktopPrev;
+      const nextButtonToUse = isMobile ? mobileNext : desktopNext;
+      
       const swiper = new Swiper('.maison_commerce_maison_collection_slider__swiper', {
         slidesPerView: 'auto',
         spaceBetween: 20,
         centeredSlides: false,
         loop: false,
         navigation: {
-          nextEl: nextButton,
-          prevEl: prevButton,
+          nextEl: nextButtonToUse,
+          prevEl: prevButtonToUse,
         },
         breakpoints: {
           0: {
