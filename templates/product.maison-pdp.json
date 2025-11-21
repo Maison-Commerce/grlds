@@ -453,6 +453,63 @@
         "quick_add": "none"
       }
     },
+    "maison_usps_diRRKV": {
+      "type": "maison-usps",
+      "blocks": {
+        "usp_wGxgxt": {
+          "type": "usp",
+          "settings": {
+            "icon": "shopify://shop_images/meteor-icons_gift.svg",
+            "title": "Signature Gift Wrap",
+            "description": "Complimentary on every order"
+          }
+        },
+        "usp_baLPLD": {
+          "type": "usp",
+          "settings": {
+            "icon": "shopify://shop_images/Frame_1484580598.svg",
+            "title": "CARBON-NEUTRAL DELIVERY",
+            "description": "Every delivery is 100% carbon offset"
+          }
+        },
+        "usp_kKiK89": {
+          "type": "usp",
+          "settings": {
+            "icon": "shopify://shop_images/shipment-return--shipment-return-parcel-shipping-box-arrow.svg",
+            "title": "Free Returns guarantee",
+            "description": "30-day hassle-free returns"
+          }
+        }
+      },
+      "block_order": [
+        "usp_wGxgxt",
+        "usp_baLPLD",
+        "usp_kKiK89"
+      ],
+      "name": "Maison USPs",
+      "settings": {
+        "section_bg_color": "#ffffff",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_left_desktop": 80,
+        "padding_right_desktop": 80,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32,
+        "padding_left_mobile": 0,
+        "padding_right_mobile": 0,
+        "item_gap_desktop": 40,
+        "item_gap_mobile": 20,
+        "icon_size": 24,
+        "title_font_size_desktop": 20,
+        "title_font_size_mobile": 18,
+        "title_color": "#1a1a1a",
+        "description_font_size_desktop": 16,
+        "description_font_size_mobile": 12,
+        "description_color": "#8b8b8b",
+        "content_gap": 24,
+        "text_gap": 4
+      }
+    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -478,6 +535,7 @@
     "main",
     "maison_img_with_text_JGaQp6",
     "maison_collection_slider_biG3Jx",
+    "maison_usps_diRRKV",
     "related-products"
   ]
 }
