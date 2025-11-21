@@ -108,6 +108,7 @@
   font-weight: 500;
   line-height: 21px;
   text-transform: uppercase;
+  min-width: 210px;
 }
 
 .select .icon-caret {
