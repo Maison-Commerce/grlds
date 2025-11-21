@@ -362,6 +362,63 @@
         "padding_bottom": 24
       }
     },
+    "maison_img_with_text_JGaQp6": {
+      "type": "maison-img-with-text",
+      "blocks": {
+        "icon_LqnrHY": {
+          "type": "icon",
+          "settings": {
+            "icon_image": "shopify://shop_images/20251110_1714_Candle-Making_Line_Art_remix_01k9q58whdfaftwxh06d0cah94_2.png"
+          }
+        },
+        "icon_LiqLTj": {
+          "type": "icon",
+          "settings": {
+            "icon_image": "shopify://shop_images/23gsrg32gergb.png"
+          }
+        },
+        "icon_fDtJ9m": {
+          "type": "icon",
+          "settings": {
+            "icon_image": "shopify://shop_images/2gerg3grh.png"
+          }
+        }
+      },
+      "block_order": [
+        "icon_LqnrHY",
+        "icon_LiqLTj",
+        "icon_fDtJ9m"
+      ],
+      "name": "Maison Image with Text",
+      "settings": {
+        "section_heading": "Why You'll Love It",
+        "section_description": "<p>Small-batch poured. Clean-burn soy blend wax. Designed to glow</p>",
+        "main_image": "shopify://shop_images/49bbd9f4aaccf66c1b9955ce09c9dda9d1beddec.png",
+        "image_position": "right",
+        "section_bg_color": "#ffffff",
+        "content_bg_color": "#fcf9f6",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "padding_left_mobile": 0,
+        "padding_right_mobile": 0,
+        "content_padding_desktop": 48,
+        "content_padding_mobile": 32,
+        "heading_font_size_desktop": 40,
+        "heading_font_size_mobile": 24,
+        "heading_color": "#1a1a1a",
+        "description_font_size_desktop": 20,
+        "description_font_size_mobile": 14,
+        "description_color": "#1a1a1abf",
+        "icon_size_desktop": 106,
+        "icon_size_mobile": 77,
+        "icon_gap_desktop": 30,
+        "icon_gap_mobile": 24
+      }
+    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -385,6 +442,7 @@
   },
   "order": [
     "main",
+    "maison_img_with_text_JGaQp6",
     "related-products"
   ]
 }
