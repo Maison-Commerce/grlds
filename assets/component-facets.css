@@ -102,6 +102,12 @@
 .facet-filters__field .select__select{
   padding: 8px 12px;
   border: 1px solid rgba(37, 33, 24, 0.20);
+  color: var(--Color-Brand-2-2900, #1F1A13);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 21px;
+  text-transform: uppercase;
 }
 
 .select .icon-caret {
