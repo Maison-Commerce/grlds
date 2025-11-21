@@ -1,0 +1,662 @@
+{% schema %}
+{
+  "name": "Maison Product Specific",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section Heading",
+      "default": "Care & Safety"
+    },
+    {
+      "type": "text",
+      "id": "burn_time_label",
+      "label": "Burn Time Label",
+      "default": "Burn Time"
+    },
+    {
+      "type": "text",
+      "id": "burn_time_value",
+      "label": "Burn Time Value",
+      "default": "~ 40 h"
+    },
+    {
+      "type": "text",
+      "id": "first_burn_label",
+      "label": "First Burn Label",
+      "default": "First burn"
+    },
+    {
+      "type": "text",
+      "id": "first_burn_value",
+      "label": "First Burn Value",
+      "default": "2–3 h · Trim wick 5 mm · Do not burn > 3 h"
+    },
+    {
+      "type": "text",
+      "id": "keep_away_label",
+      "label": "Keep Away From Label",
+      "default": "Keep away from"
+    },
+    {
+      "type": "text",
+      "id": "care_guide_text",
+      "label": "Care Guide Link Text",
+      "default": "View Full Care Guide"
+    },
+    {
+      "type": "url",
+      "id": "care_guide_link",
+      "label": "Care Guide Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_child",
+      "label": "Child Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_pet",
+      "label": "Pet Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_fire",
+      "label": "Fire Extinguisher Icon"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "content_bg_color_mobile",
+      "label": "Content Background Color (Mobile)",
+      "default": "#fcf9f6"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "content_padding_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Content Padding (Desktop)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "content_padding_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Content Padding (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_desktop",
+      "min": 16,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Mobile)",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "spec_font_size_desktop",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Specification Font Size (Desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "spec_font_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Specification Font Size (Mobile)",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "spec_label_color",
+      "label": "Specification Label Color",
+      "default": "rgba(26, 26, 26, 0.75)"
+    },
+    {
+      "type": "color",
+      "id": "spec_value_color",
+      "label": "Specification Value Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon Size",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "link_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Care Guide Link Font Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Care Guide Link Color",
+      "default": "#1a1a1a"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Maison Product Specific"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="maison_commerce_maison_product_specification-wrapper">
+  {% if section.settings.product_image != blank %}
+    <div class="maison_commerce_maison_product_specification__image-container">
+      <div class="maison_commerce_maison_product_specification__image-wrapper">
+        {{
+          section.settings.product_image
+          | image_url: width: 2000
+          | image_tag:
+            loading: 'lazy',
+            class: 'maison_commerce_maison_product_specification__image',
+            alt: section.settings.product_image.alt
+        }}
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="maison_commerce_maison_product_specification">
+    <div class="maison_commerce_maison_product_specification__container">
+      <div class="maison_commerce_maison_product_specification__content">
+        {% if section.settings.section_heading != blank %}
+          <h2 class="maison_commerce_maison_product_specification__heading">
+            {{ section.settings.section_heading }}
+          </h2>
+        {% endif %}
+
+        <div class="maison_commerce_maison_product_specification__specs">
+          <!-- Burn Time -->
+          {% if section.settings.burn_time_label != blank or section.settings.burn_time_value != blank %}
+            <div class="maison_commerce_maison_product_specification__spec-item">
+              <div class="maison_commerce_maison_product_specification__spec-row">
+                {% if section.settings.burn_time_label != blank %}
+                  <span class="maison_commerce_maison_product_specification__spec-label">
+                    {{ section.settings.burn_time_label }}
+                  </span>
+                {% endif %}
+                {% if section.settings.burn_time_value != blank %}
+                  <span class="maison_commerce_maison_product_specification__spec-value">
+                    {{ section.settings.burn_time_value }}
+                  </span>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+
+          <!-- First Burn -->
+          {% if section.settings.first_burn_label != blank or section.settings.first_burn_value != blank %}
+            <div class="maison_commerce_maison_product_specification__spec-item">
+              <div class="maison_commerce_maison_product_specification__spec-row">
+                {% if section.settings.first_burn_label != blank %}
+                  <span class="maison_commerce_maison_product_specification__spec-label">
+                    {{ section.settings.first_burn_label }}
+                  </span>
+                {% endif %}
+                {% if section.settings.first_burn_value != blank %}
+                  <span class="maison_commerce_maison_product_specification__spec-value">
+                    {{ section.settings.first_burn_value }}
+                  </span>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+
+          <!-- Keep Away From -->
+          {% if section.settings.keep_away_label != blank %}
+            <div class="maison_commerce_maison_product_specification__spec-item">
+              <div class="maison_commerce_maison_product_specification__spec-row">
+                <span class="maison_commerce_maison_product_specification__spec-label">
+                  {{ section.settings.keep_away_label }}
+                </span>
+                <div class="maison_commerce_maison_product_specification__icons">
+                  {% if section.settings.icon_child != blank %}
+                    <div class="maison_commerce_maison_product_specification__icon">
+                      {{
+                        section.settings.icon_child
+                        | image_url: width: 100
+                        | image_tag: loading: 'lazy', alt: 'Child', width: section.settings.icon_size, height: section.settings.icon_size
+                      }}
+                    </div>
+                  {% endif %}
+                  {% if section.settings.icon_pet != blank %}
+                    <div class="maison_commerce_maison_product_specification__icon">
+                      {{
+                        section.settings.icon_pet
+                        | image_url: width: 100
+                        | image_tag: loading: 'lazy', alt: 'Pet', width: section.settings.icon_size, height: section.settings.icon_size
+                      }}
+                    </div>
+                  {% endif %}
+                  {% if section.settings.icon_fire != blank %}
+                    <div class="maison_commerce_maison_product_specification__icon">
+                      {{
+                        section.settings.icon_fire
+                        | image_url: width: 100
+                        | image_tag: loading: 'lazy', alt: 'Fire Extinguisher', width: section.settings.icon_size, height: section.settings.icon_size
+                      }}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Care Guide Link -->
+        {% if section.settings.care_guide_text != blank and section.settings.care_guide_link != blank %}
+          <div class="maison_commerce_maison_product_specification__care-guide">
+            <a href="{{ section.settings.care_guide_link }}" class="maison_commerce_maison_product_specification__care-guide-link">
+              <span>{{ section.settings.care_guide_text }}</span>
+              <div class="maison_commerce_maison_product_specification__care-guide-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M15.3105 12.0003L9.53099 6.21925L8.46899 7.27975L13.1895 12.0003L8.46899 16.7192L9.53099 17.7812L15.3105 12.0003Z" fill="#7B7B7B"/>
+                </svg>
+              </div>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.section_bg_color }};
+  }
+
+  .maison_commerce_maison_product_specification-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_product_specification-wrapper {
+      flex-direction: column;
+      border-bottom: none;
+    }
+  }
+
+  /* Image Container */
+  .maison_commerce_maison_product_specification__image-container {
+    width: 100%;
+    max-width: 670px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_product_specification__image-container {
+      max-width: 100%;
+      aspect-ratio: 600 / 600;
+      order: 1;
+    }
+  }
+
+  .maison_commerce_maison_product_specification__image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+
+  .maison_commerce_maison_product_specification__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  /* Section Container */
+  .maison_commerce_maison_product_specification {
+    position: relative;
+    width: 100%;
+    padding-top: {{ section.settings.padding_top_desktop }}px;
+    padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    padding-left: {{ section.settings.padding_left_desktop }}px;
+    padding-right: {{ section.settings.padding_right_desktop }}px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_product_specification {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      padding-left: {{ section.settings.padding_left_mobile }}px;
+      padding-right: {{ section.settings.padding_right_mobile }}px;
+      border-bottom: none;
+      order: 2;
+    }
+  }
+
+  /* Container */
+  .maison_commerce_maison_product_specification__container {
+    position: relative;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Content */
+  .maison_commerce_maison_product_specification__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: {{ section.settings.content_padding_desktop }}px;
+    width: 100%;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_product_specification__content {
+      gap: 32px;
+      padding: {{ section.settings.content_padding_mobile }}px 18px;
+      background: linear-gradient(to bottom, {{ section.settings.content_bg_color_mobile }}, #ffffff);
+      border-radius: 12px;
+    }
+  }
+
+  /* Heading */
+  .maison_commerce_maison_product_specification__heading {
+    font-size: {{ section.settings.heading_font_size_desktop }}px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: {{ section.settings.heading_color }};
+    margin: 0;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_product_specification__heading {
+      font-size: {{ section.settings.heading_font_size_mobile }}px;
+      line-height: 1.4;
+    }
+  }
+
+  /* Specifications */
+  .maison_commerce_maison_product_specification__specs {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+  }
+
+  .maison_commerce_maison_product_specification__spec-item {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 20px 0;
+  }
+
+  .maison_commerce_maison_product_specification__spec-item:first-child {
+    border-top: none;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_product_specification__spec-item {
+      padding: 18px 0;
+    }
+  }
+
+  .maison_commerce_maison_product_specification__spec-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_product_specification__spec-row {
+      flex-wrap: wrap;
+    }
+  }
+
+  .maison_commerce_maison_product_specification__spec-label {
+    font-size: {{ section.settings.spec_font_size_desktop }}px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: {{ section.settings.spec_label_color }};
+    opacity: 0.9;
+    letter-spacing: 0.32px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_product_specification__spec-label {
+      font-size: {{ section.settings.spec_font_size_mobile }}px;
+      letter-spacing: 0.28px;
+    }
+  }
+
+  .maison_commerce_maison_product_specification__spec-value {
+    font-size: {{ section.settings.spec_font_size_desktop }}px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: {{ section.settings.spec_value_color }};
+    letter-spacing: 0.32px;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_product_specification__spec-value {
+      font-size: {{ section.settings.spec_font_size_mobile }}px;
+      letter-spacing: 0.28px;
+      text-align: right;
+      width: 175px;
+    }
+  }
+
+  /* Icons */
+  .maison_commerce_maison_product_specification__icons {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .maison_commerce_maison_product_specification__icon {
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .maison_commerce_maison_product_specification__icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Care Guide Link */
+  .maison_commerce_maison_product_specification__care-guide {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_product_specification__care-guide {
+      padding: 20px 0;
+    }
+  }
+
+  .maison_commerce_maison_product_specification__care-guide-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: {{ section.settings.link_color }};
+    font-size: {{ section.settings.link_font_size }}px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-position: from-font;
+    transition: opacity 0.3s ease;
+  }
+
+  .maison_commerce_maison_product_specification__care-guide-link:hover {
+    opacity: 0.7;
+  }
+
+  .maison_commerce_maison_product_specification__care-guide-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(270deg);
+  }
+
+  .maison_commerce_maison_product_specification__care-guide-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
