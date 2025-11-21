@@ -18,6 +18,45 @@
         "padding_bottom": 36
       }
     },
+    "maison_contact_TdCin6": {
+      "type": "maison-contact",
+      "name": "Maison Contact",
+      "settings": {
+        "section_heading": "Contact us",
+        "section_description": "<p>Do you have questions about our products, orders, or would you like to collaborate? We are happy to help! Please use the form below, and our team will respond as quickly as possible. We look forward to hearing from you!</p>",
+        "chamber_of_commerce": "Chamber of Commerce: 97143553",
+        "address": "Elandsgracht 89, 1016TR Amsterdam, Netherlands",
+        "email": "support@grlds.com",
+        "name_label": "Your name",
+        "email_label": "Your email address",
+        "phone_label": "Your phone number (optional)",
+        "message_label": "Describe the details of your inquiry...",
+        "button_text": "Send Message",
+        "section_bg_color": "#fefefe",
+        "border_color": "#f0e3d1",
+        "padding_top_desktop": 96,
+        "padding_bottom_desktop": 96,
+        "padding_left_desktop": 80,
+        "padding_right_desktop": 80,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "padding_left_mobile": 20,
+        "padding_right_mobile": 20,
+        "heading_font_size_desktop": 40,
+        "heading_font_size_mobile": 24,
+        "heading_color": "#1a1a1a",
+        "description_font_size": 14,
+        "description_color": "rgba(26, 26, 26, 0.75)",
+        "contact_info_font_size": 14,
+        "contact_info_color": "rgba(26, 26, 26, 0.6)",
+        "input_font_size": 12,
+        "input_placeholder_color": "#a8a8a8",
+        "input_border_color": "rgba(0, 0, 0, 0.08)",
+        "button_font_size": 14,
+        "button_bg_color": "#090909",
+        "button_text_color": "#fdfcfc"
+      }
+    },
     "maison_usps_iiFYcz": {
       "type": "maison-usps",
       "blocks": {
@@ -78,6 +117,7 @@
   },
   "order": [
     "main",
+    "maison_contact_TdCin6",
     "maison_usps_iiFYcz"
   ]
 }
