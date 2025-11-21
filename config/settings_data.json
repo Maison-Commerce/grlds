@@ -43,7 +43,7 @@
     "collapsible_size_mb": 16,
     "page_width": 1440,
     "spacing_sections": 0,
-    "spacing_grid_horizontal": 16,
+    "spacing_grid_horizontal": 20,
     "spacing_grid_vertical": 16,
     "animations_reveal_on_scroll": false,
     "animations_hover_elements": "default",
