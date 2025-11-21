@@ -178,8 +178,8 @@
       {% endfor %}
 
       {{ scheme_classes | prepend: 'body' }} {
-        /* color: rgba(var(--color-foreground), {{ settings.body_opacity | default: 85 | divided_by: 100.0 }});
-        background-color: rgb(var(--color-background)); */
+        color: rgba(var(--color-foreground), {{ settings.body_opacity | default: 85 | divided_by: 100.0 }});
+        background-color: rgb(var(--color-background));
       }
 
       :root {
