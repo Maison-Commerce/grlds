@@ -433,7 +433,7 @@
               </span>
               <span class="maison_commerce_maison_main_product__button-separator">·</span>
               <span class="maison_commerce_maison_main_product__button-price" id="button-price-{{ section.id }}">
-                {{ product.selected_or_first_available_variant.price | money }}
+                {{ product.selected_or_first_available_variant.price | money_with_currency }}
               </span>
             </button>
           {%- endform -%}
