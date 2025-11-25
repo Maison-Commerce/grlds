@@ -244,7 +244,7 @@
     "cart_message_text": "#ffffff",
     "drawer_close_bg": "#f2f2f2",
     "drawer_close": "#000000",
-    "enable_cart_progress_bar": true,
+    "enable_cart_progress_bar": false,
     "show_progress_bar_icons": true,
     "use_items_subtotal": true,
     "cart_progress_goal_threshold_1": "USD: 100, EUR: 100",
