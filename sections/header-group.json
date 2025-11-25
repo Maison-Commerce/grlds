@@ -138,7 +138,7 @@
         "menu": "main-menu",
         "menu_type_desktop": "drawer",
         "sticky_header_type": "always",
-        "show_line_separator": true,
+        "show_line_separator": false,
         "color_scheme": "background-1",
         "menu_color_scheme": "background-2",
         "enable_country_selector": true,
