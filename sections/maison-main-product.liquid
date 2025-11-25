@@ -504,6 +504,20 @@
               </div>
             {% endif %}
           {% endfor %}
+
+          <!-- Size Chart Image -->
+          {% if product.metafields.custom.size_chart != blank %}
+            <div class="maison_commerce_maison_main_product__size-chart">
+              {{
+                product.metafields.custom.size_chart
+                | image_url: width: 800
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'maison_commerce_maison_main_product__size-chart-img',
+                  alt: 'Size Chart'
+              }}
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -1076,6 +1090,26 @@
   .maison_commerce_maison_main_product__promo-icon svg {
     width: 100%;
     height: 100%;
+  }
+
+  /* Size Chart */
+  .maison_commerce_maison_main_product__size-chart {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .maison_commerce_maison_main_product__size-chart-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__size-chart {
+      width: 100%;
+      max-width: 339px;
+      margin: 0 auto;
+    }
   }
 </style>
 
