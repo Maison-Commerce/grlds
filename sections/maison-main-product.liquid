@@ -225,12 +225,12 @@
     <div class="maison_commerce_maison_main_product__container">
       <div class="maison_commerce_maison_main_product__wrapper">
         <!-- Product Gallery -->
-        <div class="maison_commerce_maison_main_product__gallery">
+        <div class="maison_commerce_maison_main_product__gallery" style="--media-radius: 0">
           {% if section.settings.gallery_layout == 'grid' %}
             <!-- Desktop Grid Layout -->
             <div class="maison_commerce_maison_main_product__gallery-grid">
               {% for media in product.media limit: 4 %}
-                <div class="maison_commerce_maison_main_product__gallery-item" style="--media-radius: 0">
+                <div class="maison_commerce_maison_main_product__gallery-item">
                   {% if forloop.first and section.settings.show_badge %}
                     <div class="maison_commerce_maison_main_product__badge">
                       {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
@@ -246,7 +246,7 @@
           <div class="swiper maison_commerce_maison_main_product__gallery-slider">
             <div class="swiper-wrapper">
               {% for media in product.media %}
-                <div class="swiper-slide maison_commerce_maison_main_product__gallery-slide" style="--media-radius: 0">
+                <div class="swiper-slide maison_commerce_maison_main_product__gallery-slide">
                   {% if forloop.first and section.settings.show_badge %}
                     <div class="maison_commerce_maison_main_product__badge">
                       {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
