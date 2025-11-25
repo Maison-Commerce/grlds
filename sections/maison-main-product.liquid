@@ -205,7 +205,7 @@
             <!-- Desktop Grid Layout -->
             <div class="maison_commerce_maison_main_product__gallery-grid">
               {% for media in product.media limit: 4 %}
-                <div class="maison_commerce_maison_main_product__gallery-item">
+                <div class="maison_commerce_maison_main_product__gallery-item" style="--media-radius: 0">
                   {% if forloop.first and section.settings.show_badge %}
                     <div class="maison_commerce_maison_main_product__badge">
                       {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
