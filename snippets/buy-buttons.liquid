@@ -102,7 +102,7 @@
                 {{ 'products.product.sold_out' | t }}
               {%- else -%}
                 {{ 'products.product.add_to_cart' | t }}
-                <span>·</span>
+                <span class="maison-add-to-cart-button-dot">·</span>
                 <span>{{ product.selected_or_first_available_variant.price | money_with_currency }}</span>
               {%- endif -%}
             </span>
