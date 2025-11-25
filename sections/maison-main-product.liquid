@@ -570,13 +570,38 @@
             <!-- Add to Cart Form -->
             {% assign buy_buttons_blocks = section.blocks | where: 'type', 'buy_buttons' %}
             {% for block in buy_buttons_blocks %}
-              {%- render 'buy-buttons',
+              {% if block.settings.button_custom_style %}
+                <style>
+                  .lumin-submit {
+                    font-size: {{ block.settings.button_font_size }}px;
+                    height: {{ block.settings.button_height }}px;
+                    background-color: {{block.settings.lm_main_button}};
+                    background: {{block.settings.lm_main_button_gr}};
+                    color: {{block.settings.lm_main_text}};
+                    border: {{block.settings.lm_main_button_border_width}}px solid {{block.settings.lm_main_button_border_color}};
+                  }
+                  .lumin-submit:hover {
+                    background-color: {{block.settings.lm_main_text_hover}} !important;
+                    background: {{block.settings.lm_main_button_gr_hover}} !important;
+                    color: {{block.settings.lm_main_button_hover}} !important;
+                  }
+                  .lumin-submit::after {
+                    box-shadow: 0 0 0 0
+                    rgba(var(--lm-button-box), var(--border-opacity)),
+                    0 0 0 var(--buttons-border-width) rgb(255 204 4 / 0%) !important;
+                  }
+                  .product__info-container .product-form {
+                    margin: {{block.settings.button_padding_top}}px 0 {{block.settings.button_padding_bottom}}px 0;
+                  }
+                </style>
+                {% endif %}
+                {%- render 'buy-buttons',
                   block: block,
                   product: product,
                   product_form_id: product_form_id,
                   section_id: section.id,
                   show_pickup_availability: true
-              -%}
+                -%}
             {% endfor %}
 
             <!-- Payment Icons -->
