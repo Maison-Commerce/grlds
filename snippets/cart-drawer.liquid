@@ -603,7 +603,7 @@
                                     {% assign rounded_save = raw_save | times: 100 | ceil | divided_by: 100 %}
                                     {% assign final_item_save = rounded_save | money %}
 
-                                    <div style="color:{{ settings.drawer_save_price_color }};font-size: 1.2rem;">
+                                    <div style="color:{{ settings.drawer_save_price_color | hex_to_rgba: 0.75 }};font-size: 1.2rem;">
                                       {{ settings.save_price_text | replace: '($)', final_item_save }}
                                     </div>
                                   {% endif %}
