@@ -356,7 +356,7 @@
 
             <!-- Variant Picker: Smell/Stone Type -->
             {% for option in product.options_with_values %}
-              {% if option.name == 'Smell' or option.name == 'SMELL' or option.name == 'Stone Type' or option.name == 'STONE TYPE' %}
+              {% if option.name != 'Size' %}
                 <div class="maison_commerce_maison_main_product__variant maison_commerce_maison_main_product__variant--smell">
                   <div class="maison_commerce_maison_main_product__variant-label">
                     {{ option.name | upcase }}:
