@@ -95,7 +95,7 @@
               disabled
             {% endif %}
           >
-            <span>
+            <span class="maison-add-to-cart-button">
               {%- if product.selected_or_first_available_variant == null -%}
                 {{ 'products.product.unavailable' | t }}
               {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
