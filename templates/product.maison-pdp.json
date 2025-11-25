@@ -17,7 +17,20 @@
           "settings": {
             "show_dynamic_checkout": false,
             "show_gift_card_recipient": false,
-            "skip_cart": false
+            "skip_cart": false,
+            "button_padding_top": 20,
+            "button_padding_bottom": 20,
+            "button_custom_style": false,
+            "button_font_size": 20,
+            "button_height": 45,
+            "lm_main_button": "#000000",
+            "lm_main_button_gr": "",
+            "lm_main_text": "#ffffff",
+            "lm_main_text_hover": "#0b57d0",
+            "lm_main_button_hover": "#ffffff",
+            "lm_main_button_gr_hover": "",
+            "lm_main_button_border_width": 0,
+            "lm_main_button_border_color": "#000000"
           }
         },
         "benefit_4MyVhJ": {
@@ -103,6 +116,32 @@
         "padding_bottom_desktop": 40,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 20
+      }
+    },
+    "maison_icon_with_text_description_3i693h": {
+      "type": "maison-icon-with-text-description",
+      "name": "Maison Icon with Text Description",
+      "settings": {
+        "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewbox=\"0 0 18 18\" fill=\"none\">\n  <path d=\"M8.99997 16.5V5.25M8.99997 5.25C7.99997 2.75 6.74997 1.5 5.24997 1.5C4.75269 1.5 4.27577 1.69754 3.92414 2.04917C3.57251 2.40081 3.37497 2.87772 3.37497 3.375C3.37497 3.87228 3.57251 4.34919 3.92414 4.70083C4.27577 5.05246 4.75269 5.25 5.24997 5.25M8.99997 5.25C9.99997 2.75 11.25 1.5 12.75 1.5C13.2473 1.5 13.7242 1.69754 14.0758 2.04917C14.4274 2.40081 14.625 2.87772 14.625 3.375C14.625 3.87228 14.4274 4.34919 14.0758 4.70083C13.7242 5.05246 13.2473 5.25 12.75 5.25M2.99997 9V16.5H15V9M16.5 5.25V9H1.49997V5.25H16.5Z\" stroke=\"#1A1A1A\" stroke-opacity=\"0.75\" stroke-width=\"1.40625\"></path>\n</svg>",
+        "text": "Perfect for gifting or quiet evenings in",
+        "section_bg_color": "#ffffff",
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32,
+        "padding_left_mobile": 18,
+        "padding_right_mobile": 18,
+        "icon_size_desktop": 18,
+        "icon_size_mobile": 18,
+        "gap_desktop": 12,
+        "gap_mobile": 12,
+        "text_font_size_desktop": 16,
+        "text_font_size_mobile": 14,
+        "text_color": "rgba(26, 26, 26, 0.75)",
+        "text_font_weight_desktop": "300",
+        "text_font_weight_mobile": "400"
       }
     },
     "main": {
@@ -775,6 +814,7 @@
   },
   "order": [
     "maison_main_product_EcLTVL",
+    "maison_icon_with_text_description_3i693h",
     "main",
     "maison_img_with_text_JGaQp6",
     "maison_product_specification_GETt9W",
