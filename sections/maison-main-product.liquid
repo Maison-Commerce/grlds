@@ -1497,15 +1497,22 @@
         priceHTML += '</span>';
       }
 
-      // Update classes
-      priceContainer.className = 'price price--large';
-      if (!available) priceContainer.classList.add('price--sold-out');
+      // Update classes (preserve existing classes, only toggle conditional ones)
+      if (!available) {
+        priceContainer.classList.add('price--sold-out');
+      } else {
+        priceContainer.classList.remove('price--sold-out');
+      }
+      
       if (isOnSale) {
         priceContainer.classList.add('price--on-sale');
         priceContainer.classList.add('price--show-badge');
+      } else {
+        priceContainer.classList.remove('price--on-sale');
+        priceContainer.classList.remove('price--show-badge');
       }
       
-      // Update HTML
+      // Update HTML (only replace innerHTML, preserve container classes)
       priceContainer.innerHTML = priceHTML;
     }
 
