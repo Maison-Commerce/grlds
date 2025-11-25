@@ -450,6 +450,7 @@
           {% unless product.has_only_default_variant %}
             {% for option in product.options_with_values %}
               {% if option.name == 'Size' or option.name == 'SIZE' %}
+                {% assign option_index = forloop.index %}
                 <div class="maison_commerce_maison_main_product__variant maison_commerce_maison_main_product__variant--size">
                   <div class="maison_commerce_maison_main_product__variant-header-wrapper">
                     <div class="maison_commerce_maison_main_product__variant-header">
@@ -473,7 +474,7 @@
                         type="button"
                         class="maison_commerce_maison_main_product__variant-thumbnail{% if value == option.selected_value %} active{% endif %}"
                         data-value="{{ value }}"
-                        data-option-position="{{ option.position }}"
+                        data-option-position="{{ option_index }}"
                         aria-label="{{ value }}"
                       >
                         {% assign variant = product.variants | where: 'option1', value | first %}
@@ -500,6 +501,7 @@
             <!-- Variant Picker: Smell/Stone Type -->
             {% for option in product.options_with_values %}
               {% if option.name != 'Size' %}
+                {% assign option_index = forloop.index %}
                 <div class="maison_commerce_maison_main_product__variant maison_commerce_maison_main_product__variant--smell">
                   <div class="maison_commerce_maison_main_product__variant-label">
                     {{ option.name | upcase }}:
@@ -510,7 +512,7 @@
                         type="button"
                         class="maison_commerce_maison_main_product__variant-option{% if value == option.selected_value %} active{% endif %}"
                         data-value="{{ value }}"
-                        data-option-position="{{ option.position }}"
+                        data-option-position="{{ option_index }}"
                       >
                         {{ value | upcase }}
                       </button>
