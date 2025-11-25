@@ -45,10 +45,10 @@
       "default": true
     },
     {
-      "type": "text",
+      "type": "richtext",
       "id": "rating_text",
       "label": "Rating Text",
-      "default": "4.8 / 5 (3,200 reviews)"
+      "default": "<p>Rated <strong>4.8</strong> / 5 based on <u>3200+</u> reviews</p>"
     },
     {
       "type": "checkbox",
@@ -277,7 +277,7 @@
                 {% endfor %}
               </div>
               <span class="maison_commerce_maison_main_product__rating-text">
-                {{ section.settings.rating_text | default: '4.8 / 5 (3,200 reviews)' }}
+                {{ section.settings.rating_text }}
               </span>
             </div>
           {% endif %}
