@@ -172,6 +172,34 @@
           "default": "2 free samples of your choice with every order"
         }
       ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy Buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "default": true,
+          "label": "Show dynamic checkout buttons",
+          "info": "Using the payment methods available on your store, customers see their preferred option, like PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/theme-editor/settings#dynamic-checkout)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_gift_card_recipient",
+          "default": true,
+          "label": "Show gift card recipient form",
+          "info": "Allow customers to send gift cards to a recipient. Only applies to gift card products."
+        },
+        {
+          "type": "checkbox",
+          "id": "skip_cart",
+          "label": "Skip cart",
+          "default": false,
+          "info": "Customers are taken directly to checkout when clicking the buy button."
+        }
+      ]
     }
   ],
   "presets": [
@@ -425,13 +453,16 @@
             {% endif %}
 
             <!-- Add to Cart Form -->
-            {%- render 'buy-buttons',
-                block: block,
-                product: product,
-                product_form_id: product_form_id,
-                section_id: section.id,
-                show_pickup_availability: true
-            -%}
+            {% assign buy_buttons_blocks = section.blocks | where: 'type', 'buy_buttons' %}
+            {% for block in buy_buttons_blocks %}
+              {%- render 'buy-buttons',
+                  block: block,
+                  product: product,
+                  product_form_id: product_form_id,
+                  section_id: section.id,
+                  show_pickup_availability: true
+              -%}
+            {% endfor %}
 
             <!-- Payment Icons -->
             {% if section.settings.show_payment_icons %}
