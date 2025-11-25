@@ -206,7 +206,7 @@
     "drawer_total_price_color": "#6c6c6c",
     "show_save_price": true,
     "save_price_text": "Save ($)",
-    "drawer_save_price_color": "#08864e",
+    "drawer_save_price_color": "#1a1a1a",
     "edit_mode": false,
     "drawer_box": false,
     "drawer_size": "56rem",
