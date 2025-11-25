@@ -1503,7 +1503,7 @@
       if (form) {
         const variantInput = form.querySelector('input[name="id"]');
         if (variantInput) {
-          variantInput.value = selectedVariant.id;
+          {% comment %} variantInput.value = selectedVariant.id; {% endcomment %}
           variantInput.dispatchEvent(new Event('change', { bubbles: true }));
         }
       }
