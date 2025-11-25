@@ -12,6 +12,27 @@
     "maison_main_product_EcLTVL": {
       "type": "maison-main-product",
       "blocks": {
+        "benefit_4MyVhJ": {
+          "type": "benefit",
+          "settings": {
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewbox=\"0 0 16 16\" fill=\"none\">\n  <g clip-path=\"url(#clip0_6042_2290)\">\n    <path d=\"M7.99999 14.6666V4.66659M7.99999 4.66659C7.11111 2.44436 5.99999 1.33325 4.66666 1.33325C4.22463 1.33325 3.80071 1.50885 3.48815 1.82141C3.17559 2.13397 2.99999 2.55789 2.99999 2.99992C2.99999 3.44195 3.17559 3.86587 3.48815 4.17843C3.80071 4.49099 4.22463 4.66659 4.66666 4.66659M7.99999 4.66659C8.88888 2.44436 9.99999 1.33325 11.3333 1.33325C11.7754 1.33325 12.1993 1.50885 12.5118 1.82141C12.8244 2.13397 13 2.55789 13 2.99992C13 3.44195 12.8244 3.86587 12.5118 4.17843C12.1993 4.49099 11.7754 4.66659 11.3333 4.66659M2.66666 7.99992V14.6666H13.3333V7.99992M14.6667 4.66659V7.99992H1.33333V4.66659H14.6667Z\" stroke=\"#1A1A1A\" stroke-width=\"1.25\"></path>\n  </g>\n  <defs>\n    <clippath id=\"clip0_6042_2290\">\n      <rect width=\"16\" height=\"16\" fill=\"white\"></rect>\n    </clippath>\n  </defs>\n</svg>",
+            "text": "Signature Gift Wrap"
+          }
+        },
+        "benefit_W7JMB3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewbox=\"0 0 14 14\" fill=\"none\">\n  <path d=\"M4.08167 6.9342H7.73713C8.72531 6.9342 9.52638 7.73527 9.52638 8.72345C9.52638 9.71158 8.72531 10.5126 7.73713 10.5126H4.16767\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n  <path d=\"M5.92837 5.07446L4.06866 6.93419L5.92837 8.79388\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n  <path d=\"M6.79688 0.546875V3.67188\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n  <path d=\"M6.79688 13.0469H0.546875V2.95817L2.73438 0.546875H10.8594L13.0469 2.95817V13.0469H6.79688Z\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n  <path d=\"M0.546875 3.64929H13.0469\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n</svg>",
+            "text": "Free Returns"
+          }
+        },
+        "benefit_TtmRKQ": {
+          "type": "benefit",
+          "settings": {
+            "icon": "Carbon-Neutral",
+            "text": "Signature Gift Wrap"
+          }
+        },
         "accordion_4kD3PC": {
           "type": "accordion",
           "settings": {
@@ -42,6 +63,9 @@
         }
       },
       "block_order": [
+        "benefit_4MyVhJ",
+        "benefit_W7JMB3",
+        "benefit_TtmRKQ",
         "accordion_4kD3PC",
         "accordion_cBLmFa",
         "accordion_HT4Vt3",
@@ -58,8 +82,6 @@
         "shipping_text": "Order before 14:00 → Ships Today",
         "button_text": "Add to Bag",
         "show_payment_icons": true,
-        "show_benefits": true,
-        "promo_text": "2 free samples of your choice with every order",
         "padding_top_desktop": 0,
         "padding_bottom_desktop": 40,
         "padding_top_mobile": 0,
