@@ -1450,8 +1450,18 @@
       let moneyPrice = formatMoney(price, currencyCodeEnabled);
       let moneyCompareAtPrice = formatMoney(compareAtPrice, currencyCodeEnabled);
 
+      // Build price classes for the inner price block
+      let priceBlockClasses = 'price price--large';
+      if (isOnSale) {
+        priceBlockClasses += ' price--on-sale price--show-badge';
+      }
+      if (!available) {
+        priceBlockClasses += ' price--sold-out';
+      }
+
       // Build price HTML following price.liquid structure
-      let priceHTML = '<div class="price__container">';
+      let priceHTML = `<div class="${priceBlockClasses}">`;
+      priceHTML += '<div class="price__container">';
       
       if (isOnSale) {
         // Show sale price with compare at price
@@ -1497,22 +1507,9 @@
         priceHTML += '</span>';
       }
 
-      // Update classes (preserve existing classes, only toggle conditional ones)
-      if (!available) {
-        priceContainer.classList.add('price--sold-out');
-      } else {
-        priceContainer.classList.remove('price--sold-out');
-      }
+      priceHTML += '</div>';
       
-      if (isOnSale) {
-        priceContainer.classList.add('price--on-sale');
-        priceContainer.classList.add('price--show-badge');
-      } else {
-        priceContainer.classList.remove('price--on-sale');
-        priceContainer.classList.remove('price--show-badge');
-      }
-      
-      // Update HTML (only replace innerHTML, preserve container classes)
+      // Update HTML (replace innerHTML with new price block, preserve container classes)
       priceContainer.innerHTML = priceHTML;
     }
 
