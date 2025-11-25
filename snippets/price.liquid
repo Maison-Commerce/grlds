@@ -38,7 +38,7 @@
   assign percentage = saving | at_least: percentage | append: '%'
 
   if settings.currency_code_enabled
-    assign money_price = price | money_without_currency
+    assign money_price = price | money_with_currency
     assign money_price_min = price_min | money_without_currency
     assign money_price_max = price_max | money_without_currency
   endif
