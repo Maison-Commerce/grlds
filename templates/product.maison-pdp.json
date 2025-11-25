@@ -36,21 +36,21 @@
         "benefit_4MyVhJ": {
           "type": "benefit",
           "settings": {
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewbox=\"0 0 16 16\" fill=\"none\">\n  <g clip-path=\"url(#clip0_6042_2290)\">\n    <path d=\"M7.99999 14.6666V4.66659M7.99999 4.66659C7.11111 2.44436 5.99999 1.33325 4.66666 1.33325C4.22463 1.33325 3.80071 1.50885 3.48815 1.82141C3.17559 2.13397 2.99999 2.55789 2.99999 2.99992C2.99999 3.44195 3.17559 3.86587 3.48815 4.17843C3.80071 4.49099 4.22463 4.66659 4.66666 4.66659M7.99999 4.66659C8.88888 2.44436 9.99999 1.33325 11.3333 1.33325C11.7754 1.33325 12.1993 1.50885 12.5118 1.82141C12.8244 2.13397 13 2.55789 13 2.99992C13 3.44195 12.8244 3.86587 12.5118 4.17843C12.1993 4.49099 11.7754 4.66659 11.3333 4.66659M2.66666 7.99992V14.6666H13.3333V7.99992M14.6667 4.66659V7.99992H1.33333V4.66659H14.6667Z\" stroke=\"#1A1A1A\" stroke-width=\"1.25\"></path>\n  </g>\n  <defs>\n    <clippath id=\"clip0_6042_2290\">\n      <rect width=\"16\" height=\"16\" fill=\"white\"></rect>\n    </clippath>\n  </defs>\n</svg>",
+            "icon": "shopify://shop_images/meteor-icons_gift_0c4fa572-1529-4fa6-8f86-908922a65d09.svg",
             "text": "Signature Gift Wrap"
           }
         },
         "benefit_W7JMB3": {
           "type": "benefit",
           "settings": {
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewbox=\"0 0 14 14\" fill=\"none\">\n  <path d=\"M4.08167 6.9342H7.73713C8.72531 6.9342 9.52638 7.73527 9.52638 8.72345C9.52638 9.71158 8.72531 10.5126 7.73713 10.5126H4.16767\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n  <path d=\"M5.92837 5.07446L4.06866 6.93419L5.92837 8.79388\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n  <path d=\"M6.79688 0.546875V3.67188\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n  <path d=\"M6.79688 13.0469H0.546875V2.95817L2.73438 0.546875H10.8594L13.0469 2.95817V13.0469H6.79688Z\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n  <path d=\"M0.546875 3.64929H13.0469\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n</svg>",
+            "icon": "shopify://shop_images/shipment-return--shipment-return-parcel-shipping-box-arrow_7f8af843-ce05-4b5c-8113-356730880f0c.svg",
             "text": "Free Returns"
           }
         },
         "benefit_TtmRKQ": {
           "type": "benefit",
           "settings": {
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewbox=\"0 0 14 14\" fill=\"none\">\n  <path d=\"M2.7753 10.2916C3.8823 10.9444 5.17847 11.201 6.45066 11.0193C7.72287 10.8375 8.89535 10.2283 9.77528 9.29164C12.4419 6.62498 12.4419 0.625 12.4419 0.625C12.4419 0.625 6.44196 0.625 3.7753 3.29166C2.8387 4.1716 2.22942 5.34408 2.04768 6.61628C1.86594 7.88848 2.12254 9.18464 2.7753 10.2916Z\" stroke=\"#1A1A1A\" stroke-width=\"1.25\"></path>\n  <path d=\"M0.441956 12.6251L7.77527 5.29175\" stroke=\"#1A1A1A\" stroke-width=\"1.25\"></path>\n</svg>",
+            "icon": "shopify://shop_images/Frame_1484580598_34310056-10c1-4062-b291-3a3750d4abeb.svg",
             "text": "Carbon-Neutral"
           }
         },
@@ -85,7 +85,7 @@
         "promo_6AYbxr": {
           "type": "promo",
           "settings": {
-            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewbox=\"0 0 14 14\" fill=\"none\">\n  <path d=\"M5.4672 3.41984C5.4672 3.69133 5.35936 3.95169 5.16739 4.14366C4.97542 4.33563 4.71505 4.44348 4.44356 4.44348C4.17208 4.44348 3.91171 4.33563 3.71974 4.14366C3.52777 3.95169 3.41992 3.69133 3.41992 3.41984C3.41992 2.3962 4.44356 1.37256 4.44356 1.37256C4.44356 1.37256 5.4672 2.3962 5.4672 3.41984Z\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n  <path d=\"M4.44357 4.4436V5.97639\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n  <path d=\"M1.88179 5.97632H6.99999V12.6273H1.88179V5.97632Z\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n  <path d=\"M10.5801 5.4672C10.5801 5.73869 10.4722 5.99906 10.2802 6.19103C10.0883 6.383 9.8279 6.49084 9.55642 6.49084C9.28493 6.49084 9.02456 6.383 8.83259 6.19103C8.64062 5.99906 8.53278 5.73869 8.53278 5.4672C8.53278 4.44356 9.55642 3.41992 9.55642 3.41992C9.55642 3.41992 10.5801 4.44356 10.5801 5.4672Z\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n  <path d=\"M9.55643 6.49097V8.02375\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n  <path d=\"M7 8.02368H12.1182V12.6274H7V8.02368Z\" stroke=\"#1A1A1A\" stroke-width=\"1.09375\"></path>\n</svg>",
+            "icon": "shopify://shop_images/Candles--Streamline-Atlas.svg",
             "text": "2 free samples of your choice with every order"
           }
         }
