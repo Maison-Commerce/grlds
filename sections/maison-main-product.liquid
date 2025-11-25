@@ -142,10 +142,9 @@
       "name": "Benefit",
       "settings": [
         {
-          "type": "html",
+          "type": "image_picker",
           "id": "icon",
-          "label": "Icon SVG",
-          "info": "Paste SVG code for the icon"
+          "label": "Icon"
         },
         {
           "type": "text",
@@ -160,10 +159,9 @@
       "name": "Promotional Message",
       "settings": [
         {
-          "type": "html",
+          "type": "image_picker",
           "id": "icon",
-          "label": "Icon SVG",
-          "info": "Paste SVG code for the icon"
+          "label": "Icon"
         },
         {
           "type": "text",
@@ -637,7 +635,11 @@
                 <div class="maison_commerce_maison_main_product__benefit" {{ block.shopify_attributes }}>
                   {% if block.settings.icon != blank %}
                     <div class="maison_commerce_maison_main_product__benefit-icon">
-                      {{ block.settings.icon }}
+                      {{
+                        block.settings.icon
+                        | image_url: width: 32
+                        | image_tag: loading: 'lazy', alt: block.settings.text, class: 'maison_commerce_maison_main_product__benefit-icon-img'
+                      }}
                     </div>
                   {% endif %}
                   <span>{{ block.settings.text }}</span>
@@ -678,7 +680,11 @@
               <div class="maison_commerce_maison_main_product__promo" {{ block.shopify_attributes }}>
                 {% if block.settings.icon != blank %}
                   <div class="maison_commerce_maison_main_product__promo-icon">
-                    {{ block.settings.icon }}
+                    {{
+                      block.settings.icon
+                      | image_url: width: 28
+                      | image_tag: loading: 'lazy', alt: block.settings.text, class: 'maison_commerce_maison_main_product__promo-icon-img'
+                    }}
                   </div>
                 {% endif %}
                 <span>{{ block.settings.text }}</span>
@@ -1263,9 +1269,11 @@
     justify-content: center;
   }
 
-  .maison_commerce_maison_main_product__benefit-icon svg {
+  .maison_commerce_maison_main_product__benefit-icon svg,
+  .maison_commerce_maison_main_product__benefit-icon-img {
     width: 100%;
     height: 100%;
+    object-fit: contain;
   }
 
   .maison_commerce_maison_main_product__benefit-divider {
@@ -1360,9 +1368,11 @@
     justify-content: center;
   }
 
-  .maison_commerce_maison_main_product__promo-icon svg {
+  .maison_commerce_maison_main_product__promo-icon svg,
+  .maison_commerce_maison_main_product__promo-icon-img {
     width: 100%;
     height: 100%;
+    object-fit: contain;
   }
 
   /* Size Chart */
