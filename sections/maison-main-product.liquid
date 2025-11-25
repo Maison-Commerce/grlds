@@ -182,22 +182,137 @@
           "type": "checkbox",
           "id": "show_dynamic_checkout",
           "default": true,
-          "label": "Show dynamic checkout buttons",
-          "info": "Using the payment methods available on your store, customers see their preferred option, like PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/theme-editor/settings#dynamic-checkout)"
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
         },
         {
           "type": "checkbox",
           "id": "show_gift_card_recipient",
           "default": true,
-          "label": "Show gift card recipient form",
-          "info": "Allow customers to send gift cards to a recipient. Only applies to gift card products."
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
+          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
         },
         {
           "type": "checkbox",
           "id": "skip_cart",
-          "label": "Skip cart",
+          "label": "t:settings_schema.lumintheme.buy_buttons.skip_cart.label",
           "default": false,
-          "info": "Customers are taken directly to checkout when clicking the buy button."
+          "info": "t:settings_schema.lumintheme.buy_buttons.skip_cart.info"
+        },
+        {
+          "type": "header",
+          "content": "Button Settings"
+        },
+        {
+          "type": "range",
+          "id": "button_padding_top",
+          "label": "Button Padding Top",
+          "default": 20,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+          },  
+          {
+          "type": "range",
+          "id": "button_padding_bottom",
+          "label": "Button Padding Bottom",
+          "default": 20,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_custom_style",
+          "label": "Use custom button size",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "button_font_size",
+          "label": "Button font size",
+          "default": 20,
+          "min": 10,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "visible_if": "{{block.settings.button_custom_style}}"
+        },
+        {
+          "type": "range",
+          "id": "button_height",
+          "label": "Button height",
+          "default": 45,
+          "min": 30,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "visible_if": "{{block.settings.button_custom_style}}"
+        },
+        
+        {
+          "type": "color",
+          "id": "lm_main_button",
+          "label": "Button Background",
+          "default": "#000",
+          "visible_if": "{{block.settings.button_custom_style}}"
+        },
+        {
+          "type": "color_background",
+          "id": "lm_main_button_gr",
+          "label": "Button Gradiant",
+          "visible_if": "{{block.settings.button_custom_style}}"
+        },
+        {
+          "type": "color",
+          "id": "lm_main_text",
+          "label": "Cart Button Text",
+          "default": "#fff",
+          "visible_if": "{{block.settings.button_custom_style}}"
+        },
+        {
+          "type": "color",
+          "id": "lm_main_text_hover",
+          "label": "Cart Button background Hover",
+          "default": "#0B57D0",
+          "visible_if": "{{block.settings.button_custom_style}}"
+        },
+        {
+          "type": "color",
+          "id": "lm_main_button_hover",
+          "label": "Cart Button text Hover",
+          "default": "#ffffff",
+          "visible_if": "{{block.settings.button_custom_style}}"
+        },
+        {
+          "type": "color_background",
+          "id": "lm_main_button_gr_hover",
+          "label": "Cart Button Gradiant Hover",
+          "visible_if": "{{block.settings.button_custom_style}}"
+        },
+        {
+          "type": "range",
+          "id": "lm_main_button_border_width",
+          "label": "Button Border Width",
+          "default": 0,
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "visible_if": "{{block.settings.button_custom_style}}"
+        },
+        {
+          "type": "color",
+          "id": "lm_main_button_border_color",
+          "label": "Button Border Color",
+          "default": "#000",
+          "visible_if": "{{block.settings.button_custom_style}}"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:settings_schema.lumintheme.buy_buttons.paragraph.content"
         }
       ]
     }
