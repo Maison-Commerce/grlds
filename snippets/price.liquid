@@ -106,7 +106,7 @@
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
           <span class="price-item price-item--regular price-item--strikethrough">
             {% if settings.currency_code_enabled %}
-              {{ compare_at_price | money_without_currency }}{{ shop.money_with_currency_format.name }}
+              {{ compare_at_price | money_without_currency }}{{ shop.money_with_currency_format.name }}Eur
             {% else %}
               {{ compare_at_price | money }}
             {% endif %}
