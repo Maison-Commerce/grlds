@@ -9,6 +9,27 @@
  */
 {
   "sections": {
+    "maison_main_product_EcLTVL": {
+      "type": "maison-main-product",
+      "name": "Maison Main Product",
+      "settings": {
+        "gallery_layout": "grid",
+        "show_badge": true,
+        "badge_text": "LIMITED EDITION",
+        "show_rating": true,
+        "rating_text": "4.8 / 5 (3,200 reviews)",
+        "show_shipping_info": true,
+        "shipping_text": "Order before 14:00 → Ships Today",
+        "button_text": "Add to Bag",
+        "show_payment_icons": true,
+        "show_benefits": true,
+        "promo_text": "2 free samples of your choice with every order",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 40,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 20
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -678,6 +699,7 @@
     }
   },
   "order": [
+    "maison_main_product_EcLTVL",
     "main",
     "maison_img_with_text_JGaQp6",
     "maison_product_specification_GETt9W",
