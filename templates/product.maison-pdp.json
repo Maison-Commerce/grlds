@@ -29,8 +29,8 @@
         "benefit_TtmRKQ": {
           "type": "benefit",
           "settings": {
-            "icon": "Carbon-Neutral",
-            "text": "Signature Gift Wrap"
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewbox=\"0 0 14 14\" fill=\"none\">\n  <path d=\"M2.7753 10.2916C3.8823 10.9444 5.17847 11.201 6.45066 11.0193C7.72287 10.8375 8.89535 10.2283 9.77528 9.29164C12.4419 6.62498 12.4419 0.625 12.4419 0.625C12.4419 0.625 6.44196 0.625 3.7753 3.29166C2.8387 4.1716 2.22942 5.34408 2.04768 6.61628C1.86594 7.88848 2.12254 9.18464 2.7753 10.2916Z\" stroke=\"#1A1A1A\" stroke-width=\"1.25\"></path>\n  <path d=\"M0.441956 12.6251L7.77527 5.29175\" stroke=\"#1A1A1A\" stroke-width=\"1.25\"></path>\n</svg>",
+            "text": "Carbon-Neutral"
           }
         },
         "accordion_4kD3PC": {
