@@ -530,6 +530,7 @@
                 data-section="{{ section.id }}"
               >
                 {%- for option in product.options_with_values -%}
+                  {% assign option_index = forloop.index %}
                   <fieldset class="js product-form__input product-form__input--pill">
                     {%- for value in option.values -%}
                       {%- liquid
@@ -540,14 +541,14 @@
                       -%}
                       <input
                         type="radio"
-                        id="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-                        name="options[{{ option.position }}]"
+                        id="Option-{{ section.id }}-{{ option_index }}-{{ forloop.index0 }}"
+                        name="options[{{ option_index }}]"
                         value="{{ value }}"
                         form="{{ product_form_id }}"
                         {% if value == option.selected_value %}checked{% endif %}
                         {% if option_disabled %}disabled{% endif %}
                       >
-                      <label for="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                      <label for="Option-{{ section.id }}-{{ option_index }}-{{ forloop.index0 }}">
                         {{ value }}
                       </label>
                     {%- endfor -%}
@@ -1430,50 +1431,110 @@
       });
     });
     
+    // Function to get selected variant from selected options
+    function getSelectedVariantFromOptions() {
+      const variantSelects = productInfo.querySelector('variant-selects');
+      if (!variantSelects) return null;
+
+      // Get all selected option values in order
+      const selectedOptions = [];
+      const optionInputs = variantSelects.querySelectorAll('input[type="radio"][name^="options["]:checked');
+      
+      // Sort by option position to ensure correct order
+      const sortedInputs = Array.from(optionInputs).sort((a, b) => {
+        const aPos = parseInt(a.name.match(/options\[(\d+)\]/)[1]);
+        const bPos = parseInt(b.name.match(/options\[(\d+)\]/)[1]);
+        return aPos - bPos;
+      });
+
+      sortedInputs.forEach(input => {
+        selectedOptions.push(input.value);
+      });
+
+      // Find matching variant from product data
+      if (productData && productData.variants) {
+        const matchingVariant = productData.variants.find(variant => {
+          if (!variant.options || variant.options.length !== selectedOptions.length) {
+            return false;
+          }
+          return variant.options.every((option, index) => option === selectedOptions[index]);
+        });
+
+        return matchingVariant || null;
+      }
+
+      return null;
+    }
+
     // Update room info and UI when variant changes
+    function updateVariantInfo() {
+      const selectedVariant = getSelectedVariantFromOptions();
+      
+      if (!selectedVariant) {
+        // Fallback: try to get from script tag
+        const variantSelects = productInfo.querySelector('variant-selects');
+        if (variantSelects) {
+          const selectedVariantJson = variantSelects.querySelector('script[data-selected-variant]');
+          if (selectedVariantJson) {
+            try {
+              const variant = JSON.parse(selectedVariantJson.textContent);
+              updateVariantUI(variant);
+              return;
+            } catch (err) {
+              console.error('Error parsing variant data:', err);
+            }
+          }
+        }
+        return;
+      }
+
+      updateVariantUI(selectedVariant);
+    }
+
+    function updateVariantUI(selectedVariant) {
+      // Update room info
+      const roomInfoEl = productInfo.querySelector('#room-info-{{ section.id }}');
+      if (roomInfoEl && selectedVariant.metafields && selectedVariant.metafields.custom && selectedVariant.metafields.custom.size_additional_description) {
+        roomInfoEl.textContent = selectedVariant.metafields.custom.size_additional_description;
+      }
+      
+      // Update form variant ID
+      const form = productInfo.querySelector('#product-form-{{ section.id }}');
+      if (form) {
+        const variantInput = form.querySelector('input[name="id"]');
+        if (variantInput) {
+          variantInput.value = selectedVariant.id;
+          variantInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }
+      
+      // Update button price
+      const priceEl = productInfo.querySelector('#button-price-{{ section.id }}');
+      if (priceEl && selectedVariant.price) {
+        priceEl.textContent = new Intl.NumberFormat('{{ request.locale.iso_code }}', {
+          style: 'currency',
+          currency: '{{ cart.currency.iso_code }}',
+          minimumFractionDigits: 0
+        }).format(selectedVariant.price / 100);
+      }
+    }
+
+    // Listen for option changes
     productInfo.addEventListener('change', function(e) {
       if (e.target.name && e.target.name.startsWith('options[')) {
         // Wait a bit for variant-selects to update
         setTimeout(() => {
-          const variantSelects = productInfo.querySelector('variant-selects');
-          if (variantSelects) {
-            const selectedVariantJson = variantSelects.querySelector('script[data-selected-variant]');
-            if (selectedVariantJson) {
-              try {
-                const selectedVariant = JSON.parse(selectedVariantJson.textContent);
-                
-                // Update room info
-                const roomInfoEl = productInfo.querySelector('#room-info-{{ section.id }}');
-                if (roomInfoEl && selectedVariant.metafields && selectedVariant.metafields.custom && selectedVariant.metafields.custom.size_additional_description) {
-                  roomInfoEl.textContent = selectedVariant.metafields.custom.size_additional_description;
-                }
-                
-                // Update form variant ID
-                const form = productInfo.querySelector('#product-form-{{ section.id }}');
-                if (form) {
-                  const variantInput = form.querySelector('input[name="id"]');
-                  console.log('variantInput', variantInput)
-                  console.log('selectedVariant.id', selectedVariant.id)
-                  if (variantInput) {
-                    variantInput.value = selectedVariant.id;
-                  }
-                }
-                
-                // Update button price
-                const priceEl = productInfo.querySelector('#button-price-{{ section.id }}');
-                if (priceEl && selectedVariant.price) {
-                  priceEl.textContent = new Intl.NumberFormat('{{ localization.country.currency.iso_code }}', {
-                    style: 'currency',
-                    currency: '{{ cart.currency.iso_code }}',
-                    minimumFractionDigits: 0
-                  }).format(selectedVariant.price / 100);
-                }
-              } catch (err) {
-                console.error('Error parsing variant data:', err);
-              }
-            }
-          }
+          updateVariantInfo();
         }, 100);
+      }
+    });
+
+    // Also listen for variant:change event
+    document.addEventListener('variant:change', function(e) {
+      if (e.detail && e.detail.variant) {
+        updateVariantUI(e.detail.variant);
+      } else {
+        updateVariantInfo();
       }
     });
 
