@@ -1518,6 +1518,8 @@
       if (roomInfoEl && selectedVariant.metafields && selectedVariant.metafields.custom && selectedVariant.metafields.custom.size_additional_description) {
         console.log('roomInfoEl metafield', selectedVariant.metafields.custom.size_additional_description)
         roomInfoEl.textContent = selectedVariant.metafields.custom.size_additional_description;
+      }else{
+        roomInfoEl.textContent = '';
       }
       
       // Update form variant ID (only if different)
