@@ -380,7 +380,9 @@
           <!-- Payment Icons -->
           {% if section.settings.show_payment_icons %}
             <div class="maison_commerce_maison_main_product__payment-icons">
-              {% comment %} Payment icons would be rendered here {% endcomment %}
+              {%- for type in shop.enabled_payment_types -%}
+                <div class="maison_commerce_maison_footer__payment-icon">{{ type | payment_type_svg_tag }}</div>
+              {%- endfor -%}
             </div>
           {% endif %}
 
