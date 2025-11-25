@@ -213,7 +213,7 @@
     "hide_cart_heading": false,
     "cart_title": "Cart • [x]",
     "cart_head_text_align": "left",
-    "show_promo_message": true,
+    "show_promo_message": false,
     "head_message": "<p>Limited-Time Offer — While Supplies Last</p>",
     "cart_head_text_style": "uppercase",
     "cart_text_align_2": "center",
