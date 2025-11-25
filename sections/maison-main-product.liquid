@@ -289,7 +289,9 @@
                     </div>
                     {% if option.name == 'Size' %}
                         <div class="maison_commerce_maison_main_product__room-info">
-                        Ideal for rooms < 30 m²
+                         <script>
+                            console.log('option', {{ option | json }})
+                         </script>
                         </div>
                     {% endif %}
                   </div>
