@@ -57,10 +57,10 @@
       "default": true
     },
     {
-      "type": "text",
+      "type": "richtext",
       "id": "shipping_text",
       "label": "Shipping Text",
-      "default": "Order before 14:00 → Ships Today"
+      "default": "<p>Order before 14:00 → <u>Ships Today</u></p>"
     },
     {
       "type": "text",
@@ -414,7 +414,7 @@
           <!-- Shipping Info -->
           {% if section.settings.show_shipping_info %}
             <div class="maison_commerce_maison_main_product__shipping">
-              {{ section.settings.shipping_text | default: 'Order before 14:00 → Ships Today' }}
+              {{ section.settings.shipping_text | default: 'Order before 14:00 → <u>Ships Today</u>' }}
             </div>
           {% endif %}
 
