@@ -203,6 +203,7 @@
     {{ 'component-swatch.css' | asset_url | stylesheet_tag }}
   {% endunless %}
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
@@ -242,23 +243,21 @@
           {% endif %}
           
           <!-- Mobile Slider Layout -->
-          <div class="maison_commerce_maison_main_product__gallery-slider slider slider--mobile">
-            {% for media in product.media %}
-              <div class="maison_commerce_maison_main_product__gallery-slide slider__slide">
-                {% if forloop.first and section.settings.show_badge %}
-                  <div class="maison_commerce_maison_main_product__badge">
-                    {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
-                  </div>
-                {% endif %}
-                {% render 'product-media', media: media %}
-              </div>
-            {% endfor %}
-          </div>
-          <!-- Slider Dots -->
-          <div class="maison_commerce_maison_main_product__gallery-dots">
-            {% for media in product.media %}
-              <div class="maison_commerce_maison_main_product__gallery-dot{% if forloop.first %} active{% endif %}"></div>
-            {% endfor %}
+          <div class="swiper maison_commerce_maison_main_product__gallery-slider">
+            <div class="swiper-wrapper">
+              {% for media in product.media %}
+                <div class="swiper-slide maison_commerce_maison_main_product__gallery-slide">
+                  {% if forloop.first and section.settings.show_badge %}
+                    <div class="maison_commerce_maison_main_product__badge">
+                      {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
+                    </div>
+                  {% endif %}
+                  {% render 'product-media', media: media %}
+                </div>
+              {% endfor %}
+            </div>
+            <!-- Slider Pagination -->
+            <div class="swiper-pagination maison_commerce_maison_main_product__gallery-pagination"></div>
           </div>
         </div>
 
@@ -595,24 +594,21 @@
 
   @media (max-width: 990px) {
     .maison_commerce_maison_main_product__gallery-slider {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    
-    .maison_commerce_maison_main_product__gallery-slider::-webkit-scrollbar {
-      display: none;
+      display: block;
+      width: 100%;
     }
   }
 
   .maison_commerce_maison_main_product__gallery-slide {
-    flex: 0 0 320px;
-    scroll-snap-align: start;
     position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+  }
+  
+  .maison_commerce_maison_main_product__gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .maison_commerce_maison_main_product__badge {
@@ -628,32 +624,37 @@
     z-index: 1;
   }
 
-  .maison_commerce_maison_main_product__gallery-dots {
-    display: none;
-  }
-
   @media (max-width: 990px) {
-    .maison_commerce_maison_main_product__gallery-dots {
-      display: flex;
-      gap: 7.1px;
-      justify-content: center;
-      padding: 8px 0;
-    }
-    
     .maison_commerce_maison_main_product__gallery-grid {
       display: none;
     }
   }
 
-  .maison_commerce_maison_main_product__gallery-dot {
+  /* Swiper Pagination Styles */
+  .maison_commerce_maison_main_product__gallery-pagination {
+    display: none;
+    position: relative;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__gallery-pagination {
+      display: block;
+    }
+  }
+
+  .maison_commerce_maison_main_product__gallery-pagination .swiper-pagination-bullet {
     width: 24px;
     height: 4px;
     border-radius: 90px;
     background-color: #e6e6e6;
-    transition: background-color 0.3s ease;
+    opacity: 1;
+    margin: 0 3.55px;
+    transition: all 0.3s ease;
   }
 
-  .maison_commerce_maison_main_product__gallery-dot.active {
+  .maison_commerce_maison_main_product__gallery-pagination .swiper-pagination-bullet-active {
     width: 32px;
     background-color: #2d2d2d;
   }
@@ -1073,6 +1074,7 @@
   }
 </style>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const productInfo = document.querySelector('#MainProduct-{{ section.id }}');
@@ -1179,38 +1181,65 @@
       }
     });
 
-    // Initialize slider dots on mobile
-    if (window.innerWidth <= 990) {
-      const slider = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-slider');
-      const dots = productInfo.querySelectorAll('.maison_commerce_maison_main_product__gallery-dot');
-      
-      if (slider && dots.length > 0) {
-        slider.addEventListener('scroll', function() {
-          const scrollLeft = slider.scrollLeft;
-          const slideWidth = slider.querySelector('.maison_commerce_maison_main_product__gallery-slide').offsetWidth;
-          const currentIndex = Math.round(scrollLeft / slideWidth);
-          
-          dots.forEach((dot, index) => {
-            if (index === currentIndex) {
-              dot.classList.add('active');
-            } else {
-              dot.classList.remove('active');
-            }
-          });
-        });
+    // Initialize Swiper for mobile gallery
+    function initMobileGallerySwiper() {
+      if (window.innerWidth <= 990) {
+        const swiperContainer = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-slider');
         
-        // Make dots clickable
-        dots.forEach((dot, index) => {
-          dot.addEventListener('click', function() {
-            const slideWidth = slider.querySelector('.maison_commerce_maison_main_product__gallery-slide').offsetWidth;
-            slider.scrollTo({
-              left: slideWidth * index,
-              behavior: 'smooth'
-            });
+        if (swiperContainer && !swiperContainer.swiper) {
+          const swiper = new Swiper('.maison_commerce_maison_main_product__gallery-slider', {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            loop: false,
+            pagination: {
+              el: '.maison_commerce_maison_main_product__gallery-pagination',
+              clickable: true,
+              renderBullet: function (index, className) {
+                return '<span class="' + className + '"></span>';
+              },
+            },
+            on: {
+              init: function(swiperInstance) {
+                // Ensure first slide badge is visible
+                swiperInstance.slides.forEach((slide, index) => {
+                  const badge = slide.querySelector('.maison_commerce_maison_main_product__badge');
+                  if (badge) {
+                    badge.style.display = index === 0 ? 'block' : 'none';
+                  }
+                });
+              },
+              slideChange: function(swiperInstance) {
+                // Show badge only on first slide
+                swiperInstance.slides.forEach((slide, index) => {
+                  const badge = slide.querySelector('.maison_commerce_maison_main_product__badge');
+                  if (badge) {
+                    badge.style.display = index === swiperInstance.activeIndex && swiperInstance.activeIndex === 0 ? 'block' : 'none';
+                  }
+                });
+              },
+            },
           });
-        });
+        }
+      } else {
+        // Destroy Swiper if window is resized to desktop
+        const swiperContainer = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-slider');
+        if (swiperContainer && swiperContainer.swiper) {
+          swiperContainer.swiper.destroy(true, true);
+        }
       }
     }
+
+    // Initialize on load
+    initMobileGallerySwiper();
+
+    // Reinitialize on resize
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(function() {
+        initMobileGallerySwiper();
+      }, 250);
+    });
   });
 </script>
 
