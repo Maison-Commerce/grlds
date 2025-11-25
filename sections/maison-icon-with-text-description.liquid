@@ -3,10 +3,9 @@
   "name": "Maison Icon with Text",
   "settings": [
     {
-      "type": "html",
+      "type": "image_picker",
       "id": "icon",
-      "label": "Icon SVG",
-      "info": "Paste SVG code for the icon"
+      "label": "Icon Image"
     },
     {
       "type": "text",
@@ -221,7 +220,14 @@
       <div class="maison_commerce_maison_icon_with_text_description__content">
         {% if section.settings.icon != blank %}
           <div class="maison_commerce_maison_icon_with_text_description__icon">
-            {{ section.settings.icon }}
+            {{
+              section.settings.icon
+              | image_url: width: 100
+              | image_tag:
+                loading: 'lazy',
+                class: 'maison_commerce_maison_icon_with_text_description__icon-image',
+                alt: section.settings.icon.alt | default: 'Icon'
+            }}
           </div>
         {% endif %}
         
