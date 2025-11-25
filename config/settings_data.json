@@ -203,7 +203,7 @@
     "show_vendor": false,
     "hide_single_item_price": true,
     "show_cart_note": false,
-    "drawer_total_price_color": "#ce094f",
+    "drawer_total_price_color": "#6c6c6c",
     "show_save_price": true,
     "save_price_text": "Save ($)",
     "drawer_save_price_color": "#08864e",
