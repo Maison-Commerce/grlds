@@ -246,7 +246,7 @@
           <div class="swiper maison_commerce_maison_main_product__gallery-slider">
             <div class="swiper-wrapper">
               {% for media in product.media %}
-                <div class="swiper-slide maison_commerce_maison_main_product__gallery-slide">
+                <div class="swiper-slide maison_commerce_maison_main_product__gallery-slide" style="--media-radius: 0">
                   {% if forloop.first and section.settings.show_badge %}
                     <div class="maison_commerce_maison_main_product__badge">
                       {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
