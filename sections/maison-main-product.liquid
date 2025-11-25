@@ -1466,8 +1466,14 @@
       return null;
     }
 
+    // Track last updated variant to prevent duplicate updates
+    let lastUpdatedVariantId = null;
+    let isUpdating = false;
+
     // Update room info and UI when variant changes
     function updateVariantInfo() {
+      if (isUpdating) return;
+      
       const selectedVariant = getSelectedVariantFromOptions();
       
       if (!selectedVariant) {
@@ -1488,24 +1494,38 @@
         return;
       }
 
+      // Prevent duplicate updates
+      if (lastUpdatedVariantId === selectedVariant.id) {
+        return;
+      }
+
       updateVariantUI(selectedVariant);
     }
 
     function updateVariantUI(selectedVariant) {
+      if (!selectedVariant || !selectedVariant.id) return;
+      
+      // Prevent duplicate updates
+      if (lastUpdatedVariantId === selectedVariant.id && isUpdating) {
+        return;
+      }
+
+      isUpdating = true;
+      lastUpdatedVariantId = selectedVariant.id;
+
       // Update room info
       const roomInfoEl = productInfo.querySelector('#room-info-{{ section.id }}');
       if (roomInfoEl && selectedVariant.metafields && selectedVariant.metafields.custom && selectedVariant.metafields.custom.size_additional_description) {
         roomInfoEl.textContent = selectedVariant.metafields.custom.size_additional_description;
       }
       
-      // Update form variant ID
+      // Update form variant ID (only if different)
       const form = productInfo.querySelector('#product-form-{{ section.id }}');
       if (form) {
         const variantInput = form.querySelector('input[name="id"]');
-        if (variantInput) {
+        if (variantInput && variantInput.value !== selectedVariant.id.toString()) {
           variantInput.value = selectedVariant.id;
-          console.log('selectedVariant.id', selectedVariant.id)
-          variantInput.dispatchEvent(new Event('change', { bubbles: true }));
+          // Don't dispatch change event here to avoid triggering duplicate updates
         }
       }
       
@@ -1518,22 +1538,52 @@
           minimumFractionDigits: 0
         }).format(selectedVariant.price / 100);
       }
+
+      // Update URL
+      const productUrl = productInfo.dataset.url || '{{ product.url }}';
+      const updateUrl = productInfo.dataset.updateUrl !== 'false';
+      
+      if (updateUrl && selectedVariant.id) {
+        const newUrl = `${productUrl}?variant=${selectedVariant.id}`;
+        
+        // Use product-info component's updateURL method if available
+        if (productInfo.updateURL && typeof productInfo.updateURL === 'function') {
+          productInfo.updateURL(productUrl, selectedVariant.id);
+        } else {
+          // Fallback: manually update URL
+          window.history.replaceState(
+            {},
+            '',
+            newUrl
+          );
+        }
+      }
+
+      // Reset updating flag after a short delay
+      setTimeout(() => {
+        isUpdating = false;
+      }, 200);
     }
 
-    // Listen for option changes
+    // Listen for option changes (with debouncing)
+    let updateTimeout;
     productInfo.addEventListener('change', function(e) {
       if (e.target.name && e.target.name.startsWith('options[')) {
+        clearTimeout(updateTimeout);
         // Wait a bit for variant-selects to update
-        setTimeout(() => {
+        updateTimeout = setTimeout(() => {
           updateVariantInfo();
-        }, 100);
+        }, 150);
       }
     });
 
-    // Also listen for variant:change event
+    // Also listen for variant:change event (but only if variant-selects hasn't already updated)
     document.addEventListener('variant:change', function(e) {
       if (e.detail && e.detail.variant) {
-        updateVariantUI(e.detail.variant);
+        // Only update if it's a different variant
+        if (lastUpdatedVariantId !== e.detail.variant.id) {
+          updateVariantUI(e.detail.variant);
+        }
       } else {
         updateVariantInfo();
       }
