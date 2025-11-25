@@ -453,10 +453,15 @@
           <!-- Promotional Message -->
           {% if section.settings.promo_text != blank %}
             <div class="maison_commerce_maison_main_product__promo">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 0L8.5 5H14L9.5 7L11 12L7 9L3 12L4.5 7L0 5H5.5L7 0Z" fill="currentColor"/>
-              </svg>
-              <span>{{ section.settings.promo_text }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M5.4672 3.41984C5.4672 3.69133 5.35936 3.95169 5.16739 4.14366C4.97542 4.33563 4.71505 4.44348 4.44356 4.44348C4.17208 4.44348 3.91171 4.33563 3.71974 4.14366C3.52777 3.95169 3.41992 3.69133 3.41992 3.41984C3.41992 2.3962 4.44356 1.37256 4.44356 1.37256C4.44356 1.37256 5.4672 2.3962 5.4672 3.41984Z" stroke="#1A1A1A" stroke-width="1.09375"/>
+                <path d="M4.44357 4.4436V5.97639" stroke="#1A1A1A" stroke-width="1.09375"/>
+                <path d="M1.88179 5.97632H6.99999V12.6273H1.88179V5.97632Z" stroke="#1A1A1A" stroke-width="1.09375"/>
+                <path d="M10.5801 5.4672C10.5801 5.73869 10.4722 5.99906 10.2802 6.19103C10.0883 6.383 9.8279 6.49084 9.55642 6.49084C9.28493 6.49084 9.02456 6.383 8.83259 6.19103C8.64062 5.99906 8.53278 5.73869 8.53278 5.4672C8.53278 4.44356 9.55642 3.41992 9.55642 3.41992C9.55642 3.41992 10.5801 4.44356 10.5801 5.4672Z" stroke="#1A1A1A" stroke-width="1.09375"/>
+                <path d="M9.55643 6.49097V8.02375" stroke="#1A1A1A" stroke-width="1.09375"/>
+                <path d="M7 8.02368H12.1182V12.6274H7V8.02368Z" stroke="#1A1A1A" stroke-width="1.09375"/>
+                </svg>
+                <span>{{ section.settings.promo_text }}</span>
             </div>
           {% endif %}
         </div>
