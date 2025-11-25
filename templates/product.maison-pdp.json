@@ -11,6 +11,42 @@
   "sections": {
     "maison_main_product_EcLTVL": {
       "type": "maison-main-product",
+      "blocks": {
+        "accordion_4kD3PC": {
+          "type": "accordion",
+          "settings": {
+            "title": "Ingredients",
+            "content": ""
+          }
+        },
+        "accordion_cBLmFa": {
+          "type": "accordion",
+          "settings": {
+            "title": "Directions for use",
+            "content": ""
+          }
+        },
+        "accordion_HT4Vt3": {
+          "type": "accordion",
+          "settings": {
+            "title": "Characteristics",
+            "content": ""
+          }
+        },
+        "accordion_hDGrec": {
+          "type": "accordion",
+          "settings": {
+            "title": "Returns & Exchanges",
+            "content": ""
+          }
+        }
+      },
+      "block_order": [
+        "accordion_4kD3PC",
+        "accordion_cBLmFa",
+        "accordion_HT4Vt3",
+        "accordion_hDGrec"
+      ],
       "name": "Maison Main Product",
       "settings": {
         "gallery_layout": "grid",
