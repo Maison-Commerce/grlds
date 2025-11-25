@@ -347,6 +347,7 @@
   {% endunless %}
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
   {%- style -%}
@@ -1467,126 +1468,97 @@
 
     // Track last updated variant to prevent duplicate updates
     let lastUpdatedVariantId = null;
-    let isUpdating = false;
+    let updateTimeout = null;
 
-    // Update room info and UI when variant changes
-    function updateVariantInfo() {
-      if (isUpdating) return;
-      
-      const selectedVariant = getSelectedVariantFromOptions();
-      
-      if (!selectedVariant) {
-        // Fallback: try to get from script tag
-        const variantSelects = productInfo.querySelector('variant-selects');
-        if (variantSelects) {
-          const selectedVariantJson = variantSelects.querySelector('script[data-selected-variant]');
-          if (selectedVariantJson) {
-            try {
-              const variant = JSON.parse(selectedVariantJson.textContent);
-              updateVariantUI(variant);
-              return;
-            } catch (err) {
-              console.error('Error parsing variant data:', err);
-            }
-          }
-        }
-        return;
-      }
-
-      // Prevent duplicate updates
-      if (lastUpdatedVariantId === selectedVariant.id) {
-        return;
-      }
-
-      updateVariantUI(selectedVariant);
-    }
-
-    function updateVariantUI(selectedVariant) {
-      if (!selectedVariant || !selectedVariant.id) return;
+    // Update ONLY custom UI elements (room info, button price)
+    // Let product-info.js handle variant input and URL updates
+    function updateCustomVariantUI(variantId) {
+      if (!variantId) return;
       
       // Prevent duplicate updates
-      if (lastUpdatedVariantId === selectedVariant.id && isUpdating) {
+      if (lastUpdatedVariantId === variantId) {
         return;
       }
 
-      isUpdating = true;
-      lastUpdatedVariantId = selectedVariant.id;
+      lastUpdatedVariantId = variantId;
 
-      // Update room info
+      // Get full variant data from productData (includes metafields)
+      const variantFromProduct = productData.variants.find(v => v.id === variantId);
+      if (!variantFromProduct) return;
+
+      // Update room info from metafield
       const roomInfoEl = productInfo.querySelector('#room-info-{{ section.id }}');
-      if (roomInfoEl && selectedVariant.metafields && selectedVariant.metafields.custom && selectedVariant.metafields.custom.size_additional_description) {
-        roomInfoEl.textContent = selectedVariant.metafields.custom.size_additional_description;
-      }
-      
-      // Update form variant ID (only if different)
-      const form = productInfo.querySelector('#product-form-{{ section.id }}');
-      if (form) {
-        const variantInput = form.querySelector('input[name="id"]');
-        if (variantInput && variantInput.value !== selectedVariant.id.toString()) {
-          variantInput.value = selectedVariant.id;
-          // Don't dispatch change event here to avoid triggering duplicate updates
-        }
+      if (roomInfoEl && variantFromProduct.metafields && variantFromProduct.metafields.custom && variantFromProduct.metafields.custom.size_additional_description) {
+        roomInfoEl.textContent = variantFromProduct.metafields.custom.size_additional_description;
       }
       
       // Update button price
       const priceEl = productInfo.querySelector('#button-price-{{ section.id }}');
-      if (priceEl && selectedVariant.price) {
+      if (priceEl && variantFromProduct.price) {
         priceEl.textContent = new Intl.NumberFormat('{{ request.locale.iso_code }}', {
           style: 'currency',
           currency: '{{ cart.currency.iso_code }}',
           minimumFractionDigits: 0
-        }).format(selectedVariant.price / 100);
+        }).format(variantFromProduct.price / 100);
       }
-
-      // Update URL
-      const productUrl = productInfo.dataset.url || '{{ product.url }}';
-      const updateUrl = productInfo.dataset.updateUrl !== 'false';
-      
-      if (updateUrl && selectedVariant.id) {
-        const newUrl = `${productUrl}?variant=${selectedVariant.id}`;
-        
-        // Use product-info component's updateURL method if available
-        if (productInfo.updateURL && typeof productInfo.updateURL === 'function') {
-          productInfo.updateURL(productUrl, selectedVariant.id);
-        } else {
-          // Fallback: manually update URL
-          window.history.replaceState(
-            {},
-            '',
-            newUrl
-          );
-        }
-      }
-
-      // Reset updating flag after a short delay
-      setTimeout(() => {
-        isUpdating = false;
-      }, 200);
     }
 
-    // Listen for option changes (with debouncing)
-    let updateTimeout;
-    productInfo.addEventListener('change', function(e) {
-      if (e.target.name && e.target.name.startsWith('options[')) {
+    // Listen for variant:change event (dispatched by product-info.js after it finishes updating)
+    document.addEventListener('variant:change', function(e) {
+      if (e.detail && e.detail.variant && e.detail.variant.id) {
         clearTimeout(updateTimeout);
-        // Wait a bit for variant-selects to update
+        // Small delay to ensure product-info.js has completely finished
         updateTimeout = setTimeout(() => {
-          updateVariantInfo();
-        }, 150);
+          updateCustomVariantUI(e.detail.variant.id);
+        }, 100);
       }
     });
 
-    // Also listen for variant:change event (but only if variant-selects hasn't already updated)
-    document.addEventListener('variant:change', function(e) {
-      if (e.detail && e.detail.variant) {
-        // Only update if it's a different variant
-        if (lastUpdatedVariantId !== e.detail.variant.id) {
-          updateVariantUI(e.detail.variant);
+    // Also listen to PUB_SUB_EVENTS.variantChange (alternative event from product-info.js)
+    if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
+      subscribe(PUB_SUB_EVENTS.variantChange, function(event) {
+        if (event.data && event.data.variant && event.data.variant.id) {
+          clearTimeout(updateTimeout);
+          updateTimeout = setTimeout(() => {
+            updateCustomVariantUI(event.data.variant.id);
+          }, 100);
         }
-      } else {
-        updateVariantInfo();
+      });
+    }
+
+    // Fallback: Watch for variant input changes (updated by product-info.js)
+    const form = productInfo.querySelector('#product-form-{{ section.id }}');
+    if (form) {
+      const variantInput = form.querySelector('input[name="id"]');
+      if (variantInput) {
+        const inputObserver = new MutationObserver(function() {
+          const variantId = variantInput.value;
+          if (variantId && variantId !== lastUpdatedVariantId) {
+            clearTimeout(updateTimeout);
+            updateTimeout = setTimeout(() => {
+              updateCustomVariantUI(parseInt(variantId));
+            }, 150);
+          }
+        });
+
+        // Watch for value attribute changes
+        inputObserver.observe(variantInput, {
+          attributes: true,
+          attributeFilter: ['value']
+        });
+
+        // Also watch for direct value changes via input events
+        variantInput.addEventListener('change', function() {
+          const variantId = this.value;
+          if (variantId && variantId !== lastUpdatedVariantId) {
+            clearTimeout(updateTimeout);
+            updateTimeout = setTimeout(() => {
+              updateCustomVariantUI(parseInt(variantId));
+            }, 150);
+          }
+        });
       }
-    });
+    }
 
     // Initialize Swiper for mobile gallery
     function initMobileGallerySwiper() {
