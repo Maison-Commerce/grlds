@@ -265,44 +265,49 @@
         <div class="maison_commerce_maison_main_product__info">
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
-          <!-- Rating -->
-          {% if section.settings.show_rating %}
-            <div class="maison_commerce_maison_main_product__rating">
-              <div class="maison_commerce_maison_main_product__stars">
-                {% for i in (1..5) %}
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 0L9.79811 5.52786H15.6085L10.9052 8.94427L12.7033 14.4721L8 11.0557L3.29667 14.4721L5.09478 8.94427L0.391548 5.52786H6.20189L8 0Z" fill="#1A1A1A"/>
-                  </svg>
-                {% endfor %}
-              </div>
-              <span class="maison_commerce_maison_main_product__rating-text">
-                {{ section.settings.rating_text | default: '4.8 / 5 (<u>3,200 reviews</u>)' }}
-              </span>
+          <!-- Product Name Section -->
+          <div class="maison_commerce_maison_main_product__name-section">
+            <div class="maison_commerce_maison_main_product__name-section-inner">
+              <!-- Rating -->
+              {% if section.settings.show_rating %}
+                <div class="maison_commerce_maison_main_product__rating">
+                  <div class="maison_commerce_maison_main_product__stars">
+                    {% for i in (1..5) %}
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 0L9.79811 5.52786H15.6085L10.9052 8.94427L12.7033 14.4721L8 11.0557L3.29667 14.4721L5.09478 8.94427L0.391548 5.52786H6.20189L8 0Z" fill="#1A1A1A"/>
+                      </svg>
+                    {% endfor %}
+                  </div>
+                  <span class="maison_commerce_maison_main_product__rating-text">
+                    {{ section.settings.rating_text | default: '4.8 / 5 (<u>3,200 reviews</u>)' }}
+                  </span>
+                </div>
+              {% endif %}
+
+              <!-- Product Title -->
+              <h1 class="maison_commerce_maison_main_product__title">
+                {{ product.title }}
+              </h1>
+
+              <!-- Product Description -->
+              {% if product.description != blank %}
+                <div class="maison_commerce_maison_main_product__description">
+                  {{ product.description }}
+                </div>
+              {% endif %}
             </div>
-          {% endif %}
 
-          <!-- Product Title -->
-          <h1 class="maison_commerce_maison_main_product__title">
-            {{ product.title }}
-          </h1>
-
-          <!-- Product Description -->
-          {% if product.description != blank %}
-            <div class="maison_commerce_maison_main_product__description">
-              {{ product.description }}
+            <!-- Price -->
+            <div class="maison_commerce_maison_main_product__price">
+              {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
             </div>
-          {% endif %}
-
-          <!-- Price -->
-          <div class="maison_commerce_maison_main_product__price">
-            {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
           </div>
 
           <!-- Variant Picker: Size -->
           {% unless product.has_only_default_variant %}
             {% for option in product.options_with_values %}
               {% if option.name == 'Size' or option.name == 'SIZE' %}
-                <div class="maison_commerce_maison_main_product__variant">
+                <div class="maison_commerce_maison_main_product__variant maison_commerce_maison_main_product__variant--size">
                   <div class="maison_commerce_maison_main_product__variant-header-wrapper">
                     <div class="maison_commerce_maison_main_product__variant-header">
                         <span class="maison_commerce_maison_main_product__variant-label">SIZE:</span>
@@ -352,7 +357,7 @@
             <!-- Variant Picker: Smell/Stone Type -->
             {% for option in product.options_with_values %}
               {% if option.name == 'Smell' or option.name == 'SMELL' or option.name == 'Stone Type' or option.name == 'STONE TYPE' %}
-                <div class="maison_commerce_maison_main_product__variant">
+                <div class="maison_commerce_maison_main_product__variant maison_commerce_maison_main_product__variant--smell">
                   <div class="maison_commerce_maison_main_product__variant-label">
                     {{ option.name | upcase }}:
                   </div>
@@ -410,46 +415,48 @@
             </div>
           {% endunless %}
 
-          <!-- Shipping Info -->
-          {% if section.settings.show_shipping_info %}
-            <div class="maison_commerce_maison_main_product__shipping">
-              {{ section.settings.shipping_text | default: 'Order before 14:00 → <u>Ships Today</u>' }}
-            </div>
-          {% endif %}
+          <!-- Action Section (Shipping, Button, Payment, Benefits) -->
+          <div class="maison_commerce_maison_main_product__action-section">
+            <!-- Shipping Info -->
+            {% if section.settings.show_shipping_info %}
+              <div class="maison_commerce_maison_main_product__shipping">
+                {{ section.settings.shipping_text | default: 'Order before 14:00 → <u>Ships Today</u>' }}
+              </div>
+            {% endif %}
 
-          <!-- Add to Cart Form -->
-          {%- form 'product', product, id: product_form_id, class: 'maison_commerce_maison_main_product__form' -%}
-            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-            
-            <button
-              type="submit"
-              name="add"
-              class="maison_commerce_maison_main_product__button"
-              {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
-            >
-              <span class="maison_commerce_maison_main_product__button-text">
-                {{ section.settings.button_text | default: 'Add to Bag' | upcase }}
-              </span>
-              <span class="maison_commerce_maison_main_product__button-separator">·</span>
-              <span class="maison_commerce_maison_main_product__button-price" id="button-price-{{ section.id }}">
-                {{ product.selected_or_first_available_variant.price | money_with_currency }}
-              </span>
-            </button>
-          {%- endform -%}
+            <!-- Add to Cart Form -->
+            {%- form 'product', product, id: product_form_id, class: 'maison_commerce_maison_main_product__form' -%}
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              
+              <button
+                type="submit"
+                name="add"
+                class="maison_commerce_maison_main_product__button"
+                {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+              >
+                <span class="maison_commerce_maison_main_product__button-text">
+                  {{ section.settings.button_text | default: 'Add to Bag' | upcase }}
+                </span>
+                <span class="maison_commerce_maison_main_product__button-separator">·</span>
+                <span class="maison_commerce_maison_main_product__button-price" id="button-price-{{ section.id }}">
+                  {{ product.selected_or_first_available_variant.price | money_with_currency }}
+                </span>
+              </button>
+            {%- endform -%}
 
-          <!-- Payment Icons -->
-          {% if section.settings.show_payment_icons %}
-            <div class="maison_commerce_maison_main_product__payment-icons">
-              {%- for type in shop.enabled_payment_types -%}
-                <div class="maison_commerce_maison_footer__payment-icon">{{ type | payment_type_svg_tag }}</div>
-              {%- endfor -%}
-            </div>
-          {% endif %}
+            <!-- Payment Icons -->
+            {% if section.settings.show_payment_icons %}
+              <div class="maison_commerce_maison_main_product__payment-icons">
+                {%- for type in shop.enabled_payment_types -%}
+                  <div class="maison_commerce_maison_footer__payment-icon">{{ type | payment_type_svg_tag }}</div>
+                {%- endfor -%}
+              </div>
+            {% endif %}
 
-          <!-- Benefits -->
-          {% assign benefit_blocks = section.blocks | where: 'type', 'benefit' %}
-          {% if benefit_blocks.size > 0 %}
-            <div class="maison_commerce_maison_main_product__benefits">
+            <!-- Benefits -->
+            {% assign benefit_blocks = section.blocks | where: 'type', 'benefit' %}
+            {% if benefit_blocks.size > 0 %}
+              <div class="maison_commerce_maison_main_product__benefits">
               {% for block in benefit_blocks %}
                 {% if forloop.index > 1 %}
                   <div class="maison_commerce_maison_main_product__benefit-divider"></div>
@@ -462,9 +469,10 @@
                   {% endif %}
                   <span>{{ block.settings.text }}</span>
                 </div>
-              {% endfor %}
-            </div>
-          {% endif %}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
 
           <!-- Accordions -->
           {% if section.blocks.size > 0 %}
@@ -684,14 +692,26 @@
     max-width: 480px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 0;
   }
 
   @media (max-width: 990px) {
     .maison_commerce_maison_main_product__info {
       max-width: 100%;
-      gap: 18px;
     }
+  }
+
+  /* Product Name Section (Rating, Title, Description, Price) */
+  .maison_commerce_maison_main_product__name-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .maison_commerce_maison_main_product__name-section-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
   /* Rating */
@@ -748,6 +768,52 @@
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+
+  /* Spacing between main sections */
+  .maison_commerce_maison_main_product__name-section {
+    margin-bottom: 24px;
+  }
+
+  .maison_commerce_maison_main_product__variant--size {
+    margin-bottom: 12px;
+  }
+
+  .maison_commerce_maison_main_product__variant--smell {
+    margin-bottom: 24px;
+  }
+
+  .maison_commerce_maison_main_product__action-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .maison_commerce_maison_main_product__accordions {
+    margin-bottom: 18px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__name-section {
+      margin-bottom: 20px;
+    }
+
+    .maison_commerce_maison_main_product__variant--size {
+      margin-bottom: 12px;
+    }
+
+    .maison_commerce_maison_main_product__variant--smell {
+      margin-bottom: 18px;
+    }
+
+    .maison_commerce_maison_main_product__action-section {
+      margin-bottom: 18px;
+    }
+
+    .maison_commerce_maison_main_product__accordions {
+      margin-bottom: 18px;
+    }
   }
 
   /* Variant Picker */
