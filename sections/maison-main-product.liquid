@@ -1504,7 +1504,8 @@
         const variantInput = form.querySelector('input[name="id"]');
         if (variantInput) {
           variantInput.value = selectedVariant.id;
-          {% comment %} variantInput.dispatchEvent(new Event('change', { bubbles: true })); {% endcomment %}
+          console.log('selectedVariant.id', selectedVariant.id)
+          variantInput.dispatchEvent(new Event('change', { bubbles: true }));
         }
       }
       
