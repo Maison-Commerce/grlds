@@ -1515,6 +1515,7 @@
       // Update room info
       const roomInfoEl = productInfo.querySelector('#room-info-{{ section.id }}');
       console.log('roomInfoEl', roomInfoEl)
+      console.log('selectedVariant.metafields', selectedVariant.metafields)
       if (roomInfoEl && selectedVariant.metafields && selectedVariant.metafields.custom && selectedVariant.metafields.custom.size_additional_description) {
         console.log('roomInfoEl metafield', selectedVariant.metafields.custom.size_additional_description)
         roomInfoEl.textContent = selectedVariant.metafields.custom.size_additional_description;
