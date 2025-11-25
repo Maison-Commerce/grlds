@@ -1,0 +1,1080 @@
+{% schema %}
+{
+  "name": "Maison Main Product",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product Gallery Settings"
+    },
+    {
+      "type": "select",
+      "id": "gallery_layout",
+      "label": "Gallery Layout",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Grid (2x2)"
+        },
+        {
+          "value": "slider",
+          "label": "Slider"
+        }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show Limited Edition Badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "LIMITED EDITION"
+    },
+    {
+      "type": "header",
+      "content": "Product Information"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show Rating",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating Text",
+      "default": "4.8 / 5 (3,200 reviews)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shipping_info",
+      "label": "Show Shipping Info",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shipping_text",
+      "label": "Shipping Text",
+      "default": "Order before 14:00 → Ships Today"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Add to Cart Button Text",
+      "default": "Add to Bag"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show Payment Icons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_benefits",
+      "label": "Show Benefits",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "promo_text",
+      "label": "Promotional Text",
+      "default": "2 free samples of your choice with every order"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Ingredients"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Maison Main Product"
+    }
+  ]
+}
+{% endschema %}
+
+<product-info
+  id="MainProduct-{{ section.id }}"
+  data-section="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-update-url="true"
+  data-url="{{ product.url }}"
+  data-product-json="{{ product | json | escape }}"
+>
+  {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+  {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+  {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+  {{ 'component-rating.css' | asset_url | stylesheet_tag }}
+  {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+
+  {% unless product.has_only_default_variant %}
+    {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
+    {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
+    {{ 'component-swatch.css' | asset_url | stylesheet_tag }}
+  {% endunless %}
+
+  <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+  {%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    @media screen and (min-width: 991px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_desktop }}px;
+        padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+      }
+    }
+  {%- endstyle -%}
+
+  <div class="maison_commerce_maison_main_product section-{{ section.id }}-padding">
+    <div class="maison_commerce_maison_main_product__container">
+      <div class="maison_commerce_maison_main_product__wrapper">
+        <!-- Product Gallery -->
+        <div class="maison_commerce_maison_main_product__gallery">
+          {% if section.settings.gallery_layout == 'grid' %}
+            <!-- Desktop Grid Layout -->
+            <div class="maison_commerce_maison_main_product__gallery-grid">
+              {% for media in product.media limit: 4 %}
+                <div class="maison_commerce_maison_main_product__gallery-item">
+                  {% if forloop.first and section.settings.show_badge %}
+                    <div class="maison_commerce_maison_main_product__badge">
+                      {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
+                    </div>
+                  {% endif %}
+                  {% render 'product-media', media: media %}
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <!-- Mobile Slider Layout -->
+            <div class="maison_commerce_maison_main_product__gallery-slider slider slider--mobile">
+              {% for media in product.media %}
+                <div class="maison_commerce_maison_main_product__gallery-slide slider__slide">
+                  {% if forloop.first and section.settings.show_badge %}
+                    <div class="maison_commerce_maison_main_product__badge">
+                      {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
+                    </div>
+                  {% endif %}
+                  {% render 'product-media', media: media %}
+                </div>
+              {% endfor %}
+            </div>
+            <!-- Slider Dots -->
+            <div class="maison_commerce_maison_main_product__gallery-dots">
+              {% for media in product.media %}
+                <div class="maison_commerce_maison_main_product__gallery-dot{% if forloop.first %} active{% endif %}"></div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Product Information -->
+        <div class="maison_commerce_maison_main_product__info">
+          {%- assign product_form_id = 'product-form-' | append: section.id -%}
+
+          <!-- Rating -->
+          {% if section.settings.show_rating %}
+            <div class="maison_commerce_maison_main_product__rating">
+              <div class="maison_commerce_maison_main_product__stars">
+                {% for i in (1..5) %}
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 0L9.79811 5.52786H15.6085L10.9052 8.94427L12.7033 14.4721L8 11.0557L3.29667 14.4721L5.09478 8.94427L0.391548 5.52786H6.20189L8 0Z" fill="#1A1A1A"/>
+                  </svg>
+                {% endfor %}
+              </div>
+              <span class="maison_commerce_maison_main_product__rating-text">
+                {{ section.settings.rating_text | default: '4.8 / 5 (3,200 reviews)' }}
+              </span>
+            </div>
+          {% endif %}
+
+          <!-- Product Title -->
+          <h1 class="maison_commerce_maison_main_product__title">
+            {{ product.title }}
+          </h1>
+
+          <!-- Product Description -->
+          {% if product.description != blank %}
+            <div class="maison_commerce_maison_main_product__description">
+              {{ product.description }}
+            </div>
+          {% endif %}
+
+          <!-- Price -->
+          <div class="maison_commerce_maison_main_product__price">
+            {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+          </div>
+
+          <!-- Variant Picker: Size -->
+          {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
+              {% if option.name == 'Size' or option.name == 'SIZE' %}
+                <div class="maison_commerce_maison_main_product__variant">
+                  <div class="maison_commerce_maison_main_product__variant-header">
+                    <span class="maison_commerce_maison_main_product__variant-label">SIZE:</span>
+                    <span class="maison_commerce_maison_main_product__variant-value" id="selected-size-{{ section.id }}">
+                      {{ option.selected_value }}
+                    </span>
+                  </div>
+                  <div class="maison_commerce_maison_main_product__variant-thumbnails">
+                    {% for value in option.values %}
+                      <button
+                        type="button"
+                        class="maison_commerce_maison_main_product__variant-thumbnail{% if value == option.selected_value %} active{% endif %}"
+                        data-value="{{ value }}"
+                        data-option-position="{{ option.position }}"
+                        aria-label="{{ value }}"
+                      >
+                        {% assign variant = product.variants | where: 'option1', value | first %}
+                        {% if variant.featured_image %}
+                          {{
+                            variant.featured_image
+                            | image_url: width: 128
+                            | image_tag: loading: 'lazy', alt: value
+                          }}
+                        {% else %}
+                          {{
+                            product.featured_image
+                            | image_url: width: 128
+                            | image_tag: loading: 'lazy', alt: value
+                          }}
+                        {% endif %}
+                      </button>
+                    {% endfor %}
+                  </div>
+                  {% if option.name == 'Size' %}
+                    <div class="maison_commerce_maison_main_product__room-info">
+                      Ideal for rooms < 30 m²
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
+
+            <!-- Variant Picker: Smell/Stone Type -->
+            {% for option in product.options_with_values %}
+              {% if option.name == 'Smell' or option.name == 'SMELL' or option.name == 'Stone Type' or option.name == 'STONE TYPE' %}
+                <div class="maison_commerce_maison_main_product__variant">
+                  <div class="maison_commerce_maison_main_product__variant-label">
+                    {{ option.name | upcase }}:
+                  </div>
+                  <div class="maison_commerce_maison_main_product__variant-options">
+                    {% for value in option.values %}
+                      <button
+                        type="button"
+                        class="maison_commerce_maison_main_product__variant-option{% if value == option.selected_value %} active{% endif %}"
+                        data-value="{{ value }}"
+                        data-option-position="{{ option.position }}"
+                      >
+                        {{ value | upcase }}
+                      </button>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+
+            <!-- Hidden Variant Picker Form -->
+            <div class="maison_commerce_maison_main_product__variant-picker-hidden">
+              {% render 'product-variant-picker', product: product, block: section.blocks.first, product_form_id: product_form_id %}
+            </div>
+          {% endunless %}
+
+          <!-- Shipping Info -->
+          {% if section.settings.show_shipping_info %}
+            <div class="maison_commerce_maison_main_product__shipping">
+              {{ section.settings.shipping_text | default: 'Order before 14:00 → Ships Today' }}
+            </div>
+          {% endif %}
+
+          <!-- Add to Cart Form -->
+          {%- form 'product', product, id: product_form_id, class: 'maison_commerce_maison_main_product__form' -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            
+            <button
+              type="submit"
+              name="add"
+              class="maison_commerce_maison_main_product__button"
+              {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+            >
+              <span class="maison_commerce_maison_main_product__button-text">
+                {{ section.settings.button_text | default: 'Add to Bag' | upcase }}
+              </span>
+              <span class="maison_commerce_maison_main_product__button-separator">·</span>
+              <span class="maison_commerce_maison_main_product__button-price" id="button-price-{{ section.id }}">
+                {{ product.selected_or_first_available_variant.price | money }}
+              </span>
+            </button>
+          {%- endform -%}
+
+          <!-- Payment Icons -->
+          {% if section.settings.show_payment_icons %}
+            <div class="maison_commerce_maison_main_product__payment-icons">
+              {% comment %} Payment icons would be rendered here {% endcomment %}
+            </div>
+          {% endif %}
+
+          <!-- Benefits -->
+          {% if section.settings.show_benefits %}
+            <div class="maison_commerce_maison_main_product__benefits">
+              <div class="maison_commerce_maison_main_product__benefit">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0L10 5H15L11 8L13 13L8 10L3 13L5 8L1 5H6L8 0Z" fill="currentColor"/>
+                </svg>
+                <span>Signature Gift Wrap</span>
+              </div>
+              <div class="maison_commerce_maison_main_product__benefit-divider"></div>
+              <div class="maison_commerce_maison_main_product__benefit">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 2L14 2L14 14L2 14L2 2Z" stroke="currentColor" stroke-width="1.25"/>
+                  <path d="M2 6L14 6" stroke="currentColor" stroke-width="1.25"/>
+                </svg>
+                <span>Free Returns</span>
+              </div>
+              <div class="maison_commerce_maison_main_product__benefit-divider"></div>
+              <div class="maison_commerce_maison_main_product__benefit">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 2L10 6L14 7L10 8L8 12L6 8L2 7L6 6L8 2Z" fill="currentColor"/>
+                </svg>
+                <span>Carbon-Neutral</span>
+              </div>
+            </div>
+          {% endif %}
+
+          <!-- Accordions -->
+          {% if section.blocks.size > 0 %}
+            <div class="maison_commerce_maison_main_product__accordions">
+              {% for block in section.blocks %}
+                {% if block.type == 'accordion' %}
+                  <div class="maison_commerce_maison_main_product__accordion" {{ block.shopify_attributes }}>
+                    <details>
+                      <summary class="maison_commerce_maison_main_product__accordion-header">
+                        <span>{{ block.settings.title }}</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8 2V14M2 8H14" stroke="currentColor" stroke-width="1.25"/>
+                        </svg>
+                      </summary>
+                      <div class="maison_commerce_maison_main_product__accordion-content">
+                        {{ block.settings.content }}
+                      </div>
+                    </details>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <!-- Promotional Message -->
+          {% if section.settings.promo_text != blank %}
+            <div class="maison_commerce_maison_main_product__promo">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 0L8.5 5H14L9.5 7L11 12L7 9L3 12L4.5 7L0 5H5.5L7 0Z" fill="currentColor"/>
+              </svg>
+              <span>{{ section.settings.promo_text }}</span>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</product-info>
+
+<style>
+  .maison_commerce_maison_main_product {
+    background-color: #ffffff;
+  }
+
+  .maison_commerce_maison_main_product__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__container {
+      padding: 0 18px;
+    }
+  }
+
+  .maison_commerce_maison_main_product__wrapper {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__wrapper {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  /* Gallery */
+  .maison_commerce_maison_main_product__gallery {
+    flex: 0 0 840px;
+    position: sticky;
+    top: 0;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__gallery {
+      flex: 1;
+      width: 100%;
+      position: relative;
+    }
+  }
+
+  .maison_commerce_maison_main_product__gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__gallery-grid {
+      display: none;
+    }
+  }
+
+  .maison_commerce_maison_main_product__gallery-item {
+    position: relative;
+    width: 410px;
+    height: 410px;
+    overflow: hidden;
+    border-radius: 0;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__gallery-item {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1;
+    }
+  }
+
+  .maison_commerce_maison_main_product__gallery-slider {
+    display: none;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__gallery-slider {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  .maison_commerce_maison_main_product__gallery-slide {
+    flex: 0 0 320px;
+    scroll-snap-align: start;
+    position: relative;
+  }
+
+  .maison_commerce_maison_main_product__badge {
+    position: absolute;
+    top: 12px;
+    left: 13px;
+    background: white;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(26, 26, 26, 0.75);
+    z-index: 1;
+  }
+
+  .maison_commerce_maison_main_product__gallery-dots {
+    display: none;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__gallery-dots {
+      display: flex;
+      gap: 7.1px;
+      justify-content: center;
+      padding: 8px 0;
+    }
+  }
+
+  .maison_commerce_maison_main_product__gallery-dot {
+    width: 24px;
+    height: 4px;
+    border-radius: 90px;
+    background-color: #e6e6e6;
+    transition: background-color 0.3s ease;
+  }
+
+  .maison_commerce_maison_main_product__gallery-dot.active {
+    width: 32px;
+    background-color: #2d2d2d;
+  }
+
+  /* Product Info */
+  .maison_commerce_maison_main_product__info {
+    flex: 1;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__info {
+      max-width: 100%;
+      gap: 18px;
+    }
+  }
+
+  /* Rating */
+  .maison_commerce_maison_main_product__rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .maison_commerce_maison_main_product__stars {
+    display: flex;
+    gap: 0;
+  }
+
+  .maison_commerce_maison_main_product__rating-text {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #1a1a1a;
+  }
+
+  /* Title */
+  .maison_commerce_maison_main_product__title {
+    font-family: 'Dangmen', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__title {
+      font-size: 24px;
+      line-height: 1.4;
+    }
+  }
+
+  /* Description */
+  .maison_commerce_maison_main_product__description {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(26, 26, 26, 0.75);
+  }
+
+  .maison_commerce_maison_main_product__description p {
+    margin: 0;
+  }
+
+  /* Price */
+  .maison_commerce_maison_main_product__price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Variant Picker */
+  .maison_commerce_maison_main_product__variant {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .maison_commerce_maison_main_product__variant-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .maison_commerce_maison_main_product__variant-label {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: rgba(26, 26, 26, 0.5);
+    text-transform: uppercase;
+  }
+
+  .maison_commerce_maison_main_product__variant-value {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #1a1a1a;
+    text-transform: uppercase;
+  }
+
+  .maison_commerce_maison_main_product__variant-thumbnails {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .maison_commerce_maison_main_product__variant-thumbnail {
+    width: 64px;
+    height: 64px;
+    border: 1.5px solid transparent;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 0;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__variant-thumbnail {
+      width: 60px;
+      height: 60px;
+      border-width: 1.406px;
+    }
+  }
+
+  .maison_commerce_maison_main_product__variant-thumbnail.active {
+    border-color: #2d2d2d;
+  }
+
+  .maison_commerce_maison_main_product__variant-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .maison_commerce_maison_main_product__room-info {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #8b8b8b;
+    text-align: right;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__room-info {
+      font-size: 10px;
+    }
+  }
+
+  .maison_commerce_maison_main_product__variant-options {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .maison_commerce_maison_main_product__variant-option {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: white;
+    padding: 8px 22px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__variant-option {
+      font-size: 10px;
+    }
+  }
+
+  .maison_commerce_maison_main_product__variant-option:hover {
+    border-color: #1a1a1a;
+  }
+
+  .maison_commerce_maison_main_product__variant-option.active {
+    border-color: #1a1a1a;
+  }
+
+  .maison_commerce_maison_main_product__variant-picker-hidden {
+    display: none;
+  }
+
+  /* Shipping */
+  .maison_commerce_maison_main_product__shipping {
+    background: rgba(235, 234, 232, 0.4);
+    padding: 4px 16px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(26, 26, 26, 0.75);
+    text-align: center;
+  }
+
+  .maison_commerce_maison_main_product__shipping a {
+    color: #1a1a1a;
+    text-decoration: underline;
+  }
+
+  /* Form */
+  .maison_commerce_maison_main_product__form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Button */
+  .maison_commerce_maison_main_product__button {
+    background-color: #090909;
+    color: #fdfcfc;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-transform: uppercase;
+    border: none;
+    padding: 16px 32px;
+    height: 56px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    font-family: 'Celex Grotesk', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__button {
+      height: 44px;
+      padding: 12px 24px;
+      gap: 8px;
+    }
+  }
+
+  .maison_commerce_maison_main_product__button:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+
+  .maison_commerce_maison_main_product__button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .maison_commerce_maison_main_product__button-separator {
+    color: #434343;
+    font-size: 16px;
+  }
+
+  .maison_commerce_maison_main_product__button-price {
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__button-price {
+      font-size: 14px;
+    }
+  }
+
+  /* Payment Icons */
+  .maison_commerce_maison_main_product__payment-icons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* Benefits */
+  .maison_commerce_maison_main_product__benefits {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    gap: 8px;
+  }
+
+  .maison_commerce_maison_main_product__benefit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(26, 26, 26, 0.75);
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__benefit {
+      font-size: 10px;
+    }
+  }
+
+  .maison_commerce_maison_main_product__benefit svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .maison_commerce_maison_main_product__benefit-divider {
+    width: 0;
+    height: 10px;
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  /* Accordions */
+  .maison_commerce_maison_main_product__accordions {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .maison_commerce_maison_main_product__accordion {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .maison_commerce_maison_main_product__accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+    cursor: pointer;
+    list-style: none;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #1a1a1a;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__accordion-header {
+      padding: 12px 0;
+      font-size: 12px;
+    }
+  }
+
+  .maison_commerce_maison_main_product__accordion-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .maison_commerce_maison_main_product__accordion-header svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  details[open] .maison_commerce_maison_main_product__accordion-header svg {
+    transform: rotate(45deg);
+  }
+
+  .maison_commerce_maison_main_product__accordion-content {
+    padding-bottom: 18px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #1a1a1a;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__accordion-content {
+      padding-bottom: 12px;
+      font-size: 12px;
+    }
+  }
+
+  /* Promo */
+  .maison_commerce_maison_main_product__promo {
+    background: #fafafa;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(26, 26, 26, 0.75);
+  }
+
+  .maison_commerce_maison_main_product__promo svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const productInfo = document.querySelector('#MainProduct-{{ section.id }}');
+    if (!productInfo) return;
+
+    const productData = JSON.parse(productInfo.dataset.productJson);
+
+    // Handle variant thumbnail clicks
+    const thumbnails = productInfo.querySelectorAll('.maison_commerce_maison_main_product__variant-thumbnail');
+    thumbnails.forEach(thumbnail => {
+      thumbnail.addEventListener('click', function() {
+        const value = this.dataset.value;
+        const optionPosition = parseInt(this.dataset.optionPosition);
+        
+        // Update active state
+        thumbnails.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Update selected value display
+        const selectedValueEl = productInfo.querySelector('#selected-size-{{ section.id }}');
+        if (selectedValueEl) {
+          selectedValueEl.textContent = value;
+        }
+        
+        // Trigger variant change via hidden form
+        const variantInputs = productInfo.querySelectorAll(`input[name="options[${optionPosition}]"]`);
+        variantInputs.forEach(input => {
+          if (input.value === value) {
+            input.checked = true;
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        });
+      });
+    });
+
+    // Handle variant option clicks
+    const options = productInfo.querySelectorAll('.maison_commerce_maison_main_product__variant-option');
+    options.forEach(option => {
+      option.addEventListener('click', function() {
+        const value = this.dataset.value;
+        const optionPosition = parseInt(this.dataset.optionPosition);
+        
+        // Update active state
+        const sameGroup = productInfo.querySelectorAll(`[data-option-position="${optionPosition}"].maison_commerce_maison_main_product__variant-option`);
+        sameGroup.forEach(o => o.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Trigger variant change via hidden form
+        const variantInputs = productInfo.querySelectorAll(`input[name="options[${optionPosition}]"]`);
+        variantInputs.forEach(input => {
+          if (input.value === value) {
+            input.checked = true;
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        });
+      });
+    });
+
+    // Update button price on variant change
+    productInfo.addEventListener('change', function(e) {
+      if (e.target.name === 'id' || e.target.name && e.target.name.startsWith('options[')) {
+        // Find selected variant
+        const form = productInfo.querySelector('#product-form-{{ section.id }}');
+        if (!form) return;
+        
+        const formData = new FormData(form);
+        const selectedOptions = {};
+        
+        // Get all selected options
+        form.querySelectorAll('input[name^="options["]:checked').forEach(input => {
+          const match = input.name.match(/options\[(\d+)\]/);
+          if (match) {
+            selectedOptions[parseInt(match[1])] = input.value;
+          }
+        });
+        
+        // Find matching variant
+        const variant = productData.variants.find(v => {
+          return v.option1 === selectedOptions[1] && 
+                 (!selectedOptions[2] || v.option2 === selectedOptions[2]) &&
+                 (!selectedOptions[3] || v.option3 === selectedOptions[3]);
+        });
+        
+        if (variant) {
+          const priceEl = productInfo.querySelector('#button-price-{{ section.id }}');
+          if (priceEl) {
+            priceEl.textContent = new Intl.NumberFormat('{{ localization.country.currency.iso_code }}', {
+              style: 'currency',
+              currency: '{{ cart.currency.iso_code }}',
+              minimumFractionDigits: 0
+            }).format(variant.price / 100);
+          }
+          
+          // Update hidden variant input
+          const variantInput = form.querySelector('input[name="id"]');
+          if (variantInput) {
+            variantInput.value = variant.id;
+          }
+        }
+      }
+    });
+  });
+</script>
+
