@@ -1418,7 +1418,7 @@
       if (typeof window.Shopify !== 'undefined' && window.Shopify.formatMoney) {
         // Use Shopify's formatMoney if available
         let formatted = window.Shopify.formatMoney(cents, moneyFormat);
-        if (!withCurrency) {
+        if (withCurrency) {
           formatted = formatted.replace('.00', '');
         }
         return formatted;
