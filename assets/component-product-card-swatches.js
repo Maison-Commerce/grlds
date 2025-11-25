@@ -47,9 +47,9 @@ class ProductCardSwatches {
 }
 
 // Initialize on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-  new ProductCardSwatches();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//   new ProductCardSwatches();
+// });
 
 // Initialize on Shopify section load
 document.addEventListener('shopify:section:load', () => {
