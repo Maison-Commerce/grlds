@@ -316,6 +316,7 @@
         "trust_feature_xnRc3U",
         "lumin_cross_sells_PdKwRH"
       ],
+      "disabled": true,
       "settings": {
         "enable_sticky_info": true,
         "no_scroll": false,
