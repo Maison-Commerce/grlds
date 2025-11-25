@@ -75,18 +75,6 @@
       "default": true
     },
     {
-      "type": "checkbox",
-      "id": "show_benefits",
-      "label": "Show Benefits",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "promo_text",
-      "label": "Promotional Text",
-      "default": "2 free samples of your choice with every order"
-    },
-    {
       "type": "header",
       "content": "Spacing"
     },
@@ -146,6 +134,42 @@
           "type": "richtext",
           "id": "content",
           "label": "Content"
+        }
+      ]
+    },
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "html",
+          "id": "icon",
+          "label": "Icon SVG",
+          "info": "Paste SVG code for the icon"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Signature Gift Wrap"
+        }
+      ]
+    },
+    {
+      "type": "promo",
+      "name": "Promotional Message",
+      "settings": [
+        {
+          "type": "html",
+          "id": "icon",
+          "label": "Icon SVG",
+          "info": "Paste SVG code for the icon"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "2 free samples of your choice with every order"
         }
       ]
     }
@@ -215,27 +239,27 @@
                 </div>
               {% endfor %}
             </div>
-          {% else %}
-            <!-- Mobile Slider Layout -->
-            <div class="maison_commerce_maison_main_product__gallery-slider slider slider--mobile">
-              {% for media in product.media %}
-                <div class="maison_commerce_maison_main_product__gallery-slide slider__slide">
-                  {% if forloop.first and section.settings.show_badge %}
-                    <div class="maison_commerce_maison_main_product__badge">
-                      {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
-                    </div>
-                  {% endif %}
-                  {% render 'product-media', media: media %}
-                </div>
-              {% endfor %}
-            </div>
-            <!-- Slider Dots -->
-            <div class="maison_commerce_maison_main_product__gallery-dots">
-              {% for media in product.media %}
-                <div class="maison_commerce_maison_main_product__gallery-dot{% if forloop.first %} active{% endif %}"></div>
-              {% endfor %}
-            </div>
           {% endif %}
+          
+          <!-- Mobile Slider Layout -->
+          <div class="maison_commerce_maison_main_product__gallery-slider slider slider--mobile">
+            {% for media in product.media %}
+              <div class="maison_commerce_maison_main_product__gallery-slide slider__slide">
+                {% if forloop.first and section.settings.show_badge %}
+                  <div class="maison_commerce_maison_main_product__badge">
+                    {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
+                  </div>
+                {% endif %}
+                {% render 'product-media', media: media %}
+              </div>
+            {% endfor %}
+          </div>
+          <!-- Slider Dots -->
+          <div class="maison_commerce_maison_main_product__gallery-dots">
+            {% for media in product.media %}
+              <div class="maison_commerce_maison_main_product__gallery-dot{% if forloop.first %} active{% endif %}"></div>
+            {% endfor %}
+          </div>
         </div>
 
         <!-- Product Information -->
@@ -288,11 +312,11 @@
                         </span>
                     </div>
                     {% if option.name == 'Size' %}
-                        <div class="maison_commerce_maison_main_product__room-info">
-                         <script>
-                            console.log('product', {{ product| json }})
-                            console.log('option', {{ option | json }})
-                         </script>
+                        <div class="maison_commerce_maison_main_product__room-info" id="room-info-{{ section.id }}">
+                          {% assign selected_variant = product.selected_or_first_available_variant %}
+                          {% if selected_variant.metafields.custom.size_additional_description != blank %}
+                            {{ selected_variant.metafields.custom.size_additional_description }}
+                          {% endif %}
                         </div>
                     {% endif %}
                   </div>
@@ -350,8 +374,40 @@
             {% endfor %}
 
             <!-- Hidden Variant Picker Form -->
-            <div class="maison_commerce_maison_main_product__variant-picker-hidden">
-              {% render 'product-variant-picker', product: product, block: section.blocks.first, product_form_id: product_form_id %}
+            <div class="maison_commerce_maison_main_product__variant-picker-hidden" style="display: none;">
+              {%- comment -%} Create variant-selects element directly {%- endcomment -%}
+              <variant-selects
+                id="variant-selects-{{ section.id }}"
+                data-section="{{ section.id }}"
+              >
+                {%- for option in product.options_with_values -%}
+                  <fieldset class="js product-form__input product-form__input--pill">
+                    {%- for value in option.values -%}
+                      {%- liquid
+                        assign option_disabled = true
+                        if value.available
+                          assign option_disabled = false
+                        endif
+                      -%}
+                      <input
+                        type="radio"
+                        id="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                        name="options[{{ option.position }}]"
+                        value="{{ value }}"
+                        form="{{ product_form_id }}"
+                        {% if value == option.selected_value %}checked{% endif %}
+                        {% if option_disabled %}disabled{% endif %}
+                      >
+                      <label for="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                        {{ value }}
+                      </label>
+                    {%- endfor -%}
+                  </fieldset>
+                {%- endfor -%}
+                <script type="application/json" data-selected-variant>
+                  {{ product.selected_or_first_available_variant | json }}
+                </script>
+              </variant-selects>
             </div>
           {% endunless %}
 
@@ -392,40 +448,22 @@
           {% endif %}
 
           <!-- Benefits -->
-          {% if section.settings.show_benefits %}
+          {% assign benefit_blocks = section.blocks | where: 'type', 'benefit' %}
+          {% if benefit_blocks.size > 0 %}
             <div class="maison_commerce_maison_main_product__benefits">
-              <div class="maison_commerce_maison_main_product__benefit">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <g clip-path="url(#clip0_6042_2290)">
-                    <path d="M7.99999 14.6666V4.66659M7.99999 4.66659C7.11111 2.44436 5.99999 1.33325 4.66666 1.33325C4.22463 1.33325 3.80071 1.50885 3.48815 1.82141C3.17559 2.13397 2.99999 2.55789 2.99999 2.99992C2.99999 3.44195 3.17559 3.86587 3.48815 4.17843C3.80071 4.49099 4.22463 4.66659 4.66666 4.66659M7.99999 4.66659C8.88888 2.44436 9.99999 1.33325 11.3333 1.33325C11.7754 1.33325 12.1993 1.50885 12.5118 1.82141C12.8244 2.13397 13 2.55789 13 2.99992C13 3.44195 12.8244 3.86587 12.5118 4.17843C12.1993 4.49099 11.7754 4.66659 11.3333 4.66659M2.66666 7.99992V14.6666H13.3333V7.99992M14.6667 4.66659V7.99992H1.33333V4.66659H14.6667Z" stroke="#1A1A1A" stroke-width="1.25"/>
-                </g>
-                <defs>
-                    <clipPath id="clip0_6042_2290">
-                    <rect width="16" height="16" fill="white"/>
-                    </clipPath>
-                </defs>
-                </svg>
-                <span>Signature Gift Wrap</span>
-              </div>
-              <div class="maison_commerce_maison_main_product__benefit-divider"></div>
-              <div class="maison_commerce_maison_main_product__benefit">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M4.08167 6.9342H7.73713C8.72531 6.9342 9.52638 7.73527 9.52638 8.72345C9.52638 9.71158 8.72531 10.5126 7.73713 10.5126H4.16767" stroke="#1A1A1A" stroke-width="1.09375"/>
-                <path d="M5.92837 5.07446L4.06866 6.93419L5.92837 8.79388" stroke="#1A1A1A" stroke-width="1.09375"/>
-                <path d="M6.79688 0.546875V3.67188" stroke="#1A1A1A" stroke-width="1.09375"/>
-                <path d="M6.79688 13.0469H0.546875V2.95817L2.73438 0.546875H10.8594L13.0469 2.95817V13.0469H6.79688Z" stroke="#1A1A1A" stroke-width="1.09375"/>
-                <path d="M0.546875 3.64929H13.0469" stroke="#1A1A1A" stroke-width="1.09375"/>
-                </svg>
-                <span>Free Returns</span>
-              </div>
-              <div class="maison_commerce_maison_main_product__benefit-divider"></div>
-              <div class="maison_commerce_maison_main_product__benefit">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2.7753 10.2916C3.8823 10.9444 5.17847 11.201 6.45066 11.0193C7.72287 10.8375 8.89535 10.2283 9.77528 9.29164C12.4419 6.62498 12.4419 0.625 12.4419 0.625C12.4419 0.625 6.44196 0.625 3.7753 3.29166C2.8387 4.1716 2.22942 5.34408 2.04768 6.61628C1.86594 7.88848 2.12254 9.18464 2.7753 10.2916Z" stroke="#1A1A1A" stroke-width="1.25"/>
-                <path d="M0.441956 12.6251L7.77527 5.29175" stroke="#1A1A1A" stroke-width="1.25"/>
-                </svg>
-                <span>Carbon-Neutral</span>
-              </div>
+              {% for block in benefit_blocks %}
+                {% if forloop.index > 1 %}
+                  <div class="maison_commerce_maison_main_product__benefit-divider"></div>
+                {% endif %}
+                <div class="maison_commerce_maison_main_product__benefit" {{ block.shopify_attributes }}>
+                  {% if block.settings.icon != blank %}
+                    <div class="maison_commerce_maison_main_product__benefit-icon">
+                      {{ block.settings.icon }}
+                    </div>
+                  {% endif %}
+                  <span>{{ block.settings.text }}</span>
+                </div>
+              {% endfor %}
             </div>
           {% endif %}
 
@@ -454,19 +492,19 @@
           {% endif %}
 
           <!-- Promotional Message -->
-          {% if section.settings.promo_text != blank %}
-            <div class="maison_commerce_maison_main_product__promo">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M5.4672 3.41984C5.4672 3.69133 5.35936 3.95169 5.16739 4.14366C4.97542 4.33563 4.71505 4.44348 4.44356 4.44348C4.17208 4.44348 3.91171 4.33563 3.71974 4.14366C3.52777 3.95169 3.41992 3.69133 3.41992 3.41984C3.41992 2.3962 4.44356 1.37256 4.44356 1.37256C4.44356 1.37256 5.4672 2.3962 5.4672 3.41984Z" stroke="#1A1A1A" stroke-width="1.09375"/>
-                <path d="M4.44357 4.4436V5.97639" stroke="#1A1A1A" stroke-width="1.09375"/>
-                <path d="M1.88179 5.97632H6.99999V12.6273H1.88179V5.97632Z" stroke="#1A1A1A" stroke-width="1.09375"/>
-                <path d="M10.5801 5.4672C10.5801 5.73869 10.4722 5.99906 10.2802 6.19103C10.0883 6.383 9.8279 6.49084 9.55642 6.49084C9.28493 6.49084 9.02456 6.383 8.83259 6.19103C8.64062 5.99906 8.53278 5.73869 8.53278 5.4672C8.53278 4.44356 9.55642 3.41992 9.55642 3.41992C9.55642 3.41992 10.5801 4.44356 10.5801 5.4672Z" stroke="#1A1A1A" stroke-width="1.09375"/>
-                <path d="M9.55643 6.49097V8.02375" stroke="#1A1A1A" stroke-width="1.09375"/>
-                <path d="M7 8.02368H12.1182V12.6274H7V8.02368Z" stroke="#1A1A1A" stroke-width="1.09375"/>
-                </svg>
-                <span>{{ section.settings.promo_text }}</span>
-            </div>
-          {% endif %}
+          {% assign promo_blocks = section.blocks | where: 'type', 'promo' %}
+          {% for block in promo_blocks %}
+            {% if block.settings.text != blank %}
+              <div class="maison_commerce_maison_main_product__promo" {{ block.shopify_attributes }}>
+                {% if block.settings.icon != blank %}
+                  <div class="maison_commerce_maison_main_product__promo-icon">
+                    {{ block.settings.icon }}
+                  </div>
+                {% endif %}
+                <span>{{ block.settings.text }}</span>
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -562,6 +600,12 @@
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    
+    .maison_commerce_maison_main_product__gallery-slider::-webkit-scrollbar {
+      display: none;
     }
   }
 
@@ -594,6 +638,10 @@
       gap: 7.1px;
       justify-content: center;
       padding: 8px 0;
+    }
+    
+    .maison_commerce_maison_main_product__gallery-grid {
+      display: none;
     }
   }
 
@@ -914,10 +962,18 @@
     }
   }
 
-  .maison_commerce_maison_main_product__benefit svg {
+  .maison_commerce_maison_main_product__benefit-icon {
     width: 16px;
     height: 16px;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .maison_commerce_maison_main_product__benefit-icon svg {
+    width: 100%;
+    height: 100%;
   }
 
   .maison_commerce_maison_main_product__benefit-divider {
@@ -1002,10 +1058,18 @@
     color: rgba(26, 26, 26, 0.75);
   }
 
-  .maison_commerce_maison_main_product__promo svg {
+  .maison_commerce_maison_main_product__promo-icon {
     width: 14px;
     height: 14px;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .maison_commerce_maison_main_product__promo-icon svg {
+    width: 100%;
+    height: 100%;
   }
 </style>
 
@@ -1024,7 +1088,8 @@
         const optionPosition = parseInt(this.dataset.optionPosition);
         
         // Update active state
-        thumbnails.forEach(t => t.classList.remove('active'));
+        const sameOptionGroup = productInfo.querySelectorAll(`[data-option-position="${optionPosition}"].maison_commerce_maison_main_product__variant-thumbnail`);
+        sameOptionGroup.forEach(t => t.classList.remove('active'));
         this.classList.add('active');
         
         // Update selected value display
@@ -1033,14 +1098,15 @@
           selectedValueEl.textContent = value;
         }
         
-        // Trigger variant change via hidden form
-        const variantInputs = productInfo.querySelectorAll(`input[name="options[${optionPosition}]"]`);
-        variantInputs.forEach(input => {
-          if (input.value === value) {
-            input.checked = true;
-            input.dispatchEvent(new Event('change', { bubbles: true }));
+        // Find and trigger the variant-selects component
+        const variantSelects = productInfo.querySelector('variant-selects');
+        if (variantSelects) {
+          const optionInput = variantSelects.querySelector(`input[name="options[${optionPosition}]"][value="${value}"]`);
+          if (optionInput) {
+            optionInput.checked = true;
+            optionInput.dispatchEvent(new Event('change', { bubbles: true }));
           }
-        });
+        }
       });
     });
 
@@ -1056,60 +1122,95 @@
         sameGroup.forEach(o => o.classList.remove('active'));
         this.classList.add('active');
         
-        // Trigger variant change via hidden form
-        const variantInputs = productInfo.querySelectorAll(`input[name="options[${optionPosition}]"]`);
-        variantInputs.forEach(input => {
-          if (input.value === value) {
-            input.checked = true;
-            input.dispatchEvent(new Event('change', { bubbles: true }));
-          }
-        });
-      });
-    });
-
-    // Update button price on variant change
-    productInfo.addEventListener('change', function(e) {
-      if (e.target.name === 'id' || e.target.name && e.target.name.startsWith('options[')) {
-        // Find selected variant
-        const form = productInfo.querySelector('#product-form-{{ section.id }}');
-        if (!form) return;
-        
-        const formData = new FormData(form);
-        const selectedOptions = {};
-        
-        // Get all selected options
-        form.querySelectorAll('input[name^="options["]:checked').forEach(input => {
-          const match = input.name.match(/options\[(\d+)\]/);
-          if (match) {
-            selectedOptions[parseInt(match[1])] = input.value;
-          }
-        });
-        
-        // Find matching variant
-        const variant = productData.variants.find(v => {
-          return v.option1 === selectedOptions[1] && 
-                 (!selectedOptions[2] || v.option2 === selectedOptions[2]) &&
-                 (!selectedOptions[3] || v.option3 === selectedOptions[3]);
-        });
-        
-        if (variant) {
-          const priceEl = productInfo.querySelector('#button-price-{{ section.id }}');
-          if (priceEl) {
-            priceEl.textContent = new Intl.NumberFormat('{{ localization.country.currency.iso_code }}', {
-              style: 'currency',
-              currency: '{{ cart.currency.iso_code }}',
-              minimumFractionDigits: 0
-            }).format(variant.price / 100);
-          }
-          
-          // Update hidden variant input
-          const variantInput = form.querySelector('input[name="id"]');
-          if (variantInput) {
-            variantInput.value = variant.id;
+        // Find and trigger the variant-selects component
+        const variantSelects = productInfo.querySelector('variant-selects');
+        if (variantSelects) {
+          const optionInput = variantSelects.querySelector(`input[name="options[${optionPosition}]"][value="${value}"]`);
+          if (optionInput) {
+            optionInput.checked = true;
+            optionInput.dispatchEvent(new Event('change', { bubbles: true }));
           }
         }
+      });
+    });
+    
+    // Update room info and UI when variant changes
+    productInfo.addEventListener('change', function(e) {
+      if (e.target.name && e.target.name.startsWith('options[')) {
+        // Wait a bit for variant-selects to update
+        setTimeout(() => {
+          const variantSelects = productInfo.querySelector('variant-selects');
+          if (variantSelects) {
+            const selectedVariantJson = variantSelects.querySelector('script[data-selected-variant]');
+            if (selectedVariantJson) {
+              try {
+                const selectedVariant = JSON.parse(selectedVariantJson.textContent);
+                
+                // Update room info
+                const roomInfoEl = productInfo.querySelector('#room-info-{{ section.id }}');
+                if (roomInfoEl && selectedVariant.metafields && selectedVariant.metafields.custom && selectedVariant.metafields.custom.size_additional_description) {
+                  roomInfoEl.textContent = selectedVariant.metafields.custom.size_additional_description;
+                }
+                
+                // Update form variant ID
+                const form = productInfo.querySelector('#product-form-{{ section.id }}');
+                if (form) {
+                  const variantInput = form.querySelector('input[name="id"]');
+                  if (variantInput) {
+                    variantInput.value = selectedVariant.id;
+                  }
+                }
+                
+                // Update button price
+                const priceEl = productInfo.querySelector('#button-price-{{ section.id }}');
+                if (priceEl && selectedVariant.price) {
+                  priceEl.textContent = new Intl.NumberFormat('{{ localization.country.currency.iso_code }}', {
+                    style: 'currency',
+                    currency: '{{ cart.currency.iso_code }}',
+                    minimumFractionDigits: 0
+                  }).format(selectedVariant.price / 100);
+                }
+              } catch (err) {
+                console.error('Error parsing variant data:', err);
+              }
+            }
+          }
+        }, 100);
       }
     });
+
+    // Initialize slider dots on mobile
+    if (window.innerWidth <= 990) {
+      const slider = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-slider');
+      const dots = productInfo.querySelectorAll('.maison_commerce_maison_main_product__gallery-dot');
+      
+      if (slider && dots.length > 0) {
+        slider.addEventListener('scroll', function() {
+          const scrollLeft = slider.scrollLeft;
+          const slideWidth = slider.querySelector('.maison_commerce_maison_main_product__gallery-slide').offsetWidth;
+          const currentIndex = Math.round(scrollLeft / slideWidth);
+          
+          dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          });
+        });
+        
+        // Make dots clickable
+        dots.forEach((dot, index) => {
+          dot.addEventListener('click', function() {
+            const slideWidth = slider.querySelector('.maison_commerce_maison_main_product__gallery-slide').offsetWidth;
+            slider.scrollTo({
+              left: slideWidth * index,
+              behavior: 'smooth'
+            });
+          });
+        });
+      }
+    }
   });
 </script>
 
