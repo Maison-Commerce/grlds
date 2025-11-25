@@ -1400,6 +1400,135 @@
     const variantMetafieldsScript = document.getElementById('variant-metafields-{{ section.id }}');
     const variantMetafields = variantMetafieldsScript ? JSON.parse(variantMetafieldsScript.textContent) : {};
 
+    // Store settings from Liquid
+    const currencyCodeEnabled = {{ settings.currency_code_enabled | default: false }};
+    const saleMessage = {{ settings.sale_message | json }};
+    const saleBadgeColorScheme = '{{ settings.sale_badge_color_scheme | default: "accent-1" }}';
+    const soldOutBadgeColorScheme = '{{ settings.sold_out_badge_color_scheme | default: "accent-1" }}';
+    const regularPriceText = '{{ "products.product.price.regular_price" | t }}';
+    const salePriceText = '{{ "products.product.price.sale_price" | t }}';
+    const onSaleText = '{{ "products.product.on_sale" | t }}';
+    const soldOutText = '{{ "products.product.sold_out" | t }}';
+    const moneyFormat = '{{ shop.money_format }}';
+    const currencyCode = '{{ cart.currency.iso_code }}';
+    const locale = '{{ request.locale.iso_code }}';
+
+    // Helper function to format money (matching Shopify's format)
+    function formatMoney(cents, withCurrency = false) {
+      if (typeof window.Shopify !== 'undefined' && window.Shopify.formatMoney) {
+        // Use Shopify's formatMoney if available
+        let formatted = window.Shopify.formatMoney(cents, moneyFormat);
+        if (!withCurrency) {
+          formatted = formatted.replace('.00', '');
+        }
+        return formatted;
+      }
+      
+      // Fallback to Intl.NumberFormat
+      const amount = cents / 100;
+      const options = {
+        style: 'currency',
+        currency: currencyCode,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+      };
+      
+      return new Intl.NumberFormat(locale, options).format(amount);
+    }
+
+    // Update main price element following price.liquid snippet logic
+    function updateMainPrice(variant) {
+      const priceContainer = productInfo.querySelector('.maison_commerce_maison_main_product__price');
+      if (!priceContainer || !variant) return;
+
+      const price = variant.price || 0;
+      const compareAtPrice = variant.compare_at_price || 0;
+      const available = variant.available !== false;
+      const isOnSale = compareAtPrice > price && compareAtPrice > 0;
+      
+      let moneyPrice = formatMoney(price, currencyCodeEnabled);
+      let moneyCompareAtPrice = formatMoney(compareAtPrice, currencyCodeEnabled);
+
+      // Build price HTML following price.liquid structure
+      let priceHTML = '<div class="price__container">';
+      
+      if (isOnSale) {
+        // Show sale price with compare at price
+        priceHTML += '<div class="price__sale">';
+        priceHTML += '<span class="lumin-price-container">';
+        priceHTML += `<span class="visually-hidden visually-hidden--inline">${regularPriceText}</span>`;
+        priceHTML += `<span class="price-item price-item--regular price-item--strikethrough">${moneyCompareAtPrice}</span>`;
+        priceHTML += `<span class="visually-hidden visually-hidden--inline">${salePriceText}</span>`;
+        priceHTML += `<span class="price-item price-item--sale price-item--last price-item--highlight">${moneyPrice}</span>`;
+        priceHTML += '</span>';
+        priceHTML += '</div>';
+      } else {
+        // Show regular price
+        priceHTML += '<div class="price__regular">';
+        priceHTML += `<span class="visually-hidden visually-hidden--inline">${regularPriceText}</span>`;
+        priceHTML += `<span class="price-item price-item--regular">${moneyPrice}</span>`;
+        priceHTML += '</div>';
+      }
+      
+      priceHTML += '</div>';
+      
+      // Add sale badge if on sale
+      if (isOnSale) {
+        const savings = compareAtPrice - price;
+        const savingsFormatted = formatMoney(savings);
+        const percentage = Math.round((savings / compareAtPrice) * 100);
+        let badgeText = saleMessage || onSaleText;
+        
+        // Replace placeholders in sale message
+        if (saleMessage) {
+          badgeText = badgeText.replace('[$]', savingsFormatted).replace('[%]', percentage + '%');
+        }
+        
+        priceHTML += `<span class="lm-badge badge price__badge-sale color-${saleBadgeColorScheme}">`;
+        priceHTML += badgeText;
+        priceHTML += '</span>';
+      }
+      
+      // Add sold out badge if unavailable
+      if (!available) {
+        priceHTML += `<span class="badge price__badge-sold-out color-${soldOutBadgeColorScheme}">`;
+        priceHTML += soldOutText;
+        priceHTML += '</span>';
+      }
+
+      // Update classes
+      priceContainer.className = 'price price--large';
+      if (!available) priceContainer.classList.add('price--sold-out');
+      if (isOnSale) {
+        priceContainer.classList.add('price--on-sale');
+        priceContainer.classList.add('price--show-badge');
+      }
+      
+      // Update HTML
+      priceContainer.innerHTML = priceHTML;
+    }
+
+    // Update button price (simple price without discount)
+    function updateButtonPrice(variant) {
+      // Try multiple selectors for button price
+      const buttonPriceSelectors = [
+        '#button-price-{{ section.id }}',
+        '.maison-add-to-cart-button-price',
+        '.maison_commerce_maison_main_product__button-price',
+        '.product-form__submit .maison-add-to-cart-button-price'
+      ];
+      
+      let priceEl = null;
+      for (const selector of buttonPriceSelectors) {
+        priceEl = productInfo.querySelector(selector) || document.querySelector(selector);
+        if (priceEl) break;
+      }
+      
+      if (priceEl && variant && variant.price) {
+        priceEl.textContent = formatMoney(variant.price, currencyCodeEnabled);
+      }
+    }
+
     // Handle variant thumbnail clicks
     const thumbnails = productInfo.querySelectorAll('.maison_commerce_maison_main_product__variant-thumbnail');
     thumbnails.forEach(thumbnail => {
@@ -1557,15 +1686,11 @@
         }
       }
       
-      // Update button price
-      const priceEl = productInfo.querySelector('#button-price-{{ section.id }}');
-      if (priceEl && selectedVariant.price) {
-        priceEl.textContent = new Intl.NumberFormat('{{ request.locale.iso_code }}', {
-          style: 'currency',
-          currency: '{{ cart.currency.iso_code }}',
-          minimumFractionDigits: 0
-        }).format(selectedVariant.price / 100);
-      }
+      // Update main price element (following price.liquid snippet logic)
+      updateMainPrice(selectedVariant);
+      
+      // Update button price (simple price without discount)
+      updateButtonPrice(selectedVariant);
 
       // Update URL
       const productUrl = productInfo.dataset.url || '{{ product.url }}';
