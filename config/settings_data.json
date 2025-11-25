@@ -226,7 +226,7 @@
     "show_extra_line": false,
     "show_total_save_price": true,
     "total_save_price_text": "You save",
-    "drawer_savings": "#08864e",
+    "drawer_savings": "#6c6c6c",
     "show_cart_button": false,
     "view_cart_text": "View Cart",
     "show_checkout_price": false,
