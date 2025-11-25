@@ -1452,6 +1452,8 @@
                 const form = productInfo.querySelector('#product-form-{{ section.id }}');
                 if (form) {
                   const variantInput = form.querySelector('input[name="id"]');
+                  console.log('variantInput', variantInput)
+                  console.log('selectedVariant.id', selectedVariant.id)
                   if (variantInput) {
                     variantInput.value = selectedVariant.id;
                   }
