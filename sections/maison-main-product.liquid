@@ -425,24 +425,13 @@
             {% endif %}
 
             <!-- Add to Cart Form -->
-            {%- form 'product', product, id: product_form_id, class: 'maison_commerce_maison_main_product__form' -%}
-              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-              
-              <button
-                type="submit"
-                name="add"
-                class="maison_commerce_maison_main_product__button"
-                {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
-              >
-                <span class="maison_commerce_maison_main_product__button-text">
-                  {{ section.settings.button_text | default: 'Add to Bag' | upcase }}
-                </span>
-                <span class="maison_commerce_maison_main_product__button-separator">·</span>
-                <span class="maison_commerce_maison_main_product__button-price" id="button-price-{{ section.id }}">
-                  {{ product.selected_or_first_available_variant.price | money_with_currency }}
-                </span>
-              </button>
-            {%- endform -%}
+            {%- render 'buy-buttons',
+                block: block,
+                product: product,
+                product_form_id: product_form_id,
+                section_id: section.id,
+                show_pickup_availability: true
+            -%}
 
             <!-- Payment Icons -->
             {% if section.settings.show_payment_icons %}
