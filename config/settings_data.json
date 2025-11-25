@@ -168,7 +168,7 @@
     "drawer_shadow_vertical_offset": 0,
     "drawer_shadow_blur": 0,
     "badge_icon": "none",
-    "sale_message": "- [%]",
+    "sale_message": "You save  [%]",
     "badge_size": 10,
     "badge_text_style": "body",
     "custom_badge_bold": true,
