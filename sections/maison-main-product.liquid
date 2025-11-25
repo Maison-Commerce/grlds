@@ -280,11 +280,18 @@
             {% for option in product.options_with_values %}
               {% if option.name == 'Size' or option.name == 'SIZE' %}
                 <div class="maison_commerce_maison_main_product__variant">
-                  <div class="maison_commerce_maison_main_product__variant-header">
-                    <span class="maison_commerce_maison_main_product__variant-label">SIZE:</span>
-                    <span class="maison_commerce_maison_main_product__variant-value" id="selected-size-{{ section.id }}">
-                      {{ option.selected_value }}
-                    </span>
+                  <div class="maison_commerce_maison_main_product__variant-header-wrapper">
+                    <div class="maison_commerce_maison_main_product__variant-header">
+                        <span class="maison_commerce_maison_main_product__variant-label">SIZE:</span>
+                        <span class="maison_commerce_maison_main_product__variant-value" id="selected-size-{{ section.id }}">
+                        {{ option.selected_value }}
+                        </span>
+                    </div>
+                    {% if option.name == 'Size' %}
+                        <div class="maison_commerce_maison_main_product__room-info">
+                        Ideal for rooms < 30 m²
+                        </div>
+                    {% endif %}
                   </div>
                   <div class="maison_commerce_maison_main_product__variant-thumbnails">
                     {% for value in option.values %}
