@@ -87,7 +87,7 @@
         "show_rating": true,
         "rating_text": "",
         "show_shipping_info": true,
-        "shipping_text": "Order before 14:00 → Ships Today",
+        "shipping_text": "",
         "button_text": "Add to Bag",
         "show_payment_icons": true,
         "padding_top_desktop": 0,
