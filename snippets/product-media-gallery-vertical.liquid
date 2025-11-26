@@ -981,7 +981,7 @@ function initThumbnailHeightSync() {
   }
   
   // Also listen for slide changes
-  const sliderButtons = mediaGallery.querySelectorAll('.slider-button');
+  const sliderButtons = document.querySelectorAll('#MediaGallery-{{ section.id }} .slider-button');
   sliderButtons.forEach(button => {
     button.addEventListener('click', function() {
       setTimeout(function() {
