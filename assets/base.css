@@ -2523,6 +2523,11 @@ input[type=checkbox] {
   transition: width .3s cubic-bezier(.52, 0, .61, .99)
 }
 
+.footer__payment ul{
+  list-style-type: none!important;
+  gap: 8px;
+}
+
 @media screen and (max-width:989px) {
 
   .header__heading-logo-wrapper {
