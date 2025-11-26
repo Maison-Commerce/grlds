@@ -2525,6 +2525,11 @@ input[type=checkbox] {
 
 @media screen and (max-width:989px) {
 
+  .header__heading-logo-wrapper {
+    max-width: 92px;
+    margin: 0 auto;
+  }
+
   .header__heading,
   .header__heading-link {
     text-align: center
