@@ -9,6 +9,141 @@
  */
 {
   "sections": {
+    "maison_main_product_EcLTVL": {
+      "type": "maison-main-product",
+      "blocks": {
+        "buy_buttons_Bp7LYz": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false,
+            "skip_cart": false,
+            "button_padding_top": 20,
+            "button_padding_bottom": 20,
+            "button_custom_style": false,
+            "button_font_size": 20,
+            "button_height": 45,
+            "lm_main_button": "#000000",
+            "lm_main_button_gr": "",
+            "lm_main_text": "#ffffff",
+            "lm_main_text_hover": "#0b57d0",
+            "lm_main_button_hover": "#ffffff",
+            "lm_main_button_gr_hover": "",
+            "lm_main_button_border_width": 0,
+            "lm_main_button_border_color": "#000000"
+          }
+        },
+        "benefit_4MyVhJ": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shopify://shop_images/meteor-icons_gift_0c4fa572-1529-4fa6-8f86-908922a65d09.svg",
+            "text": "Signature Gift Wrap"
+          }
+        },
+        "benefit_W7JMB3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shopify://shop_images/shipment-return--shipment-return-parcel-shipping-box-arrow_7f8af843-ce05-4b5c-8113-356730880f0c.svg",
+            "text": "Free Returns"
+          }
+        },
+        "benefit_TtmRKQ": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shopify://shop_images/Frame_1484580598_34310056-10c1-4062-b291-3a3750d4abeb.svg",
+            "text": "Carbon-Neutral"
+          }
+        },
+        "accordion_4kD3PC": {
+          "type": "accordion",
+          "settings": {
+            "title": "Ingredients",
+            "content": ""
+          }
+        },
+        "accordion_cBLmFa": {
+          "type": "accordion",
+          "settings": {
+            "title": "Directions for use",
+            "content": ""
+          }
+        },
+        "accordion_HT4Vt3": {
+          "type": "accordion",
+          "settings": {
+            "title": "Characteristics",
+            "content": ""
+          }
+        },
+        "accordion_hDGrec": {
+          "type": "accordion",
+          "settings": {
+            "title": "Returns & Exchanges",
+            "content": ""
+          }
+        },
+        "promo_6AYbxr": {
+          "type": "promo",
+          "settings": {
+            "icon": "shopify://shop_images/Candles--Streamline-Atlas.svg",
+            "text": "2 free samples of your choice with every order"
+          }
+        }
+      },
+      "block_order": [
+        "buy_buttons_Bp7LYz",
+        "benefit_4MyVhJ",
+        "benefit_W7JMB3",
+        "benefit_TtmRKQ",
+        "accordion_4kD3PC",
+        "accordion_cBLmFa",
+        "accordion_HT4Vt3",
+        "accordion_hDGrec",
+        "promo_6AYbxr"
+      ],
+      "name": "Maison Main Product",
+      "settings": {
+        "gallery_layout": "grid",
+        "show_badge": true,
+        "badge_text": "LIMITED EDITION",
+        "show_rating": true,
+        "rating_text": "",
+        "show_shipping_info": true,
+        "shipping_text": "",
+        "button_text": "Add to Bag",
+        "show_payment_icons": true,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 40,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "maison_icon_with_text_description_3i693h": {
+      "type": "maison-icon-with-text-description",
+      "name": "Maison Icon with Text Description",
+      "settings": {
+        "icon": "shopify://shop_images/meteor-icons_gift_0c4fa572-1529-4fa6-8f86-908922a65d09.svg",
+        "text": "Perfect for gifting or quiet evenings in",
+        "section_bg_color": "#ffffff",
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32,
+        "padding_left_mobile": 18,
+        "padding_right_mobile": 18,
+        "icon_size_desktop": 18,
+        "icon_size_mobile": 18,
+        "gap_desktop": 12,
+        "gap_mobile": 12,
+        "text_font_size_desktop": 16,
+        "text_font_size_mobile": 14,
+        "text_color": "#1a1a1abf",
+        "text_font_weight_desktop": "300",
+        "text_font_weight_mobile": "400"
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -138,7 +273,6 @@
           "settings": {
             "alignment": "center",
             "show_icon": true,
-            "icon": "shopify://shop_images/shipping-transfer-truck--truck-shipping-delivery.svg",
             "icon_size": 20,
             "heading": "",
             "heading_size": 20,
@@ -156,7 +290,6 @@
           "settings": {
             "alignment": "center",
             "show_icon": true,
-            "icon": "shopify://shop_images/Shield-Check--Streamline-Sharp.svg",
             "icon_size": 20,
             "heading": "",
             "heading_size": 20,
@@ -174,7 +307,6 @@
           "settings": {
             "alignment": "center",
             "show_icon": true,
-            "icon": "shopify://shop_images/hourly-rate-fee-dollar-sign--hourly-rate-fee-dollar-sign-job-marketing-salary-price.svg",
             "icon_size": 20,
             "heading": "",
             "heading_size": 20,
@@ -319,6 +451,7 @@
         "trust_feature_xnRc3U",
         "lumin_cross_sells_PdKwRH"
       ],
+      "disabled": true,
       "settings": {
         "enable_sticky_info": true,
         "no_scroll": false,
@@ -328,7 +461,7 @@
         "media_size": "medium",
         "constrain_to_viewport": true,
         "media_fit": "cover",
-        "gallery_layout": "vertical_left",
+        "gallery_layout": "columns",
         "hide_slider_buttons": false,
         "thumbnail_layout": "medium",
         "thumbnail_size": 54,
@@ -365,371 +498,302 @@
         "padding_bottom": 24
       }
     },
-    "lumin_review_BPPxCy": {
-      "type": "Lumin-review",
+    "maison_img_with_text_JGaQp6": {
+      "type": "maison-img-with-text",
       "blocks": {
-        "review_r8bWEd": {
-          "type": "review",
+        "icon_LqnrHY": {
+          "type": "icon",
           "settings": {
-            "selected_product": "",
-            "star_rating": 5,
-            "name_text": "Johan D.",
-            "country_code": "US",
-            "show_country_flag": true,
-            "date_text": "June 2025",
-            "review_head": "Nice Product",
-            "review_text": "Nice Product. I'm happy with my purchase.",
-            "like_size": 0,
-            "dislike_size": 0,
-            "feature_font_size": 16
+            "icon_image": "shopify://shop_images/20251110_1714_Candle-Making_Line_Art_remix_01k9q58whdfaftwxh06d0cah94_2.png"
           }
         },
-        "review_xXpgWh": {
-          "type": "review",
+        "icon_LiqLTj": {
+          "type": "icon",
           "settings": {
-            "selected_product": "",
-            "star_rating": 5,
-            "name_text": "Johan D.",
-            "country_code": "US",
-            "show_country_flag": true,
-            "date_text": "June 2025",
-            "review_head": "Nice Product",
-            "review_text": "Nice Product. I'm happy with my purchase.",
-            "like_size": 0,
-            "dislike_size": 0,
-            "feature_font_size": 16
+            "icon_image": "shopify://shop_images/23gsrg32gergb.png"
           }
         },
-        "review_BzF7wc": {
-          "type": "review",
+        "icon_fDtJ9m": {
+          "type": "icon",
           "settings": {
-            "selected_product": "",
-            "star_rating": 5,
-            "name_text": "Johan D.",
-            "country_code": "US",
-            "show_country_flag": true,
-            "date_text": "June 2025",
-            "review_head": "Nice Product",
-            "review_text": "Nice Product. I'm happy with my purchase.",
-            "like_size": 0,
-            "dislike_size": 0,
-            "feature_font_size": 16
+            "icon_image": "shopify://shop_images/2gerg3grh.png"
           }
         }
       },
       "block_order": [
-        "review_r8bWEd",
-        "review_xXpgWh",
-        "review_BzF7wc"
+        "icon_LqnrHY",
+        "icon_LiqLTj",
+        "icon_fDtJ9m"
       ],
-      "name": "Lumin Review",
+      "name": "Maison Image with Text",
       "settings": {
-        "editing": true,
-        "color_scheme": "background-1",
-        "header_text": "See what our customers say",
-        "show_top": true,
-        "rating_text": "4.8",
-        "rating_range": 4.5,
-        "star_size_top": 0.6,
-        "rating_count": "Based on 16 Reviews",
-        "show_customer_images": true,
-        "show_country_flags": false,
-        "customer_image_size": 30,
-        "customer_image_radius": 30,
-        "customer_initials_bg": "#e5e5e5",
-        "customer_initials_color": "#000000",
-        "review_column_mobile": 1,
-        "review_column_tab": 2,
-        "review_column_desk": 3,
-        "review_load": 3,
-        "load_text": "Load More",
-        "rw_img_size": 60,
-        "rw_img_radius": 6,
-        "block_name_size": 16,
-        "date_size": 12,
-        "block_head_size": 16,
-        "block_text_size": 14,
-        "star_style": "star_bg_2",
-        "star_size": 0.6,
-        "star_radius": 0,
-        "feature_svg_color": "#00b67a",
-        "inactive_star_color": "#e2e2e2",
-        "show_border": true,
-        "rw_border": "#f2f2f2",
-        "border_radius": 0,
-        "section_bg3": "#000000",
-        "section_bg2": "#000000",
-        "verify_text": "Verified",
-        "review_bg": "#f8f8f8",
-        "feature_acc_color": "#000000",
-        "review_pd": 16,
-        "review_pd_m": 16,
-        "show_footer": false,
-        "show_product": false,
-        "product_image_radius": 4,
-        "like_text": "Was this helpful?",
-        "show_add_review_button": false,
-        "review_cta_heading": "Review this product",
-        "review_cta_subtext": "Share your thoughts with other customers",
-        "add_review_button_text": "Add Your Review",
-        "review_cta_heading_color": "#333333",
-        "review_cta_subtext_color": "#666666",
-        "add_review_button_bg": "#000000",
-        "add_review_button_text_color": "#ffffff",
-        "modal_title": "Write Your Review",
-        "name_label": "Your Name",
-        "rating_label": "Rating",
-        "title_label": "Review Title",
-        "review_label": "Your Review",
-        "email_label": "Your Email",
-        "date_format": "detailed",
-        "cancel_button_text": "Cancel",
-        "submit_button_text": "Submit Review",
-        "success_message_title": "Thank you for your review!",
-        "success_message_body": "Your review has been submitted successfully and will be forwarded to our team.",
-        "success_message_duration": "3",
-        "success_message_bg": "#4caf50",
-        "success_message_text": "#ffffff",
-        "success_message_position": "top-right",
-        "success_message_font_size": 16,
-        "success_message_show_icon": true,
-        "email_subject": "New Review Submitted",
-        "email_method": "real_form",
-        "rw_margin": 0,
-        "padding_top": 36,
-        "padding_bottom": 36,
-        "enable_review_popup": false,
-        "popup_helpful_text": "Was this helpful?",
-        "show_popup_helpful_buttons": false,
-        "show_popup_product_info": false,
-        "popup_image_quality": "800",
-        "popup_customer_image_size": 60,
-        "enable_image_enlarge": false
+        "section_heading": "Why You'll Love It",
+        "section_description": "<p>Small-batch poured. Clean-burn soy blend wax. Designed to glow</p>",
+        "main_image": "shopify://shop_images/49bbd9f4aaccf66c1b9955ce09c9dda9d1beddec.png",
+        "img_position": "top",
+        "image_position": "right",
+        "section_bg_color": "#ffffff",
+        "content_bg_color": "#fcf9f6",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "padding_left_mobile": 0,
+        "padding_right_mobile": 0,
+        "content_padding_desktop": 48,
+        "content_padding_mobile": 32,
+        "heading_font_size_desktop": 40,
+        "heading_font_size_mobile": 24,
+        "heading_color": "#1a1a1a",
+        "description_font_size_desktop": 20,
+        "description_font_size_mobile": 14,
+        "description_color": "#1a1a1abf",
+        "icon_size_desktop": 106,
+        "icon_size_mobile": 77,
+        "icon_gap_desktop": 30,
+        "icon_gap_mobile": 24
       }
     },
-    "lumin_mega_yAGDw9": {
-      "type": "lumin-mega",
-      "blocks": {
-        "image_aBVXca": {
-          "type": "image",
-          "settings": {
-            "inset_image": "shopify://shop_images/Figma_2025-10-25_21.22.16.png",
-            "inset_image_size": 25,
-            "inset_image_radius": 0,
-            "image_alignment": "center"
-          }
-        },
-        "divider_hGRaxQ": {
-          "type": "divider",
-          "settings": {
-            "base_width": 20,
-            "thickness": 0,
-            "style": "solid",
-            "divider_color": "#ffffff",
-            "padding_top": 0,
-            "padding_bottom": 16
-          }
-        },
-        "heading_dLbrQ8": {
-          "type": "heading",
-          "settings": {
-            "heading": "Verfijnd & Duurzaam",
-            "heading_size": "h2"
-          }
-        },
-        "text_fh73cM": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Premium stoffen, precieze snit en afwerking in kleine oplage voor blijvende elegantie.</p>",
-            "text_style": "body"
-          }
-        },
-        "text_Q8nUjR": {
-          "type": "text",
-          "settings": {
-            "text": "<p><strong>Premium materialen    ·    Precieze snit    ·    Kleine oplage</strong></p>",
-            "text_style": "body"
-          }
-        }
-      },
-      "block_order": [
-        "image_aBVXca",
-        "divider_hGRaxQ",
-        "heading_dLbrQ8",
-        "text_fh73cM",
-        "text_Q8nUjR"
-      ],
-      "name": "Lumin Mega Section",
+    "maison_product_specification_GETt9W": {
+      "type": "maison-product-specification",
+      "name": "Maison Product Specific",
       "settings": {
-        "color_scheme_main": "inverse",
-        "full-width": false,
-        "image": "shopify://shop_images/Figma_2025-10-25_21.23.30.png",
-        "height": "large",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "center",
-        "content_layout": "no-overlap",
-        "color_scheme": "",
-        "image_behavior": "ambient",
-        "mobile_content_alignment": "center",
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "padding_top": 56,
-        "padding_bottom": 56
+        "section_heading": "Care & Safety",
+        "burn_time_label": "Burn Time",
+        "burn_time_value": "~ 40 h",
+        "first_burn_label": "First burn",
+        "first_burn_value": "2–3 h · Trim wick 5 mm · Do not burn > 3 h",
+        "keep_away_label": "Keep away from",
+        "care_guide_text": "View Full Care Guide",
+        "care_guide_link": "#",
+        "product_image": "shopify://shop_images/9810d94e5d182fd3415907fc409378fec71088f4.png",
+        "icon_child": "shopify://shop_images/Kids-Boy--Streamline-Ultimate.svg",
+        "icon_pet": "shopify://shop_images/Dog-Sit-3--Streamline-Ultimate.svg",
+        "icon_fire": "shopify://shop_images/Safety-Fire-Extinguisher--Streamline-Ultimate.svg",
+        "section_bg_color": "#ffffff",
+        "content_bg_color_mobile": "#fcf9f6",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "padding_left_mobile": 0,
+        "padding_right_mobile": 0,
+        "content_padding_desktop": 48,
+        "content_padding_mobile": 32,
+        "heading_font_size_desktop": 40,
+        "heading_font_size_mobile": 24,
+        "heading_color": "#1a1a1a",
+        "spec_font_size_desktop": 16,
+        "spec_font_size_mobile": 14,
+        "spec_label_color": "#1a1a1abf",
+        "spec_value_color": "#1a1a1a",
+        "icon_size": 24,
+        "link_font_size": 16,
+        "link_color": "#1a1a1a"
       }
     },
-    "lumin_mega_H9LqTD": {
-      "type": "lumin-mega",
-      "blocks": {
-        "heading_zYFGRg": {
-          "type": "heading",
-          "settings": {
-            "heading": "Belangrijkste Benmerken",
-            "heading_size": "h2"
-          }
-        },
-        "text_d7LfLf": {
-          "type": "text",
-          "settings": {
-            "text": "<p>De Amber Haze Tee is gemaakt van het fijnste dubbel-gemerceriseerde Egyptische katoen, wat zorgt voor een luxueus zachte hand en een subtiele, zijdeachtige glans die blijft bestaan was na was.  De slim fit pasvorm geeft een moderne, aansluitende look zonder in te boeten op comfort. Deze premium t-shirt is ontworpen om jarenlang mee te gaan, met dubbelgestikte naden die extra duurzaamheid garanderen en kleurvaste stoffen die hun levendige tint behouden.</p>",
-            "text_style": "body"
-          }
-        },
-        "feature_9QALrW": {
-          "type": "feature",
-          "settings": {
-            "alignment": "center",
-            "icon_size": 32,
-            "heading": "",
-            "heading_size": 16,
-            "text": "<p><strong>100% Dubbel-Gemerceriseerd Egyptisch Katoen</strong> — Zijdezacht Met Subtiele Glans</p>",
-            "text_size": 14,
-            "padding_top": 8,
-            "padding_bottom": 8
-          }
-        },
-        "feature_4LqTJJ": {
-          "type": "feature",
-          "settings": {
-            "alignment": "center",
-            "icon_size": 32,
-            "heading": "",
-            "heading_size": 16,
-            "text": "<p><strong>Slim Fit</strong> — Moderne, aansluitende pasvorm</p>",
-            "text_size": 14,
-            "padding_top": 8,
-            "padding_bottom": 8
-          }
-        },
-        "feature_aVM49r": {
-          "type": "feature",
-          "settings": {
-            "alignment": "center",
-            "icon_size": 32,
-            "heading": "",
-            "heading_size": 16,
-            "text": "<p><strong>Kleurvast & Vormhoudend</strong> — Blijft mooi, was na was</p>",
-            "text_size": 14,
-            "padding_top": 8,
-            "padding_bottom": 8
-          }
-        },
-        "feature_9ftQCy": {
-          "type": "feature",
-          "settings": {
-            "alignment": "center",
-            "icon_size": 32,
-            "heading": "",
-            "heading_size": 16,
-            "text": "<p><strong>Dubbelgestikte Naden</strong> — Extra duurzaam</p>",
-            "text_size": 14,
-            "padding_top": 8,
-            "padding_bottom": 8
-          }
-        }
-      },
-      "block_order": [
-        "heading_zYFGRg",
-        "text_d7LfLf",
-        "feature_9QALrW",
-        "feature_4LqTJJ",
-        "feature_aVM49r",
-        "feature_9ftQCy"
-      ],
-      "name": "Lumin Mega Section",
+    "maison_collection_slider_biG3Jx": {
+      "type": "maison-collection-slider",
+      "name": "Maison Collection Slider",
       "settings": {
-        "color_scheme_main": "background-1",
-        "full-width": false,
-        "image": "shopify://shop_images/Figma_2025-10-25_21.26.35.png",
-        "height": "medium",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
-        "color_scheme": "",
-        "image_behavior": "ambient",
-        "mobile_content_alignment": "left",
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "padding_top": 56,
-        "padding_bottom": 56
+        "collection": "frontpage",
+        "section_heading": "Complete the Ritual",
+        "button_text": "View All Holiday Collection",
+        "button_link": "shopify://collections/frontpage",
+        "products_to_show": 4,
+        "section_bg_color": "#ffffff",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_left_desktop": 40,
+        "padding_right_desktop": 40,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32,
+        "padding_left_mobile": 20,
+        "padding_right_mobile": 20,
+        "heading_font_size_desktop": 40,
+        "heading_font_size_mobile": 24,
+        "heading_color": "#1a1a1a",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "image_no_crop": false,
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "show_scroll_tags": false,
+        "show_product_description": false,
+        "description_font_size": 14,
+        "description_word_limit": 20,
+        "quick_add": "none"
       }
     },
-    "lumin_mega_jbengK": {
-      "type": "lumin-mega",
+    "maison_reviews_slider_9ap7pP": {
+      "type": "maison-reviews-slider",
       "blocks": {
-        "heading_EhBhTR": {
-          "type": "heading",
+        "review_yhqhgn": {
+          "type": "review",
           "settings": {
-            "heading": "FAQ",
-            "heading_size": "h1"
+            "rating": 5,
+            "show_verified": true,
+            "review_title": "Stunning design",
+            "review_text": "<p>The scent is absolutely divine, creating a delightful atmosphere. It burns evenly and fills the entire room with its enchanting aroma.</p>",
+            "author_name": "Persy",
+            "review_date": "Oct 15, 2025"
           }
         },
-        "text_LrHeXi": {
-          "type": "text",
+        "review_fpbLff": {
+          "type": "review",
           "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "text_style": "body"
+            "rating": 5,
+            "show_verified": true,
+            "review_title": "Stunning design",
+            "review_text": "<p>The scent is absolutely divine, creating a delightful atmosphere. It burns evenly and fills the entire room with its enchanting aroma.</p>",
+            "author_name": "Persy",
+            "review_date": "Oct 15, 2025"
           }
         },
-        "collapsible_content_8MgHtn": {
-          "type": "collapsible_content",
+        "review_dccJjD": {
+          "type": "review",
           "settings": {
-            "title": "Shipping information",
-            "text": "<p>Lorem ipsum dolor.</p>",
-            "icon_style": "plus_minus_square",
-            "show_open": false
+            "rating": 5,
+            "show_verified": true,
+            "review_title": "Stunning design",
+            "review_text": "<p>The scent is absolutely divine, creating a delightful atmosphere. It burns evenly and fills the entire room with its enchanting aroma.</p>",
+            "author_name": "Persy",
+            "review_date": "Oct 15, 2025"
+          }
+        },
+        "review_wXaJAp": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "show_verified": true,
+            "review_title": "Stunning design",
+            "review_text": "<p>The scent is absolutely divine, creating a delightful atmosphere. It burns evenly and fills the entire room with its enchanting aroma.</p>",
+            "author_name": "Persy",
+            "review_date": "Oct 15, 2025"
+          }
+        },
+        "review_fbhAxM": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "show_verified": true,
+            "review_title": "Stunning design",
+            "review_text": "<p>The scent is absolutely divine, creating a delightful atmosphere. It burns evenly and fills the entire room with its enchanting aroma.</p>",
+            "author_name": "Persy",
+            "review_date": "Oct 15, 2025"
           }
         }
       },
       "block_order": [
-        "heading_EhBhTR",
-        "text_LrHeXi",
-        "collapsible_content_8MgHtn"
+        "review_yhqhgn",
+        "review_fpbLff",
+        "review_dccJjD",
+        "review_wXaJAp",
+        "review_fbhAxM"
       ],
-      "name": "Lumin Mega Section",
+      "name": "Maison Reviews Slider",
       "settings": {
-        "color_scheme_main": "background-2",
-        "full-width": true,
-        "height": "large",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "content_layout": "overlap",
-        "color_scheme": "background-2",
-        "image_behavior": "none",
-        "mobile_content_alignment": "left",
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "padding_top": 0,
-        "padding_bottom": 0
+        "section_heading": "We're loved by thousands",
+        "section_heading_mobile": "We're loved by thousands of girls",
+        "rating_text": "<p>Rated <strong>4.8</strong> / 5 based on <u>3200+</u> reviews</p>",
+        "rating_text_mobile": "<p>Rated <strong>4.8</strong> / 5 based on <u>3200+</u> reviews. Showing our favorite reviews.</p>",
+        "button_text": "Read All Reviews",
+        "button_link": "",
+        "section_bg_color": "#ffffff",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 40,
+        "padding_left_desktop": 40,
+        "padding_right_desktop": 40,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32,
+        "padding_left_mobile": 20,
+        "padding_right_mobile": 20,
+        "heading_font_size_desktop": 40,
+        "heading_font_size_mobile": 24,
+        "heading_color": "#1a1a1a",
+        "rating_font_size": 12,
+        "rating_color": "#1a1a1a",
+        "card_gap_desktop": 20,
+        "card_gap_mobile": 16,
+        "card_width_desktop": 320,
+        "card_width_mobile": 240,
+        "review_title_font_size": 14,
+        "review_title_color": "#1c1c1c",
+        "review_text_font_size": 14,
+        "review_text_color": "#1c1c1cbf",
+        "author_font_size": 12,
+        "author_color": "#1c1c1c",
+        "card_bg_color": "#fafafa",
+        "button_font_size": 14,
+        "button_bg_color": "#090909",
+        "button_text_color": "#ffffff"
+      }
+    },
+    "maison_usps_diRRKV": {
+      "type": "maison-usps",
+      "blocks": {
+        "usp_wGxgxt": {
+          "type": "usp",
+          "settings": {
+            "icon": "shopify://shop_images/meteor-icons_gift.svg",
+            "title": "Signature Gift Wrap",
+            "description": "Complimentary on every order"
+          }
+        },
+        "usp_baLPLD": {
+          "type": "usp",
+          "settings": {
+            "icon": "shopify://shop_images/Frame_1484580598.svg",
+            "title": "CARBON-NEUTRAL DELIVERY",
+            "description": "Every delivery is 100% carbon offset"
+          }
+        },
+        "usp_kKiK89": {
+          "type": "usp",
+          "settings": {
+            "icon": "shopify://shop_images/shipment-return--shipment-return-parcel-shipping-box-arrow.svg",
+            "title": "Free Returns guarantee",
+            "description": "30-day hassle-free returns"
+          }
+        }
+      },
+      "block_order": [
+        "usp_wGxgxt",
+        "usp_baLPLD",
+        "usp_kKiK89"
+      ],
+      "name": "Maison USPs",
+      "settings": {
+        "section_bg_color": "#ffffff",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_left_desktop": 80,
+        "padding_right_desktop": 80,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32,
+        "padding_left_mobile": 0,
+        "padding_right_mobile": 0,
+        "item_gap_desktop": 40,
+        "item_gap_mobile": 20,
+        "icon_size": 24,
+        "title_font_size_desktop": 20,
+        "title_font_size_mobile": 18,
+        "title_color": "#1a1a1a",
+        "description_font_size_desktop": 16,
+        "description_font_size_mobile": 12,
+        "description_color": "#8b8b8b",
+        "content_gap": 24,
+        "text_gap": 4
       }
     },
     "related-products": {
       "type": "related-products",
+      "disabled": true,
       "settings": {
         "heading": "Others also bought",
         "heading_size": "h2",
@@ -749,11 +813,14 @@
     }
   },
   "order": [
+    "maison_main_product_EcLTVL",
+    "maison_icon_with_text_description_3i693h",
     "main",
-    "lumin_review_BPPxCy",
-    "lumin_mega_yAGDw9",
-    "lumin_mega_H9LqTD",
-    "lumin_mega_jbengK",
+    "maison_img_with_text_JGaQp6",
+    "maison_product_specification_GETt9W",
+    "maison_collection_slider_biG3Jx",
+    "maison_reviews_slider_9ap7pP",
+    "maison_usps_diRRKV",
     "related-products"
   ]
 }
