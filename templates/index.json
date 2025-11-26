@@ -47,7 +47,7 @@
         "primary_button_text": "Shop Holiday Collection",
         "primary_button_link": "shopify://collections/holiday",
         "secondary_button_text": "Find a gift",
-        "secondary_button_link": "#",
+        "secondary_button_link": "shopify://collections/gift",
         "background_image": "shopify://shop_images/7b9d51068cb2251b233e76e231453122e67f84f6.png",
         "section_bg_color": "#f8f8f8",
         "padding_top_desktop": 96,
