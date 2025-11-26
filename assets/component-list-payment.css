@@ -21,6 +21,6 @@
   padding: 0.5rem;
 }
 
-.list-payment__item::marker{
-  display: none!important;
+.list-payment__item{
+  list-style-type: none!important;
 }
