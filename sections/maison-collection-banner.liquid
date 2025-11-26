@@ -325,7 +325,6 @@
   .maison_commerce_maison_collection_banner {
     position: relative;
     width: 100%;
-    max-width: 819px;
     padding-top: {{ section.settings.padding_top_desktop }}px;
     padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
     padding-left: {{ section.settings.padding_left_desktop }}px;
@@ -338,7 +337,6 @@
 
   @media (max-width: 990px) {
     .maison_commerce_maison_collection_banner {
-      max-width: 100%;
       padding-top: {{ section.settings.padding_top_mobile }}px;
       padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
       padding-left: {{ section.settings.padding_left_mobile }}px;
@@ -362,21 +360,17 @@
     overflow: hidden;
     pointer-events: none;
     width: 100%;
-    min-width: 450px;
-    max-height: 500px;
-    flex: 1;
     height: auto;
     max-width: 621px;
     display: flex;
+    flex: 1;
   }
 
   @media (max-width: 990px) {
     .maison_commerce_maison_collection_banner__background {
       max-width: 100%;
-      max-height: auto;
       order: 2;
       aspect-ratio: 1 / 0.76;
-      min-width: auto;
     }
   }
 
