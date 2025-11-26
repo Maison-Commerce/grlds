@@ -103,7 +103,7 @@
         "show_product_description": false,
         "description_font_size": 14,
         "description_word_limit": 20,
-        "quick_add": "none"
+        "quick_add": "standard"
       }
     },
     "maison_img_with_text_96bPrD": {
