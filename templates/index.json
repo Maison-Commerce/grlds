@@ -246,7 +246,7 @@
         "icon_image": "shopify://shop_images/123t34yg45rg54.png",
         "image_position": "left",
         "button_text": "View Full Care Guide",
-        "button_link": "#",
+        "button_link": "shopify://collections/all",
         "section_bg_color": "#f8f8f8",
         "content_bg_color": "#f8f8f8",
         "padding_top_desktop": 0,
