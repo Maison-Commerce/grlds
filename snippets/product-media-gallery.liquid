@@ -82,7 +82,7 @@
 </style>
 
 <media-gallery
-  id="MediaGallery-{{ section.id }}"
+  id="MediaGallery-{{ section.id }}{{ id_append }}"
   data-section="{{ section.id }}"
   {% if has_filtering %}
     data-filtering-option="{{ section.settings.variant_image_filtering }}"
