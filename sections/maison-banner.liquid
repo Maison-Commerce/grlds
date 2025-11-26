@@ -625,14 +625,15 @@
     min-width: 250px;
   }
 
-  .maison_commerce_maison_banner__button:hover {
-    opacity: 0.8;
-  }
-
   .maison_commerce_maison_banner__button--primary {
     background-color: {{ section.settings.primary_button_bg }};
     color: {{ section.settings.primary_button_text_color }};
     height: 56px;
+    transition: all 0.3s ease;
+  }
+
+  .maison_commerce_maison_banner__button--primary:hover{
+    background-color: {{ section.settings.primary_button_bg | hex_to_rgba: 0.75 }};
   }
 
   .maison_commerce_maison_banner__button--secondary {
@@ -640,6 +641,11 @@
     color: {{ section.settings.secondary_button_text_color }};
     border: 1px solid {{ section.settings.secondary_button_border }};
     height: 56px;
+    transition: all 0.3s ease;
+  }
+
+  .maison_commerce_maison_banner__button--primary:hover{
+    background-color: rgba(255,255,255,0.2);
   }
 
   @media (max-width: 990px) {
