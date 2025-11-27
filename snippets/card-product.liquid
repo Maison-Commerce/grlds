@@ -216,7 +216,7 @@
             </div>
           </div>
         {%- endif -%}
-        <div class="card__content">
+        <a href="{{ card_product.url }}" class="card__content">
           <div class="card__information">
             <h3
               class="card__heading"
@@ -544,7 +544,7 @@
               </div>
             {% endif %}
           {% endif %}
-        </div>
+        </a>
       </div>
        {% render 'lumin-wishlist-button', product: card_product %}
       <div class="card__content">
