@@ -76,7 +76,7 @@
       "type": "maison-collection-slider",
       "name": "Maison Collection Slider",
       "settings": {
-        "collection": "frontpage",
+        "collection": "bestsellers",
         "section_heading": "Our Bestsellers",
         "button_text": "View All Holiday Collection",
         "button_link": "shopify://collections/holiday",
