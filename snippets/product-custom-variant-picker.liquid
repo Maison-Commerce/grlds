@@ -1,6 +1,6 @@
 <div class="maison-variant-related-pr">
     <a href="{{ product.url }}" class="maison-variant-related-pr-item">
-
+        <img src="{{ product.featured_image.src }}">
     </a>
     {% for item in product.metafields.custom.related_products %}
     {% endfor %}
