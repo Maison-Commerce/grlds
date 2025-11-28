@@ -79,7 +79,7 @@
         "collection": "bestsellers",
         "section_heading": "Our Bestsellers",
         "button_text": "View All Holiday Collection",
-        "button_link": "shopify://collections/holiday",
+        "button_link": "shopify://collections/bestsellers",
         "products_to_show": 4,
         "section_bg_color": "#ffffff",
         "padding_top_desktop": 80,
