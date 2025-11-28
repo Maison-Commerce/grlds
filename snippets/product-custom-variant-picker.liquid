@@ -16,6 +16,8 @@
         height: 64px;
         border: 1.5px solid transparent;
         transition: all 0.3s ease;
+
+
     }
 
     .maison-variant-related-pr-item:hover{
@@ -37,11 +39,11 @@
         {{ title }}:
     </div>
     <div class="maison-variant-related-pr">
-        <a href="{{ product.url }}" class="maison-variant-related-pr-item current">
+        <a href="{{ product.url }}" class=".maison_commerce_maison_main_product__variant-option current">
             {{ product.metafields.custom.related_products_variant }}
         </a>
         {% for item in product.metafields.custom.related_products.value %}
-            <a href="{{ item.url }}" class="maison-variant-related-pr-item">
+            <a href="{{ item.url }}" class=".maison_commerce_maison_main_product__variant-option">
                 {{ item.metafields.custom.related_products_variant }}
             </a>
         {% endfor %}
