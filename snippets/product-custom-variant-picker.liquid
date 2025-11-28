@@ -26,14 +26,18 @@
         height: 100%;
     }
 </style>
-
-<div class="maison-variant-related-pr">
-    <a href="{{ product.url }}" class="maison-variant-related-pr-item current">
-        <img src="{{ product.featured_image.src | image_url }}">
-    </a>
-    {% for item in product.metafields.custom.related_products %}
-        <a href="{{ item.url }}" class="maison-variant-related-pr-item">
-            <img src="{{ item.featured_image.src | image_url }}">
+<div class="maison-variant-related-pr-wrapper">
+    <div class="maison_commerce_maison_main_product__variant-label">
+        Scent:
+    </div>
+    <div class="maison-variant-related-pr">
+        <a href="{{ product.url }}" class="maison-variant-related-pr-item current">
+            <img src="{{ product.featured_image.src | image_url }}">
         </a>
-    {% endfor %}
+        {% for item in product.metafields.custom.related_products %}
+            <a href="{{ item.url }}" class="maison-variant-related-pr-item">
+                <img src="{{ item.featured_image.src | image_url }}">
+            </a>
+        {% endfor %}
+    </div>
 </div>
