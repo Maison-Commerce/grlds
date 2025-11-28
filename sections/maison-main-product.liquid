@@ -530,11 +530,11 @@
               {% endif %}
             {% endfor %}
 
-            {% render 'product-custom-variant-picker',
-              product: product,
-              uniq_id: product_form_id,
-              block: block
-            %}
+            {% if product.metafields.custom.related_products != blank %}
+              {% render 'product-custom-variant-picker',
+                product: product
+              %}
+            {% endif %}
 
             <!-- Hidden Variant Picker Form -->
             <div class="maison_commerce_maison_main_product__variant-picker-hidden" style="display: none;">
