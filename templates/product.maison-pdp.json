@@ -12,6 +12,12 @@
     "maison_main_product_EcLTVL": {
       "type": "maison-main-product",
       "blocks": {
+        "product_variants_VxGKJw": {
+          "type": "product-variants",
+          "settings": {
+            "title": ""
+          }
+        },
         "buy_buttons_Bp7LYz": {
           "type": "buy_buttons",
           "settings": {
@@ -91,6 +97,7 @@
         }
       },
       "block_order": [
+        "product_variants_VxGKJw",
         "buy_buttons_Bp7LYz",
         "benefit_4MyVhJ",
         "benefit_W7JMB3",
