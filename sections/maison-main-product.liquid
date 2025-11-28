@@ -530,6 +530,12 @@
               {% endif %}
             {% endfor %}
 
+            {% render 'product-custom-variant-picker',
+              product: product,
+              uniq_id: product_form_id,
+              block: block
+            %}
+
             <!-- Hidden Variant Picker Form -->
             <div class="maison_commerce_maison_main_product__variant-picker-hidden" style="display: none;">
               {%- comment -%} Create variant-selects element directly {%- endcomment -%}
