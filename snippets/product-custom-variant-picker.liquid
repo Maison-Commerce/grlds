@@ -39,7 +39,7 @@
         <a href="{{ product.url }}" class="maison-variant-related-pr-item current">
             <img src="{{ product.featured_image.src | image_url }}">
         </a>
-        {% for item in product.metafields.custom.related_products %}
+        {% for item in product.metafields.custom.related_products.value %}
             <a href="{{ item.url }}" class="maison-variant-related-pr-item">
                 <img src="{{ item.featured_image.src | image_url }}">
             </a>
