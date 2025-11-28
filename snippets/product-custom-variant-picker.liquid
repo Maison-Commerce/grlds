@@ -1,3 +1,7 @@
 <div class="maison-variant-related-pr">
+    <a href="{{ product.url }}" class="maison-variant-related-pr-item">
 
+    </a>
+    {% for item in product.metafields.custom.related_products %}
+    {% endfor %}
 </div>
