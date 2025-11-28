@@ -1,10 +1,6 @@
 <!-- /snippets/product-variant-options.liquid -->
-{%- assign current_variant = product.selected_or_first_available_variant -%}
 
 <div class="product__block__variants-custom ">
-  <script>
-    console.log('metafields', {{ product.metafields.custom.related_products_stone.value | json }})
-  </script>
   <style>
     .custom-variant-picker {
       display: flex;
