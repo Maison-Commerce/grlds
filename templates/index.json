@@ -270,6 +270,45 @@
         "padding_bottom": 36
       }
     },
+    "maison_img_with_txt_button_FUTWVG": {
+      "type": "maison-img-with-txt-button",
+      "name": "Maison Img - Text Button",
+      "settings": {
+        "section_heading": "inspired by evenings in the pines",
+        "section_description": "<p>Gerald's Candles blend refined perfumery with modern design</p>",
+        "main_image": "shopify://shop_images/5d926139954951df0c2bccdbea940df456c3bf07.png",
+        "icon_image": "shopify://shop_images/123t34yg45rg54.png",
+        "image_position": "left",
+        "button_text": "View Full Care Guide",
+        "button_link": "shopify://collections/all",
+        "section_bg_color": "#f8f8f8",
+        "content_bg_color": "#f8f8f8",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32,
+        "padding_left_mobile": 0,
+        "padding_right_mobile": 0,
+        "content_padding_desktop": 48,
+        "content_padding_mobile": 32,
+        "heading_font_size_desktop": 40,
+        "heading_font_size_mobile": 24,
+        "heading_color": "#1a1a1a",
+        "description_font_size_desktop": 20,
+        "description_font_size_mobile": 16,
+        "description_color": "#1a1a1abf",
+        "icon_size_desktop": 106,
+        "icon_size_mobile": 77,
+        "button_font_size_desktop": 16,
+        "button_font_size_mobile": 12,
+        "button_height_desktop": 64,
+        "button_height_mobile": 44,
+        "button_border_color": "#1f1a13",
+        "button_text_color": "#1a1a1a"
+      }
+    },
     "maison_blog_slider_FJTygR": {
       "type": "maison-blog-slider",
       "blocks": {
@@ -322,45 +361,6 @@
         "link_font_size": 16,
         "link_color": "#1a1a1a",
         "read_more_text": "Read More"
-      }
-    },
-    "maison_img_with_txt_button_FUTWVG": {
-      "type": "maison-img-with-txt-button",
-      "name": "Maison Img - Text Button",
-      "settings": {
-        "section_heading": "inspired by evenings in the pines",
-        "section_description": "<p>Gerald's Candles blend refined perfumery with modern design</p>",
-        "main_image": "shopify://shop_images/5d926139954951df0c2bccdbea940df456c3bf07.png",
-        "icon_image": "shopify://shop_images/123t34yg45rg54.png",
-        "image_position": "left",
-        "button_text": "View Full Care Guide",
-        "button_link": "shopify://collections/all",
-        "section_bg_color": "#f8f8f8",
-        "content_bg_color": "#f8f8f8",
-        "padding_top_desktop": 0,
-        "padding_bottom_desktop": 0,
-        "padding_left_desktop": 0,
-        "padding_right_desktop": 0,
-        "padding_top_mobile": 32,
-        "padding_bottom_mobile": 32,
-        "padding_left_mobile": 0,
-        "padding_right_mobile": 0,
-        "content_padding_desktop": 48,
-        "content_padding_mobile": 32,
-        "heading_font_size_desktop": 40,
-        "heading_font_size_mobile": 24,
-        "heading_color": "#1a1a1a",
-        "description_font_size_desktop": 20,
-        "description_font_size_mobile": 16,
-        "description_color": "#1a1a1abf",
-        "icon_size_desktop": 106,
-        "icon_size_mobile": 77,
-        "button_font_size_desktop": 16,
-        "button_font_size_mobile": 12,
-        "button_height_desktop": 64,
-        "button_height_mobile": 44,
-        "button_border_color": "#1f1a13",
-        "button_text_color": "#1a1a1a"
       }
     },
     "maison_usps_4AGgTN": {
@@ -426,8 +426,8 @@
     "maison_collection_slider_nqJTdp",
     "maison_img_with_text_96bPrD",
     "maison_propose_product_hBqB84",
-    "featured_collection_XNgCQd",
     "maison_img_with_txt_button_FUTWVG",
+    "featured_collection_XNgCQd",
     "maison_blog_slider_FJTygR",
     "maison_usps_4AGgTN"
   ]
