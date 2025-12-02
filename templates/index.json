@@ -303,7 +303,7 @@
         "description_word_limit": 20,
         "quick_add": "standard",
         "show_secondary_add": false,
-        "columns_mobile": "1",
+        "columns_mobile": "2",
         "swipe_on_mobile": true,
         "padding_top": 44,
         "padding_bottom": 36
