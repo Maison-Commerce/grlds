@@ -122,7 +122,7 @@
             {%- endif -%}
           {%- endfor -%}
           {%- assign middle_image = nil -%}
-          {%- if size_position > 0 and size_values.size > 1 -%}
+          {%- if section.settings.show_middle_size_image and size_position > 0 and size_values.size > 1 -%}
             {%- assign mid_index = size_values.size | divided_by: 2 -%}
             {%- assign mid_value = '' -%}
             {%- for v in size_values -%}
@@ -477,6 +477,13 @@
       "id": "show_secondary_image",
       "default": false,
       "label": "t:sections.featured-collection.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_middle_size_image",
+      "default": true,
+      "label": "Show middle-size variant image",
+      "info": "Use the middle size variant's image as the product card image."
     },
     {
       "type": "checkbox",

@@ -35,6 +35,13 @@
       "default": "LIMITED EDITION"
     },
     {
+      "type": "checkbox",
+      "id": "auto_select_middle_size",
+      "label": "Auto-select middle size on load",
+      "info": "Automatically selects the middle size variant and syncs the gallery when the page opens.",
+      "default": true
+    },
+    {
       "type": "header",
       "content": "Product Information"
     },
@@ -1923,6 +1930,10 @@
 
     // Select the middle Size thumbnail by default (unless a specific variant is in the URL)
     (function selectDefaultMiddleSize() {
+      {%- unless section.settings.auto_select_middle_size -%}
+        return; // disabled via section settings
+      {%- endunless -%}
+
       const params = new URLSearchParams(window.location.search);
       if (params.has('variant')) return; // respect an explicit variant link
 
