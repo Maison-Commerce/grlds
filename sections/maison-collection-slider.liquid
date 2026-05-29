@@ -351,7 +351,7 @@
               {% assign skip_card_product_styles = true %}
             {% endif %}
 
-            <div class="swiper-slide maison_commerce_maison_collection_slider__slide">
+            <div class="swiper-slide maison_commerce_maison_collection_slider__slide" data-product-id="{{ product.id }}">
               <div class="maison_commerce_maison_collection_slider__product">
                 {% render 'card-product', 
                   card_product: product, 
@@ -392,6 +392,45 @@
           </div>
         </div>
       </div>
+
+      {%- comment -%} Map each product to its middle-size variant image {%- endcomment -%}
+      <script type="application/json" id="maison-collection-slider-variant-images-{{ section.id }}">
+        {
+          {%- assign map_first = true -%}
+          {%- for product in collection_products -%}
+            {%- assign size_position = 0 -%}
+            {%- for option in product.options_with_values -%}
+              {%- assign oname = option.name | downcase -%}
+              {%- if oname == 'size' -%}
+                {%- assign size_position = forloop.index -%}
+                {%- assign size_values = option.values -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if size_position > 0 and size_values.size > 1 -%}
+              {%- assign mid_index = size_values.size | divided_by: 2 -%}
+              {%- assign mid_value = size_values[mid_index] | append: '' -%}
+              {%- assign opt_index0 = size_position | minus: 1 -%}
+              {%- assign chosen_image = null -%}
+              {%- for variant in product.variants -%}
+                {%- if variant.options[opt_index0] == mid_value and variant.image -%}
+                  {%- assign chosen_image = variant.image -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if chosen_image -%}
+                {%- unless map_first -%},{%- endunless -%}
+                "{{ product.id }}": {
+                  "src": "{{ chosen_image | image_url: width: 533 }}",
+                  "srcset": "{{ chosen_image | image_url: width: 360 }} 360w, {{ chosen_image | image_url: width: 533 }} 533w, {{ chosen_image | image_url: width: 720 }} 720w, {{ chosen_image | image_url: width: 940 }} 940w",
+                  "width": {{ chosen_image.width }},
+                  "height": {{ chosen_image.height }}
+                }
+                {%- assign map_first = false -%}
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        }
+      </script>
 
       <!-- Desktop Progress Bar -->
       <div class="maison_commerce_maison_collection_slider__progress maison_commerce_maison_collection_slider__progress--desktop">
@@ -719,8 +758,37 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    const sectionRoot = document.querySelector('#shopify-section-{{ section.id }}') || document;
+
+    // Swap each card's main image to its middle-size variant image
+    (function applyMiddleSizeImages() {
+      const variantImagesEl = document.getElementById('maison-collection-slider-variant-images-{{ section.id }}');
+      if (!variantImagesEl) return;
+
+      let variantImages = {};
+      try {
+        variantImages = JSON.parse(variantImagesEl.textContent);
+      } catch (e) {
+        return;
+      }
+
+      sectionRoot.querySelectorAll('.maison_commerce_maison_collection_slider__slide').forEach(function(slide) {
+        const pid = slide.dataset.productId;
+        if (!pid || !variantImages[pid]) return;
+
+        const data = variantImages[pid];
+        const img = slide.querySelector('.card__media img');
+        if (!img) return;
+
+        if (data.srcset) img.setAttribute('srcset', data.srcset);
+        if (data.src) img.setAttribute('src', data.src);
+        if (data.width) img.setAttribute('width', data.width);
+        if (data.height) img.setAttribute('height', data.height);
+      });
+    })();
+
     const swiperContainer = document.querySelector('.maison_commerce_maison_collection_slider__swiper');
-    
+
     if (swiperContainer) {
       const desktopProgressBar = document.querySelector('.maison_commerce_maison_collection_slider__progress--desktop .maison_commerce_maison_collection_slider__progress-bar');
       const mobileProgressBar = document.querySelector('.maison_commerce_maison_collection_slider__progress--mobile .maison_commerce_maison_collection_slider__progress-bar');

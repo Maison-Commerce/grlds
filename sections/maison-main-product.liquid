@@ -1921,6 +1921,21 @@
     // Initialize on load
     initMobileGallerySwiper();
 
+    // Select the middle Size thumbnail by default (unless a specific variant is in the URL)
+    (function selectDefaultMiddleSize() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('variant')) return; // respect an explicit variant link
+
+      const sizeThumbnails = productInfo.querySelectorAll('.maison_commerce_maison_main_product__variant-thumbnail');
+      if (sizeThumbnails.length < 2) return;
+
+      const middleIndex = Math.floor(sizeThumbnails.length / 2);
+      const middleThumb = sizeThumbnails[middleIndex];
+      if (middleThumb && !middleThumb.classList.contains('active')) {
+        middleThumb.click();
+      }
+    })();
+
     // Reinitialize on resize
     let resizeTimeout;
     window.addEventListener('resize', function() {
