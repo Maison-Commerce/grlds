@@ -408,7 +408,7 @@
           <div class="swiper maison_commerce_maison_main_product__gallery-slider">
             <div class="swiper-wrapper">
               {% for media in product.media %}
-                <div class="swiper-slide maison_commerce_maison_main_product__gallery-slide">
+                <div class="swiper-slide maison_commerce_maison_main_product__gallery-slide" data-media-id="{{ media.id }}">
                   {% if forloop.first and section.settings.show_badge %}
                     <div class="maison_commerce_maison_main_product__badge">
                       {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
@@ -1495,6 +1495,30 @@
     const variantMetafieldsScript = document.getElementById('variant-metafields-{{ section.id }}');
     const variantMetafields = variantMetafieldsScript ? JSON.parse(variantMetafieldsScript.textContent) : {};
 
+    // Map each variant to its featured media id (for mobile slider sync)
+    const variantMediaMap = {
+      {%- for variant in product.variants -%}
+        "{{ variant.id }}": {{ variant.featured_media.id | default: 'null' }}{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    };
+
+    // Reference to the mobile gallery Swiper instance
+    let mobileSwiper = null;
+
+    // Move the mobile slider to the slide matching the variant's featured media
+    function goToVariantMedia(variant) {
+      if (!mobileSwiper || mobileSwiper.destroyed || !variant) return;
+      const mediaId = variantMediaMap[variant.id];
+      if (!mediaId) return;
+      const slides = mobileSwiper.slides;
+      for (let i = 0; i < slides.length; i++) {
+        if (parseInt(slides[i].dataset.mediaId, 10) === mediaId) {
+          mobileSwiper.slideTo(i);
+          break;
+        }
+      }
+    }
+
     // Store settings from Liquid
     const currencyCodeEnabled = {{ settings.currency_code_enabled | default: false }};
     const saleMessage = {{ settings.sale_message | json }};
@@ -1792,6 +1816,9 @@
       // Update button price (simple price without discount)
       updateButtonPrice(selectedVariant);
 
+      // Sync mobile gallery slider to the variant's image
+      goToVariantMedia(selectedVariant);
+
       // Update URL
       const productUrl = productInfo.dataset.url || '{{ product.url }}';
       const updateUrl = productInfo.dataset.updateUrl !== 'false';
@@ -1848,7 +1875,7 @@
         const swiperContainer = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-slider');
         
         if (swiperContainer && !swiperContainer.swiper) {
-          const swiper = new Swiper('.maison_commerce_maison_main_product__gallery-slider', {
+          mobileSwiper = new Swiper('.maison_commerce_maison_main_product__gallery-slider', {
             slidesPerView: 1,
             spaceBetween: 8,
             loop: false,
@@ -1886,6 +1913,7 @@
         const swiperContainer = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-slider');
         if (swiperContainer && swiperContainer.swiper) {
           swiperContainer.swiper.destroy(true, true);
+          mobileSwiper = null;
         }
       }
     }
