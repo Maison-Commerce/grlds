@@ -163,12 +163,42 @@
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
                 {% assign skip_card_product_styles = false %}
+
+                {%- comment -%} Find the middle-size variant image {%- endcomment -%}
+                {%- assign size_position = 0 -%}
+                {%- assign size_values = nil -%}
+                {%- for option in product.options_with_values -%}
+                  {%- assign oname = option.name | downcase -%}
+                  {%- if oname == 'size' -%}
+                    {%- assign size_position = forloop.index -%}
+                    {%- assign size_values = option.values -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- assign middle_image = nil -%}
+                {%- if size_position > 0 and size_values.size > 1 -%}
+                  {%- assign mid_index = size_values.size | divided_by: 2 -%}
+                  {%- assign mid_value = size_values[mid_index] | append: '' -%}
+                  {%- assign opt_index0 = size_position | minus: 1 -%}
+                  {%- for variant in product.variants -%}
+                    {%- if variant.options[opt_index0] == mid_value and variant.image -%}
+                      {%- assign middle_image = variant.image -%}
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+
                 <li
                   class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                   {% if settings.animations_reveal_on_scroll %}
                     data-cascade
                     style="--animation-order: {{ forloop.index }};"
                   {% endif %}
+                  {%- if middle_image %}
+                    data-middle-src="{{ middle_image | image_url: width: 533 }}"
+                    data-middle-srcset="{{ middle_image | image_url: width: 165 }} 165w, {{ middle_image | image_url: width: 360 }} 360w, {{ middle_image | image_url: width: 533 }} 533w, {{ middle_image | image_url: width: 720 }} 720w, {{ middle_image | image_url: width: 940 }} 940w"
+                    data-middle-width="{{ middle_image.width }}"
+                    data-middle-height="{{ middle_image.height }}"
+                  {%- endif %}
                 >
                   {% render 'card-product',
                     card_product: product,
@@ -204,6 +234,51 @@
     {{ 'mask-arch.svg' | inline_asset_content }}
   {%- endif -%}
 </div>
+
+<script>
+  (function () {
+    // Swap each card's main image to its middle-size variant image.
+    // Data lives on each grid item so it survives facet/sort/pagination AJAX re-renders.
+    function applyMiddleImages(root) {
+      (root || document)
+        .querySelectorAll('#ProductGridContainer .grid__item[data-middle-src]')
+        .forEach(function (li) {
+          var img = li.querySelector('.card__media img');
+          if (!img) return;
+
+          var src = li.getAttribute('data-middle-src');
+          if (!src || img.getAttribute('src') === src) return; // skip if already applied
+
+          var srcset = li.getAttribute('data-middle-srcset');
+          if (srcset) img.setAttribute('srcset', srcset);
+          img.setAttribute('src', src);
+
+          var w = li.getAttribute('data-middle-width');
+          var h = li.getAttribute('data-middle-height');
+          if (w) img.setAttribute('width', w);
+          if (h) img.setAttribute('height', h);
+        });
+    }
+
+    function init() {
+      applyMiddleImages(document);
+
+      var container = document.getElementById('ProductGridContainer');
+      if (container) {
+        var observer = new MutationObserver(function () {
+          applyMiddleImages(container);
+        });
+        observer.observe(container, { childList: true, subtree: true });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
 
 {% schema %}
 {
