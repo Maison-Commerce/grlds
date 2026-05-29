@@ -408,13 +408,23 @@
             {%- endfor -%}
             {%- if size_position > 0 and size_values.size > 1 -%}
               {%- assign mid_index = size_values.size | divided_by: 2 -%}
-              {%- assign mid_value = size_values[mid_index] | append: '' -%}
+              {%- assign mid_value = '' -%}
+              {%- for v in size_values -%}
+                {%- if forloop.index0 == mid_index -%}
+                  {%- capture mid_value -%}{{ v }}{%- endcapture -%}
+                {%- endif -%}
+              {%- endfor -%}
               {%- assign opt_index0 = size_position | minus: 1 -%}
               {%- assign chosen_image = null -%}
               {%- for variant in product.variants -%}
-                {%- if variant.options[opt_index0] == mid_value and variant.image -%}
-                  {%- assign chosen_image = variant.image -%}
-                  {%- break -%}
+                {%- if variant.options[opt_index0] == mid_value -%}
+                  {%- if variant.featured_media -%}
+                    {%- assign chosen_image = variant.featured_media.preview_image -%}
+                    {%- break -%}
+                  {%- elsif variant.image -%}
+                    {%- assign chosen_image = variant.image -%}
+                    {%- break -%}
+                  {%- endif -%}
                 {%- endif -%}
               {%- endfor -%}
               {%- if chosen_image -%}
