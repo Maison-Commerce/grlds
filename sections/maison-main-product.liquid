@@ -143,10 +143,74 @@
           "label": "Content"
         },
         {
-          "type": "richtext",
-          "id": "specs",
-          "label": "Specifications (burning time & weight)",
-          "default": "<p>S | 50h<br/>M | 100h<br/>L | 340h</p><p>S | 520g<br/>M | 1.2kg<br/>L | 3.2kg</p><p>Burning time and weight of candle</p>"
+          "type": "header",
+          "content": "Specifications (burning time & weight)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_specs",
+          "label": "Show specifications table",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "specs_caption",
+          "label": "Caption",
+          "default": "Burning time and weight of candle"
+        },
+        {
+          "type": "text",
+          "id": "spec_1_label",
+          "label": "Row 1 — size",
+          "default": "S"
+        },
+        {
+          "type": "text",
+          "id": "spec_1_burn",
+          "label": "Row 1 — burn time",
+          "default": "50h"
+        },
+        {
+          "type": "text",
+          "id": "spec_1_weight",
+          "label": "Row 1 — weight",
+          "default": "520g"
+        },
+        {
+          "type": "text",
+          "id": "spec_2_label",
+          "label": "Row 2 — size",
+          "default": "M"
+        },
+        {
+          "type": "text",
+          "id": "spec_2_burn",
+          "label": "Row 2 — burn time",
+          "default": "100h"
+        },
+        {
+          "type": "text",
+          "id": "spec_2_weight",
+          "label": "Row 2 — weight",
+          "default": "1.2kg"
+        },
+        {
+          "type": "text",
+          "id": "spec_3_label",
+          "label": "Row 3 — size",
+          "default": "L"
+        },
+        {
+          "type": "text",
+          "id": "spec_3_burn",
+          "label": "Row 3 — burn time",
+          "default": "340h"
+        },
+        {
+          "type": "text",
+          "id": "spec_3_weight",
+          "label": "Row 3 — weight",
+          "default": "3.2kg"
         },
         {
           "type": "image_picker",
@@ -705,9 +769,44 @@
                       </summary>
                       <div class="maison_commerce_maison_main_product__accordion-content">
                         {{ block.settings.content }}
-                        {% if block.settings.specs != blank %}
+                        {% if block.settings.show_specs %}
                           <div class="maison_commerce_maison_main_product__accordion-specs">
-                            {{ block.settings.specs }}
+                            <div class="maison_commerce_maison_main_product__specs-table">
+                              <div class="maison_commerce_maison_main_product__specs-row maison_commerce_maison_main_product__specs-row--head">
+                                <span class="maison_commerce_maison_main_product__specs-cell"></span>
+                                <span class="maison_commerce_maison_main_product__specs-cell">
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2c1.5 3 5 5.5 5 10a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5C9.5 9 10 11 11 11.5 11 9 12 4.5 12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                  </svg>
+                                  <span>Burn time</span>
+                                </span>
+                                <span class="maison_commerce_maison_main_product__specs-cell">
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 3h6l1 3H8l1-3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                    <path d="M5 21 7.5 6h9L19 21H5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                  </svg>
+                                  <span>Weight</span>
+                                </span>
+                              </div>
+                              {% for i in (1..3) %}
+                                {% capture label_key %}spec_{{ i }}_label{% endcapture %}
+                                {% capture burn_key %}spec_{{ i }}_burn{% endcapture %}
+                                {% capture weight_key %}spec_{{ i }}_weight{% endcapture %}
+                                {% assign spec_label = block.settings[label_key] %}
+                                {% assign spec_burn = block.settings[burn_key] %}
+                                {% assign spec_weight = block.settings[weight_key] %}
+                                {% if spec_label != blank or spec_burn != blank or spec_weight != blank %}
+                                  <div class="maison_commerce_maison_main_product__specs-row">
+                                    <span class="maison_commerce_maison_main_product__specs-cell maison_commerce_maison_main_product__specs-size">{{ spec_label }}</span>
+                                    <span class="maison_commerce_maison_main_product__specs-cell">{{ spec_burn }}</span>
+                                    <span class="maison_commerce_maison_main_product__specs-cell">{{ spec_weight }}</span>
+                                  </div>
+                                {% endif %}
+                              {% endfor %}
+                            </div>
+                            {% if block.settings.specs_caption != blank %}
+                              <p class="maison_commerce_maison_main_product__specs-caption">{{ block.settings.specs_caption }}</p>
+                            {% endif %}
                           </div>
                         {% endif %}
                         {% if block.settings.image != blank %}
@@ -1465,16 +1564,69 @@
   }
 
   .maison_commerce_maison_main_product__accordion-specs {
-    margin-top: 12px;
+    margin-top: 16px;
   }
 
-  .maison_commerce_maison_main_product__accordion-specs p {
-    margin: 0 0 8px 0;
+  .maison_commerce_maison_main_product__specs-table {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
   }
 
-  .maison_commerce_maison_main_product__accordion-specs p:last-child {
-    margin-bottom: 0;
+  .maison_commerce_maison_main_product__specs-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+  }
+
+  .maison_commerce_maison_main_product__specs-row + .maison_commerce_maison_main_product__specs-row {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .maison_commerce_maison_main_product__specs-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 8px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #1a1a1a;
+    text-align: center;
+  }
+
+  .maison_commerce_maison_main_product__specs-row--head {
+    background: rgba(235, 234, 232, 0.4);
+  }
+
+  .maison_commerce_maison_main_product__specs-row--head .maison_commerce_maison_main_product__specs-cell {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: rgba(26, 26, 26, 0.6);
+  }
+
+  .maison_commerce_maison_main_product__specs-row--head svg {
+    flex-shrink: 0;
+  }
+
+  .maison_commerce_maison_main_product__specs-size {
+    font-weight: 600;
+  }
+
+  .maison_commerce_maison_main_product__specs-caption {
+    margin: 8px 0 0 0;
+    font-size: 12px;
     color: rgba(26, 26, 26, 0.5);
+    text-align: center;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__specs-cell {
+      font-size: 12px;
+      padding: 8px 6px;
+    }
   }
 
   .maison_commerce_maison_main_product__accordion-image {
