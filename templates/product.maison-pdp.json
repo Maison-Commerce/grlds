@@ -101,7 +101,7 @@
           "type": "accordion",
           "settings": {
             "title": "Characteristics",
-            "content": "<p>Hand-cut natural stone vessels with unique veining patterns<br/>Three-dimensional embossed \"Geralds\" and \"bougies 1907\" branding<br/>Available scents: Oud, Figs, Roses, Caramel<br/>Refillable design for endless reuse<br/>Ships in handcrafted wooden gift box</p>",
+            "content": "<ul><li>Hand-cut natural stone vessels with unique veining patterns</li><li>Three-dimensional embossed \"Geralds\" and \"bougies 1907\" branding</li><li>Available scents: Oud, Figs, Roses, Caramel</li><li>Refillable design for endless reuse</li><li>Ships in handcrafted wooden gift box</li></ul>",
             "show_specs": true,
             "specs_caption": "",
             "spec_1_label": "S",
