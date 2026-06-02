@@ -480,7 +480,25 @@
                       {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
                     </div>
                   {% endif %}
-                  {% render 'product-media', media: media %}
+                  {% if media.media_type == 'video' %}
+                    {%- assign sorted_video_sources = media.sources | sort: 'width' | reverse -%}
+                    <video
+                      class="maison_commerce_maison_main_product__gallery-video"
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      preload="metadata"
+                      poster="{{ media.preview_image | image_url: width: 1100 }}"
+                      data-media-id="{{ media.id }}"
+                    >
+                      {%- for source in sorted_video_sources -%}
+                        <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                      {%- endfor -%}
+                    </video>
+                  {% else %}
+                    {% render 'product-media', media: media %}
+                  {% endif %}
                 </div>
               {% endfor %}
             </div>
@@ -496,7 +514,25 @@
                       {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
                     </div>
                   {% endif %}
-                  {% render 'product-media', media: media %}
+                  {% if media.media_type == 'video' %}
+                    {%- assign sorted_video_sources = media.sources | sort: 'width' | reverse -%}
+                    <video
+                      class="maison_commerce_maison_main_product__gallery-video"
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      preload="metadata"
+                      poster="{{ media.preview_image | image_url: width: 1100 }}"
+                      data-media-id="{{ media.id }}"
+                    >
+                      {%- for source in sorted_video_sources -%}
+                        <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                      {%- endfor -%}
+                    </video>
+                  {% else %}
+                    {% render 'product-media', media: media %}
+                  {% endif %}
                 </div>
               {% endfor %}
             </div>
@@ -932,9 +968,11 @@
     border-radius: 0;
   }
 
-  .maison_commerce_maison_main_product__gallery-item img{
+  .maison_commerce_maison_main_product__gallery-item img,
+  .maison_commerce_maison_main_product__gallery-item video{
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 
   @media (max-width: 990px) {
@@ -967,7 +1005,8 @@
     aspect-ratio: 1;
   }
   
-  .maison_commerce_maison_main_product__gallery-slide img {
+  .maison_commerce_maison_main_product__gallery-slide img,
+  .maison_commerce_maison_main_product__gallery-slide video {
     width: 100%;
     height: 100%;
     object-fit: cover;
