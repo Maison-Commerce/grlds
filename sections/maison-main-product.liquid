@@ -1940,10 +1940,14 @@
       const sizeThumbnails = productInfo.querySelectorAll('.maison_commerce_maison_main_product__variant-thumbnail');
       if (sizeThumbnails.length < 2) return;
 
-      const middleIndex = Math.floor(sizeThumbnails.length / 2);
-      const middleThumb = sizeThumbnails[middleIndex];
-      if (middleThumb && !middleThumb.classList.contains('active')) {
-        middleThumb.click();
+      // Refill products default to the large (last) size; others to the middle
+      const isRefill = {% if product.title contains 'Refill' or product.title contains 'refill' %}true{% else %}false{% endif %};
+      const targetIndex = isRefill
+        ? sizeThumbnails.length - 1
+        : Math.floor(sizeThumbnails.length / 2);
+      const targetThumb = sizeThumbnails[targetIndex];
+      if (targetThumb && !targetThumb.classList.contains('active')) {
+        targetThumb.click();
       }
     })();
 

@@ -177,6 +177,10 @@
                 {%- assign middle_image = nil -%}
                 {%- if section.settings.show_middle_size_image and size_position > 0 and size_values.size > 1 -%}
                   {%- assign mid_index = size_values.size | divided_by: 2 -%}
+                  {%- assign title_dc = product.title | downcase -%}
+                  {%- if title_dc contains 'refill' -%}
+                    {%- assign mid_index = size_values.size | minus: 1 -%}
+                  {%- endif -%}
                   {%- assign mid_value = '' -%}
                   {%- for v in size_values -%}
                     {%- if forloop.index0 == mid_index -%}
