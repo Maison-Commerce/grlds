@@ -141,6 +141,17 @@
           "type": "richtext",
           "id": "content",
           "label": "Content"
+        },
+        {
+          "type": "richtext",
+          "id": "specs",
+          "label": "Specifications (burning time & weight)",
+          "default": "<p>S | 50h<br/>M | 100h<br/>L | 340h</p><p>S | 520g<br/>M | 1.2kg<br/>L | 3.2kg</p><p>Burning time and weight of candle</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
         }
       ]
     },
@@ -694,6 +705,23 @@
                       </summary>
                       <div class="maison_commerce_maison_main_product__accordion-content">
                         {{ block.settings.content }}
+                        {% if block.settings.specs != blank %}
+                          <div class="maison_commerce_maison_main_product__accordion-specs">
+                            {{ block.settings.specs }}
+                          </div>
+                        {% endif %}
+                        {% if block.settings.image != blank %}
+                          <div class="maison_commerce_maison_main_product__accordion-image">
+                            {{
+                              block.settings.image
+                              | image_url: width: 1000
+                              | image_tag:
+                                loading: 'lazy',
+                                class: 'maison_commerce_maison_main_product__accordion-image-img',
+                                alt: block.settings.image.alt
+                            }}
+                          </div>
+                        {% endif %}
                       </div>
                     </details>
                   </div>
@@ -1434,6 +1462,29 @@
       padding-bottom: 12px;
       font-size: 12px;
     }
+  }
+
+  .maison_commerce_maison_main_product__accordion-specs {
+    margin-top: 12px;
+  }
+
+  .maison_commerce_maison_main_product__accordion-specs p {
+    margin: 0 0 8px 0;
+  }
+
+  .maison_commerce_maison_main_product__accordion-specs p:last-child {
+    margin-bottom: 0;
+    color: rgba(26, 26, 26, 0.5);
+  }
+
+  .maison_commerce_maison_main_product__accordion-image {
+    margin-top: 12px;
+  }
+
+  .maison_commerce_maison_main_product__accordion-image-img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   /* Promo */
