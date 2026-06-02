@@ -316,7 +316,9 @@
       preload="metadata"
       {% if section.settings.main_image != blank %}poster="{{ section.settings.main_image | image_url: width: 2000 }}"{% endif %}
     >
-      {%- for source in section.settings.main_video.sources -%}
+      {%- comment -%} Highest resolution first so the browser picks the best quality {%- endcomment -%}
+      {%- assign sorted_sources = section.settings.main_video.sources | sort: 'width' | reverse -%}
+      {%- for source in sorted_sources -%}
         <source src="{{ source.url }}" type="{{ source.mime_type }}">
       {%- endfor -%}
     </video>
