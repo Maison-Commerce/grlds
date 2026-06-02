@@ -66,7 +66,17 @@
           "settings": {
             "title": "Ingredients",
             "content": "<p>Premium natural soy wax blend with high-quality fragrance oils. Hand-poured into sculpted natural stone vessels (Green Onyx, Travertine, or Emperador marble). Cotton wicks for clean burning.</p>",
-            "specs": "<p>S | 50h<br/>M | 100h<br/>L | 340h</p><p>S | 520g<br/>M | 1.2kg<br/>L | 3.2kg</p><p>Burning time and weight of candle</p>"
+            "show_specs": true,
+            "specs_caption": "Burning time and weight of candle",
+            "spec_1_label": "S",
+            "spec_1_burn": "50h",
+            "spec_1_weight": "520g",
+            "spec_2_label": "M",
+            "spec_2_burn": "100h",
+            "spec_2_weight": "1.2kg",
+            "spec_3_label": "L",
+            "spec_3_burn": "340h",
+            "spec_3_weight": "3.2kg"
           }
         },
         "accordion_cBLmFa": {
@@ -74,15 +84,35 @@
           "settings": {
             "title": "Directions for use",
             "content": "<p>Trim wick to ¼\" before each burn. Burn until wax melts evenly across surface (2-3 hours minimum). Never burn longer than 4 hours at a time. Keep away from drafts and flammable materials. When candle is finished, order a refill to continue enjoying your stone vessel.</p>",
-            "specs": "<p>S | 50h<br/>M | 100h<br/>L | 340h</p><p>S | 520g<br/>M | 1.2kg<br/>L | 3.2kg</p><p>Burning time and weight of candle</p>"
+            "show_specs": true,
+            "specs_caption": "Burning time and weight of candle",
+            "spec_1_label": "S",
+            "spec_1_burn": "50h",
+            "spec_1_weight": "520g",
+            "spec_2_label": "M",
+            "spec_2_burn": "100h",
+            "spec_2_weight": "1.2kg",
+            "spec_3_label": "L",
+            "spec_3_burn": "340h",
+            "spec_3_weight": "3.2kg"
           }
         },
         "accordion_HT4Vt3": {
           "type": "accordion",
           "settings": {
             "title": "Characteristics",
-            "content": "<p>Hand-cut natural stone vessels with unique veining patterns<br/>Three-dimensional embossed \"Geralds\" and \"bougies 1907\" branding<br/>Available scents: Oud, Figs, Roses, Caramel<br/>Burn time varies by size (set includes three sizes)<br/>Refillable design for endless reuse<br/>Ships in handcrafted wooden gift box</p>",
-            "specs": "<p>S | 50h<br/>M | 100h<br/>L | 340h</p><p>S | 520g<br/>M | 1.2kg<br/>L | 3.2kg</p><p>Burning time and weight of candle</p>",
+            "content": "<p>Hand-cut natural stone vessels with unique veining patterns<br/>Three-dimensional embossed \"Geralds\" and \"bougies 1907\" branding<br/>Available scents: Oud, Figs, Roses, Caramel<br/>Refillable design for endless reuse<br/>Ships in handcrafted wooden gift box</p>",
+            "show_specs": true,
+            "specs_caption": "Burning time and weight of candle",
+            "spec_1_label": "S",
+            "spec_1_burn": "50h",
+            "spec_1_weight": "520g",
+            "spec_2_label": "M",
+            "spec_2_burn": "100h",
+            "spec_2_weight": "1.2kg",
+            "spec_3_label": "L",
+            "spec_3_burn": "340h",
+            "spec_3_weight": "3.2kg",
             "image": "shopify://shop_images/929c0416-48a2-4d52-bab6-f991346ae6a0.jpg"
           }
         },
@@ -91,7 +121,17 @@
           "settings": {
             "title": "Returns & Exchanges",
             "content": "<p>30-day return policy for unopened items in original packaging. Stone vessels may show natural variations in pattern and color—this is not considered a defect. Contact us at [email] for return authorization. Free return shipping on defective items.</p>",
-            "specs": "<p>S | 50h<br/>M | 100h<br/>L | 340h</p><p>S | 520g<br/>M | 1.2kg<br/>L | 3.2kg</p><p>Burning time and weight of candle</p>"
+            "show_specs": true,
+            "specs_caption": "Burning time and weight of candle",
+            "spec_1_label": "S",
+            "spec_1_burn": "50h",
+            "spec_1_weight": "520g",
+            "spec_2_label": "M",
+            "spec_2_burn": "100h",
+            "spec_2_weight": "1.2kg",
+            "spec_3_label": "L",
+            "spec_3_burn": "340h",
+            "spec_3_weight": "3.2kg"
           }
         },
         "promo_6AYbxr": {
