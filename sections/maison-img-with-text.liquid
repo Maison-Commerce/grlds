@@ -20,6 +20,12 @@
       "label": "Main Image"
     },
     {
+      "type": "video",
+      "id": "main_video",
+      "label": "Main Video",
+      "info": "If set, the video replaces the main image. It plays automatically, muted and looping. The main image is used as the poster while it loads."
+    },
+    {
       "type": "select",
       "id": "img_position",
       "label": "Image postion on mobile",
@@ -293,6 +299,39 @@
 }
 {% endschema %}
 
+{%- assign has_media = false -%}
+{%- if section.settings.main_image != blank or section.settings.main_video != blank -%}
+  {%- assign has_media = true -%}
+{%- endif -%}
+
+{%- comment -%} Render the main media: video (autoplay, muted, looping) takes priority over the image {%- endcomment -%}
+{%- capture main_media -%}
+  {%- if section.settings.main_video != blank -%}
+    <video
+      class="maison_commerce_maison_img_with_text__image"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      {% if section.settings.main_image != blank %}poster="{{ section.settings.main_image | image_url: width: 2000 }}"{% endif %}
+    >
+      {%- for source in section.settings.main_video.sources -%}
+        <source src="{{ source.url }}" type="{{ source.mime_type }}">
+      {%- endfor -%}
+    </video>
+  {%- elsif section.settings.main_image != blank -%}
+    {{
+      section.settings.main_image
+      | image_url: width: 2000
+      | image_tag:
+        loading: 'lazy',
+        class: 'maison_commerce_maison_img_with_text__image',
+        alt: section.settings.main_image.alt
+    }}
+  {%- endif -%}
+{%- endcapture -%}
+
 <div class="maison_commerce_maison_img_with_text">
   <div class="maison_commerce_maison_img_with_text__wrapper">
     {% assign image_first = false %}
@@ -300,17 +339,10 @@
       {% assign image_first = true %}
     {% endif %}
 
-    {% if image_first and section.settings.main_image != blank %}
+    {% if image_first and has_media %}
       <div class="maison_commerce_maison_img_with_text__image-container">
         <div class="maison_commerce_maison_img_with_text__image-wrapper">
-          {{
-            section.settings.main_image
-            | image_url: width: 2000
-            | image_tag:
-              loading: 'lazy',
-              class: 'maison_commerce_maison_img_with_text__image',
-              alt: section.settings.main_image.alt
-          }}
+          {{ main_media }}
         </div>
       </div>
     {% endif %}
@@ -354,17 +386,10 @@
     </div>
 
     {% unless image_first %}
-      {% if section.settings.main_image != blank %}
+      {% if has_media %}
         <div class="maison_commerce_maison_img_with_text__image-container">
           <div class="maison_commerce_maison_img_with_text__image-wrapper">
-            {{
-              section.settings.main_image
-              | image_url: width: 2000
-              | image_tag:
-                loading: 'lazy',
-                class: 'maison_commerce_maison_img_with_text__image',
-                alt: section.settings.main_image.alt
-            }}
+            {{ main_media }}
             {% if section.settings.overlay_image != blank %}
               <div class="maison_commerce_maison_img_with_text__overlay">
                 {{
