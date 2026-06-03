@@ -58,28 +58,72 @@
           "type": "accordion",
           "settings": {
             "title": "Ingredients",
-            "content": ""
+            "content": "",
+            "show_specs": true,
+            "specs_caption": "Burning time and weight of candle",
+            "spec_1_label": "S",
+            "spec_1_burn": "50h",
+            "spec_1_weight": "520g",
+            "spec_2_label": "M",
+            "spec_2_burn": "100h",
+            "spec_2_weight": "1.2kg",
+            "spec_3_label": "L",
+            "spec_3_burn": "340h",
+            "spec_3_weight": "3.2kg"
           }
         },
         "accordion_cBLmFa": {
           "type": "accordion",
           "settings": {
             "title": "Directions for use",
-            "content": ""
+            "content": "",
+            "show_specs": true,
+            "specs_caption": "Burning time and weight of candle",
+            "spec_1_label": "S",
+            "spec_1_burn": "50h",
+            "spec_1_weight": "520g",
+            "spec_2_label": "M",
+            "spec_2_burn": "100h",
+            "spec_2_weight": "1.2kg",
+            "spec_3_label": "L",
+            "spec_3_burn": "340h",
+            "spec_3_weight": "3.2kg"
           }
         },
         "accordion_HT4Vt3": {
           "type": "accordion",
           "settings": {
             "title": "Characteristics",
-            "content": ""
+            "content": "",
+            "show_specs": true,
+            "specs_caption": "Burning time and weight of candle",
+            "spec_1_label": "S",
+            "spec_1_burn": "50h",
+            "spec_1_weight": "520g",
+            "spec_2_label": "M",
+            "spec_2_burn": "100h",
+            "spec_2_weight": "1.2kg",
+            "spec_3_label": "L",
+            "spec_3_burn": "340h",
+            "spec_3_weight": "3.2kg"
           }
         },
         "accordion_hDGrec": {
           "type": "accordion",
           "settings": {
             "title": "Returns & Exchanges",
-            "content": ""
+            "content": "",
+            "show_specs": true,
+            "specs_caption": "Burning time and weight of candle",
+            "spec_1_label": "S",
+            "spec_1_burn": "50h",
+            "spec_1_weight": "520g",
+            "spec_2_label": "M",
+            "spec_2_burn": "100h",
+            "spec_2_weight": "1.2kg",
+            "spec_3_label": "L",
+            "spec_3_burn": "340h",
+            "spec_3_weight": "3.2kg"
           }
         },
         "promo_6AYbxr": {
@@ -106,6 +150,7 @@
         "gallery_layout": "grid",
         "show_badge": true,
         "badge_text": "LIMITED EDITION",
+        "auto_select_middle_size": true,
         "show_rating": true,
         "rating_text": "",
         "show_shipping_info": true,
@@ -529,7 +574,7 @@
       "settings": {
         "section_heading": "Why You'll Love It",
         "section_description": "<p>Small-batch poured. Clean-burn soy blend wax. Designed to glow</p>",
-        "main_image": "shopify://shop_images/49bbd9f4aaccf66c1b9955ce09c9dda9d1beddec.png",
+        "main_video": "shopify://files/videos/Kaarsen aan en uit.mp4",
         "img_position": "top",
         "image_position": "right",
         "section_bg_color": "#ffffff",
@@ -621,6 +666,7 @@
         "image_shape": "default",
         "image_no_crop": false,
         "show_secondary_image": false,
+        "show_middle_size_image": true,
         "show_vendor": false,
         "show_rating": false,
         "show_scroll_tags": false,
