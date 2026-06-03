@@ -66,7 +66,7 @@
           "settings": {
             "title": "Ingredients",
             "content": "<p>Premium natural soy wax blend with high-quality fragrance oils. Hand-poured into sculpted natural stone vessels (Green Onyx, Travertine, or Emperador marble). Cotton wicks for clean burning.</p>",
-            "show_specs": true,
+            "show_specs": false,
             "specs_caption": "Burning time and weight of candle",
             "spec_1_label": "S",
             "spec_1_burn": "50h",
@@ -84,7 +84,7 @@
           "settings": {
             "title": "Directions for use",
             "content": "<p>Trim wick to ¼\" before each burn. Burn until wax melts evenly across surface (2-3 hours minimum). Never burn longer than 4 hours at a time. Keep away from drafts and flammable materials. When candle is finished, order a refill to continue enjoying your stone vessel.</p>",
-            "show_specs": true,
+            "show_specs": false,
             "specs_caption": "Burning time and weight of candle",
             "spec_1_label": "S",
             "spec_1_burn": "50h",
@@ -121,7 +121,7 @@
           "settings": {
             "title": "Returns & Exchanges",
             "content": "<p>30-day return policy for unopened items in original packaging. Stone vessels may show natural variations in pattern and color—this is not considered a defect. Contact us at [email] for return authorization. Free return shipping on defective items.</p>",
-            "show_specs": true,
+            "show_specs": false,
             "specs_caption": "Burning time and weight of candle",
             "spec_1_label": "S",
             "spec_1_burn": "50h",
