@@ -112,7 +112,7 @@
           "type": "accordion",
           "settings": {
             "title": "Returns & Exchanges",
-            "content": "",
+            "content": "<p>30-day return policy for unopened items in original packaging. Stone vessels may show natural variations in pattern and color—this is not considered a defect. Contact us at [email] for return authorization. Free return shipping on defective items.</p>",
             "show_specs": false,
             "specs_caption": "Burning time and weight of candle",
             "spec_1_label": "S",
