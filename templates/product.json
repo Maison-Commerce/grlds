@@ -59,7 +59,7 @@
           "settings": {
             "title": "Ingredients",
             "content": "",
-            "show_specs": true,
+            "show_specs": false,
             "specs_caption": "Burning time and weight of candle",
             "spec_1_label": "S",
             "spec_1_burn": "50h",
@@ -77,7 +77,7 @@
           "settings": {
             "title": "Directions for use",
             "content": "",
-            "show_specs": true,
+            "show_specs": false,
             "specs_caption": "Burning time and weight of candle",
             "spec_1_label": "S",
             "spec_1_burn": "50h",
@@ -113,7 +113,7 @@
           "settings": {
             "title": "Returns & Exchanges",
             "content": "",
-            "show_specs": true,
+            "show_specs": false,
             "specs_caption": "Burning time and weight of candle",
             "spec_1_label": "S",
             "spec_1_burn": "50h",
