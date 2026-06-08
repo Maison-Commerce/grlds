@@ -648,7 +648,8 @@
                   </div>
                   <div class="maison_commerce_maison_main_product__variant-options">
                     {% for value in option.values %}
-                      {%- assign scent = metaobjects.scent[value | handleize] -%}
+                      {%- assign scent_handle = value | handleize -%}
+                      {%- assign scent = metaobjects.scent[scent_handle] -%}
                       <button
                         type="button"
                         class="maison_commerce_maison_main_product__variant-option{% if scent.image != blank %} maison_commerce_maison_main_product__variant-option--has-img{% endif %}{% if value == option.selected_value %} active{% endif %}"
