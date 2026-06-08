@@ -640,18 +640,33 @@
               {% if option.name != 'Size' %}
                 {% assign option_index = forloop.index %}
                 <div class="maison_commerce_maison_main_product__variant maison_commerce_maison_main_product__variant--smell">
-                  <div class="maison_commerce_maison_main_product__variant-label">
-                    {{ option.name | upcase }}:
+                  <div class="maison_commerce_maison_main_product__variant-header">
+                    <span class="maison_commerce_maison_main_product__variant-label">{{ option.name | upcase }}:</span>
+                    <span class="maison_commerce_maison_main_product__variant-value" id="selected-smell-{{ section.id }}">
+                      {{ option.selected_value }}
+                    </span>
                   </div>
                   <div class="maison_commerce_maison_main_product__variant-options">
                     {% for value in option.values %}
+                      {%- assign scent = metaobjects.scent[value | handleize] -%}
                       <button
                         type="button"
-                        class="maison_commerce_maison_main_product__variant-option{% if value == option.selected_value %} active{% endif %}"
+                        class="maison_commerce_maison_main_product__variant-option{% if scent.image != blank %} maison_commerce_maison_main_product__variant-option--has-img{% endif %}{% if value == option.selected_value %} active{% endif %}"
                         data-value="{{ value }}"
                         data-option-position="{{ option_index }}"
+                        aria-label="{{ value }}"
                       >
-                        {{ value | upcase }}
+                        {% if scent.image != blank %}
+                          <span class="maison_commerce_maison_main_product__variant-option-img">
+                            {{
+                              scent.image
+                              | image_url: width: 160
+                              | image_tag: loading: 'lazy', alt: value
+                            }}
+                          </span>
+                        {% else %}
+                          {{ value | upcase }}
+                        {% endif %}
                       </button>
                     {% endfor %}
                   </div>
@@ -1383,6 +1398,49 @@
     outline-color: #1a1a1a;
   }
 
+  /* Smell swatch (image only) */
+  .maison_commerce_maison_main_product__variant-option--has-img {
+    padding: 0;
+    width: 64px;
+    height: 64px;
+    background: #f8f8f8;
+    outline: none;
+    border: 1.5px solid transparent;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  .maison_commerce_maison_main_product__variant-option--has-img:hover {
+    outline: none;
+    border-color: #2d2d2d;
+  }
+
+  .maison_commerce_maison_main_product__variant-option--has-img.active {
+    outline: none;
+    border-color: #2d2d2d;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__variant-option--has-img {
+      width: 60px;
+      height: 60px;
+      border-width: 1.406px;
+    }
+  }
+
+  .maison_commerce_maison_main_product__variant-option-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .maison_commerce_maison_main_product__variant-option-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   .maison_commerce_maison_main_product__variant-picker-hidden {
     display: none;
   }
@@ -1943,7 +2001,13 @@
         const sameGroup = productInfo.querySelectorAll(`[data-option-position="${optionPosition}"].maison_commerce_maison_main_product__variant-option`);
         sameGroup.forEach(o => o.classList.remove('active'));
         this.classList.add('active');
-        
+
+        // Update selected smell label display
+        const selectedSmellEl = productInfo.querySelector('#selected-smell-{{ section.id }}');
+        if (selectedSmellEl) {
+          selectedSmellEl.textContent = value;
+        }
+
         // Find and trigger the variant-selects component
         const variantSelects = productInfo.querySelector('variant-selects');
         if (variantSelects) {
