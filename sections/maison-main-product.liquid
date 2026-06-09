@@ -42,6 +42,23 @@
       "default": true
     },
     {
+      "type": "select",
+      "id": "smell_swatch_style",
+      "label": "Smell option style",
+      "info": "Image swatches use the Scent metaobject images; text shows the value as a pill.",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image swatches"
+        },
+        {
+          "value": "text",
+          "label": "Text only"
+        }
+      ],
+      "default": "image"
+    },
+    {
       "type": "header",
       "content": "Product Information"
     },
@@ -650,14 +667,18 @@
                     {% for value in option.values %}
                       {%- assign scent_handle = value | handleize -%}
                       {%- assign scent = metaobjects.scent[scent_handle] -%}
+                      {%- assign show_scent_img = false -%}
+                      {%- if section.settings.smell_swatch_style == 'image' and scent.image != blank -%}
+                        {%- assign show_scent_img = true -%}
+                      {%- endif -%}
                       <button
                         type="button"
-                        class="maison_commerce_maison_main_product__variant-option{% if scent.image != blank %} maison_commerce_maison_main_product__variant-option--has-img{% endif %}{% if value == option.selected_value %} active{% endif %}"
+                        class="maison_commerce_maison_main_product__variant-option{% if show_scent_img %} maison_commerce_maison_main_product__variant-option--has-img{% endif %}{% if value == option.selected_value %} active{% endif %}"
                         data-value="{{ value }}"
                         data-option-position="{{ option_index }}"
                         aria-label="{{ value }}"
                       >
-                        {% if scent.image != blank %}
+                        {% if show_scent_img %}
                           <span class="maison_commerce_maison_main_product__variant-option-img">
                             {{
                               scent.image
