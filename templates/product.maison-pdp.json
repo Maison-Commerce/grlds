@@ -160,6 +160,7 @@
         "show_badge": true,
         "badge_text": "LIMITED EDITION",
         "auto_select_middle_size": true,
+        "smell_swatch_style": "text",
         "show_rating": true,
         "rating_text": "",
         "show_shipping_info": true,
