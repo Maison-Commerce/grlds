@@ -2364,11 +2364,6 @@
             ? label.dataset.labelLess
             : label.dataset.labelMore;
         }
-
-        // When collapsing, scroll the gallery back into view
-        if (!next) {
-          grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
       });
     })();
 
