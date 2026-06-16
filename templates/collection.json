@@ -68,7 +68,7 @@
       "settings": {
         "color_scheme_main": "background-2",
         "full-width": true,
-        "image": "shopify://shop_images/9810d94e5d182fd3415907fc409378fec71088f4.png",
+        "image": "shopify://shop_images/9810d94e5d182fd3415907fc409378fec71088f4_png.png",
         "height": "medium",
         "desktop_image_width": "medium",
         "layout": "text_first",
@@ -94,6 +94,7 @@
         "image_shape": "default",
         "image_no_crop": false,
         "show_secondary_image": true,
+        "show_middle_size_image": true,
         "show_vendor": false,
         "show_rating": false,
         "show_scroll_tags": false,
