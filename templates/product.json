@@ -151,6 +151,7 @@
         "show_badge": true,
         "badge_text": "LIMITED EDITION",
         "auto_select_middle_size": true,
+        "smell_swatch_style": "text",
         "show_rating": true,
         "rating_text": "",
         "show_shipping_info": true,
@@ -574,7 +575,7 @@
       "settings": {
         "section_heading": "Why You'll Love It",
         "section_description": "<p>Small-batch poured. Clean-burn soy blend wax. Designed to glow</p>",
-        "main_video": "shopify://files/videos/1780483845733299.mp4",
+        "main_video": "shopify://files/videos/Bruin.mp4",
         "img_position": "top",
         "image_position": "right",
         "section_bg_color": "#ffffff",
