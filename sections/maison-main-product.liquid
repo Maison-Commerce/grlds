@@ -486,14 +486,36 @@
     <div class="maison_commerce_maison_main_product__container">
       <div class="maison_commerce_maison_main_product__wrapper">
         <!-- Product Gallery -->
+        {%- liquid
+          assign has_size_option = false
+          assign size_values = ''
+          assign size_option_position = 0
+          for option in product.options_with_values
+            assign _opt_name = option.name | downcase
+            if _opt_name == 'size'
+              assign has_size_option = true
+              assign size_values = option.values | join: ','
+              assign size_option_position = forloop.index
+            endif
+          endfor
+        -%}
         <div class="maison_commerce_maison_main_product__gallery" style="--media-radius: 0">
           {% if section.settings.gallery_layout == 'grid' %}
             <!-- Desktop Grid Layout -->
             <div class="maison_commerce_maison_main_product__gallery-grid" data-gallery-grid>
               {% for media in product.media %}
-                <div class="maison_commerce_maison_main_product__gallery-item{% if forloop.index > 4 %} maison_commerce_maison_main_product__gallery-item--extra is-hidden{% endif %}">
-                  {% if forloop.first and section.settings.show_badge %}
-                    <div class="maison_commerce_maison_main_product__badge">
+                {%- assign media_sizes = '' -%}
+                {%- if has_size_option -%}
+                  {%- capture media_sizes -%}{%- render 'media-size-match', media: media, size_values: size_values -%}{%- endcapture -%}
+                  {%- assign media_sizes = media_sizes | strip -%}
+                {%- endif -%}
+                <div
+                  class="maison_commerce_maison_main_product__gallery-item{% if forloop.index > 4 %} is-collapsed-hidden{% endif %}"
+                  data-gallery-item
+                  data-media-sizes="{{ media_sizes }}"
+                >
+                  {% if section.settings.show_badge %}
+                    <div class="maison_commerce_maison_main_product__badge"{% unless forloop.first %} style="display: none;"{% endunless %}>
                       {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
                     </div>
                   {% endif %}
@@ -535,7 +557,7 @@
                 </svg>
                 <span
                   data-gallery-toggle-label
-                  data-label-more="View all photos ({{ product.media.size }})"
+                  data-label-more="View all photos"
                   data-label-less="Show less"
                 >View all photos ({{ product.media.size }})</span>
               </button>
@@ -546,9 +568,14 @@
           <div class="swiper maison_commerce_maison_main_product__gallery-slider">
             <div class="swiper-wrapper">
               {% for media in product.media %}
-                <div class="swiper-slide maison_commerce_maison_main_product__gallery-slide" data-media-id="{{ media.id }}">
-                  {% if forloop.first and section.settings.show_badge %}
-                    <div class="maison_commerce_maison_main_product__badge">
+                {%- assign media_sizes = '' -%}
+                {%- if has_size_option -%}
+                  {%- capture media_sizes -%}{%- render 'media-size-match', media: media, size_values: size_values -%}{%- endcapture -%}
+                  {%- assign media_sizes = media_sizes | strip -%}
+                {%- endif -%}
+                <div class="swiper-slide maison_commerce_maison_main_product__gallery-slide" data-media-id="{{ media.id }}" data-media-sizes="{{ media_sizes }}">
+                  {% if section.settings.show_badge %}
+                    <div class="maison_commerce_maison_main_product__badge"{% unless forloop.first %} style="display: none;"{% endunless %}>
                       {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
                     </div>
                   {% endif %}
@@ -1170,8 +1197,10 @@
     }
   }
 
-  /* Extra grid items (beyond the first 4) stay in the 2-column grid, hidden until expanded */
-  .maison_commerce_maison_main_product__gallery-item.is-hidden {
+  /* Grid items hidden either because they don't match the selected Size,
+     or because they're collapsed behind the "View all photos" button */
+  .maison_commerce_maison_main_product__gallery-item.is-size-hidden,
+  .maison_commerce_maison_main_product__gallery-item.is-collapsed-hidden {
     display: none;
   }
 
@@ -1898,6 +1927,121 @@
     // Reference to the mobile gallery Swiper instance
     let mobileSwiper = null;
 
+    // Gallery / Size-binding config (from Liquid)
+    const hasSizeOption = {% if has_size_option %}true{% else %}false{% endif %};
+    const sizeOptionPosition = {{ size_option_position | default: 0 }};
+
+    // Capture mobile slider slides up-front so we can filter them by Size
+    const mobileGalleryEl = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-slider');
+    const mobileWrapper = mobileGalleryEl ? mobileGalleryEl.querySelector('.swiper-wrapper') : null;
+    const allMobileSlides = mobileWrapper ? Array.from(mobileWrapper.children) : [];
+
+    // Gallery expand/collapse + current Size state
+    let galleryExpanded = false;
+    let currentGallerySize = null;
+
+    // Does a gallery element (grid item / slide) match the selected Size?
+    function mediaMatchesSize(el, size) {
+      const raw = (el.dataset.mediaSizes || '').trim();
+      if (!raw) return true;        // no Size tag in alt → always visible
+      if (!size) return true;       // no Size selected/available → show all
+      const list = raw.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+      return list.includes(String(size).toLowerCase());
+    }
+
+    // Resolve the selected Size value from a variant
+    function currentSizeFromVariant(variant) {
+      if (!hasSizeOption || !variant || !variant.options) return null;
+      return variant.options[sizeOptionPosition - 1] || null;
+    }
+
+    // Show the Limited Edition badge only on the first visible mobile slide
+    function setFirstSlideBadge() {
+      if (!mobileWrapper) return;
+      Array.from(mobileWrapper.children).forEach((slide, i) => {
+        const badge = slide.querySelector('.maison_commerce_maison_main_product__badge');
+        if (badge) badge.style.display = i === 0 ? 'block' : 'none';
+      });
+    }
+
+    // Desktop grid: filter by Size, then collapse matched items beyond the first 4
+    function renderDesktopGrid(size) {
+      const grid = productInfo.querySelector('[data-gallery-grid]');
+      if (!grid) return;
+
+      const items = Array.from(grid.querySelectorAll('[data-gallery-item]'));
+      const matched = [];
+      items.forEach(item => {
+        if (mediaMatchesSize(item, size)) {
+          item.classList.remove('is-size-hidden');
+          matched.push(item);
+        } else {
+          item.classList.add('is-size-hidden');
+        }
+      });
+
+      matched.forEach((item, i) => {
+        if (i >= 4 && !galleryExpanded) {
+          item.classList.add('is-collapsed-hidden');
+        } else {
+          item.classList.remove('is-collapsed-hidden');
+        }
+      });
+
+      // Show the badge only on the first visible (matched) grid item
+      items.forEach(item => {
+        const badge = item.querySelector('.maison_commerce_maison_main_product__badge');
+        if (badge) badge.style.display = 'none';
+      });
+      if (matched[0]) {
+        const firstBadge = matched[0].querySelector('.maison_commerce_maison_main_product__badge');
+        if (firstBadge) firstBadge.style.display = 'block';
+      }
+
+      const toggle = productInfo.querySelector('[data-gallery-toggle]');
+      if (toggle) {
+        if (matched.length > 4) {
+          toggle.style.display = '';
+          toggle.setAttribute('aria-expanded', String(galleryExpanded));
+          const label = toggle.querySelector('[data-gallery-toggle-label]');
+          if (label) {
+            label.textContent = galleryExpanded
+              ? (label.dataset.labelLess || 'Show less')
+              : `${label.dataset.labelMore || 'View all photos'} (${matched.length})`;
+          }
+        } else {
+          toggle.style.display = 'none';
+        }
+      }
+    }
+
+    // Mobile slider: keep only slides matching the selected Size
+    function rebuildMobileSlides(size) {
+      if (!mobileWrapper) return;
+
+      const matching = allMobileSlides.filter(s => mediaMatchesSize(s, size));
+      const visible = matching.length ? matching : allMobileSlides;
+
+      // Detach all, then re-append the visible ones in their original order
+      allMobileSlides.forEach(s => {
+        if (s.parentNode === mobileWrapper) mobileWrapper.removeChild(s);
+      });
+      visible.forEach(s => mobileWrapper.appendChild(s));
+
+      if (mobileSwiper && !mobileSwiper.destroyed) {
+        mobileSwiper.update();
+        mobileSwiper.slideTo(0, 0);
+      }
+      setFirstSlideBadge();
+    }
+
+    // Apply the Size filter across both desktop grid and mobile slider
+    function applyGalleryFilter(size) {
+      currentGallerySize = size;
+      renderDesktopGrid(size);
+      rebuildMobileSlides(size);
+    }
+
     // Move the mobile slider to the slide matching the variant's featured media
     function goToVariantMedia(variant) {
       if (!mobileSwiper || mobileSwiper.destroyed || !variant) return;
@@ -2215,6 +2359,9 @@
       // Update button price (simple price without discount)
       updateButtonPrice(selectedVariant);
 
+      // Filter gallery media by the selected Size (matched via image alt tags)
+      applyGalleryFilter(currentSizeFromVariant(selectedVariant));
+
       // Sync mobile gallery slider to the variant's image
       goToVariantMedia(selectedVariant);
 
@@ -2343,29 +2490,17 @@
       }
     })();
 
-    // Gallery grid "View all photos" toggle — reveals the remaining grid items
-    (function initGalleryGridToggle() {
-      const toggle = productInfo.querySelector('[data-gallery-toggle]');
-      const grid = productInfo.querySelector('[data-gallery-grid]');
-      if (!toggle || !grid) return;
-
-      const extraItems = grid.querySelectorAll('.maison_commerce_maison_main_product__gallery-item--extra');
-      const label = toggle.querySelector('[data-gallery-toggle-label]');
-
-      toggle.addEventListener('click', function() {
-        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-        const next = !isExpanded;
-
-        extraItems.forEach(item => item.classList.toggle('is-hidden', !next));
-        toggle.setAttribute('aria-expanded', String(next));
-
-        if (label) {
-          label.textContent = next
-            ? label.dataset.labelLess
-            : label.dataset.labelMore;
-        }
+    // Gallery grid "View all photos" toggle — reveals the remaining matched items
+    const galleryToggle = productInfo.querySelector('[data-gallery-toggle]');
+    if (galleryToggle) {
+      galleryToggle.addEventListener('click', function() {
+        galleryExpanded = !galleryExpanded;
+        renderDesktopGrid(currentGallerySize);
       });
-    })();
+    }
+
+    // Initial gallery filter (Size may be refined by auto-select / variant change)
+    applyGalleryFilter(currentSizeFromVariant(getSelectedVariantFromOptions()));
 
     // Reinitialize on resize
     let resizeTimeout;

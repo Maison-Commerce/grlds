@@ -1,0 +1,30 @@
+{%- comment -%}
+  Outputs a comma-separated, downcased list of Size option values that match
+  this media's alt text. Sizes in the alt should be separated by a comma,
+  semicolon or pipe (e.g. "S" or "S, M"). Tokens are matched exactly against
+  the product's Size option values (case-insensitive).
+
+  Accepts:
+  - media: {Object} product media object
+  - size_values: {String} comma-joined list of the product's Size option values
+
+  Usage:
+  {%- capture media_sizes -%}
+    {%- render 'media-size-match', media: media, size_values: size_values -%}
+  {%- endcapture -%}
+{%- endcomment -%}
+{%- assign _sizes = size_values | split: ',' -%}
+{%- assign _alt = media.alt | default: '' | downcase | replace: ';', ',' | replace: '|', ',' -%}
+{%- assign _alt_tokens = _alt | split: ',' -%}
+{%- assign _out = '' -%}
+{%- for sv in _sizes -%}
+  {%- assign _sv = sv | strip | downcase -%}
+  {%- if _sv == '' -%}{%- continue -%}{%- endif -%}
+  {%- for tok in _alt_tokens -%}
+    {%- assign _tok = tok | strip -%}
+    {%- if _tok == _sv -%}
+      {%- assign _out = _out | append: _sv | append: ',' -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+{{- _out | split: ',' | uniq | join: ',' -}}
