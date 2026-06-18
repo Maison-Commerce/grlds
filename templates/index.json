@@ -42,7 +42,7 @@
       "name": "Maison Banner",
       "settings": {
         "rating_text": "<p>Rated <strong>4.8</strong> / 5 based on <span style=\"text-decoration:underline\">3200+</span> reviews</p>",
-        "section_heading": "THE CANDLE YOU NEVER THROW AWAY",
+        "section_heading": "<p>THE CANDLE YOU NEVER<br/>THROW AWAY</p>",
         "section_description": "<p>Refillable onyx vessels crafted to last a lifetime</p>",
         "primary_button_text": "Shop Bestsellers",
         "primary_button_link": "shopify://collections/bestsellers",
