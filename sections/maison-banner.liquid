@@ -287,7 +287,7 @@
           {% endif %}
 
           {% if section.settings.section_heading != blank %}
-            <div class="maison_commerce_maison_banner__heading">
+            <div class="maison_commerce_maison_banner__heading h2">
               {{ section.settings.section_heading }}
             </div>
           {% endif %}
@@ -549,6 +549,10 @@
     margin: 0;
     text-transform: uppercase;
     text-align: left;
+  }
+
+  .maison_commerce_maison_banner__heading p{
+    margin: 0;
   }
 
   @media (max-width: 990px) {
