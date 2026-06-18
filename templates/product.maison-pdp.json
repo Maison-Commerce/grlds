@@ -584,7 +584,7 @@
       "settings": {
         "section_heading": "Why You'll Love It",
         "section_description": "<p>Small-batch poured. Clean-burn soy blend wax. Designed to glow</p>",
-        "main_video": "shopify://files/videos/Bruin.mp4",
+        "main_video": "{{ product.metafields.custom.video_gif.value }}",
         "img_position": "top",
         "image_position": "right",
         "section_bg_color": "#ffffff",
