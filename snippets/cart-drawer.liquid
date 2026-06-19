@@ -27,14 +27,19 @@
             letter-spacing: 0.32px;
         }
         .maison-cart-item-save-money{
+          padding: 0 4px;
+          background: var(--Color-Brand-2-200, #EBEAE8);
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 150%; /* 18px */
+        }
+        .maison-cart-item-save-money--founder{
           display: inline-flex;
           align-items: center;
           padding: 4px 10px;
           background: #1c1c1c;
           color: #fff;
-          font-size: 12px;
-          font-style: normal;
-          font-weight: 400;
           line-height: 1;
           letter-spacing: 0.9px;
           white-space: nowrap;
@@ -628,7 +633,7 @@
                                     {%- endif -%}
                                     {%- assign fr_percent_str = fr_percent | append: '%' -%}
 
-                                    <div class="maison-cart-item-save-money">
+                                    <div class="maison-cart-item-save-money maison-cart-item-save-money--founder">
                                       {{ fr_badge | replace: '[percent]', fr_percent_str }}
                                     </div>
                                   {%- elsif settings.show_save_price -%}
@@ -639,7 +644,7 @@
                                     {% assign rounded_save = raw_save | times: 100 | ceil | divided_by: 100 %}
                                     {% assign final_item_save = rounded_save | money %}
 
-                                    <div class="maison-cart-item-save-money">
+                                    <div class="maison-cart-item-save-money" style="color:{{ settings.drawer_save_price_color | hex_to_rgba: 0.75 }};font-size: 1.2rem;">
                                       {{ settings.save_price_text | replace: '($)', final_item_save }}
                                     </div>
                                   {%- endif -%}
