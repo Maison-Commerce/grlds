@@ -100,6 +100,17 @@
     },
     {
       "type": "header",
+      "content": "Free Refill / Founder Savings"
+    },
+    {
+      "type": "text",
+      "id": "free_refill_badge_text",
+      "label": "Free refill badge text",
+      "info": "Second badge shown next to the Founder Savings badge. The whole block only appears when the product metafields custom.free_refill_price and custom.free_refill_badge are set.",
+      "default": "+1 FREE Refill"
+    },
+    {
+      "type": "header",
       "content": "Spacing"
     },
     {
@@ -643,8 +654,48 @@
             </div>
 
             <!-- Price -->
-            <div class="maison_commerce_maison_main_product__price">
-              {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+            {%- liquid
+              assign free_refill_price = product.metafields.custom.free_refill_price
+              assign free_refill_badge = product.metafields.custom.free_refill_badge
+              assign free_refill_active = false
+              if free_refill_price != blank and free_refill_badge != blank
+                assign free_refill_active = true
+              endif
+
+              assign refill_cents = 0
+              assign founder_text = ''
+              if free_refill_active
+                assign refill_cents = free_refill_price | times: 100 | round
+                assign fr_variant = product.selected_or_first_available_variant
+                assign fr_new_compare = fr_variant.compare_at_price | plus: refill_cents
+                assign fr_percent = 0
+                if fr_new_compare > 0
+                  assign fr_diff = fr_new_compare | minus: fr_variant.price
+                  assign fr_percent = fr_diff | times: 100.0 | divided_by: fr_new_compare | round
+                  if fr_percent < 0
+                    assign fr_percent = 0
+                  endif
+                endif
+                assign fr_percent_str = fr_percent | append: '%'
+                assign founder_text = free_refill_badge | replace: '[percent]', fr_percent_str
+              endif
+            -%}
+            <div class="maison_commerce_maison_main_product__price-row{% if free_refill_active %} has-founder-badges{% endif %}">
+              <div class="maison_commerce_maison_main_product__price">
+                {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+              </div>
+              {%- if free_refill_active -%}
+                <div
+                  class="maison_commerce_maison_main_product__founder-badges"
+                  id="founder-badges-{{ section.id }}"
+                  data-refill-cents="{{ refill_cents }}"
+                >
+                  <span class="maison_commerce_maison_main_product__badge-founder" data-founder-badge>{{ founder_text }}</span>
+                  {%- if section.settings.free_refill_badge_text != blank -%}
+                    <span class="maison_commerce_maison_main_product__badge-refill">{{ section.settings.free_refill_badge_text }}</span>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
             </div>
           </div>
 
@@ -839,6 +890,17 @@
                   show_pickup_availability: true
                 -%}
             {% endfor %}
+
+            <!-- Free refill checkout note (hidden in cart, visible at checkout) -->
+            {%- assign free_refill_checkout = product.metafields.custom.free_refill_text_on_checkout -%}
+            {%- if free_refill_active and free_refill_checkout != blank -%}
+              <input
+                type="hidden"
+                name="properties[Free Refill]"
+                value="{{ free_refill_checkout | escape }}"
+                form="{{ product_form_id }}"
+              >
+            {%- endif -%}
 
             <!-- Payment Icons -->
             {% if section.settings.show_payment_icons %}
@@ -1337,6 +1399,54 @@
     line-height: 24px;
     letter-spacing: 0.32px;
     margin-right: 4px!important;
+  }
+
+  /* Price row + Founder Savings / Free Refill badges */
+  .maison_commerce_maison_main_product__price-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  /* When the founder badges replace the default sale badge, hide the default one */
+  .maison_commerce_maison_main_product__price-row.has-founder-badges .price__badge-sale {
+    display: none !important;
+  }
+
+  .maison_commerce_maison_main_product__founder-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .maison_commerce_maison_main_product__badge-founder,
+  .maison_commerce_maison_main_product__badge-refill {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.9px;
+    white-space: nowrap;
+  }
+
+  .maison_commerce_maison_main_product__badge-founder {
+    background: #1c1c1c;
+    color: #ffffff;
+  }
+
+  .maison_commerce_maison_main_product__badge-refill {
+    background: #f2f2f2;
+    color: rgba(26, 26, 26, 0.75);
+  }
+
+  @media (max-width: 990px) {
+    /* Mobile: price on the first line, badges wrap to the line below */
+    .maison_commerce_maison_main_product__price-row .maison_commerce_maison_main_product__founder-badges {
+      flex-basis: 100%;
+    }
   }
 
   /* Spacing between main sections */
@@ -2070,6 +2180,31 @@
     const currencyCode = '{{ cart.currency.iso_code }}';
     const locale = '{{ request.locale.iso_code }}';
 
+    // Free Refill / Founder Savings config (from Liquid)
+    const freeRefillActive = {% if free_refill_active %}true{% else %}false{% endif %};
+    const freeRefillCents = {{ refill_cents | default: 0 }};
+    const founderBadgeTemplate = {{ free_refill_badge | json }};
+
+    // Recompute the Founder Savings percent for the selected variant:
+    // newCompare = variant.compare_at_price + free refill price; percent off the regular price.
+    function updateFounderBadge(variant) {
+      if (!freeRefillActive || !variant) return;
+      const badgeEl = productInfo.querySelector('[data-founder-badge]');
+      if (!badgeEl) return;
+
+      const compare = variant.compare_at_price || 0;
+      const price = variant.price || 0;
+      const newCompare = compare + freeRefillCents;
+
+      let percent = 0;
+      if (newCompare > 0) {
+        percent = Math.round(((newCompare - price) / newCompare) * 100);
+        if (percent < 0) percent = 0;
+      }
+
+      badgeEl.textContent = (founderBadgeTemplate || '').replace('[percent]', percent + '%');
+    }
+
     // Helper function to format money (matching Shopify's format)
     function formatMoney(cents, withCurrency = false) {
       if (typeof window.Shopify !== 'undefined' && window.Shopify.formatMoney) {
@@ -2358,6 +2493,9 @@
       
       // Update button price (simple price without discount)
       updateButtonPrice(selectedVariant);
+
+      // Recompute the Founder Savings badge for this variant
+      updateFounderBadge(selectedVariant);
 
       // Filter gallery media by the selected Size (matched via image alt tags)
       applyGalleryFilter(currentSizeFromVariant(selectedVariant));
