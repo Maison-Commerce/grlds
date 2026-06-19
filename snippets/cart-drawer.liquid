@@ -617,7 +617,21 @@
                                   {% endif %}
                                 </span>
                                 {% if item.variant.compare_at_price > item.variant.price %}
-                                  {% if settings.show_save_price %}
+                                  {%- assign fr_badge = item.product.metafields.custom.free_refill_badge -%}
+                                  {%- if fr_badge != blank -%}
+                                    {%- assign fr_compare = item.variant.compare_at_price -%}
+                                    {%- assign fr_percent = 0 -%}
+                                    {%- if fr_compare > 0 -%}
+                                      {%- assign fr_diff = fr_compare | minus: item.variant.price -%}
+                                      {%- assign fr_percent = fr_diff | times: 100.0 | divided_by: fr_compare | round -%}
+                                      {%- if fr_percent < 0 -%}{%- assign fr_percent = 0 -%}{%- endif -%}
+                                    {%- endif -%}
+                                    {%- assign fr_percent_str = fr_percent | append: '%' -%}
+
+                                    <div class="maison-cart-item-save-money">
+                                      {{ fr_badge | replace: '[percent]', fr_percent_str }}
+                                    </div>
+                                  {%- elsif settings.show_save_price -%}
                                     {% assign raw_save = item.variant.compare_at_price
                                       | times: item.quantity
                                       | minus: item.original_line_price
@@ -628,7 +642,7 @@
                                     <div class="maison-cart-item-save-money">
                                       {{ settings.save_price_text | replace: '($)', final_item_save }}
                                     </div>
-                                  {% endif %}
+                                  {%- endif -%}
                                 {% endif %}
                               </span>
                             {%- endif -%}
