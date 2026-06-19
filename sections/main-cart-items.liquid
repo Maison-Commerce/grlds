@@ -224,7 +224,7 @@
 
                           {%- for property in item.properties -%}
                             {%- assign property_first_char = property.first | slice: 0 -%}
-                            {%- if property.last != blank and property_first_char != '_' and property.first != 'Free Refill' -%}
+                            {%- if property.last != blank and property_first_char != '_' and property.last != item.product.metafields.custom.free_refill_text_on_checkout -%}
                               <div class="product-option">
                                 <dt>{{ property.first }}:</dt>
                                 <dd>
