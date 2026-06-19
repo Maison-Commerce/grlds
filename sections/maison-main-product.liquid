@@ -104,13 +104,6 @@
     },
     {
       "type": "text",
-      "id": "free_refill_badge_text",
-      "label": "Free refill badge text",
-      "info": "Second badge shown next to the Founder Savings badge. The whole block only appears when the product metafield custom.free_refill_badge is set.",
-      "default": "+1 FREE Refill"
-    },
-    {
-      "type": "text",
       "id": "free_refill_checkout_label",
       "label": "Checkout label",
       "info": "Shown before the checkout text as \"Label: text\" at checkout. The text comes from custom.free_refill_text_on_checkout.",
@@ -663,13 +656,20 @@
             <!-- Price -->
             {%- liquid
               assign free_refill_badge = product.metafields.custom.free_refill_badge
-              assign free_refill_active = false
+              assign free_refill_refill_text = product.metafields.custom.free_refill_text_on_checkout
+
+              assign show_founder_badge = false
               if free_refill_badge != blank
-                assign free_refill_active = true
+                assign show_founder_badge = true
+              endif
+
+              assign show_refill_badge = false
+              if free_refill_refill_text != blank
+                assign show_refill_badge = true
               endif
 
               assign founder_text = ''
-              if free_refill_active
+              if show_founder_badge
                 assign fr_variant = product.selected_or_first_available_variant
                 assign fr_compare = fr_variant.compare_at_price
                 assign fr_percent = 0
@@ -684,18 +684,20 @@
                 assign founder_text = free_refill_badge | replace: '[percent]', fr_percent_str
               endif
             -%}
-            <div class="maison_commerce_maison_main_product__price-row{% if free_refill_active %} has-founder-badges{% endif %}">
+            <div class="maison_commerce_maison_main_product__price-row{% if show_founder_badge %} has-founder-badges{% endif %}">
               <div class="maison_commerce_maison_main_product__price">
                 {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
               </div>
-              {%- if free_refill_active -%}
+              {%- if show_founder_badge or show_refill_badge -%}
                 <div
                   class="maison_commerce_maison_main_product__founder-badges"
                   id="founder-badges-{{ section.id }}"
                 >
-                  <span class="maison_commerce_maison_main_product__badge-founder" data-founder-badge>{{ founder_text }}</span>
-                  {%- if section.settings.free_refill_badge_text != blank -%}
-                    <span class="maison_commerce_maison_main_product__badge-refill">{{ section.settings.free_refill_badge_text }}</span>
+                  {%- if show_founder_badge -%}
+                    <span class="maison_commerce_maison_main_product__badge-founder" data-founder-badge>{{ founder_text }}</span>
+                  {%- endif -%}
+                  {%- if show_refill_badge -%}
+                    <span class="maison_commerce_maison_main_product__badge-refill">{{ free_refill_refill_text }}</span>
                   {%- endif -%}
                 </div>
               {%- endif -%}
@@ -896,7 +898,7 @@
 
             <!-- Free refill checkout note (hidden in cart, visible at checkout) -->
             {%- assign free_refill_checkout = product.metafields.custom.free_refill_text_on_checkout -%}
-            {%- if free_refill_active and free_refill_checkout != blank -%}
+            {%- if free_refill_checkout != blank -%}
               {%- assign free_refill_label = section.settings.free_refill_checkout_label | default: 'Gift' -%}
               <input
                 type="hidden"
@@ -2185,13 +2187,13 @@
     const locale = '{{ request.locale.iso_code }}';
 
     // Free Refill / Founder Savings config (from Liquid)
-    const freeRefillActive = {% if free_refill_active %}true{% else %}false{% endif %};
+    const founderBadgeActive = {% if show_founder_badge %}true{% else %}false{% endif %};
     const founderBadgeTemplate = {{ free_refill_badge | json }};
 
     // Recompute the Founder Savings percent for the selected variant:
     // percent off the regular price relative to compare_at_price.
     function updateFounderBadge(variant) {
-      if (!freeRefillActive || !variant) return;
+      if (!founderBadgeActive || !variant) return;
       const badgeEl = productInfo.querySelector('[data-founder-badge]');
       if (!badgeEl) return;
 
