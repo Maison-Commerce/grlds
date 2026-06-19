@@ -27,12 +27,17 @@
             letter-spacing: 0.32px;
         }
         .maison-cart-item-save-money{
-          padding: 0 4px;
-          background: var(--Color-Brand-2-200, #EBEAE8);
+          display: inline-flex;
+          align-items: center;
+          padding: 4px 10px;
+          background: #1c1c1c;
+          color: #fff;
           font-size: 12px;
           font-style: normal;
           font-weight: 400;
-          line-height: 150%; /* 18px */
+          line-height: 1;
+          letter-spacing: 0.9px;
+          white-space: nowrap;
         }
         .maison-cart-item-regular-price{
           color: var(--Text-Primary, #1A1A1A);
@@ -512,7 +517,7 @@
 
                                 {%- for property in item.properties -%}
                                   {%- assign property_first_char = property.first | slice: 0 -%}
-                                  {%- if property.last != blank and property_first_char != '_' and property.last != item.product.metafields.custom.free_refill_text_on_checkout -%}
+                                  {%- if property.last != blank and property_first_char != '_' -%}
                                     <div class="product-option">
                                       <dt>{{ property.first }}:</dt>
                                       <dd>
@@ -620,7 +625,7 @@
                                     {% assign rounded_save = raw_save | times: 100 | ceil | divided_by: 100 %}
                                     {% assign final_item_save = rounded_save | money %}
 
-                                    <div class="maison-cart-item-save-money" style="color:{{ settings.drawer_save_price_color | hex_to_rgba: 0.75 }};font-size: 1.2rem;">
+                                    <div class="maison-cart-item-save-money">
                                       {{ settings.save_price_text | replace: '($)', final_item_save }}
                                     </div>
                                   {% endif %}
