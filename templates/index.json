@@ -97,7 +97,7 @@
         "image_shape": "default",
         "image_no_crop": false,
         "show_secondary_image": false,
-        "show_middle_size_image": false,
+        "show_middle_size_image": true,
         "show_vendor": false,
         "show_rating": false,
         "show_scroll_tags": false,
