@@ -332,12 +332,19 @@
           "settings": {
             "article": "news/the-art-of-the-first-burn-a-ritual-worth-honoring"
           }
+        },
+        "article_68Vh3K": {
+          "type": "article",
+          "settings": {
+            "article": "news/the-colectionof-fragrance-three-scents-three-atmospheres-three-stories"
+          }
         }
       },
       "block_order": [
         "article_bM4x7k",
         "article_VjatDP",
-        "article_QTCKr6"
+        "article_QTCKr6",
+        "article_68Vh3K"
       ],
       "name": "Maison Blog Slider",
       "settings": {
