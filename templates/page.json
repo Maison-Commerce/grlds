@@ -18,49 +18,6 @@
         "padding_bottom": 28
       }
     },
-    "rich_text_NQAzrJ": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_QzpdpL": {
-          "type": "heading",
-          "settings": {
-            "heading": "The Story of Gerald’s",
-            "heading_size": "h1"
-          }
-        },
-        "text_g76Liw": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Every object begins with a story.</p><p>For Gerald’s, that story begins with a single name: Gerard, my grandfather.</p><p>Born in 1907, Gerard belonged to a generation that understood the value of craftsmanship, patience and creating things that were built to last. Long before a world driven by trends and disposability, objects were made with purpose, kept for decades and passed from one generation to the next.</p><p>That philosophy became the foundation of Gerald’s.</p><p>The year 1907 carries a deeper meaning than a date alone. In numerology, it represents wisdom, new beginnings, limitless potential and depth. Together these numbers form the number 8, a symbol of strength, longevity and legacy. These values became the guiding principles behind every decision we made while creating the brand.</p><p>What started as Gerard evolved into Gerald. The same soul translated into a timeless and internationally recognizable name. A tribute to the past, reimagined for the present.</p><p>The vision for Gerald’s took shape during my time in Monte Carlo. Surrounded by timeless architecture, natural stone and understated luxury, I became fascinated by objects that age beautifully rather than becoming outdated. The elegance of the French language also found its way into the brand and inspired the name Bougies.</p><p>From the very beginning, I knew I did not want to create another candle brand. Candles are often treated as temporary objects. They are burned, discarded and forgotten. Gerald’s was created with a different philosophy.</p><p>Our vessels are carved from natural stone that has taken millions of years to form beneath the earth’s surface. Every piece is hand cut, hand polished and carefully finished with solid brass details. No two stones are ever identical. Each carries its own patterns, textures and character, shaped by nature over time.</p><p>The candle itself is only one chapter of the story. When the wax is finished, the vessel remains. A refill can be placed inside, allowing the object to continue its life for years to come. The flame may disappear, but the piece remains part of your home.</p><p>That is why Gerald’s is not simply a candle brand. It is a collection of objects designed to live with you. Objects that become part of daily rituals, meaningful moments and personal spaces. Objects that grow more valuable through the memories attached to them.</p><p>Rooted in 1907. Inspired by legacy. Created to last.</p><h4><strong>GERALD’S BOUGIES 1907</strong></h4><p><em>Colin van Wonderen</em></p>"
-          }
-        },
-        "button_grePm4": {
-          "type": "button",
-          "settings": {
-            "button_label": "",
-            "button_link": "",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_QzpdpL",
-        "text_g76Liw",
-        "button_grePm4"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
-      }
-    },
     "slideshow_3QdNKe": {
       "type": "slideshow",
       "blocks": {
@@ -130,6 +87,7 @@
         "slide_ca6Xxa",
         "slide_paiVGV"
       ],
+      "disabled": true,
       "name": "t:sections.slideshow.presets.name",
       "settings": {
         "layout": "full_bleed",
@@ -142,11 +100,54 @@
         "show_text_below": true,
         "accessibility_info": "Slideshow about our brand"
       }
+    },
+    "rich_text_NQAzrJ": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_QzpdpL": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Story of Gerald’s",
+            "heading_size": "h1"
+          }
+        },
+        "text_g76Liw": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every object begins with a story.</p><p>For Gerald’s, that story begins with a single name: Gerard, my grandfather.</p><p>Born in 1907, Gerard belonged to a generation that understood the value of craftsmanship, patience and creating things that were built to last. Long before a world driven by trends and disposability, objects were made with purpose, kept for decades and passed from one generation to the next.</p><p>That philosophy became the foundation of Gerald’s.</p><p>The year 1907 carries a deeper meaning than a date alone. In numerology, it represents wisdom, new beginnings, limitless potential and depth. Together these numbers form the number 8, a symbol of strength, longevity and legacy. These values became the guiding principles behind every decision we made while creating the brand.</p><p>What started as Gerard evolved into Gerald. The same soul translated into a timeless and internationally recognizable name. A tribute to the past, reimagined for the present.</p><p>The vision for Gerald’s took shape during my time in Monte Carlo. Surrounded by timeless architecture, natural stone and understated luxury, I became fascinated by objects that age beautifully rather than becoming outdated. The elegance of the French language also found its way into the brand and inspired the name Bougies.</p><p>From the very beginning, I knew I did not want to create another candle brand. Candles are often treated as temporary objects. They are burned, discarded and forgotten. Gerald’s was created with a different philosophy.</p><p>Our vessels are carved from natural stone that has taken millions of years to form beneath the earth’s surface. Every piece is hand cut, hand polished and carefully finished with solid brass details. No two stones are ever identical. Each carries its own patterns, textures and character, shaped by nature over time.</p><p>The candle itself is only one chapter of the story. When the wax is finished, the vessel remains. A refill can be placed inside, allowing the object to continue its life for years to come. The flame may disappear, but the piece remains part of your home.</p><p>That is why Gerald’s is not simply a candle brand. It is a collection of objects designed to live with you. Objects that become part of daily rituals, meaningful moments and personal spaces. Objects that grow more valuable through the memories attached to them.</p><p>Rooted in 1907. Inspired by legacy. Created to last.</p><h4><strong>GERALD’S BOUGIES 1907</strong></h4><p><em>Colin van Wonderen</em></p>"
+          }
+        },
+        "button_grePm4": {
+          "type": "button",
+          "settings": {
+            "button_label": "",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_QzpdpL",
+        "text_g76Liw",
+        "button_grePm4"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "main",
-    "rich_text_NQAzrJ",
-    "slideshow_3QdNKe"
+    "slideshow_3QdNKe",
+    "rich_text_NQAzrJ"
   ]
 }
