@@ -344,6 +344,12 @@
           "settings": {
             "article": "news/figueres-inspired-by-the-timeless-fig-tree"
           }
+        },
+        "article_fTkeAf": {
+          "type": "article",
+          "settings": {
+            "article": "news/ambre-the-warmth-of-timeless-evenings"
+          }
         }
       },
       "block_order": [
@@ -351,7 +357,8 @@
         "article_VjatDP",
         "article_QTCKr6",
         "article_68Vh3K",
-        "article_6mVmTj"
+        "article_6mVmTj",
+        "article_fTkeAf"
       ],
       "name": "Maison Blog Slider",
       "settings": {
