@@ -61,70 +61,92 @@
         "padding_bottom": 52
       }
     },
-    "lookbook_NjGipN": {
-      "type": "lookbook",
+    "slideshow_3QdNKe": {
+      "type": "slideshow",
       "blocks": {
-        "point_wyXphV": {
-          "type": "point",
+        "slide_ca6Xxa": {
+          "type": "slide",
           "settings": {
-            "title": "Title",
-            "description": "Some optional description for this point",
-            "product": "",
-            "show_image": true,
-            "show_price": true,
-            "btn_text": "View product",
-            "mobile_pos_left": 0,
-            "mobile_pos_top": 0,
-            "desktop_pos_left": 0,
-            "desktop_pos_top": 0
+            "image": "shopify://shop_images/d0accfbb-f94c-491b-bfef-7a9a6342c2ec.jpg",
+            "caption": "Company",
+            "block_cap_size": 20,
+            "cap_color": "#222222",
+            "heading": "Lumin Slideshow",
+            "heading_font_size_desktop": 60,
+            "heading_font_size_mobile": 44,
+            "heading_line_height_desktop": 1.2,
+            "heading_line_height_mobile": 1.2,
+            "subheading": "Tell your brand's story through images",
+            "subheading_font_size_desktop": 20,
+            "subheading_font_size_mobile": 16,
+            "subheading_line_height_desktop": 1.4,
+            "subheading_line_height_mobile": 1.4,
+            "button_label": "Button label",
+            "link": "",
+            "link-2": "",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": false,
+            "container_size": 800,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "",
+            "box_align_mobile": "middle",
+            "text_alignment_mobile": "center"
           }
         },
-        "point_VKwQAb": {
-          "type": "point",
+        "slide_paiVGV": {
+          "type": "slide",
           "settings": {
-            "title": "Title",
-            "description": "Some optional description for this point",
-            "product": "",
-            "show_image": true,
-            "show_price": true,
-            "btn_text": "View product",
-            "mobile_pos_left": 0,
-            "mobile_pos_top": 0,
-            "desktop_pos_left": 0,
-            "desktop_pos_top": 0
+            "caption": "Company",
+            "block_cap_size": 20,
+            "cap_color": "#222222",
+            "heading": "Lumin Slideshow",
+            "heading_font_size_desktop": 60,
+            "heading_font_size_mobile": 44,
+            "heading_line_height_desktop": 1.2,
+            "heading_line_height_mobile": 1.2,
+            "subheading": "Tell your brand's story through images",
+            "subheading_font_size_desktop": 20,
+            "subheading_font_size_mobile": 16,
+            "subheading_line_height_desktop": 1.4,
+            "subheading_line_height_mobile": 1.4,
+            "button_label": "Button label",
+            "link": "",
+            "link-2": "",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": false,
+            "container_size": 800,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "",
+            "box_align_mobile": "middle",
+            "text_alignment_mobile": "center"
           }
         }
       },
       "block_order": [
-        "point_wyXphV",
-        "point_VKwQAb"
+        "slide_ca6Xxa",
+        "slide_paiVGV"
       ],
-      "name": "lumin - Lookbook",
+      "name": "t:sections.slideshow.presets.name",
       "settings": {
-        "bg_color": "#ffffff",
-        "text_color": "#121212",
-        "container": true,
-        "container_max_width": "",
-        "header_text_align": "center",
-        "heading": "Lookbook",
-        "heading_size": "h1",
-        "description": "<p>Optional description for this section</p>",
-        "desktop_image": "shopify://shop_images/d0accfbb-f94c-491b-bfef-7a9a6342c2ec.jpg",
-        "image_border_radius": 1,
-        "point_color": "#334fb4",
-        "point_diameter": 1,
-        "tooltip_width": 260,
-        "tooltip_text_align": "center",
-        "tooltip_bg_color": "#ffffff",
-        "tooltip_color": "#121212",
-        "pt": 3,
-        "pb": 3
+        "layout": "full_bleed",
+        "border_radius": 8,
+        "slide_height": "adapt_image",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": true,
+        "accessibility_info": "Slideshow about our brand"
       }
     }
   },
   "order": [
     "main",
     "rich_text_NQAzrJ",
-    "lookbook_NjGipN"
+    "slideshow_3QdNKe"
   ]
 }
