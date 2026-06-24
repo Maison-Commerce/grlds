@@ -78,7 +78,7 @@
       "settings": {
         "collection": "bestsellers",
         "section_heading": "Our Bestsellers",
-        "button_text": "View All Holiday Collection",
+        "button_text": "View All Founders Collection",
         "button_link": "shopify://collections/bestsellers",
         "products_to_show": 4,
         "section_bg_color": "#ffffff",
@@ -98,6 +98,7 @@
         "image_no_crop": false,
         "show_secondary_image": false,
         "show_middle_size_image": false,
+        "show_large_size_image_refill": true,
         "show_vendor": false,
         "show_rating": false,
         "show_scroll_tags": false,
