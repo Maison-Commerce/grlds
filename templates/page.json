@@ -60,10 +60,71 @@
         "padding_top": 40,
         "padding_bottom": 52
       }
+    },
+    "lookbook_NjGipN": {
+      "type": "lookbook",
+      "blocks": {
+        "point_wyXphV": {
+          "type": "point",
+          "settings": {
+            "title": "Title",
+            "description": "Some optional description for this point",
+            "product": "",
+            "show_image": true,
+            "show_price": true,
+            "btn_text": "View product",
+            "mobile_pos_left": 0,
+            "mobile_pos_top": 0,
+            "desktop_pos_left": 0,
+            "desktop_pos_top": 0
+          }
+        },
+        "point_VKwQAb": {
+          "type": "point",
+          "settings": {
+            "title": "Title",
+            "description": "Some optional description for this point",
+            "product": "",
+            "show_image": true,
+            "show_price": true,
+            "btn_text": "View product",
+            "mobile_pos_left": 0,
+            "mobile_pos_top": 0,
+            "desktop_pos_left": 0,
+            "desktop_pos_top": 0
+          }
+        }
+      },
+      "block_order": [
+        "point_wyXphV",
+        "point_VKwQAb"
+      ],
+      "name": "lumin - Lookbook",
+      "settings": {
+        "bg_color": "#ffffff",
+        "text_color": "#121212",
+        "container": true,
+        "container_max_width": "",
+        "header_text_align": "center",
+        "heading": "Lookbook",
+        "heading_size": "h1",
+        "description": "<p>Optional description for this section</p>",
+        "desktop_image": "shopify://shop_images/d0accfbb-f94c-491b-bfef-7a9a6342c2ec.jpg",
+        "image_border_radius": 1,
+        "point_color": "#334fb4",
+        "point_diameter": 1,
+        "tooltip_width": 260,
+        "tooltip_text_align": "center",
+        "tooltip_bg_color": "#ffffff",
+        "tooltip_color": "#121212",
+        "pt": 3,
+        "pb": 3
+      }
     }
   },
   "order": [
     "main",
-    "rich_text_NQAzrJ"
+    "rich_text_NQAzrJ",
+    "lookbook_NjGipN"
   ]
 }
