@@ -143,11 +143,70 @@
         "padding_top": 40,
         "padding_bottom": 52
       }
+    },
+    "image_banner_timer_Mm4DPH": {
+      "type": "image-banner-timer",
+      "blocks": {
+        "heading_Kyeb4R": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Image banner",
+            "heading_size": "h1"
+          }
+        },
+        "text_JVrCja": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text_style": "body"
+          }
+        },
+        "timer_DcNiUg": {
+          "type": "timer",
+          "disabled": true,
+          "settings": {
+            "date": "2025-12-31",
+            "timer_days": "Days",
+            "hide_days": false,
+            "timer_hrs": "Hours",
+            "timer_min": "Minutes",
+            "timer_sec": "Seconds",
+            "number_size": "medium",
+            "head_font": false,
+            "timer_color": "#212121",
+            "timer_color_bg": "#ffffff",
+            "tm_bg_opacity": 0.3,
+            "message": "<p>Sale is end!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Kyeb4R",
+        "text_JVrCja",
+        "timer_DcNiUg"
+      ],
+      "name": "t:sections.image-banner.presets.name-2",
+      "settings": {
+        "image": "shopify://shop_images/d0accfbb-f94c-491b-bfef-7a9a6342c2ec.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "large",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": false
+      }
     }
   },
   "order": [
     "main",
     "slideshow_3QdNKe",
-    "rich_text_NQAzrJ"
+    "rich_text_NQAzrJ",
+    "image_banner_timer_Mm4DPH"
   ]
 }
