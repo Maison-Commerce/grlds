@@ -338,13 +338,20 @@
           "settings": {
             "article": "news/the-colectionof-fragrance-three-scents-three-atmospheres-three-stories"
           }
+        },
+        "article_6mVmTj": {
+          "type": "article",
+          "settings": {
+            "article": "news/figueres-inspired-by-the-timeless-fig-tree"
+          }
         }
       },
       "block_order": [
         "article_bM4x7k",
         "article_VjatDP",
         "article_QTCKr6",
-        "article_68Vh3K"
+        "article_68Vh3K",
+        "article_6mVmTj"
       ],
       "name": "Maison Blog Slider",
       "settings": {
