@@ -315,10 +315,10 @@
     "maison_blog_slider_FJTygR": {
       "type": "maison-blog-slider",
       "blocks": {
-        "article_QTCKr6": {
+        "article_bM4x7k": {
           "type": "article",
           "settings": {
-            "article": "news/the-art-of-the-first-burn-a-ritual-worth-honoring"
+            "article": "news/winter-light-the-story-behind-our-limited-edition-collection"
           }
         },
         "article_VjatDP": {
@@ -327,17 +327,17 @@
             "article": "news/scent-memory-how-fragrance-shapes-the-spaces-we-love"
           }
         },
-        "article_bM4x7k": {
+        "article_QTCKr6": {
           "type": "article",
           "settings": {
-            "article": "news/winter-light-the-story-behind-our-limited-edition-collection"
+            "article": "news/the-art-of-the-first-burn-a-ritual-worth-honoring"
           }
         }
       },
       "block_order": [
-        "article_QTCKr6",
+        "article_bM4x7k",
         "article_VjatDP",
-        "article_bM4x7k"
+        "article_QTCKr6"
       ],
       "name": "Maison Blog Slider",
       "settings": {
