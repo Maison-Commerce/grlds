@@ -44,21 +44,21 @@
           "type": "benefit",
           "settings": {
             "icon": "shopify://shop_images/meteor-icons_gift_0c4fa572-1529-4fa6-8f86-908922a65d09.svg",
-            "text": "Signature Gift Wrap"
+            "text": "Designed to Last"
           }
         },
         "benefit_W7JMB3": {
           "type": "benefit",
           "settings": {
             "icon": "shopify://shop_images/shipment-return--shipment-return-parcel-shipping-box-arrow_7f8af843-ce05-4b5c-8113-356730880f0c.svg",
-            "text": "Free Returns"
+            "text": "Beautifully Delivered"
           }
         },
         "benefit_TtmRKQ": {
           "type": "benefit",
           "settings": {
             "icon": "shopify://shop_images/Frame_1484580598_34310056-10c1-4062-b291-3a3750d4abeb.svg",
-            "text": "Carbon-Neutral"
+            "text": "Clean Burning Soy Wax"
           }
         },
         "accordion_4kD3PC": {
@@ -167,6 +167,7 @@
         "shipping_text": "",
         "button_text": "Add to Bag",
         "show_payment_icons": true,
+        "free_refill_checkout_label": "Gift",
         "padding_top_desktop": 0,
         "padding_bottom_desktop": 40,
         "padding_top_mobile": 0,
@@ -677,6 +678,7 @@
         "image_no_crop": false,
         "show_secondary_image": false,
         "show_middle_size_image": true,
+        "show_large_size_image_refill": true,
         "show_vendor": false,
         "show_rating": false,
         "show_scroll_tags": false,
