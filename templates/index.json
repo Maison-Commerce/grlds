@@ -394,24 +394,24 @@
           "type": "usp",
           "settings": {
             "icon": "shopify://shop_images/meteor-icons_gift.svg",
-            "title": "Signature Gift Wrap",
-            "description": "Complimentary on every order"
+            "title": "BEAUTIFULLY DELIVERED",
+            "description": "Luxury, from box to burn."
           }
         },
         "usp_N6UEPp": {
           "type": "usp",
           "settings": {
             "icon": "shopify://shop_images/Frame_1484580598.svg",
-            "title": "CARBON-NEUTRAL DELIVERY",
-            "description": "Every delivery is 100% carbon offset"
+            "title": "PREMIUM SOY WAX",
+            "description": "Clean burning and long lasting."
           }
         },
         "usp_wzhPi8": {
           "type": "usp",
           "settings": {
             "icon": "shopify://shop_images/shipment-return--shipment-return-parcel-shipping-box-arrow.svg",
-            "title": "Free Returns guarantee",
-            "description": "30-day hassle-free returns"
+            "title": "DESIGNED TO LAST",
+            "description": "Refill again and again."
           }
         }
       },
