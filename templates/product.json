@@ -33,6 +33,20 @@
             "lm_main_button_border_color": "#000000"
           }
         },
+        "fragrance_info_tijehJ": {
+          "type": "fragrance_info",
+          "settings": {
+            "part_1_title": "FIGUERES",
+            "part_1_list": "Green Fig, White Woods, Summer Shade",
+            "part_1_description": "The scent of an ancient fig tree standing quietly in the Mediterranean sun. Fresh green fig leaves blend with the creamy sweetness of ripe fruit, while soft woods and earthy notes create depth and warmth. Natural, elegant and calming, it captures the feeling of a slow summer afternoon beneath the shade of a fig tree.",
+            "part_2_title": "AMBRE",
+            "part_2_list": "Warm Amber, Smoked Woods, Cashmere",
+            "part_2_description": "A warm and enveloping fragrance built around rich amber and precious woods. Subtle spices add depth, while soft musks create a smooth and refined finish. Sophisticated and comforting, it evokes the atmosphere of candlelight, aged wood and timeless interiors.",
+            "part_3_title": "ZAGARA",
+            "part_3_list": "Orange Blossom, Citrus Grove, Morning Light",
+            "part_3_description": "Inspired by the orange groves of the Mediterranean coast in full bloom. Delicate orange blossom is layered with fresh citrus notes and soft floral accords, creating a fragrance that feels bright, radiant and uplifting. Elegant yet effortless, it captures the beauty of a warm spring morning filled with sunlight and blooming flowers."
+          }
+        },
         "benefit_4MyVhJ": {
           "type": "benefit",
           "settings": {
@@ -136,6 +150,7 @@
       },
       "block_order": [
         "buy_buttons_Bp7LYz",
+        "fragrance_info_tijehJ",
         "benefit_4MyVhJ",
         "benefit_W7JMB3",
         "benefit_TtmRKQ",
@@ -158,6 +173,7 @@
         "shipping_text": "",
         "button_text": "Add to Bag",
         "show_payment_icons": true,
+        "free_refill_checkout_label": "Gift",
         "padding_top_desktop": 0,
         "padding_bottom_desktop": 40,
         "padding_top_mobile": 0,
@@ -575,7 +591,7 @@
       "settings": {
         "section_heading": "Why You'll Love It",
         "section_description": "<p>Small-batch poured. Clean-burn soy blend wax. Designed to glow</p>",
-        "main_video": "shopify://files/videos/Bruin.mp4",
+        "main_video": "{{ product.metafields.custom.video_gif.value }}",
         "img_position": "top",
         "image_position": "right",
         "section_bg_color": "#ffffff",
@@ -614,7 +630,7 @@
         "keep_away_label": "Keep away from",
         "care_guide_text": "View Full Care Guide",
         "care_guide_link": "#",
-        "product_image": "shopify://shop_images/GroenMHand_png.png",
+        "product_image": "{{ product.metafields.custom.pdp_img.value }}",
         "icon_child": "shopify://shop_images/Kids-Boy--Streamline-Ultimate.svg",
         "icon_pet": "shopify://shop_images/Dog-Sit-3--Streamline-Ultimate.svg",
         "icon_fire": "shopify://shop_images/Safety-Fire-Extinguisher--Streamline-Ultimate.svg",
@@ -668,6 +684,7 @@
         "image_no_crop": false,
         "show_secondary_image": false,
         "show_middle_size_image": true,
+        "show_large_size_image_refill": true,
         "show_vendor": false,
         "show_rating": false,
         "show_scroll_tags": false,
