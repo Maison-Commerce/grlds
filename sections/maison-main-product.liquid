@@ -293,6 +293,83 @@
       ]
     },
     {
+      "type": "fragrance_info",
+      "name": "Fragrance Info",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Adds an info icon next to the Fragrance option. Clicking it opens a popup with the three fragrances below. Notes are comma-separated and shown with • separators."
+        },
+        {
+          "type": "header",
+          "content": "Fragrance 1"
+        },
+        {
+          "type": "text",
+          "id": "part_1_title",
+          "label": "Title",
+          "default": "FIGUERES"
+        },
+        {
+          "type": "text",
+          "id": "part_1_list",
+          "label": "Notes (comma-separated)",
+          "default": "Green Fig, White Woods, Summer Shade"
+        },
+        {
+          "type": "textarea",
+          "id": "part_1_description",
+          "label": "Description",
+          "default": "The scent of an ancient fig tree standing quietly in the Mediterranean sun. Fresh green fig leaves blend with the creamy sweetness of ripe fruit, while soft woods and earthy notes create depth and warmth. Natural, elegant and calming, it captures the feeling of a slow summer afternoon beneath the shade of a fig tree."
+        },
+        {
+          "type": "header",
+          "content": "Fragrance 2"
+        },
+        {
+          "type": "text",
+          "id": "part_2_title",
+          "label": "Title",
+          "default": "AMBRE"
+        },
+        {
+          "type": "text",
+          "id": "part_2_list",
+          "label": "Notes (comma-separated)",
+          "default": "Warm Amber, Smoked Woods, Cashmere"
+        },
+        {
+          "type": "textarea",
+          "id": "part_2_description",
+          "label": "Description",
+          "default": "A warm and enveloping fragrance built around rich amber and precious woods. Subtle spices add depth, while soft musks create a smooth and refined finish. Sophisticated and comforting, it evokes the atmosphere of candlelight, aged wood and timeless interiors."
+        },
+        {
+          "type": "header",
+          "content": "Fragrance 3"
+        },
+        {
+          "type": "text",
+          "id": "part_3_title",
+          "label": "Title",
+          "default": "ZAGARA"
+        },
+        {
+          "type": "text",
+          "id": "part_3_list",
+          "label": "Notes (comma-separated)",
+          "default": "Orange Blossom, Citrus Grove, Morning Light"
+        },
+        {
+          "type": "textarea",
+          "id": "part_3_description",
+          "label": "Description",
+          "default": "Inspired by the orange groves of the Mediterranean coast in full bloom. Delicate orange blossom is layered with fresh citrus notes and soft floral accords, creating a fragrance that feels bright, radiant and uplifting. Elegant yet effortless, it captures the beauty of a warm spring morning filled with sunlight and blooming flowers."
+        }
+      ]
+    },
+    {
       "type": "buy_buttons",
       "name": "Buy Buttons",
       "limit": 1,
@@ -757,6 +834,7 @@
             {% endfor %}
 
             <!-- Variant Picker: Smell/Stone Type -->
+            {%- assign fragrance_info_block = section.blocks | where: 'type', 'fragrance_info' | first -%}
             {% for option in product.options_with_values %}
               {% if option.name != 'Size' %}
                 {% assign option_index = forloop.index %}
@@ -766,6 +844,19 @@
                     <span class="maison_commerce_maison_main_product__variant-value" id="selected-smell-{{ section.id }}">
                       {{ option.selected_value }}
                     </span>
+                    {%- if fragrance_info_block -%}
+                      <button
+                        type="button"
+                        class="maison_commerce_maison_main_product__fragrance-info-btn"
+                        data-fragrance-info-open
+                        aria-label="Fragrance details"
+                        aria-haspopup="dialog"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 50 50" fill="currentColor">
+                          <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 4 z M 25 11 A 3 3 0 0 0 22 14 A 3 3 0 0 0 25 17 A 3 3 0 0 0 28 14 A 3 3 0 0 0 25 11 z M 21 21 L 21 23 L 22 23 L 23 23 L 23 36 L 22 36 L 21 36 L 21 38 L 22 38 L 23 38 L 27 38 L 28 38 L 29 38 L 29 36 L 28 36 L 27 36 L 27 21 L 26 21 L 22 21 L 21 21 z"></path>
+                        </svg>
+                      </button>
+                    {%- endif -%}
                   </div>
                   <div class="maison_commerce_maison_main_product__variant-options">
                     {% for value in option.values %}
@@ -1048,6 +1139,54 @@
                   class: 'maison_commerce_maison_main_product__size-chart-img',
                   alt: 'Size Chart'
               }}
+            </div>
+          {% endif %}
+
+          <!-- Fragrance Info Popup -->
+          {% if fragrance_info_block %}
+            <div class="maison_commerce_maison_main_product__fragrance-modal" data-fragrance-modal aria-hidden="true">
+              <div class="maison_commerce_maison_main_product__fragrance-modal-overlay" data-fragrance-info-close></div>
+              <div class="maison_commerce_maison_main_product__fragrance-modal-dialog" role="dialog" aria-modal="true" aria-label="Fragrance details">
+                <button
+                  type="button"
+                  class="maison_commerce_maison_main_product__fragrance-modal-close"
+                  data-fragrance-info-close
+                  aria-label="Close"
+                >
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L17 17M17 1L1 17" stroke="currentColor"/>
+                  </svg>
+                </button>
+                <div class="maison_commerce_maison_main_product__fragrance-modal-content">
+                  {% for i in (1..3) %}
+                    {% capture title_key %}part_{{ i }}_title{% endcapture %}
+                    {% capture desc_key %}part_{{ i }}_description{% endcapture %}
+                    {% capture list_key %}part_{{ i }}_list{% endcapture %}
+                    {% assign part_title = fragrance_info_block.settings[title_key] %}
+                    {% assign part_desc = fragrance_info_block.settings[desc_key] %}
+                    {% assign part_list = fragrance_info_block.settings[list_key] %}
+                    {% if part_title != blank or part_desc != blank or part_list != blank %}
+                      <div class="maison_commerce_maison_main_product__fragrance-part">
+                        {% if part_title != blank %}
+                          <h3 class="maison_commerce_maison_main_product__fragrance-part-title">{{ part_title }}</h3>
+                        {% endif %}
+                        {% if part_desc != blank %}
+                          <p class="maison_commerce_maison_main_product__fragrance-part-desc">{{ part_desc }}</p>
+                        {% endif %}
+                        {% if part_list != blank %}
+                          <div class="maison_commerce_maison_main_product__fragrance-part-list">
+                            {% assign part_items = part_list | split: ',' %}
+                            {% for item in part_items %}
+                              <span class="maison_commerce_maison_main_product__fragrance-part-list-item">{{ item | strip }}</span>
+                              {% unless forloop.last %}<span class="maison_commerce_maison_main_product__fragrance-part-list-sep">•</span>{% endunless %}
+                            {% endfor %}
+                          </div>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
             </div>
           {% endif %}
         </div>
@@ -1674,6 +1813,120 @@
 
   .maison_commerce_maison_main_product__variant-picker-hidden {
     display: none;
+  }
+
+  /* Fragrance info icon + popup */
+  .maison_commerce_maison_main_product__fragrance-info-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-left: 2px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(26, 26, 26, 0.45);
+    transition: color 0.2s ease;
+    line-height: 0;
+  }
+
+  .maison_commerce_maison_main_product__fragrance-info-btn:hover {
+    color: #1a1a1a;
+  }
+
+  .maison_commerce_maison_main_product__fragrance-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .maison_commerce_maison_main_product__fragrance-modal.is-open {
+    display: flex;
+  }
+
+  .maison_commerce_maison_main_product__fragrance-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.4);
+  }
+
+  .maison_commerce_maison_main_product__fragrance-modal-dialog {
+    position: relative;
+    background: #fff;
+    width: 100%;
+    max-width: 760px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 56px 64px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__fragrance-modal-dialog {
+      padding: 48px 24px;
+    }
+  }
+
+  .maison_commerce_maison_main_product__fragrance-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #1a1a1a;
+    cursor: pointer;
+  }
+
+  .maison_commerce_maison_main_product__fragrance-modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .maison_commerce_maison_main_product__fragrance-part {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .maison_commerce_maison_main_product__fragrance-part-title {
+    font-family: 'Dangmen', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .maison_commerce_maison_main_product__fragrance-part-desc {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(26, 26, 26, 0.75);
+    margin: 0;
+  }
+
+  .maison_commerce_maison_main_product__fragrance-part-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #1a1a1a;
+  }
+
+  .maison_commerce_maison_main_product__fragrance-part-list-sep {
+    color: rgba(26, 26, 26, 0.4);
   }
 
   /* Shipping */
@@ -2643,6 +2896,36 @@
 
     // Initial gallery filter (Size may be refined by auto-select / variant change)
     applyGalleryFilter(currentSizeFromVariant(getSelectedVariantFromOptions()));
+
+    // Fragrance info popup
+    (function initFragranceInfo() {
+      const modal = productInfo.querySelector('[data-fragrance-modal]');
+      if (!modal) return;
+
+      const openTriggers = productInfo.querySelectorAll('[data-fragrance-info-open]');
+      const closeTriggers = modal.querySelectorAll('[data-fragrance-info-close]');
+
+      function openModal() {
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      openTriggers.forEach(t => t.addEventListener('click', openModal));
+      closeTriggers.forEach(t => t.addEventListener('click', closeModal));
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+          closeModal();
+        }
+      });
+    })();
 
     // Reinitialize on resize
     let resizeTimeout;
