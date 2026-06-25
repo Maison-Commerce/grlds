@@ -40,6 +40,20 @@
             "lm_main_button_border_color": "#000000"
           }
         },
+        "fragrance_info_wJyGxC": {
+          "type": "fragrance_info",
+          "settings": {
+            "part_1_title": "FIGUERES",
+            "part_1_list": "Green Fig, White Woods, Summer Shade",
+            "part_1_description": "The scent of an ancient fig tree standing quietly in the Mediterranean sun. Fresh green fig leaves blend with the creamy sweetness of ripe fruit, while soft woods and earthy notes create depth and warmth. Natural, elegant and calming, it captures the feeling of a slow summer afternoon beneath the shade of a fig tree.",
+            "part_2_title": "AMBRE",
+            "part_2_list": "Warm Amber, Smoked Woods, Cashmere",
+            "part_2_description": "A warm and enveloping fragrance built around rich amber and precious woods. Subtle spices add depth, while soft musks create a smooth and refined finish. Sophisticated and comforting, it evokes the atmosphere of candlelight, aged wood and timeless interiors.",
+            "part_3_title": "ZAGARA",
+            "part_3_list": "Orange Blossom, Citrus Grove, Morning Light",
+            "part_3_description": "Inspired by the orange groves of the Mediterranean coast in full bloom. Delicate orange blossom is layered with fresh citrus notes and soft floral accords, creating a fragrance that feels bright, radiant and uplifting. Elegant yet effortless, it captures the beauty of a warm spring morning filled with sunlight and blooming flowers."
+          }
+        },
         "benefit_4MyVhJ": {
           "type": "benefit",
           "settings": {
@@ -145,6 +159,7 @@
       "block_order": [
         "product_variants_VxGKJw",
         "buy_buttons_Bp7LYz",
+        "fragrance_info_wJyGxC",
         "benefit_4MyVhJ",
         "benefit_W7JMB3",
         "benefit_TtmRKQ",
