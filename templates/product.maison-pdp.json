@@ -179,7 +179,7 @@
         "show_rating": true,
         "rating_text": "",
         "show_shipping_info": true,
-        "shipping_text": "",
+        "shipping_text": "<p>Pre-order now. Ships September/October</p>",
         "button_text": "Add to Bag",
         "show_payment_icons": true,
         "free_refill_checkout_label": "Gift",
