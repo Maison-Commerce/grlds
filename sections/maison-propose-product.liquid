@@ -524,6 +524,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    position: relative;
   }
 
   /* Image Wrapper */
@@ -639,6 +640,14 @@
 
   .maison_commerce_maison_propose_product__button:hover {
     opacity: 0.8;
+  }
+
+  /* Make the whole card clickable (button link stretched over the card) */
+  .maison_commerce_maison_propose_product__button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
   }
 
   @media (max-width: 990px) {
