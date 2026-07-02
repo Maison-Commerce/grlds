@@ -576,7 +576,7 @@
       "settings": {
         "section_heading": "Why You'll Love It",
         "section_description": "<p>Small-batch poured. Clean-burn soy blend wax. Designed to glow</p>",
-        "main_video": "shopify://files/videos/Bruin.mp4",
+        "main_video": "{{ product.metafields.custom.video_gif.value }}",
         "img_position": "top",
         "image_position": "right",
         "section_bg_color": "#ffffff",
@@ -615,7 +615,7 @@
         "keep_away_label": "Keep away from",
         "care_guide_text": "View Full Care Guide",
         "care_guide_link": "#",
-        "product_image": "shopify://shop_images/GroenMHand_png.png",
+        "product_image": "{{ product.metafields.custom.pdp_img.value }}",
         "icon_child": "shopify://shop_images/Kids-Boy--Streamline-Ultimate.svg",
         "icon_pet": "shopify://shop_images/Dog-Sit-3--Streamline-Ultimate.svg",
         "icon_fire": "shopify://shop_images/Safety-Fire-Extinguisher--Streamline-Ultimate.svg",
