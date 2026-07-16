@@ -586,6 +586,14 @@
               assign size_option_position = forloop.index
             endif
           endfor
+
+          assign has_video = false
+          for media in product.media
+            if media.media_type == 'video'
+              assign has_video = true
+              break
+            endif
+          endfor
         -%}
         <div class="maison_commerce_maison_main_product__gallery" style="--media-radius: 0">
           {% if section.settings.gallery_layout == 'grid' %}
@@ -1193,6 +1201,32 @@
       </div>
     </div>
   </div>
+
+  <!-- Fullscreen Video Popup -->
+  {% if has_video %}
+    <div class="maison_commerce_maison_main_product__video-modal" data-video-modal aria-hidden="true">
+      <div class="maison_commerce_maison_main_product__video-modal-overlay" data-video-close></div>
+      <button
+        type="button"
+        class="maison_commerce_maison_main_product__video-modal-close"
+        data-video-close
+        aria-label="Close"
+      >
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L21 21M21 1L1 21" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+      </button>
+      <div class="maison_commerce_maison_main_product__video-modal-inner">
+        <video
+          class="maison_commerce_maison_main_product__video-modal-player"
+          controls
+          playsinline
+          preload="none"
+          data-video-player
+        ></video>
+      </div>
+    </div>
+  {% endif %}
 </product-info>
 
 <style>
@@ -1928,6 +1962,71 @@
 
   .maison_commerce_maison_main_product__fragrance-part-list-sep {
     color: rgba(26, 26, 26, 0.4);
+  }
+
+  /* Gallery video → fullscreen popup */
+  .maison_commerce_maison_main_product__gallery-video {
+    cursor: pointer;
+  }
+
+  .maison_commerce_maison_main_product__video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .maison_commerce_maison_main_product__video-modal.is-open {
+    display: flex;
+  }
+
+  .maison_commerce_maison_main_product__video-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  .maison_commerce_maison_main_product__video-modal-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .maison_commerce_maison_main_product__video-modal-player {
+    width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    background: #000;
+    display: block;
+  }
+
+  .maison_commerce_maison_main_product__video-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .maison_commerce_maison_main_product__video-modal-close:hover {
+    background: rgba(255, 255, 255, 0.25);
   }
 
   /* Shipping */
@@ -2924,6 +3023,62 @@
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.classList.contains('is-open')) {
           closeModal();
+        }
+      });
+    })();
+
+    // Fullscreen video popup
+    (function initVideoModal() {
+      const modal = productInfo.querySelector('[data-video-modal]');
+      if (!modal) return;
+
+      const player = modal.querySelector('[data-video-player]');
+      const closeTriggers = modal.querySelectorAll('[data-video-close]');
+      const galleryVideos = productInfo.querySelectorAll('.maison_commerce_maison_main_product__gallery-video');
+
+      function openVideo(sourceVideo) {
+        // Copy the clicked video's sources into the modal player
+        player.innerHTML = '';
+        sourceVideo.querySelectorAll('source').forEach(function(s) {
+          const src = document.createElement('source');
+          src.src = s.src || s.getAttribute('src');
+          if (s.type) src.type = s.type;
+          player.appendChild(src);
+        });
+
+        player.muted = false;
+        player.load();
+
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        const playPromise = player.play();
+        if (playPromise && playPromise.catch) playPromise.catch(function() {});
+      }
+
+      function closeVideo() {
+        player.pause();
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        player.removeAttribute('src');
+        player.innerHTML = '';
+      }
+
+      galleryVideos.forEach(function(video) {
+        video.addEventListener('click', function() {
+          openVideo(video);
+        });
+      });
+
+      closeTriggers.forEach(function(t) {
+        t.addEventListener('click', closeVideo);
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+          closeVideo();
         }
       });
     })();
