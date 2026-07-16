@@ -631,6 +631,9 @@
                         <source src="{{ source.url }}" type="{{ source.mime_type }}">
                       {%- endfor -%}
                     </video>
+                    <span class="maison_commerce_maison_main_product__video-badge" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                    </span>
                   {% else %}
                     {% render 'product-media', media: media %}
                   {% endif %}
@@ -691,6 +694,9 @@
                         <source src="{{ source.url }}" type="{{ source.mime_type }}">
                       {%- endfor -%}
                     </video>
+                    <span class="maison_commerce_maison_main_product__video-badge" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                    </span>
                   {% else %}
                     {% render 'product-media', media: media %}
                   {% endif %}
@@ -1969,6 +1975,37 @@
     cursor: pointer;
   }
 
+  /* "Play / open video" corner badge */
+  .maison_commerce_maison_main_product__video-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  }
+
+  .maison_commerce_maison_main_product__video-badge svg {
+    margin-left: 2px;
+  }
+
+  @media (max-width: 990px) {
+    .maison_commerce_maison_main_product__video-badge {
+      width: 32px;
+      height: 32px;
+      bottom: 10px;
+      right: 10px;
+    }
+  }
+
   .maison_commerce_maison_main_product__video-modal {
     position: fixed;
     inset: 0;
@@ -2019,15 +2056,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.12);
+    background: #ffffff;
     border: none;
-    color: #fff;
+    color: #1a1a1a;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: opacity 0.2s ease;
   }
 
   .maison_commerce_maison_main_product__video-modal-close:hover {
-    background: rgba(255, 255, 255, 0.25);
+    opacity: 0.8;
   }
 
   /* Shipping */
