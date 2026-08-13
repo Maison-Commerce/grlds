@@ -553,7 +553,8 @@
     {{ 'component-swatch.css' | asset_url | stylesheet_tag }}
   {% endunless %}
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
   {%- style -%}
@@ -579,8 +580,8 @@
           assign size_values = ''
           assign size_option_position = 0
           for option in product.options_with_values
-            assign _opt_name = option.name | downcase
-            if _opt_name == 'size'
+            assign opt_name = option.name | downcase
+            if opt_name == 'size'
               assign has_size_option = true
               assign size_values = option.values | join: ','
               assign size_option_position = forloop.index
@@ -596,74 +597,6 @@
           endfor
         -%}
         <div class="maison_commerce_maison_main_product__gallery" style="--media-radius: 0">
-          {% if section.settings.gallery_layout == 'grid' %}
-            <!-- Desktop Grid Layout -->
-            <div class="maison_commerce_maison_main_product__gallery-grid" data-gallery-grid>
-              {% for media in product.media %}
-                {%- assign media_sizes = '' -%}
-                {%- if has_size_option -%}
-                  {%- capture media_sizes -%}{%- render 'media-size-match', media: media, size_values: size_values -%}{%- endcapture -%}
-                  {%- assign media_sizes = media_sizes | strip -%}
-                {%- endif -%}
-                <div
-                  class="maison_commerce_maison_main_product__gallery-item{% if forloop.index > 4 %} is-collapsed-hidden{% endif %}"
-                  data-gallery-item
-                  data-media-sizes="{{ media_sizes }}"
-                >
-                  {% if section.settings.show_badge %}
-                    <div class="maison_commerce_maison_main_product__badge"{% unless forloop.first %} style="display: none;"{% endunless %}>
-                      {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
-                    </div>
-                  {% endif %}
-                  {% if media.media_type == 'video' %}
-                    {%- assign sorted_video_sources = media.sources | sort: 'width' | reverse -%}
-                    <video
-                      class="maison_commerce_maison_main_product__gallery-video"
-                      autoplay
-                      muted
-                      loop
-                      playsinline
-                      preload="metadata"
-                      poster="{{ media.preview_image | image_url: width: 1100 }}"
-                      data-media-id="{{ media.id }}"
-                    >
-                      {%- for source in sorted_video_sources -%}
-                        <source src="{{ source.url }}" type="{{ source.mime_type }}">
-                      {%- endfor -%}
-                    </video>
-                    <span class="maison_commerce_maison_main_product__video-badge" aria-hidden="true">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
-                    </span>
-                  {% else %}
-                    {% render 'product-media', media: media %}
-                  {% endif %}
-                </div>
-              {% endfor %}
-            </div>
-
-            {% if product.media.size > 4 %}
-              <button
-                type="button"
-                class="maison_commerce_maison_main_product__view-all"
-                data-gallery-toggle
-                aria-expanded="false"
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="0.5" y="0.5" width="5" height="5" stroke="currentColor"/>
-                  <rect x="8.5" y="0.5" width="5" height="5" stroke="currentColor"/>
-                  <rect x="0.5" y="8.5" width="5" height="5" stroke="currentColor"/>
-                  <rect x="8.5" y="8.5" width="5" height="5" stroke="currentColor"/>
-                </svg>
-                <span
-                  data-gallery-toggle-label
-                  data-label-more="View all photos"
-                  data-label-less="Show less"
-                >View all photos ({{ product.media.size }})</span>
-              </button>
-            {% endif %}
-          {% endif %}
-
-          <!-- Mobile Slider Layout -->
           <div class="swiper maison_commerce_maison_main_product__gallery-slider">
             <div class="swiper-wrapper">
               {% for media in product.media %}
@@ -1226,6 +1159,7 @@
         <video
           class="maison_commerce_maison_main_product__video-modal-player"
           controls
+          loop
           playsinline
           preload="none"
           data-video-player
@@ -1316,19 +1250,13 @@
   }
 
   .maison_commerce_maison_main_product__gallery-slider {
-    display: none!important;
+    display: block !important;
+    width: 100%;
+    overflow: hidden !important;
   }
 
-  @media (max-width: 990px) {
-    .maison_commerce_maison_main_product__gallery-slider {
-      display: block!important;
-      width: 100%;
-      overflow: visible!important;
-    }
-
-    .maison_commerce_maison_main_product{
-      overflow: hidden!important;
-    }
+  .maison_commerce_maison_main_product {
+    overflow: hidden !important;
   }
 
   .maison_commerce_maison_main_product__gallery-slide {
@@ -1342,6 +1270,26 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .maison_commerce_maison_main_product__gallery-slide video {
+    animation: maison-product-video-zoom 10s ease-in-out infinite alternate;
+    transform-origin: center;
+  }
+
+  @keyframes maison-product-video-zoom {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.06);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .maison_commerce_maison_main_product__gallery-slide video {
+      animation: none;
+    }
   }
 
   .maison_commerce_maison_main_product__badge {
@@ -1365,7 +1313,7 @@
 
   /* Swiper Pagination Styles */
   .maison_commerce_maison_main_product__gallery-pagination {
-    display: none;
+    display: block;
     position: relative;
     margin-top: 8px;
     text-align: center;
@@ -1374,12 +1322,6 @@
     left: auto!important;
     right: auto!important;
     bottom: auto!important;
-  }
-
-  @media (max-width: 990px) {
-    .maison_commerce_maison_main_product__gallery-pagination {
-      display: block;
-    }
   }
 
   .maison_commerce_maison_main_product__gallery-pagination .swiper-pagination-bullet {
@@ -2413,7 +2355,6 @@
   }
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const productInfo = document.querySelector('#MainProduct-{{ section.id }}');
@@ -2425,28 +2366,24 @@
     const variantMetafieldsScript = document.getElementById('variant-metafields-{{ section.id }}');
     const variantMetafields = variantMetafieldsScript ? JSON.parse(variantMetafieldsScript.textContent) : {};
 
-    // Map each variant to its featured media id (for mobile slider sync)
+    // Map each variant to its featured media id for gallery sync
     const variantMediaMap = {
       {%- for variant in product.variants -%}
         "{{ variant.id }}": {{ variant.featured_media.id | default: 'null' }}{% unless forloop.last %},{% endunless %}
       {%- endfor -%}
     };
 
-    // Reference to the mobile gallery Swiper instance
+    // Reference to the product gallery Swiper instance
     let mobileSwiper = null;
 
     // Gallery / Size-binding config (from Liquid)
     const hasSizeOption = {% if has_size_option %}true{% else %}false{% endif %};
     const sizeOptionPosition = {{ size_option_position | default: 0 }};
 
-    // Capture mobile slider slides up-front so we can filter them by Size
+    // Capture gallery slides up-front so we can filter them by Size
     const mobileGalleryEl = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-slider');
     const mobileWrapper = mobileGalleryEl ? mobileGalleryEl.querySelector('.swiper-wrapper') : null;
     const allMobileSlides = mobileWrapper ? Array.from(mobileWrapper.children) : [];
-
-    // Gallery expand/collapse + current Size state
-    let galleryExpanded = false;
-    let currentGallerySize = null;
 
     // Does a gallery element (grid item / slide) match the selected Size?
     function mediaMatchesSize(el, size) {
@@ -2472,58 +2409,7 @@
       });
     }
 
-    // Desktop grid: filter by Size, then collapse matched items beyond the first 4
-    function renderDesktopGrid(size) {
-      const grid = productInfo.querySelector('[data-gallery-grid]');
-      if (!grid) return;
-
-      const items = Array.from(grid.querySelectorAll('[data-gallery-item]'));
-      const matched = [];
-      items.forEach(item => {
-        if (mediaMatchesSize(item, size)) {
-          item.classList.remove('is-size-hidden');
-          matched.push(item);
-        } else {
-          item.classList.add('is-size-hidden');
-        }
-      });
-
-      matched.forEach((item, i) => {
-        if (i >= 4 && !galleryExpanded) {
-          item.classList.add('is-collapsed-hidden');
-        } else {
-          item.classList.remove('is-collapsed-hidden');
-        }
-      });
-
-      // Show the badge only on the first visible (matched) grid item
-      items.forEach(item => {
-        const badge = item.querySelector('.maison_commerce_maison_main_product__badge');
-        if (badge) badge.style.display = 'none';
-      });
-      if (matched[0]) {
-        const firstBadge = matched[0].querySelector('.maison_commerce_maison_main_product__badge');
-        if (firstBadge) firstBadge.style.display = 'block';
-      }
-
-      const toggle = productInfo.querySelector('[data-gallery-toggle]');
-      if (toggle) {
-        if (matched.length > 4) {
-          toggle.style.display = '';
-          toggle.setAttribute('aria-expanded', String(galleryExpanded));
-          const label = toggle.querySelector('[data-gallery-toggle-label]');
-          if (label) {
-            label.textContent = galleryExpanded
-              ? (label.dataset.labelLess || 'Show less')
-              : `${label.dataset.labelMore || 'View all photos'} (${matched.length})`;
-          }
-        } else {
-          toggle.style.display = 'none';
-        }
-      }
-    }
-
-    // Mobile slider: keep only slides matching the selected Size
+    // Keep only slides matching the selected Size
     function rebuildMobileSlides(size) {
       if (!mobileWrapper) return;
 
@@ -2539,18 +2425,17 @@
       if (mobileSwiper && !mobileSwiper.destroyed) {
         mobileSwiper.update();
         mobileSwiper.slideTo(0, 0);
+        syncGalleryVideoPlayback(mobileSwiper);
       }
       setFirstSlideBadge();
     }
 
-    // Apply the Size filter across both desktop grid and mobile slider
+    // Apply the Size filter to the gallery
     function applyGalleryFilter(size) {
-      currentGallerySize = size;
-      renderDesktopGrid(size);
       rebuildMobileSlides(size);
     }
 
-    // Move the mobile slider to the slide matching the variant's featured media
+    // Move the gallery to the slide matching the variant's featured media
     function goToVariantMedia(variant) {
       if (!mobileSwiper || mobileSwiper.destroyed || !variant) return;
       const mediaId = variantMediaMap[variant.id];
@@ -2949,52 +2834,61 @@
       }
     });
 
-    // Initialize Swiper for mobile gallery
+    function syncGalleryVideoPlayback(swiperInstance) {
+      swiperInstance.slides.forEach((slide, index) => {
+        const video = slide.querySelector('.maison_commerce_maison_main_product__gallery-video');
+        if (!video) return;
+
+        video.muted = true;
+        video.loop = true;
+
+        if (index === swiperInstance.activeIndex) {
+          const playPromise = video.play();
+          if (playPromise && playPromise.catch) playPromise.catch(function() {});
+        } else {
+          video.pause();
+        }
+      });
+    }
+
+    // Initialize the one-at-a-time product gallery at every viewport size
     function initMobileGallerySwiper() {
-      if (window.innerWidth <= 990) {
-        const swiperContainer = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-slider');
-        
-        if (swiperContainer && !swiperContainer.swiper) {
-          mobileSwiper = new Swiper('.maison_commerce_maison_main_product__gallery-slider', {
-            slidesPerView: 1,
-            spaceBetween: 8,
-            loop: false,
-            pagination: {
-              el: '.maison_commerce_maison_main_product__gallery-pagination',
-              clickable: true,
-              renderBullet: function (index, className) {
-                return '<span class="' + className + '"></span>';
-              },
+      const swiperContainer = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-slider');
+      const pagination = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-pagination');
+
+      if (swiperContainer && !swiperContainer.swiper) {
+        mobileSwiper = new Swiper(swiperContainer, {
+          slidesPerView: 1,
+          spaceBetween: 8,
+          loop: false,
+          pagination: {
+            el: pagination,
+            clickable: true,
+            renderBullet: function (index, className) {
+              return '<span class="' + className + '"></span>';
             },
-            on: {
-              init: function(swiperInstance) {
-                // Ensure first slide badge is visible
-                swiperInstance.slides.forEach((slide, index) => {
-                  const badge = slide.querySelector('.maison_commerce_maison_main_product__badge');
-                  if (badge) {
-                    badge.style.display = index === 0 ? 'block' : 'none';
-                  }
-                });
-              },
-              slideChange: function(swiperInstance) {
-                // Show badge only on first slide
-                swiperInstance.slides.forEach((slide, index) => {
-                  const badge = slide.querySelector('.maison_commerce_maison_main_product__badge');
-                  if (badge) {
-                    badge.style.display = index === swiperInstance.activeIndex && swiperInstance.activeIndex === 0 ? 'block' : 'none';
-                  }
-                });
-              },
+          },
+          on: {
+            init: function(swiperInstance) {
+              swiperInstance.slides.forEach((slide, index) => {
+                const badge = slide.querySelector('.maison_commerce_maison_main_product__badge');
+                if (badge) {
+                  badge.style.display = index === 0 ? 'block' : 'none';
+                }
+              });
+              syncGalleryVideoPlayback(swiperInstance);
             },
-          });
-        }
-      } else {
-        // Destroy Swiper if window is resized to desktop
-        const swiperContainer = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-slider');
-        if (swiperContainer && swiperContainer.swiper) {
-          swiperContainer.swiper.destroy(true, true);
-          mobileSwiper = null;
-        }
+            slideChange: function(swiperInstance) {
+              swiperInstance.slides.forEach((slide, index) => {
+                const badge = slide.querySelector('.maison_commerce_maison_main_product__badge');
+                if (badge) {
+                  badge.style.display = index === swiperInstance.activeIndex && swiperInstance.activeIndex === 0 ? 'block' : 'none';
+                }
+              });
+              syncGalleryVideoPlayback(swiperInstance);
+            },
+          },
+        });
       }
     }
 
@@ -3023,15 +2917,6 @@
         targetThumb.click();
       }
     })();
-
-    // Gallery grid "View all photos" toggle — reveals the remaining matched items
-    const galleryToggle = productInfo.querySelector('[data-gallery-toggle]');
-    if (galleryToggle) {
-      galleryToggle.addEventListener('click', function() {
-        galleryExpanded = !galleryExpanded;
-        renderDesktopGrid(currentGallerySize);
-      });
-    }
 
     // Initial gallery filter (Size may be refined by auto-select / variant change)
     applyGalleryFilter(currentSizeFromVariant(getSelectedVariantFromOptions()));
@@ -3122,14 +3007,5 @@
       });
     })();
 
-    // Reinitialize on resize
-    let resizeTimeout;
-    window.addEventListener('resize', function() {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(function() {
-        initMobileGallerySwiper();
-      }, 250);
-    });
   });
 </script>
-
