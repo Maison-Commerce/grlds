@@ -1322,12 +1322,24 @@
   }
 
   .maison-product-lightbox {
-    --pswp-bg: #f7f5f0;
-    --pswp-placeholder-bg: #e8e4da;
+    --pswp-bg: #ffffff;
+    --pswp-placeholder-bg: #f2f2f2;
     --pswp-icon-color: #1a1a1a;
     --pswp-icon-color-secondary: #ffffff;
     --pswp-icon-stroke-color: #ffffff;
     --pswp-error-text-color: #1a1a1a;
+    background: #ffffff;
+    isolation: isolate;
+  }
+
+  .maison-product-lightbox .pswp__bg,
+  .maison-product-lightbox .pswp__scroll-wrap {
+    background: #ffffff;
+  }
+
+  .maison-product-lightbox .pswp__bg {
+    display: block;
+    opacity: 1 !important;
   }
 
   .maison-product-lightbox .pswp__top-bar {
@@ -1341,7 +1353,7 @@
 
   .maison-product-lightbox .pswp__button--close,
   .maison-product-lightbox .pswp__button--arrow {
-    background: rgba(255, 255, 255, 0.94);
+    background: #ffffff;
     box-shadow: 0 4px 20px rgba(26, 26, 26, 0.12);
   }
 
@@ -1358,9 +1370,9 @@
   }
 
   .maison-product-lightbox .pswp__button--arrow {
-    width: 52px;
-    height: 52px;
-    margin-top: -26px;
+    width: 42px;
+    height: 42px;
+    margin-top: -21px;
     border-radius: 50%;
   }
 
@@ -1373,9 +1385,17 @@
   }
 
   .maison-product-lightbox .pswp__button--arrow .pswp__icn {
-    width: 44px;
-    height: 44px;
-    margin-top: -22px;
+    width: 26px;
+    height: 26px;
+    margin-top: -13px;
+  }
+
+  .maison-product-lightbox .pswp__button--arrow--prev .pswp__icn {
+    left: 8px;
+  }
+
+  .maison-product-lightbox .pswp__button--arrow--next .pswp__icn {
+    right: 8px;
   }
 
   .maison-product-lightbox .pswp__product-thumbnails {
@@ -1390,7 +1410,7 @@
     padding: 8px;
     overflow-x: auto;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.94);
+    background: #ffffff;
     border-radius: 4px;
     box-shadow: 0 4px 24px rgba(26, 26, 26, 0.12);
     scrollbar-width: none;
@@ -3198,6 +3218,7 @@
         pswpModule: () => import({{ 'photoswipe.esm.js' | asset_url | json }}),
         mainClass: 'maison-product-lightbox',
         bgOpacity: 1,
+        showHideAnimationType: 'none',
         loop: productLightboxItems.length > 2,
         wheelToZoom: true,
         closeTitle: {{ 'accessibility.close' | t | json }},
@@ -3211,11 +3232,6 @@
           left: viewportSize.x < 750 ? 12 : 80,
           right: viewportSize.x < 750 ? 12 : 80
         })
-      });
-
-      productLightbox.addFilter('thumbEl', (thumbEl, itemData, index) => {
-        const galleryImage = productLightboxRoot.querySelector(`[data-lightbox-image-index="${index}"] img`);
-        return galleryImage || thumbEl;
       });
 
       if (productLightboxItems.length > 1) {
