@@ -1283,6 +1283,7 @@
     position: relative;
     width: 100%;
     aspect-ratio: 200 / 230;
+    overflow: hidden;
   }
   
   .maison_commerce_maison_main_product__gallery-slide img,
@@ -1302,8 +1303,11 @@
   }
 
   .maison_commerce_maison_main_product__gallery-slide video {
-    animation: maison-product-video-zoom 10s ease-in-out infinite alternate;
     transform-origin: center;
+  }
+
+  .maison_commerce_maison_main_product__gallery-slide.swiper-slide-active video {
+    animation: maison-product-video-zoom 10s ease-in-out infinite alternate;
   }
 
   @keyframes maison-product-video-zoom {
