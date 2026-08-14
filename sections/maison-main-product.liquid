@@ -1391,11 +1391,11 @@
   }
 
   .maison-product-lightbox .pswp__button--arrow--prev .pswp__icn {
-    left: 8px;
+    left: 12.5px;
   }
 
   .maison-product-lightbox .pswp__button--arrow--next .pswp__icn {
-    right: 8px;
+    right: 12.5px;
   }
 
   .maison-product-lightbox .pswp__product-thumbnails {
@@ -3224,6 +3224,7 @@
         showHideAnimationType: 'zoom',
         loop: productLightboxItems.length > 2,
         wheelToZoom: true,
+        zoom: false,
         returnFocus: false,
         closeTitle: {{ 'accessibility.close' | t | json }},
         arrowPrevTitle: {{ 'general.pagination.previous' | t | json }},
