@@ -554,6 +554,7 @@
   {% endunless %}
 
   {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+  {{ 'photoswipe.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
@@ -599,13 +600,27 @@
         <div class="maison_commerce_maison_main_product__gallery" style="--media-radius: 0">
           <div class="swiper maison_commerce_maison_main_product__gallery-slider">
             <div class="swiper-wrapper">
+              {%- assign lightbox_image_index = 0 -%}
               {% for media in product.media %}
                 {%- assign media_sizes = '' -%}
                 {%- if has_size_option -%}
                   {%- capture media_sizes -%}{%- render 'media-size-match', media: media, size_values: size_values -%}{%- endcapture -%}
                   {%- assign media_sizes = media_sizes | strip -%}
                 {%- endif -%}
-                <div class="swiper-slide maison_commerce_maison_main_product__gallery-slide" data-media-id="{{ media.id }}" data-media-sizes="{{ media_sizes }}">
+                {%- if media.media_type == 'image' -%}
+                  {%- assign lightbox_image_number = lightbox_image_index | plus: 1 -%}
+                {%- endif -%}
+                <div
+                  class="swiper-slide maison_commerce_maison_main_product__gallery-slide{% if media.media_type == 'image' %} maison_commerce_maison_main_product__gallery-slide--lightbox{% endif %}"
+                  data-media-id="{{ media.id }}"
+                  data-media-sizes="{{ media_sizes }}"
+                  {% if media.media_type == 'image' %}
+                    data-lightbox-image-index="{{ lightbox_image_index }}"
+                    role="button"
+                    tabindex="0"
+                    aria-label="{{ 'products.product.media.open_media' | t: index: lightbox_image_number }}"
+                  {% endif %}
+                >
                   {% if section.settings.show_badge %}
                     <div class="maison_commerce_maison_main_product__badge"{% unless forloop.first %} style="display: none;"{% endunless %}>
                       {{ section.settings.badge_text | default: 'LIMITED EDITION' }}
@@ -634,6 +649,9 @@
                     {% render 'product-media', media: media %}
                   {% endif %}
                 </div>
+                {%- if media.media_type == 'image' -%}
+                  {%- assign lightbox_image_index = lightbox_image_index | plus: 1 -%}
+                {%- endif -%}
               {% endfor %}
             </div>
             <!-- Slider Pagination -->
@@ -1274,6 +1292,15 @@
     object-fit: cover;
   }
 
+  .maison_commerce_maison_main_product__gallery-slide--lightbox {
+    cursor: zoom-in;
+  }
+
+  .maison_commerce_maison_main_product__gallery-slide--lightbox:focus-visible {
+    outline: 2px solid #1a1a1a;
+    outline-offset: -2px;
+  }
+
   .maison_commerce_maison_main_product__gallery-slide video {
     animation: maison-product-video-zoom 10s ease-in-out infinite alternate;
     transform-origin: center;
@@ -1291,6 +1318,130 @@
   @media (prefers-reduced-motion: reduce) {
     .maison_commerce_maison_main_product__gallery-slide video {
       animation: none;
+    }
+  }
+
+  .maison-product-lightbox {
+    --pswp-bg: #f7f5f0;
+    --pswp-placeholder-bg: #e8e4da;
+    --pswp-icon-color: #1a1a1a;
+    --pswp-icon-color-secondary: #ffffff;
+    --pswp-icon-stroke-color: #ffffff;
+    --pswp-error-text-color: #1a1a1a;
+  }
+
+  .maison-product-lightbox .pswp__top-bar {
+    height: 68px;
+  }
+
+  .maison-product-lightbox .pswp__counter {
+    color: #1a1a1a;
+    text-shadow: none;
+  }
+
+  .maison-product-lightbox .pswp__button--close,
+  .maison-product-lightbox .pswp__button--arrow {
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 4px 20px rgba(26, 26, 26, 0.12);
+  }
+
+  .maison-product-lightbox .pswp__button--close {
+    width: 44px;
+    height: 44px;
+    margin: 12px;
+    border-radius: 50%;
+  }
+
+  .maison-product-lightbox .pswp__button--close .pswp__icn {
+    top: 6px;
+    left: 6px;
+  }
+
+  .maison-product-lightbox .pswp__button--arrow {
+    width: 52px;
+    height: 52px;
+    margin-top: -26px;
+    border-radius: 50%;
+  }
+
+  .maison-product-lightbox .pswp__button--arrow--prev {
+    left: 20px;
+  }
+
+  .maison-product-lightbox .pswp__button--arrow--next {
+    right: 20px;
+  }
+
+  .maison-product-lightbox .pswp__button--arrow .pswp__icn {
+    width: 44px;
+    height: 44px;
+    margin-top: -22px;
+  }
+
+  .maison-product-lightbox .pswp__product-thumbnails {
+    position: absolute;
+    z-index: 20;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    left: 50%;
+    display: flex;
+    width: max-content;
+    max-width: calc(100vw - 32px);
+    gap: 8px;
+    padding: 8px;
+    overflow-x: auto;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 4px;
+    box-shadow: 0 4px 24px rgba(26, 26, 26, 0.12);
+    scrollbar-width: none;
+  }
+
+  .maison-product-lightbox .pswp__product-thumbnails::-webkit-scrollbar {
+    display: none;
+  }
+
+  .maison-product-lightbox .pswp__product-thumbnail {
+    flex: 0 0 58px;
+    width: 58px;
+    height: 68px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    background: transparent;
+    opacity: 0.56;
+    cursor: pointer;
+    transition: opacity 180ms ease, border-color 180ms ease;
+  }
+
+  .maison-product-lightbox .pswp__product-thumbnail:hover,
+  .maison-product-lightbox .pswp__product-thumbnail:focus-visible,
+  .maison-product-lightbox .pswp__product-thumbnail.is-active {
+    border-color: #1a1a1a;
+    opacity: 1;
+  }
+
+  .maison-product-lightbox .pswp__product-thumbnail img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 749px) {
+    .maison-product-lightbox .pswp__button--arrow {
+      display: none;
+    }
+
+    .maison-product-lightbox .pswp__product-thumbnails {
+      gap: 6px;
+      padding: 6px;
+    }
+
+    .maison-product-lightbox .pswp__product-thumbnail {
+      flex-basis: 48px;
+      width: 48px;
+      height: 58px;
     }
   }
 
@@ -3011,3 +3162,126 @@
 
   });
 </script>
+
+{%- if product.images.size > 0 -%}
+  <script type="module">
+    import PhotoSwipeLightbox from {{ 'photoswipe-lightbox.esm.js' | asset_url | json }};
+
+    const productLightboxRoot = document.querySelector('#MainProduct-{{ section.id }}');
+    const productLightboxItems = [
+      {%- assign lightbox_item_number = 0 -%}
+      {%- for media in product.media -%}
+        {%- if media.media_type == 'image' -%}
+          {%- assign lightbox_item_number = lightbox_item_number | plus: 1 -%}
+          {%- assign lightbox_width = media.preview_image.width | at_most: 3000 -%}
+          {%- assign lightbox_height = lightbox_width | divided_by: media.preview_image.aspect_ratio | round -%}
+          {
+            id: {{ media.id | json }},
+            src: {{ media.preview_image | image_url: width: lightbox_width | json }},
+            srcset: "{% if media.preview_image.width >= 750 %}{{ media.preview_image | image_url: width: 750 }} 750w, {% endif %}{% if media.preview_image.width >= 1500 %}{{ media.preview_image | image_url: width: 1500 }} 1500w, {% endif %}{% if media.preview_image.width >= 2250 %}{{ media.preview_image | image_url: width: 2250 }} 2250w, {% endif %}{{ media.preview_image | image_url: width: lightbox_width }} {{ lightbox_width }}w",
+            width: {{ lightbox_width }},
+            height: {{ lightbox_height }},
+            msrc: {{ media.preview_image | image_url: width: 320 | json }},
+            thumbSrc: {{ media.preview_image | image_url: width: 160 | json }},
+            alt: {{ media.alt | default: product.title | json }},
+            label: {{ 'products.product.media.load_image' | t: index: lightbox_item_number | json }}
+          },
+        {%- endif -%}
+      {%- endfor -%}
+    ];
+
+    if (productLightboxRoot && productLightboxItems.length > 0 && !productLightboxRoot.dataset.photoSwipeInitialized) {
+      productLightboxRoot.dataset.photoSwipeInitialized = 'true';
+
+      const productLightbox = new PhotoSwipeLightbox({
+        dataSource: productLightboxItems,
+        pswpModule: () => import({{ 'photoswipe.esm.js' | asset_url | json }}),
+        mainClass: 'maison-product-lightbox',
+        bgOpacity: 1,
+        loop: productLightboxItems.length > 2,
+        wheelToZoom: true,
+        closeTitle: {{ 'accessibility.close' | t | json }},
+        arrowPrevTitle: {{ 'general.pagination.previous' | t | json }},
+        arrowNextTitle: {{ 'general.pagination.next' | t | json }},
+        errorMsg: {{ 'accessibility.error' | t | json }},
+        indexIndicatorSep: ' / ',
+        paddingFn: (viewportSize) => ({
+          top: 68,
+          bottom: viewportSize.x < 750 ? 86 : 106,
+          left: viewportSize.x < 750 ? 12 : 80,
+          right: viewportSize.x < 750 ? 12 : 80
+        })
+      });
+
+      productLightbox.addFilter('thumbEl', (thumbEl, itemData, index) => {
+        const galleryImage = productLightboxRoot.querySelector(`[data-lightbox-image-index="${index}"] img`);
+        return galleryImage || thumbEl;
+      });
+
+      if (productLightboxItems.length > 1) {
+        productLightbox.on('uiRegister', () => {
+          productLightbox.pswp.ui.registerElement({
+            name: 'product-thumbnails',
+            className: 'pswp__product-thumbnails',
+            appendTo: 'wrapper',
+            onInit: (thumbnailRail, photoSwipe) => {
+              const thumbnailButtons = productLightboxItems.map((item, index) => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'pswp__product-thumbnail';
+                button.setAttribute('aria-label', item.label);
+
+                const image = document.createElement('img');
+                image.src = item.thumbSrc;
+                image.alt = '';
+                image.loading = 'lazy';
+                image.width = 58;
+                image.height = 68;
+                button.appendChild(image);
+
+                button.addEventListener('click', () => photoSwipe.goTo(index));
+                thumbnailRail.appendChild(button);
+                return button;
+              });
+
+              const updateActiveThumbnail = () => {
+                thumbnailButtons.forEach((button, index) => {
+                  const isActive = index === photoSwipe.currIndex;
+                  button.classList.toggle('is-active', isActive);
+                  if (isActive) {
+                    button.setAttribute('aria-current', 'true');
+                    button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                  } else {
+                    button.removeAttribute('aria-current');
+                  }
+                });
+              };
+
+              photoSwipe.on('change', updateActiveThumbnail);
+              updateActiveThumbnail();
+            }
+          });
+        });
+      }
+
+      productLightbox.init();
+
+      productLightboxRoot.querySelectorAll('[data-lightbox-image-index]').forEach((trigger) => {
+        const openLightbox = () => {
+          productLightbox.loadAndOpen(Number(trigger.dataset.lightboxImageIndex));
+        };
+
+        trigger.addEventListener('click', (event) => {
+          if (!event.defaultPrevented) openLightbox();
+        });
+
+        trigger.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openLightbox();
+          }
+        });
+      });
+    }
+  </script>
+{%- endif -%}
