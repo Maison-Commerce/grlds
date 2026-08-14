@@ -3286,7 +3286,14 @@
                   button.classList.toggle('is-active', isActive);
                   if (isActive) {
                     button.setAttribute('aria-current', 'true');
-                    button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    const maxThumbnailScroll = thumbnailRail.scrollWidth - thumbnailRail.clientWidth;
+                    if (maxThumbnailScroll > 0) {
+                      const centeredThumbnailPosition = button.offsetLeft - (thumbnailRail.clientWidth - button.offsetWidth) / 2;
+                      thumbnailRail.scrollTo({
+                        left: Math.max(0, Math.min(centeredThumbnailPosition, maxThumbnailScroll)),
+                        behavior: 'smooth'
+                      });
+                    }
                   } else {
                     button.removeAttribute('aria-current');
                   }
