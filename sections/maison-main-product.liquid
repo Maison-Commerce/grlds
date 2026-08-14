@@ -3193,16 +3193,17 @@
       {%- for media in product.media -%}
         {%- if media.media_type == 'image' -%}
           {%- assign lightbox_item_number = lightbox_item_number | plus: 1 -%}
-          {%- assign lightbox_width = media.preview_image.width | at_most: 3000 -%}
-          {%- assign lightbox_height = lightbox_width | divided_by: media.preview_image.aspect_ratio | round -%}
+          {%- assign lightbox_width_from_height = media.preview_image.height | times: 200 | divided_by: 230 -%}
+          {%- assign lightbox_width = media.preview_image.width | at_most: 2600 | at_most: lightbox_width_from_height -%}
+          {%- assign lightbox_height = lightbox_width | times: 230 | divided_by: 200 -%}
           {
             id: {{ media.id | json }},
-            src: {{ media.preview_image | image_url: width: lightbox_width | json }},
-            srcset: "{% if media.preview_image.width >= 750 %}{{ media.preview_image | image_url: width: 750 }} 750w, {% endif %}{% if media.preview_image.width >= 1500 %}{{ media.preview_image | image_url: width: 1500 }} 1500w, {% endif %}{% if media.preview_image.width >= 2250 %}{{ media.preview_image | image_url: width: 2250 }} 2250w, {% endif %}{{ media.preview_image | image_url: width: lightbox_width }} {{ lightbox_width }}w",
+            src: {{ media.preview_image | image_url: width: lightbox_width, height: lightbox_height, crop: 'center' | json }},
+            srcset: "{% if lightbox_width >= 800 %}{{ media.preview_image | image_url: width: 800, height: 920, crop: 'center' }} 800w, {% endif %}{% if lightbox_width >= 1600 %}{{ media.preview_image | image_url: width: 1600, height: 1840, crop: 'center' }} 1600w, {% endif %}{% if lightbox_width >= 2400 %}{{ media.preview_image | image_url: width: 2400, height: 2760, crop: 'center' }} 2400w, {% endif %}{{ media.preview_image | image_url: width: lightbox_width, height: lightbox_height, crop: 'center' }} {{ lightbox_width }}w",
             width: {{ lightbox_width }},
             height: {{ lightbox_height }},
-            msrc: {{ media.preview_image | image_url: width: 320 | json }},
-            thumbSrc: {{ media.preview_image | image_url: width: 160 | json }},
+            msrc: {{ media.preview_image | image_url: width: 320, height: 368, crop: 'center' | json }},
+            thumbSrc: {{ media.preview_image | image_url: width: 160, height: 184, crop: 'center' | json }},
             alt: {{ media.alt | default: product.title | json }},
             label: {{ 'products.product.media.load_image' | t: index: lightbox_item_number | json }}
           },
@@ -3212,15 +3213,18 @@
 
     if (productLightboxRoot && productLightboxItems.length > 0 && !productLightboxRoot.dataset.photoSwipeInitialized) {
       productLightboxRoot.dataset.photoSwipeInitialized = 'true';
+      let productLightboxOpeningTrigger = null;
+      let productLightboxOpeningScroll = null;
 
       const productLightbox = new PhotoSwipeLightbox({
         dataSource: productLightboxItems,
         pswpModule: () => import({{ 'photoswipe.esm.js' | asset_url | json }}),
         mainClass: 'maison-product-lightbox',
         bgOpacity: 1,
-        showHideAnimationType: 'none',
+        showHideAnimationType: 'zoom',
         loop: productLightboxItems.length > 2,
         wheelToZoom: true,
+        returnFocus: false,
         closeTitle: {{ 'accessibility.close' | t | json }},
         arrowPrevTitle: {{ 'general.pagination.previous' | t | json }},
         arrowNextTitle: {{ 'general.pagination.next' | t | json }},
@@ -3232,6 +3236,22 @@
           left: viewportSize.x < 750 ? 12 : 80,
           right: viewportSize.x < 750 ? 12 : 80
         })
+      });
+
+      productLightbox.addFilter('thumbEl', (thumbEl) => {
+        return productLightboxOpeningTrigger?.querySelector('img') || thumbEl;
+      });
+
+      productLightbox.on('destroy', () => {
+        const openingTrigger = productLightboxOpeningTrigger;
+        const openingScroll = productLightboxOpeningScroll;
+        productLightboxOpeningTrigger = null;
+        productLightboxOpeningScroll = null;
+
+        requestAnimationFrame(() => {
+          if (openingScroll) window.scrollTo(openingScroll.x, openingScroll.y);
+          if (openingTrigger?.isConnected) openingTrigger.focus({ preventScroll: true });
+        });
       });
 
       if (productLightboxItems.length > 1) {
@@ -3284,6 +3304,8 @@
 
       productLightboxRoot.querySelectorAll('[data-lightbox-image-index]').forEach((trigger) => {
         const openLightbox = () => {
+          productLightboxOpeningTrigger = trigger;
+          productLightboxOpeningScroll = { x: window.scrollX, y: window.scrollY };
           productLightbox.loadAndOpen(Number(trigger.dataset.lightboxImageIndex));
         };
 
