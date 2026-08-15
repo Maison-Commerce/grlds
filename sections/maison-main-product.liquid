@@ -1309,7 +1309,8 @@
   }
 
   .maison_commerce_maison_main_product {
-    overflow: hidden !important;
+    overflow-x: clip !important;
+    overflow-y: visible !important;
   }
 
   .maison_commerce_maison_main_product__gallery-slide {
@@ -1328,6 +1329,7 @@
 
   @media (min-width: 991px) {
     .maison_commerce_maison_main_product__gallery {
+      top: var(--maison-product-sticky-header-height, 0px);
       height: calc(100vh - var(--maison-product-header-stack-height, 0px));
       height: calc(100dvh - var(--maison-product-header-stack-height, 0px));
       max-height: none;
@@ -2723,6 +2725,7 @@
     let mobileSwiper = null;
 
     const headerGroupSections = Array.from(document.querySelectorAll('.shopify-section-group-header-group'));
+    const stickyHeaderSection = document.querySelector('.section-header');
 
     function syncDesktopGalleryViewport() {
       const headerStackHeight = headerGroupSections.reduce((total, headerSection) => {
@@ -2730,6 +2733,10 @@
       }, 0);
 
       productInfo.style.setProperty('--maison-product-header-stack-height', `${headerStackHeight}px`);
+      productInfo.style.setProperty(
+        '--maison-product-sticky-header-height',
+        `${stickyHeaderSection ? stickyHeaderSection.getBoundingClientRect().height : 0}px`
+      );
 
       if (mobileSwiper && !mobileSwiper.destroyed) {
         mobileSwiper.update();
