@@ -1318,6 +1318,25 @@
     object-fit: cover;
   }
 
+  @media (min-width: 991px) {
+    .maison_commerce_maison_main_product__gallery,
+    .maison_commerce_maison_main_product__gallery-slider {
+      max-height: 100vh;
+      max-height: 100dvh;
+    }
+
+    .maison_commerce_maison_main_product__gallery-slide {
+      max-height: calc(100vh - 20px);
+      max-height: calc(100dvh - 20px);
+    }
+
+    .maison_commerce_maison_main_product__gallery-pagination {
+      height: 4px;
+      line-height: 4px;
+      flex-shrink: 0;
+    }
+  }
+
   .maison_commerce_maison_main_product__gallery-arrow {
     position: absolute;
     z-index: 5;
@@ -3165,8 +3184,8 @@
 
       if (swiperContainer && !swiperContainer.swiper) {
         mobileSwiper = new Swiper(swiperContainer, {
-          slidesPerView: 1.25,
-          centeredSlides: true,
+          slidesPerView: 1,
+          centeredSlides: false,
           spaceBetween: 0,
           loop: false,
           a11y: {
@@ -3418,7 +3437,7 @@
         showHideAnimationType: 'zoom',
         loop: productLightboxItems.length > 2,
         wheelToZoom: true,
-        zoom: false,
+        zoom: window.matchMedia('(max-width: 990px)').matches,
         returnFocus: false,
         closeTitle: {{ 'accessibility.close' | t | json }},
         arrowPrevTitle: {{ 'general.pagination.previous' | t | json }},
