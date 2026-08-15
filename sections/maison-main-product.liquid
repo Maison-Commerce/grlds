@@ -654,6 +654,24 @@
                 {%- endif -%}
               {% endfor %}
             </div>
+            <button
+              type="button"
+              class="maison_commerce_maison_main_product__gallery-arrow maison_commerce_maison_main_product__gallery-arrow--prev"
+              aria-label="{{ 'general.slider.previous_slide' | t }}"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M14.5 5.5L8 12l6.5 6.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="maison_commerce_maison_main_product__gallery-arrow maison_commerce_maison_main_product__gallery-arrow--next"
+              aria-label="{{ 'general.slider.next_slide' | t }}"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9.5 5.5L16 12l-6.5 6.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
             <!-- Slider Pagination -->
             <div class="swiper-pagination maison_commerce_maison_main_product__gallery-pagination"></div>
           </div>
@@ -1283,14 +1301,80 @@
     position: relative;
     width: 100%;
     aspect-ratio: 200 / 230;
+    max-height: max(320px, calc(100svh - 160px));
     overflow: hidden;
+    background: #ffffff;
   }
-  
-  .maison_commerce_maison_main_product__gallery-slide img,
+
+  .maison_commerce_maison_main_product__gallery-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
   .maison_commerce_maison_main_product__gallery-slide video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .maison_commerce_maison_main_product__gallery-arrow {
+    position: absolute;
+    z-index: 5;
+    top: calc(50% - 16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #1a1a1a;
+    box-shadow: 0 4px 18px rgba(26, 26, 26, 0.14);
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: opacity 180ms ease, box-shadow 180ms ease;
+  }
+
+  .maison_commerce_maison_main_product__gallery-arrow:hover {
+    box-shadow: 0 5px 22px rgba(26, 26, 26, 0.2);
+  }
+
+  .maison_commerce_maison_main_product__gallery-arrow:focus-visible {
+    outline: 2px solid #1a1a1a;
+    outline-offset: 2px;
+  }
+
+  .maison_commerce_maison_main_product__gallery-arrow--prev {
+    left: 16px;
+  }
+
+  .maison_commerce_maison_main_product__gallery-arrow--next {
+    right: 16px;
+  }
+
+  .maison_commerce_maison_main_product__gallery-arrow.swiper-button-disabled,
+  .maison_commerce_maison_main_product__gallery-arrow.swiper-button-lock {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (max-width: 749px) {
+    .maison_commerce_maison_main_product__gallery-arrow {
+      width: 36px;
+      height: 36px;
+    }
+
+    .maison_commerce_maison_main_product__gallery-arrow--prev {
+      left: 10px;
+    }
+
+    .maison_commerce_maison_main_product__gallery-arrow--next {
+      right: 10px;
+    }
   }
 
   .maison_commerce_maison_main_product__gallery-slide--lightbox {
@@ -3032,18 +3116,28 @@
     function initMobileGallerySwiper() {
       const swiperContainer = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-slider');
       const pagination = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-pagination');
+      const previousButton = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-arrow--prev');
+      const nextButton = productInfo.querySelector('.maison_commerce_maison_main_product__gallery-arrow--next');
 
       if (swiperContainer && !swiperContainer.swiper) {
         mobileSwiper = new Swiper(swiperContainer, {
           slidesPerView: 1,
           spaceBetween: 8,
           loop: false,
+          a11y: {
+            prevSlideMessage: {{ 'general.slider.previous_slide' | t | json }},
+            nextSlideMessage: {{ 'general.slider.next_slide' | t | json }},
+          },
           pagination: {
             el: pagination,
             clickable: true,
             renderBullet: function (index, className) {
               return '<span class="' + className + '"></span>';
             },
+          },
+          navigation: {
+            prevEl: previousButton,
+            nextEl: nextButton,
           },
           on: {
             init: function(swiperInstance) {
