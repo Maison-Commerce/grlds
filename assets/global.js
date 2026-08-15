@@ -530,6 +530,16 @@ class MenuDrawer extends HTMLElement {
 
   closeAnimation(detailsElement) {
     let animationStart;
+    const animatedElement = detailsElement.querySelector(':scope > .menu-drawer, :scope > .menu-drawer__submenu');
+    const animationDuration = animatedElement
+      ? getComputedStyle(animatedElement)
+          .transitionDuration.split(',')
+          .reduce((longestDuration, duration) => {
+            const value = Number.parseFloat(duration);
+            const durationInMilliseconds = duration.includes('ms') ? value : value * 1000;
+            return Math.max(longestDuration, durationInMilliseconds);
+          }, 0)
+      : 0;
 
     const handleAnimation = (time) => {
       if (animationStart === undefined) {
@@ -538,7 +548,7 @@ class MenuDrawer extends HTMLElement {
 
       const elapsedTime = time - animationStart;
 
-      if (elapsedTime < 400) {
+      if (elapsedTime < animationDuration) {
         window.requestAnimationFrame(handleAnimation);
       } else {
         detailsElement.removeAttribute('open');
@@ -1327,5 +1337,4 @@ if (!customElements.get('bulk-add')) {
   customElements.define('bulk-add', BulkAdd);
 }
 /*=======custom=========*/
-
 
