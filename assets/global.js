@@ -434,7 +434,7 @@ class MenuDrawer extends HTMLElement {
       summary.addEventListener('click', this.onSummaryClick.bind(this))
     );
     this.querySelectorAll(
-      'button:not(.localization-selector):not(.country-selector__close-button):not(.country-filter__reset-button)'
+      'button:not(.localization-selector):not(.country-selector__close-button):not(.country-filter__reset-button):not(.menu-drawer__dismiss-button)'
     ).forEach((button) => button.addEventListener('click', this.onCloseButtonClick.bind(this)));
   }
 
@@ -567,6 +567,11 @@ customElements.define('menu-drawer', MenuDrawer);
 class HeaderDrawer extends MenuDrawer {
   constructor() {
     super();
+
+    this.dismissButton = this.querySelector('.menu-drawer__dismiss-button');
+    this.dismissButton?.addEventListener('click', (event) => {
+      this.closeMenuDrawer(event, this.mainDetailsToggle.querySelector('summary'));
+    });
   }
 
   openMenuDrawer(summaryElement) {
@@ -585,7 +590,7 @@ class HeaderDrawer extends MenuDrawer {
 
     summaryElement.setAttribute('aria-expanded', true);
     window.addEventListener('resize', this.onResize);
-    trapFocus(this.mainDetailsToggle, summaryElement);
+    trapFocus(this.mainDetailsToggle, this.dismissButton || summaryElement);
     document.body.classList.add(`overflow-hidden-${this.dataset.breakpoint}`);
   }
 
@@ -1337,4 +1342,3 @@ if (!customElements.get('bulk-add')) {
   customElements.define('bulk-add', BulkAdd);
 }
 /*=======custom=========*/
-

@@ -22,7 +22,20 @@
         {{- 'icon-close.svg' | inline_asset_content -}}
       </span>
     </summary>
-    <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
+    <div
+      id="menu-drawer"
+      class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{ 'sections.header.menu' | t }}"
+    >
+      <button
+        type="button"
+        class="menu-drawer__dismiss-button link focus-inset"
+        aria-label="{{ 'accessibility.close' | t }}"
+      >
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </button>
       <div class="menu-drawer__inner-container">
         <div class="menu-drawer__navigation-container">
           <nav class="menu-drawer__navigation">
