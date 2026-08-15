@@ -1224,6 +1224,14 @@
     }
   }
 
+  @media (min-width: 991px) {
+    .maison_commerce_maison_main_product__container {
+      width: 100%;
+      max-width: none;
+      padding: 0;
+    }
+  }
+
   .maison_commerce_maison_main_product__wrapper {
     display: flex;
     gap: 40px;
@@ -1319,15 +1327,25 @@
   }
 
   @media (min-width: 991px) {
-    .maison_commerce_maison_main_product__gallery,
+    .maison_commerce_maison_main_product__gallery {
+      height: calc(100vh - var(--maison-product-header-stack-height, 0px));
+      height: calc(100dvh - var(--maison-product-header-stack-height, 0px));
+      max-height: none;
+    }
+
     .maison_commerce_maison_main_product__gallery-slider {
-      max-height: 100vh;
-      max-height: 100dvh;
+      height: 100%;
+      max-height: none;
+    }
+
+    .maison_commerce_maison_main_product__gallery-slider .swiper-wrapper {
+      height: calc(100% - 12px);
     }
 
     .maison_commerce_maison_main_product__gallery-slide {
-      max-height: calc(100vh - 20px);
-      max-height: calc(100dvh - 20px);
+      height: 100%;
+      max-height: none;
+      aspect-ratio: auto;
     }
 
     .maison_commerce_maison_main_product__gallery-pagination {
@@ -1660,6 +1678,12 @@
     display: flex;
     flex-direction: column;
     gap: 0;
+  }
+
+  @media (min-width: 991px) {
+    .maison_commerce_maison_main_product__info {
+      margin-right: 40px;
+    }
   }
 
   @media (max-width: 990px) {
@@ -2700,6 +2724,28 @@
     // Reference to the product gallery Swiper instance
     let mobileSwiper = null;
 
+    const headerGroupSections = Array.from(document.querySelectorAll('.shopify-section-group-header-group'));
+
+    function syncDesktopGalleryViewport() {
+      const headerStackHeight = headerGroupSections.reduce((total, headerSection) => {
+        return total + headerSection.getBoundingClientRect().height;
+      }, 0);
+
+      productInfo.style.setProperty('--maison-product-header-stack-height', `${headerStackHeight}px`);
+
+      if (mobileSwiper && !mobileSwiper.destroyed) {
+        mobileSwiper.update();
+      }
+    }
+
+    syncDesktopGalleryViewport();
+    window.addEventListener('resize', syncDesktopGalleryViewport);
+
+    if ('ResizeObserver' in window) {
+      const headerResizeObserver = new ResizeObserver(syncDesktopGalleryViewport);
+      headerGroupSections.forEach((headerSection) => headerResizeObserver.observe(headerSection));
+    }
+
     // Gallery / Size-binding config (from Liquid)
     const hasSizeOption = {% if has_size_option %}true{% else %}false{% endif %};
     const sizeOptionPosition = {{ size_option_position | default: 0 }};
@@ -3188,6 +3234,11 @@
           centeredSlides: false,
           spaceBetween: 0,
           loop: false,
+          breakpoints: {
+            991: {
+              slidesPerView: 1.25,
+            },
+          },
           a11y: {
             prevSlideMessage: {{ 'general.slider.previous_slide' | t | json }},
             nextSlideMessage: {{ 'general.slider.next_slide' | t | json }},
