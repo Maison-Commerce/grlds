@@ -1023,7 +1023,7 @@
                 {% if block.type == 'accordion' %}
                   <div class="maison_commerce_maison_main_product__accordion" {{ block.shopify_attributes }}>
                     <details>
-                      <summary class="maison_commerce_maison_main_product__accordion-header">
+                      <summary class="maison_commerce_maison_main_product__accordion-header" aria-expanded="false">
                         <span>{{ block.settings.title }}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path d="M6.875 0V13.75" stroke="currentColor"/>
@@ -1031,9 +1031,10 @@
                         </svg>
                       </summary>
                       <div class="maison_commerce_maison_main_product__accordion-content">
-                        {{ block.settings.content }}
-                        {% if block.settings.show_specs %}
-                          <div class="maison_commerce_maison_main_product__accordion-specs">
+                        <div class="maison_commerce_maison_main_product__accordion-content-inner">
+                          {{ block.settings.content }}
+                          {% if block.settings.show_specs %}
+                            <div class="maison_commerce_maison_main_product__accordion-specs">
                             <div class="maison_commerce_maison_main_product__specs-table">
                               <div class="maison_commerce_maison_main_product__specs-row maison_commerce_maison_main_product__specs-row--head">
                                 <span class="maison_commerce_maison_main_product__specs-cell"></span>
@@ -1070,20 +1071,21 @@
                             {% if block.settings.specs_caption != blank %}
                               <p class="maison_commerce_maison_main_product__specs-caption">{{ block.settings.specs_caption }}</p>
                             {% endif %}
-                          </div>
-                        {% endif %}
-                        {% if block.settings.image != blank %}
-                          <div class="maison_commerce_maison_main_product__accordion-image">
-                            {{
-                              block.settings.image
-                              | image_url: width: 1000
-                              | image_tag:
-                                loading: 'lazy',
-                                class: 'maison_commerce_maison_main_product__accordion-image-img',
-                                alt: block.settings.image.alt
-                            }}
-                          </div>
-                        {% endif %}
+                            </div>
+                          {% endif %}
+                          {% if block.settings.image != blank %}
+                            <div class="maison_commerce_maison_main_product__accordion-image">
+                              {{
+                                block.settings.image
+                                | image_url: width: 1000
+                                | image_tag:
+                                  loading: 'lazy',
+                                  class: 'maison_commerce_maison_main_product__accordion-image-img',
+                                  alt: block.settings.image.alt
+                              }}
+                            </div>
+                          {% endif %}
+                        </div>
                       </div>
                     </details>
                   </div>
@@ -2473,25 +2475,58 @@
     width: 16px;
     height: 16px;
     flex-shrink: 0;
-    transition: transform 0.3s ease;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.49, 0.4, 0.05, 1.02);
+    transition-duration: 0.8s;
   }
 
-  details[open] .maison_commerce_maison_main_product__accordion-header svg {
+  details.is-expanded .maison_commerce_maison_main_product__accordion-header svg,
+  details[open]:not([data-accordion-ready]) .maison_commerce_maison_main_product__accordion-header svg {
     transform: rotate(45deg);
   }
 
   .maison_commerce_maison_main_product__accordion-content {
-    padding-bottom: 18px;
+    display: grid;
+    grid-template-rows: 0fr;
+    padding-bottom: 0;
+    opacity: 0;
+    overflow: hidden;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.5;
     color: #1a1a1a;
+    transition-property: grid-template-rows, padding-bottom, opacity;
+    transition-timing-function: cubic-bezier(0.49, 0.4, 0.05, 1.02);
+    transition-duration: 0.8s;
+  }
+
+  .maison_commerce_maison_main_product__accordion-content-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  details.is-expanded .maison_commerce_maison_main_product__accordion-content,
+  details[open]:not([data-accordion-ready]) .maison_commerce_maison_main_product__accordion-content {
+    grid-template-rows: 1fr;
+    padding-bottom: 18px;
+    opacity: 1;
   }
 
   @media (max-width: 990px) {
     .maison_commerce_maison_main_product__accordion-content {
-      padding-bottom: 12px;
       font-size: 12px;
+    }
+
+    details.is-expanded .maison_commerce_maison_main_product__accordion-content,
+    details[open]:not([data-accordion-ready]) .maison_commerce_maison_main_product__accordion-content {
+      padding-bottom: 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .maison_commerce_maison_main_product__accordion-header svg,
+    .maison_commerce_maison_main_product__accordion-content {
+      transition-duration: 0.01ms;
     }
   }
 
@@ -3201,6 +3236,57 @@
 
     // Initial gallery filter (Size may be refined by auto-select / variant change)
     applyGalleryFilter(currentSizeFromVariant(getSelectedVariantFromOptions()));
+
+    (function initProductAccordions() {
+      const accordions = productInfo.querySelectorAll('.maison_commerce_maison_main_product__accordion > details');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      accordions.forEach((details) => {
+        const summary = details.querySelector(':scope > summary');
+        const content = details.querySelector(':scope > .maison_commerce_maison_main_product__accordion-content');
+        if (!summary || !content) return;
+
+        let closeFallback;
+        details.dataset.accordionReady = 'true';
+        details.classList.toggle('is-expanded', details.open);
+        summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+
+        const finishClose = () => {
+          window.clearTimeout(closeFallback);
+          if (!details.classList.contains('is-expanded')) {
+            details.removeAttribute('open');
+          }
+        };
+
+        const openAccordion = () => {
+          window.clearTimeout(closeFallback);
+          details.setAttribute('open', '');
+          summary.setAttribute('aria-expanded', 'true');
+          window.requestAnimationFrame(() => details.classList.add('is-expanded'));
+        };
+
+        const closeAccordion = () => {
+          details.classList.remove('is-expanded');
+          summary.setAttribute('aria-expanded', 'false');
+          closeFallback = window.setTimeout(finishClose, reducedMotion ? 20 : 850);
+        };
+
+        summary.addEventListener('click', (event) => {
+          event.preventDefault();
+          if (details.classList.contains('is-expanded')) {
+            closeAccordion();
+          } else {
+            openAccordion();
+          }
+        });
+
+        content.addEventListener('transitionend', (event) => {
+          if (event.target === content && event.propertyName === 'grid-template-rows') {
+            finishClose();
+          }
+        });
+      });
+    })();
 
     // Fragrance info popup
     (function initFragranceInfo() {
