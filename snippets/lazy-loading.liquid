@@ -1,79 +1,132 @@
-{%- comment -%}
-  Lazy loading implementation for images and other content
-  This snippet should be included in the theme.liquid before closing body tag
-{%- endcomment -%}
+{% doc %}
+  Applies the global skeleton and blur-up loading state to storefront images.
+{% enddoc %}
 
 <script>
-  // Intersection Observer for lazy loading
-  if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.classList.remove('lazy');
-            img.classList.add('loaded');
-            observer.unobserve(img);
-          }
+  (() => {
+    const imageStates = new WeakMap();
+    const transitionDuration = 800;
+
+    const getSourceKey = (image) =>
+      [
+        image.getAttribute('src'),
+        image.getAttribute('srcset'),
+        image.getAttribute('sizes'),
+        image.dataset.src,
+        image.dataset.srcset,
+        image.currentSrc
+      ].filter(Boolean).join('|');
+
+    const finishImage = (image, token) => {
+      if (imageStates.get(image) !== token) return;
+
+      const reveal = () => {
+        if (imageStates.get(image) !== token) return;
+
+        image.dataset.globalImageLoaded = 'true';
+        image.classList.add('global-image-loaded');
+
+        window.setTimeout(() => {
+          if (imageStates.get(image) !== token) return;
+          image.classList.remove('global-image-loaded');
+        }, transitionDuration);
+      };
+
+      if (typeof image.decode === 'function') {
+        image.decode().catch(() => {}).finally(() => window.requestAnimationFrame(reveal));
+      } else {
+        window.requestAnimationFrame(reveal);
+      }
+    };
+
+    const failImage = (image, token) => {
+      if (imageStates.get(image) !== token) return;
+      image.dataset.globalImageLoaded = 'error';
+      image.classList.remove('global-image-loaded');
+    };
+
+    const watchImage = (image) => {
+      if (!(image instanceof HTMLImageElement) || image.hasAttribute('data-image-loader-ignore')) return;
+
+      const sourceKey = getSourceKey(image);
+      if (!sourceKey) return;
+
+      const currentState = imageStates.get(image);
+      if (currentState?.sourceKey === sourceKey && image.dataset.globalImageLoaded) return;
+
+      const token = { sourceKey };
+      imageStates.set(image, token);
+      image.removeAttribute('data-global-image-loaded');
+      image.classList.remove('global-image-loaded');
+
+      if (image.complete) {
+        if (image.naturalWidth > 0) {
+          finishImage(image, token);
+        } else {
+          failImage(image, token);
         }
+        return;
+      }
+
+      image.addEventListener('load', () => finishImage(image, token), { once: true });
+      image.addEventListener('error', () => failImage(image, token), { once: true });
+    };
+
+    const lazyImageObserver = 'IntersectionObserver' in window
+      ? new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            const image = entry.target;
+            if (image.dataset.srcset) image.srcset = image.dataset.srcset;
+            if (image.dataset.src) image.src = image.dataset.src;
+            observer.unobserve(image);
+            watchImage(image);
+          });
+        }, { rootMargin: '100px 0px', threshold: 0.01 })
+      : null;
+
+    const prepareImage = (image) => {
+      if (!(image instanceof HTMLImageElement) || image.hasAttribute('data-image-loader-ignore')) return;
+
+      if ((image.dataset.src || image.dataset.srcset) && !image.currentSrc && !image.getAttribute('src')) {
+        if (lazyImageObserver) {
+          lazyImageObserver.observe(image);
+        } else {
+          if (image.dataset.srcset) image.srcset = image.dataset.srcset;
+          if (image.dataset.src) image.src = image.dataset.src;
+          watchImage(image);
+        }
+        return;
+      }
+
+      watchImage(image);
+    };
+
+    const prepareImagesWithin = (node) => {
+      if (!(node instanceof Element)) return;
+      if (node instanceof HTMLImageElement) prepareImage(node);
+      node.querySelectorAll('img').forEach(prepareImage);
+    };
+
+    document.querySelectorAll('img').forEach(prepareImage);
+
+    const imageObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes') {
+          prepareImage(mutation.target);
+          return;
+        }
+
+        mutation.addedNodes.forEach(prepareImagesWithin);
       });
-    }, {
-      rootMargin: '50px 0px',
-      threshold: 0.01
     });
 
-    // Observe all lazy images
-    document.querySelectorAll('img[data-src]').forEach(img => {
-      imageObserver.observe(img);
+    imageObserver.observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['src', 'srcset', 'sizes']
     });
-  } else {
-    // Fallback for older browsers
-    document.querySelectorAll('img[data-src]').forEach(img => {
-      img.src = img.dataset.src;
-      img.classList.remove('lazy');
-      img.classList.add('loaded');
-    });
-  }
-
-  // Preload critical images
-  function preloadCriticalImages() {
-    const criticalImages = document.querySelectorAll('img[data-preload="true"]');
-    criticalImages.forEach(img => {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = img.src || img.dataset.src;
-      document.head.appendChild(link);
-    });
-  }
-
-  // Run preload on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', preloadCriticalImages);
-  } else {
-    preloadCriticalImages();
-  }
+  })();
 </script>
-
-<style>
-  .lazy {
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  
-  .loaded {
-    opacity: 1;
-  }
-  
-  .placeholder-image {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: loading 1.5s infinite;
-  }
-  
-  @keyframes loading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
-</style>
