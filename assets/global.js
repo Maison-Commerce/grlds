@@ -434,7 +434,7 @@ class MenuDrawer extends HTMLElement {
       summary.addEventListener('click', this.onSummaryClick.bind(this))
     );
     this.querySelectorAll(
-      'button:not(.localization-selector):not(.country-selector__close-button):not(.country-filter__reset-button):not(.menu-drawer__dismiss-button)'
+      'button:not(.localization-selector):not(.country-selector__close-button):not(.country-filter__reset-button):not(.menu-drawer__dismiss-button):not(.menu-drawer__viewport-overlay)'
     ).forEach((button) => button.addEventListener('click', this.onCloseButtonClick.bind(this)));
   }
 
@@ -569,7 +569,11 @@ class HeaderDrawer extends MenuDrawer {
     super();
 
     this.dismissButton = this.querySelector('.menu-drawer__dismiss-button');
+    this.viewportOverlay = this.querySelector('.menu-drawer__viewport-overlay');
     this.dismissButton?.addEventListener('click', (event) => {
+      this.closeMenuDrawer(event, this.mainDetailsToggle.querySelector('summary'));
+    });
+    this.viewportOverlay?.addEventListener('click', (event) => {
       this.closeMenuDrawer(event, this.mainDetailsToggle.querySelector('summary'));
     });
   }

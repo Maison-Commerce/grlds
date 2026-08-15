@@ -22,6 +22,12 @@
         {{- 'icon-close.svg' | inline_asset_content -}}
       </span>
     </summary>
+    <button
+      type="button"
+      class="menu-drawer__viewport-overlay"
+      aria-label="{{ 'accessibility.close' | t }}"
+      tabindex="-1"
+    ></button>
     <div
       id="menu-drawer"
       class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}"
